@@ -10,14 +10,15 @@ import {
   FormDescription,
   FormMessage,
 } from "@/components/ui/form";
-import { Style } from "@prisma/client";
-import React from "react";
+import type { Style } from "@prisma/client";
+import React, { useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { AppBar, AppBarAction } from "@/components/AppBar";
+import type { AppBarAction } from "@/components/AppBar";
+import { AppBar } from "@/components/AppBar";
 import { Save } from "lucide-react";
-export type StylesListProps = {
+export interface StylesListProps {
   styles: Style[];
-};
+}
 
 const appbarItems: AppBarAction[] = [
   { text: "Save", icon: Save },
@@ -26,7 +27,12 @@ const appbarItems: AppBarAction[] = [
 
 export function StylesList({ styles }: StylesListProps) {
   const form = useForm({ defaultValues: { username: "name" } });
-  const onSubmit = (v) => console.log(v);
+  useMemo(() => {
+    return form;
+  }, []);
+  const onSubmit = (v) => {
+    console.log(v);
+  };
   return (
     <div className="">
       <AppBar title="Styles List" actions={appbarItems}>

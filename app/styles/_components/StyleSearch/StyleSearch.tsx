@@ -1,8 +1,8 @@
-import { Style } from "@prisma/client";
+import type { Style } from "@prisma/client";
 import React from "react";
-export type StyleSearchProps = {
+export interface StyleSearchProps {
   style: Style;
-};
+}
 
 export function StyleSearch({ style }: StyleSearchProps) {
   return <div className="">{JSON.stringify(style)}</div>;

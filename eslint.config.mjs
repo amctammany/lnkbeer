@@ -22,15 +22,24 @@ const patchedConfig = fixupConfigRules([
 const config = [
   ...patchedConfig,
 
+  ts.configs.eslintRecommended,
   ...ts.configs.recommended,
   prettierConfigRecommended,
   // Add more flat configs here
-  { ignores: [".next/*", "tailwind.config.ts"] },
+  { ignores: [".next/*", "components/ui/**/*", "tailwind.config.ts", "*.mjs"] },
   {
     rules: {
       "no-console": "warn",
       "@typescript-eslint/no-unused-vars": "warn",
       "@typescript-eslint/no-explicit-any": "warn",
+    },
+  },
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
   },
 ];

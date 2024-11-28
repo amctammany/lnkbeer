@@ -1,10 +1,10 @@
 import { StyleDisplay } from "@/app/styles/_components/StyleDisplay";
 import { getStyle } from "../queries";
-type StyleDisplayPageProps = {
+interface StyleDisplayPageProps {
   params: Promise<{
     identifier: string;
   }>;
-};
+}
 export async function generateMetadata({ params }: StyleDisplayPageProps) {
   const { identifier } = await params;
   return {

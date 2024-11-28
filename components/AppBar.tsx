@@ -2,16 +2,16 @@ import Link from "next/link";
 import { SidebarTrigger } from "./ui/sidebar";
 import { Button } from "./ui/button";
 
-export type AppBarAction = {
+export interface AppBarAction {
   text?: string;
   icon?: any;
   action?: any;
-};
-export type AppBarProps = {
+}
+export interface AppBarProps {
   title?: React.ReactNode;
   children?: React.ReactNode;
   actions?: AppBarAction[];
-};
+}
 export const AppBar = ({ actions = [], title, children }: AppBarProps) => {
   return (
     <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">

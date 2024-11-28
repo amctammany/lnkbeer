@@ -2,7 +2,7 @@
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/client";
 import { Dashboard } from "./_components/Dashboard";
-import { User } from "@prisma/client";
+import type { User } from "@prisma/client";
 //const AdminModal = dynamic(
 //() => import("./AdminModal").then((s) => s.AdminModal),
 //{ ssr: false }

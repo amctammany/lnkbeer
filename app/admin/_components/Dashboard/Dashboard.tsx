@@ -1,10 +1,10 @@
-import { User } from "@prisma/client";
+import type { User } from "@prisma/client";
 
-export type DashboardProps = {
+export interface DashboardProps {
   src?: User | null;
   //action?: any;
   //children: React.ReactNode;
-};
+}
 
 export const Dashboard = ({ src }: DashboardProps) => {
   return (
