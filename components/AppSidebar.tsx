@@ -1,4 +1,5 @@
 import {
+  BookMarked,
   ChartColumn,
   ChartLine,
   ChevronRight,
@@ -39,7 +40,7 @@ import {
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: Home,
     isActive: true,
   },
@@ -73,6 +74,7 @@ const items = [
       { title: "Mash", url: "/profiles/mash", icon: Thermometer },
     ],
   },
+  { title: "Styles", url: "/styles", icon: BookMarked },
   {
     title: "Settings",
     url: "#",
@@ -86,38 +88,47 @@ export function AppSidebar() {
       <SidebarHeader>Sidebar</SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
-          {items.map((item) => (
-            <Collapsible
-              key={item.title}
-              asChild
-              defaultOpen={true}
-              className="group/collapsible"
-            >
-              <SidebarMenuItem>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuButton tooltip={item.title}>
-                    {item.icon && <item.icon />}
-                    <span>{item.title}</span>
-                    <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
-                <CollapsibleContent>
-                  <SidebarMenuSub>
-                    {item.items?.map((subItem) => (
-                      <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton asChild>
-                          <a href={subItem.url}>
-                            {subItem.icon && <subItem.icon />}
-                            <span>{subItem.title}</span>
-                          </a>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                </CollapsibleContent>
-              </SidebarMenuItem>
-            </Collapsible>
-          ))}
+          {items.map((item) =>
+            item.items && item.items.length ? (
+              <Collapsible
+                key={item.title}
+                asChild
+                defaultOpen={true}
+                className="group/collapsible"
+              >
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton tooltip={item.title}>
+                      {item.icon && <item.icon />}
+                      <span>{item.title}</span>
+                      <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {item.items?.map((subItem) => (
+                        <SidebarMenuSubItem key={subItem.title}>
+                          <SidebarMenuSubButton asChild>
+                            <a href={subItem.url}>
+                              {subItem.icon && <subItem.icon />}
+                              <span>{subItem.title}</span>
+                            </a>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+            ) : (
+              <SidebarMenuButton key={item.title} tooltip={item.title} asChild>
+                <a href={item.url}>
+                  {item.icon && <item.icon />}
+                  <span>{item.title}</span>
+                </a>
+              </SidebarMenuButton>
+            ),
+          )}
         </SidebarMenu>
       </SidebarContent>
     </Sidebar>

@@ -48,14 +48,6 @@ export default function RootLayout({
         <SidebarProvider>
           <AppSidebar />
           <SidebarInset>
-            <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-              <SidebarTrigger className="-ml-1">
-                <span>xxx</span>
-              </SidebarTrigger>
-              <Link href="/styles">
-                <Button>Styles</Button>
-              </Link>
-            </header>
             <div>{children}</div>
           </SidebarInset>
         </SidebarProvider>
