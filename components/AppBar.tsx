@@ -6,6 +6,7 @@ export interface AppBarAction {
   text?: string;
   icon?: any;
   action?: any;
+  url?: string;
 }
 export interface AppBarProps {
   title?: React.ReactNode;
