@@ -7,7 +7,10 @@
     "prebuild": "pnpm run lint",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "precommit": "pnpm build",
+    "prepare": "husky install",
+    "postinstall": "prisma generate && prisma db push --accept-data-loss"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
@@ -33,7 +36,8 @@
     "tailwindcss": "^3.4.1",
     "ts-node": "^10.9.2",
     "typescript": "^5",
-    "typescript-eslint": "^8.16.0"
+    "typescript-eslint": "^8.16.0",
+    "husky": "^8.0.0"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
