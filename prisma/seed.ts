@@ -8,7 +8,7 @@ async function main() {
 
   await prisma.user.deleteMany();
   await prisma.style.createMany({
-    data: styles.map(({ category, slug, ...style }) => ({
+    data: styles.map(({ category, ...style }) => ({
       ...style,
       subcategoryId: parseInt(style.subcategoryId, 10),
       category: StyleCategory[category.toLowerCase() as StyleCategory],

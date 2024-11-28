@@ -16,6 +16,7 @@ import { useForm } from "react-hook-form";
 import type { AppBarAction } from "@/components/AppBar";
 import { AppBar } from "@/components/AppBar";
 import { Save } from "lucide-react";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 export interface StylesListProps {
   styles: Style[];
 }
@@ -38,6 +39,16 @@ export function StylesList({ styles }: StylesListProps) {
       <AppBar title="Styles List" actions={appbarItems}>
         SSS
       </AppBar>
+      <ul className="gap-2">
+        {styles.map((style) => (
+          <li key={style.id} className="flex m-2 p-1 border-b-2">
+            <Avatar>
+              <AvatarFallback>{style.identifier}</AvatarFallback>
+            </Avatar>
+            <span className="flex-grow my-auto ml-4">{style.name}</span>
+          </li>
+        ))}
+      </ul>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField

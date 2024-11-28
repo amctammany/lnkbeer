@@ -62,7 +62,7 @@ model Style {
   userId        String?
   owner         User?         @relation(fields: [userId], references: [id])
   name          String
-  //slug          String        @unique
+  slug          String        @unique
   //recipes       Recipe[]
   category      StyleCategory
   subcategoryId Int
