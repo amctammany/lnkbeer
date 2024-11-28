@@ -1,4 +1,19 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import {
+  ChartColumn,
+  ChartLine,
+  ChevronRight,
+  FlaskConical,
+  Home,
+  Hop,
+  ReceiptText,
+  Settings,
+  ShoppingBasket,
+  Store,
+  Thermometer,
+  WalletCards,
+  Waves,
+  Wheat,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -6,10 +21,19 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "./ui/collapsible";
 
 // Menu items.
 const items = [
@@ -17,21 +41,37 @@ const items = [
     title: "Home",
     url: "#",
     icon: Home,
+    isActive: true,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "Recipes",
+    url: "/recipes",
+    icon: ReceiptText,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
+    title: "Ingredients",
+    url: "/ingredients",
+    icon: Store,
+    items: [
+      { title: "Hops", url: "/ingredients/hops", icon: Hop },
+      { title: "Fermentables", url: "/ingredients/fermentables", icon: Wheat },
+      { title: "Yeasts", url: "/ingredients/yeasts", icon: FlaskConical },
+      { title: "Other", url: "/ingredients/other", icon: ShoppingBasket },
+    ],
   },
   {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    title: "Profiles",
+    url: "/profiles",
+    icon: WalletCards,
+    items: [
+      {
+        title: "Fermentation",
+        url: "/profiles/fermentation",
+        icon: ChartLine,
+      },
+      { title: "Water", url: "/profiles/water", icon: Waves },
+      { title: "Mash", url: "/profiles/mash", icon: Thermometer },
+    ],
   },
   {
     title: "Settings",
@@ -43,24 +83,44 @@ const items = [
 export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
+      <SidebarHeader>Sidebar</SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
+        <SidebarMenu>
+          {items.map((item) => (
+            <Collapsible
+              key={item.title}
+              asChild
+              defaultOpen={true}
+              className="group/collapsible"
+            >
+              <SidebarMenuItem>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuButton tooltip={item.title}>
+                    {item.icon && <item.icon />}
+                    <span>{item.title}</span>
+                    <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                   </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <SidebarMenuSub>
+                    {item.items?.map((subItem) => (
+                      <SidebarMenuSubItem key={subItem.title}>
+                        <SidebarMenuSubButton>
+                          <>
+                            {subItem.icon && <subItem.icon />}
+                            <a href={subItem.url}>
+                              <span>{subItem.title}</span>
+                            </a>
+                          </>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </SidebarMenuItem>
+            </Collapsible>
+          ))}
+        </SidebarMenu>
       </SidebarContent>
     </Sidebar>
   );
