@@ -4,6 +4,11 @@ import "./globals.css";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import {
   NavigationMenu,
   NavigationMenuList,
   NavigationMenuItem,
@@ -12,6 +17,7 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { AppSidebar } from "@/components/AppSidebar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -39,29 +45,40 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavigationMenu className="bg-primary">
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <Link href="/styles" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Styles
-                </NavigationMenuLink>
+        <SidebarProvider>
+          <AppSidebar />
+          <SidebarInset>
+            <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+              <SidebarTrigger className="-ml-1">
+                <span>xxx</span>
+              </SidebarTrigger>
+              <Link href="/styles">
+                <Button>Styles</Button>
               </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <NavigationMenuLink>Link</NavigationMenuLink>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-          </NavigationMenuList>
-        </NavigationMenu>
-
-        <Link href="/styles">
-          <Button>Styles</Button>
-        </Link>
-        {children}
+            </header>
+            <div>{children}</div>
+          </SidebarInset>
+        </SidebarProvider>
       </body>
     </html>
   );
 }
+/**<NavigationMenu className="bg-primary">
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <Link href="/styles" legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Styles
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <NavigationMenuLink>Link</NavigationMenuLink>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+
+   */
