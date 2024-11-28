@@ -42,7 +42,7 @@ export default function RootLayout({
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link href="/styles">
+              <Link href="/styles" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Styles
                 </NavigationMenuLink>
