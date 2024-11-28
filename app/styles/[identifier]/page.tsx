@@ -1,0 +1,21 @@
+import { StyleDisplay } from "@/app/styles/_components/StyleDisplay";
+import { getStyle } from "../queries";
+type StyleDisplayPageProps = {
+  params: Promise<{
+    identifier: string;
+  }>;
+};
+export async function generateMetadata({ params }: StyleDisplayPageProps) {
+  const { identifier } = await params;
+  return {
+    title: `LNK Style: ${identifier}`,
+  };
+}
+
+export default async function StyleDisplayPage({
+  params,
+}: StyleDisplayPageProps) {
+  const { identifier } = await params;
+  const style = await getStyle(identifier);
+  return <StyleDisplay style={style} />;
+}

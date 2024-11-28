@@ -21,6 +21,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  Style         Style[]
 }
 
 model Account {
@@ -48,4 +49,47 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum StyleCategory {
+  beer
+  mead
+  cider
+}
+
+model Style {
+  id            Int           @id @default(autoincrement())
+  userId        String?
+  owner         User?         @relation(fields: [userId], references: [id])
+  name          String
+  slug          String        @unique
+  //recipes       Recipe[]
+  category      StyleCategory
+  subcategoryId Int
+  identifier    String        @unique
+  overall       String?
+  aroma         String?
+  appearance    String?
+  flavor        String?
+  mouthfeel     String?
+  comments      String?
+  history       String?
+  ingredients   String?
+  comparison    String?
+  examples      String?
+  ibuLow        Float?
+  ibuHigh       Float?
+  ibuFlex       Boolean       @default(false)
+  ogLow         Float?
+  ogHigh        Float?
+  ogFlex        Boolean       @default(false)
+  fgLow         Float?
+  fgHigh        Float?
+  fgFlex        Boolean       @default(false)
+  srmLow        Float?
+  srmHigh       Float?
+  srmFlex       Boolean       @default(false)
+  abvLow        Float?
+  abvHigh       Float?
+  abvFlex       Boolean       @default(false)
 }
