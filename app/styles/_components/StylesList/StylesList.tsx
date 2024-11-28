@@ -13,6 +13,7 @@ import {
 import { Style } from "@prisma/client";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { AppBar } from "@/components/AppBar";
 export type StylesListProps = {
   styles: Style[];
 };
@@ -22,6 +23,7 @@ export function StylesList({ styles }: StylesListProps) {
   const onSubmit = (v) => console.log(v);
   return (
     <div className="">
+      <AppBar title="Styles List">SSS</AppBar>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
