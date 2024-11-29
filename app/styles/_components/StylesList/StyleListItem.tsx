@@ -1,11 +1,22 @@
-import type { Style } from "@prisma/client";
-import React from "react";
-export interface StyleListItemProps {
+import { ListItem } from "@/components/List/ListItem";
+import { ListItemIcon } from "@/components/List/ListItemIcon";
+import { ListItemText } from "@/components/List/ListItemText";
+import { Style } from "@prisma/client";
+
+export type StyleListItemProps = {
   style: Style;
-}
-
-function StyleListItem({ style }: StyleListItemProps) {
-  return <div className="">{JSON.stringify(style)}</div>;
-}
-
-export default StyleListItem;
+};
+export const StyleListItem = ({ style }: StyleListItemProps) => {
+  return (
+    <ListItem border="none" href={`/styles/${style.identifier}`}>
+      <ListItemIcon variant="icon">
+        <div className="text-lg ">{style.identifier}</div>
+      </ListItemIcon>
+      <ListItemText
+        className="flex-grow"
+        primary={style.name}
+        secondary={style.category}
+      />
+    </ListItem>
+  );
+};

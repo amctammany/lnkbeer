@@ -17,6 +17,9 @@ import type { AppBarAction } from "@/components/AppBar";
 import { AppBar } from "@/components/AppBar";
 import { Save } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { List } from "@/components/List/List";
+import { ListItem } from "@/components/List/ListItem";
+import { StyleListItem } from "./StyleListItem";
 export interface StylesListProps {
   styles: Style[];
 }
@@ -39,6 +42,11 @@ export function StylesList({ styles }: StylesListProps) {
       <AppBar title="Styles List" actions={appbarItems}>
         SSS
       </AppBar>
+      <List>
+        {styles.map((style) => (
+          <StyleListItem key={style.id} style={style} />
+        ))}
+      </List>
       <ul className="gap-2">
         {styles.map((style) => (
           <li key={style.id} className="flex m-2 p-1 border-b-2">
