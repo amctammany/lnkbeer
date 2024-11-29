@@ -38,7 +38,7 @@ export function StylesList({ styles }: StylesListProps) {
     console.log(v);
   };
   return (
-    <div className="">
+    <>
       <AppBar title="Styles List" actions={appbarItems}>
         SSS
       </AppBar>
@@ -78,7 +78,7 @@ export function StylesList({ styles }: StylesListProps) {
           <Button type="submit">Submit</Button>
         </form>
       </Form>
-    </div>
+    </>
   );
 }
 

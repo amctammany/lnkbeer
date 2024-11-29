@@ -28,7 +28,9 @@ const listItemInnerStyles = cva(["px-0 py-0 flex items-center flex-grow"], {
 const listItemStyles = cva(["group relative box-border justify-start w-full"], {
   variants: {
     variant: {
-      default: ["hover:bg-primary-500/10 p-2"],
+      default: [
+        "hover:bg-primary-500/10 p-2 even:bg-primary-foreground odd:bg-slate-50",
+      ],
       warning: ["group-hover:bg-warning-500/10"],
       //default: [""],
       //warning: [""],

@@ -8,7 +8,11 @@ export type StyleListItemProps = {
 };
 export const StyleListItem = ({ style }: StyleListItemProps) => {
   return (
-    <ListItem border="none" href={`/styles/${style.identifier}`}>
+    <ListItem
+      border="none"
+      className="even:bg-slate-100 odd:bg-slate-200"
+      href={`/styles/${style.slug}`}
+    >
       <ListItemIcon variant="icon">
         <div className="text-lg ">{style.identifier}</div>
       </ListItemIcon>
