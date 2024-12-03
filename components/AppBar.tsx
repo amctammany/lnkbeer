@@ -26,7 +26,7 @@ export const AppBar = ({
   const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
 
   return (
-    <div className="group peer" data-state={state} data-isMobile={isMobile}>
+    <div className="group peer" data-state={state} data-ismobile={isMobile}>
       <header
         className={clsx(
           "flex h-16 shrink-0 items-center gap-2 border-b px-4 group-data-[state=expanded]:w-[calc(100%_-_var(--sidebar-width))] group-data-[state=collapsed]:w-[calc(100%_-_var(--sidebar-width-icon))]",
