@@ -1,5 +1,6 @@
+"use client";
 import Link from "next/link";
-import { SidebarTrigger } from "./ui/sidebar";
+import { SidebarTrigger, useSidebar } from "./ui/sidebar";
 import { Button } from "./ui/button";
 import clsx from "clsx";
 
@@ -17,41 +18,25 @@ export interface AppBarProps {
   actions?: AppBarAction[];
 }
 export const AppBar = ({
-  actions = [],
+  //actions = [],
   title,
   className,
   children,
 }: AppBarProps) => {
+  const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
+
   return (
-    <header
-      className={clsx(
-        "flex h-16 shrink-0 items-center gap-2 border-b px-4",
-        className,
-      )}
-    >
-      <SidebarTrigger className="" />
-      <span className="flex-grow">{title}</span>
-      {children}
-      {actions.map((action) =>
-        action.url ? (
-          <Button key={action.url} asChild size="sm" variant="secondary">
-            <Link href={action.url}>
-              {action.icon && <action.icon />}
-              {action.text}
-            </Link>
-          </Button>
-        ) : (
-          <Button
-            type={action.type ?? "button"}
-            key={action.text}
-            size="sm"
-            variant="secondary"
-          >
-            {action.icon && <action.icon />}
-            {action.text}
-          </Button>
-        ),
-      )}
-    </header>
+    <div className="group peer" data-state={state} data-isMobile={isMobile}>
+      <header
+        className={clsx(
+          "flex h-16 shrink-0 items-center gap-2 border-b px-4 group-data-[state=expanded]:w-[calc(100%_-_var(--sidebar-width))] group-data-[state=collapsed]:w-[calc(100%_-_var(--sidebar-width-icon))]",
+          className,
+        )}
+      >
+        <SidebarTrigger className="" />
+        <span className="flex-grow">{title}</span>
+        {children}
+      </header>
+    </div>
   );
 };

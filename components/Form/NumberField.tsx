@@ -1,8 +1,8 @@
 import { Label } from "./Label";
-import { VariantProps, cva } from "class-variance-authority";
-import { SchemaFieldError } from "@/lib/validateSchema";
+//import { VariantProps, cva } from "class-variance-authority";
+//import { SchemaFieldError } from "@/lib/validateSchema";
 import { Input, inputStyles, InputProps } from "./Input";
-import clsx from "clsx";
+//import clsx from "clsx";
 
 export type NumberFieldProps = {
   //name: string;
@@ -18,6 +18,7 @@ export type NumberFieldProps = {
 } & InputProps;
 //VariantProps<typeof numberFieldStyles>;
 
+/**
 const numberFieldStyles = cva("input ", {
   variants: {
     variant: {
@@ -37,6 +38,7 @@ const numberFieldStyles = cva("input ", {
   },
   defaultVariants: { size: "default", variant: "default" },
 });
+ */
 
 export function NumberField({
   name,

@@ -19,7 +19,7 @@ const schema = zfd.formData({
   cohumulone: zfd.numeric(z.number().min(0).max(40).optional()),
   farnesene: zfd.numeric(z.number().min(0).max(40).optional()),
   humulene: zfd.numeric(z.number().min(0).max(40).optional()),
-  myrcene: zfd.numeric(z.number().min(0).max(40).optional()),
+  myrcene: zfd.numeric(z.number().min(0).max(80).optional()),
   totalOil: zfd.numeric(z.number().min(0).max(40).optional()),
   flavor: zfd.text(z.string().optional()),
   purpose: zfd.text(z.string().optional()),
