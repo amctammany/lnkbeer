@@ -4,7 +4,7 @@ import { AppBarLayout } from "@/components/AppBarLayout";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
 import { NumberField } from "@/components/Form/NumberField";
-import { RangeField } from "@/components/Form/RangeField";
+import { RangeField, RangeFieldProps } from "@/components/Form/RangeField";
 import { RangeValue } from "@/components/Form/RangeSlider";
 import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
@@ -12,12 +12,83 @@ import { useActionForm } from "@/hooks/useActionForm";
 import { HopInput } from "@/types/ingredient";
 import { Hop, HopUsage } from "@prisma/client";
 import { Save } from "lucide-react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, FieldValues, useForm } from "react-hook-form";
 
 export type HopEditorProps = {
   hop?: HopInput | null;
   action: any;
 };
+export type NumberKeys<T extends object> = {
+  [K in keyof T]: NonNullable<T[K]> extends number ? K : never;
+}[keyof T];
+export type RangeKeys<T extends object> = {
+  [K in keyof T]: NonNullable<T[K]> extends RangeValue ? K : never;
+}[keyof T];
+type RangeFieldProp<T extends FieldValues> = {
+  name: Required<RangeKeys<T>>;
+  lowField: Required<NumberKeys<T>>;
+  highField: Required<NumberKeys<T>>;
+  min?: number;
+  max?: number;
+};
+const rangeProps: RangeFieldProp<HopInput>[] = [
+  {
+    name: "alphaRange",
+    min: 0,
+    max: 50,
+    lowField: "alphaLow",
+    highField: "alphaHigh",
+  },
+  {
+    name: "betaRange",
+    min: 0,
+    max: 50,
+    lowField: "betaLow",
+    highField: "betaHigh",
+  },
+  {
+    name: "caryophylleneRange",
+    min: 0,
+    max: 50,
+    lowField: "caryophylleneLow",
+    highField: "caryophylleneHigh",
+  },
+  {
+    name: "cohumuloneRange",
+    min: 0,
+    max: 50,
+    lowField: "cohumuloneLow",
+    highField: "cohumuloneHigh",
+  },
+  {
+    name: "farneseneRange",
+    min: 0,
+    max: 50,
+    highField: "farneseneLow",
+    lowField: "farneseneHigh",
+  },
+  {
+    name: "humuleneRange",
+    min: 0,
+    max: 50,
+    highField: "humuleneLow",
+    lowField: "humuleneHigh",
+  },
+  {
+    name: "myrceneRange",
+    min: 0,
+    max: 50,
+    highField: "myrceneHigh",
+    lowField: "myrceneLow",
+  },
+  {
+    name: "totalOilRange",
+    min: 0,
+    max: 50,
+    lowField: "totalOilLow",
+    highField: "totalOilHigh",
+  },
+];
 const makeActions: (hop: Hop) => AppBarAction[] = (hop) => [
   { text: "Save", icon: Save },
 ];
@@ -63,163 +134,33 @@ export function HopEditor({ hop, action }: HopEditorProps) {
               <NumberField {...register("myrcene")} step={0.01} />
 
               <NumberField {...register("totalOil")} step={0.01} />
-              <Controller
-                name="alphaRange"
-                control={control}
-                defaultValue={getValues(["alphaLow", "alphaHigh"]).reduce(
-                  (acc, v, i) => ({ ...acc, [i === 0 ? "min" : "max"]: v! }),
-                  {} as RangeValue,
-                )}
-                render={({ field }) => (
-                  <RangeField
-                    error={state.errors?.alphaRange}
-                    {...field}
-                    label="Alpha"
-                    step={0.01}
-                    min={0}
-                    max={40}
-                  />
-                )}
-              />
-
-              <Controller
-                name="betaRange"
-                control={control}
-                defaultValue={getValues(["betaLow", "betaHigh"]).reduce(
-                  (acc, v, i) => ({ ...acc, [i === 0 ? "min" : "max"]: v! }),
-                  {} as RangeValue,
-                )}
-                render={({ field }) => (
-                  <RangeField
-                    error={state.errors?.farneseneRange}
-                    {...field}
-                    label="Beta"
-                    step={0.01}
-                    min={0}
-                    max={35}
-                  />
-                )}
-              />
-              <Controller
-                name="caryophylleneRange"
-                control={control}
-                defaultValue={getValues([
-                  "caryophylleneLow",
-                  "caryophylleneHigh",
-                ]).reduce(
-                  (acc, v, i) => ({ ...acc, [i === 0 ? "min" : "max"]: v! }),
-                  {} as RangeValue,
-                )}
-                render={({ field }) => (
-                  <RangeField
-                    error={state.errors?.caryophylleneRange}
-                    {...field}
-                    label="Caryophyllene"
-                    step={0.01}
-                    min={0}
-                    max={35}
-                  />
-                )}
-              />
-              <Controller
-                name="humuleneRange"
-                control={control}
-                defaultValue={getValues(["humuleneLow", "humuleneHigh"]).reduce(
-                  (acc, v, i) => ({ ...acc, [i === 0 ? "min" : "max"]: v! }),
-                  {} as RangeValue,
-                )}
-                render={({ field }) => (
-                  <RangeField
-                    error={state.errors?.humuleneRange}
-                    {...field}
-                    label="Humulene"
-                    step={0.01}
-                    min={0}
-                    max={35}
-                  />
-                )}
-              />
-              <Controller
-                name="cohumuloneRange"
-                control={control}
-                defaultValue={getValues([
-                  "cohumuloneLow",
-                  "cohumuloneHigh",
-                ]).reduce(
-                  (acc, v, i) => ({ ...acc, [i === 0 ? "min" : "max"]: v! }),
-                  {} as RangeValue,
-                )}
-                render={({ field }) => (
-                  <RangeField
-                    error={state.errors?.cohumuloneRange}
-                    {...field}
-                    label="Cohumulone"
-                    step={0.01}
-                    min={0}
-                    max={35}
-                  />
-                )}
-              />
-
-              <Controller
-                name="myrceneRange"
-                control={control}
-                defaultValue={getValues(["myrceneLow", "myrceneHigh"]).reduce(
-                  (acc, v, i) => ({ ...acc, [i === 0 ? "min" : "max"]: v! }),
-                  {} as RangeValue,
-                )}
-                render={({ field }) => (
-                  <RangeField
-                    error={state.errors?.myrceneRange}
-                    {...field}
-                    label="Myrcene"
-                    step={0.01}
-                    min={0}
-                    max={50}
-                  />
-                )}
-              />
-
-              <Controller
-                name="totalOilRange"
-                control={control}
-                defaultValue={getValues(["totalOilLow", "totalOilHigh"]).reduce(
-                  (acc, v, i) => ({ ...acc, [i === 0 ? "min" : "max"]: v! }),
-                  {} as RangeValue,
-                )}
-                render={({ field }) => (
-                  <RangeField
-                    error={state.errors?.totalOilRange}
-                    {...field}
-                    label="Total Oil"
-                    step={0.01}
-                    min={0}
-                    max={35}
-                  />
-                )}
-              />
-
-              <Controller
-                name="farneseneRange"
-                control={control}
-                defaultValue={getValues([
-                  "farneseneLow",
-                  "farneseneHigh",
-                ]).reduce(
-                  (acc, v, i) => ({ ...acc, [i === 0 ? "min" : "max"]: v! }),
-                  {} as RangeValue,
-                )}
-                render={({ field }) => (
-                  <RangeField
-                    error={state.errors?.farneseneRange}
-                    {...field}
-                    label="Farnesene"
-                    step={0.01}
-                    min={0}
-                    max={35}
-                  />
-                )}
-              />
+              {rangeProps.map(({ name, highField, lowField }) => (
+                <Controller
+                  key={name}
+                  name={name!}
+                  control={control}
+                  defaultValue={
+                    getValues([lowField!, highField!]).reduce(
+                      (acc, v, i) => ({
+                        ...acc,
+                        [i === 0 ? "min" : "max"]: v!,
+                      }),
+                      {} as RangeValue,
+                    ) as RangeValue
+                  }
+                  render={({ field }) => (
+                    <RangeField
+                      error={state.errors?.[name!]}
+                      {...field}
+                      value={field.value ?? { min: 0, max: 100 }}
+                      label={name}
+                      step={0.01}
+                      min={0}
+                      max={40}
+                    />
+                  )}
+                />
+              ))}
             </div>
           </div>
         </div>
