@@ -1,5 +1,5 @@
-import { AppBar } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import type { Style } from "@prisma/client";
 import React from "react";
 export interface StyleDisplayProps {
@@ -12,12 +12,19 @@ export function StyleDisplay({ style }: StyleDisplayProps) {
       title={`Style: ${style?.identifier} : ${style?.name}`}
       actions={actions}
     >
-      {Object.entries(style || {}).map(([key, value]) => (
-        <div key={key} className="grid grid-flow-col">
-          <span>{key}</span>
-          <span>{value}</span>
-        </div>
-      ))}
+      <Card className="m-8">
+        <CardHeader>
+          <span>{`Style: ${style?.identifier} : ${style?.name}`}</span>
+        </CardHeader>
+        <CardContent>
+          {Object.entries(style || {}).map(([key, value]) => (
+            <div key={key} className="flex border-2 mb-1">
+              <span className="bg-slate-200 px-2">{key}</span>
+              <span className="flex-grow px-2">{value}</span>
+            </div>
+          ))}
+        </CardContent>
+      </Card>
     </AppBarLayout>
   );
 }
