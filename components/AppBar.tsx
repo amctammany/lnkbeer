@@ -7,6 +7,7 @@ export interface AppBarAction {
   text?: string;
   icon?: any;
   action?: any;
+  type?: HTMLButtonElement["type"];
   url?: string;
 }
 export interface AppBarProps {
@@ -40,7 +41,12 @@ export const AppBar = ({
             </Link>
           </Button>
         ) : (
-          <Button key={action.text} size="sm" variant="secondary">
+          <Button
+            type={action.type ?? "button"}
+            key={action.text}
+            size="sm"
+            variant="secondary"
+          >
             {action.icon && <action.icon />}
             {action.text}
           </Button>

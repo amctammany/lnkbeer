@@ -93,3 +93,87 @@ model Style {
   abvHigh       Float?
   abvFlex       Boolean       @default(false)
 }
+
+enum HopUsage {
+  aroma
+  bittering
+  dual
+}
+
+model Hop {
+  id                Int       @id @default(autoincrement())
+  name              String
+  slug              String    @unique
+  description       String?
+  characteristics   String?
+  country           String?
+  usage             HopUsage?
+  alpha             Float?
+  alphaLow          Float?
+  alphaHigh         Float?
+  beta              Float?
+  betaLow           Float?
+  betaHigh          Float?
+  caryophyllene     Float?
+  caryophylleneLow  Float?
+  caryophylleneHigh Float?
+  cohumulone        Float?
+  cohumuloneLow     Float?
+  cohumuloneHigh    Float?
+  farnesene         Float?
+  farneseneLow      Float?
+  farneseneHigh     Float?
+  humulene          Float?
+  humuleneLow       Float?
+  humuleneHigh      Float?
+  myrcene           Float?
+  myrceneLow        Float?
+  myrceneHigh       Float?
+  totalOil          Float?
+  totalOilLow       Float?
+  totalOilHigh      Float?
+  geraniol          Float?
+  geraniolLow       Float?
+  geraniolHigh      Float?
+  other             Float?
+  otherLow          Float?
+  otherHigh         Float?
+  linalool          Float?
+  linaloolLow       Float?
+  linaloolHigh      Float?
+
+  bPinene           Float?
+  bPineneLow        Float?
+  bPineneHigh       Float?
+  purpose           String?
+  flavor            String?
+  notes             String?
+  substitutesString String[]
+  styles            String[]
+  //HopIngredient     HopIngredient[]
+  HopSensoryPanel   HopSensoryPanel[]
+}
+
+model HopSensoryPanel {
+  id            Int     @id @default(autoincrement())
+  hopId         Int?
+  slug          String  @unique
+  hop           Hop     @relation(fields: [slug], references: [slug])
+  sweetAromatic Float
+  berry         Float
+  stoneFruit    Float
+  pomme         Float
+  melon         Float
+  tropical      Float
+  citrus        Float
+  floral        Float
+  herbal        Float
+  vegetal       Float
+  grassy        Float
+  earthy        Float
+  woody         Float
+  spicy         Float
+  year          Int?
+  author        String?
+  notes         String?
+}
