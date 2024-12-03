@@ -1,5 +1,6 @@
 import { AppBarAction } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
+import { Range } from "@/components/Range";
 import { Hop } from "@prisma/client";
 
 export type HopDisplayProps = {
@@ -9,9 +10,17 @@ const makeActions: (hop: Hop) => AppBarAction[] = (hop) => [
   { text: "Edit", url: `/ingredients/hops/${hop.slug}/edit` },
 ];
 export function HopDisplay({ hop }: HopDisplayProps) {
+  if (!hop) return <div>Bad</div>;
   return (
     <AppBarLayout title={`Hop: ${hop?.name}`} actions={makeActions(hop!)}>
       <div className="">
+        <Range
+          label="Alpha"
+          min={0}
+          max={50}
+          range={[hop.alphaLow, hop.alphaHigh]}
+          value={hop.alpha!}
+        />
         {Object.entries(hop || {}).map(([key, value]) => (
           <div key={key} className="flex border-2 mb-1">
             <span className="bg-slate-200 px-2">{key}</span>
