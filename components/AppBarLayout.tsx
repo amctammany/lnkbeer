@@ -1,10 +1,10 @@
 import clsx from "clsx";
-import { AppBar } from "./AppBar";
+import { AppBar, AppBarAction } from "./AppBar";
 
 export type AppBarLayoutProps = {
   title?: string;
   className?: string;
-  actions?: any;
+  actions?: AppBarAction[];
   children?: React.ReactNode | React.ReactNode[];
 };
 export const AppBarLayout = ({
@@ -13,10 +13,12 @@ export const AppBarLayout = ({
   className,
   children,
 }: AppBarLayoutProps) => (
-  <div className="relative ">
-    <div className="fixed bg-white h-16 w-full z-20">
-      <AppBar title={title} actions={actions} />
-    </div>
+  <div className="relative w-full">
+    <AppBar
+      title={title}
+      actions={actions}
+      className="fixed bg-white left-[240px] right-0 h-16 z-20"
+    />
     <div className={clsx("mt-16 w-full", className)}>{children}</div>
   </div>
 );

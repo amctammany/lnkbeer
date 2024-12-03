@@ -5,26 +5,23 @@ import React from "react";
 export interface StyleDisplayProps {
   style?: Style | null;
 }
-const actions = [{ text: "Edit", url: "edit" }];
+const makeActions = (style: Style | undefined | null) => [
+  { text: "Edit", url: `/styles/${style?.slug}/edit` },
+];
 export function StyleDisplay({ style }: StyleDisplayProps) {
   return (
     <AppBarLayout
       title={`Style: ${style?.identifier} : ${style?.name}`}
-      actions={actions}
+      actions={makeActions(style)}
     >
-      <Card className="m-8">
-        <CardHeader>
-          <span>{`Style: ${style?.identifier} : ${style?.name}`}</span>
-        </CardHeader>
-        <CardContent>
-          {Object.entries(style || {}).map(([key, value]) => (
-            <div key={key} className="flex border-2 mb-1">
-              <span className="bg-slate-200 px-2">{key}</span>
-              <span className="flex-grow px-2">{value}</span>
-            </div>
-          ))}
-        </CardContent>
-      </Card>
+      <div className="p-10">
+        {Object.entries(style || {}).map(([key, value]) => (
+          <div key={key} className="flex border-2 mb-1">
+            <span className="bg-slate-200 px-2">{key}</span>
+            <span className="flex-grow px-2">{value}</span>
+          </div>
+        ))}
+      </div>
     </AppBarLayout>
   );
 }

@@ -31,12 +31,21 @@ export const AppBar = ({
       <SidebarTrigger className="" />
       <span className="flex-grow">{title}</span>
       {children}
-      {actions.map((action) => (
-        <Button key={action.text} size="sm" variant="secondary">
-          {action.icon && <action.icon />}
-          {action.text}
-        </Button>
-      ))}
+      {actions.map((action) =>
+        action.url ? (
+          <Button key={action.url} asChild size="sm" variant="secondary">
+            <Link href={action.url}>
+              {action.icon && <action.icon />}
+              {action.text}
+            </Link>
+          </Button>
+        ) : (
+          <Button key={action.text} size="sm" variant="secondary">
+            {action.icon && <action.icon />}
+            {action.text}
+          </Button>
+        ),
+      )}
     </header>
   );
 };

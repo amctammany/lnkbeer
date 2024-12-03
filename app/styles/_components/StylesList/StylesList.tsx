@@ -16,7 +16,6 @@ const appbarItems: AppBarAction[] = [
 export function StylesList({ styles }: StylesListProps) {
   return (
     <AppBarLayout title="Styles List" actions={appbarItems}>
-      SSS
       <List>
         {styles.map((style) => (
           <StyleListItem key={style.id} style={style} />
