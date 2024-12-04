@@ -19,7 +19,7 @@ export const HopItem = ({ style, data, index }) => {
       style={style}
     >
       <Link
-        className="p-0 my-auto grid grid-rows-2 md:flex lg:grid lg:grid-cols-2"
+        className="p-0 my-auto grid grid-rows-2 md:grid md:grid-cols-2"
         href={`/ingredients/hops/${hop.slug}/edit`}
       >
         <span className="block font-bold text-sm md:text-lg md:flex-grow my-auto">
