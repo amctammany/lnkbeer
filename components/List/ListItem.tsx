@@ -29,7 +29,7 @@ const listItemStyles = cva(["group relative box-border justify-start w-full"], {
   variants: {
     variant: {
       default: [
-        "hover:bg-primary-500/10 p-2 even:bg-primary-foreground even:hover:bg-slate-500/10 odd:bg-slate-200 odd:hover:bg-slate-500/10",
+        "bg-white hover:bg-primary-500/10 p-2 even:bg-primary-foreground even:hover:bg-slate-500/10 odd:bg-slate-200 odd:hover:bg-slate-500/10",
       ],
       warning: ["group-hover:bg-warning-500/10"],
       //default: [""],
@@ -61,6 +61,7 @@ export const ListItem = ({
   border,
   innerClassName,
   className,
+  style,
 }: ListItemProps) => {
   const cn = clsx(listItemInnerStyles({ variant }), innerClassName);
   const child = href ? (
@@ -77,7 +78,10 @@ export const ListItem = ({
   );
 
   return (
-    <li className={clsx(listItemStyles({ variant, border }), className)}>
+    <li
+      style={style}
+      className={clsx(listItemStyles({ variant, border }), className)}
+    >
       {child}
     </li>
   );

@@ -15,9 +15,9 @@ export type HopListItemProps = {
 export const HopListItem = ({ hop }: HopListItemProps) => {
   const secondaryText = (
     <div className="flex h-5 items-center space-x-4 text-sm ">
-      <TooltipBadge icon={<House />} label="Country">
+      <Badge icon={<House />} label="Country">
         {hop.country}
-      </TooltipBadge>
+      </Badge>
       <Badge icon={<BicepsFlexed />} label="Alpha">
         {hop.alpha}
       </Badge>

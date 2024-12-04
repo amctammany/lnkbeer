@@ -16,7 +16,7 @@ export const AppBarLayout = ({
   children,
 }: AppBarLayoutProps) => {
   return (
-    <div className="relative w-full group">
+    <div className="relative w-full ">
       <AppBar title={title} className="fixed bg-white  h-16 z-20">
         {actions.map((action) =>
           action.url ? (
