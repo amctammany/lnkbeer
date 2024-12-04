@@ -1,4 +1,3 @@
-"use client";
 import {
   BookMarked,
   ChartLine,
@@ -26,12 +25,14 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "./ui/collapsible";
+import AdminNav from "@/app/admin/_components/AdminNav/AdminNav";
 
 // Menu items.
 const items = [
@@ -142,6 +143,9 @@ export function AppSidebar() {
               </SidebarMenuButton>
             ),
           )}
+          <SidebarSeparator />
+
+          <AdminNav />
         </SidebarMenu>
       </SidebarContent>
     </Sidebar>

@@ -9,8 +9,13 @@ export interface DashboardProps {
 
 export const Dashboard = ({ src }: DashboardProps) => {
   return (
-    <AppBarLayout title="Dashboard">
-      <div className="mx-auto w-10/12 grid grid-flow-row gap-8">Dashboard</div>
+    <AppBarLayout
+      title="Dashboard"
+      actions={[{ text: "Sign Out", url: "/api/auth/signout" }]}
+    >
+      <div className="mx-auto w-10/12 grid grid-flow-row gap-8">
+        {JSON.stringify(src)}
+      </div>
     </AppBarLayout>
   );
 };
