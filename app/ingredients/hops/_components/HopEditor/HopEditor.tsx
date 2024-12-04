@@ -1,15 +1,14 @@
 "use client";
-import { AppBarAction } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
 import { NumberField } from "@/components/Form/NumberField";
-import { RangeField, RangeFieldProps } from "@/components/Form/RangeField";
-import { RangeValue } from "@/components/Form/RangeSlider";
+import { RangeField } from "@/components/Form/RangeField";
+//import { RangeValue } from "@/components/Form/RangeSlider";
 import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
-import { HopInput } from "@/types/ingredient";
+import { HopInput, RangeValue } from "@/types/ingredient";
 import { Hop, HopUsage } from "@prisma/client";
 import { Save } from "lucide-react";
 import { Controller, FieldValues, useForm } from "react-hook-form";
@@ -89,13 +88,9 @@ const rangeProps: RangeFieldProp<HopInput>[] = [
     highField: "totalOilHigh",
   },
 ];
-const makeActions: (hop: Hop) => AppBarAction[] = (hop) => [
-  { text: "Save", icon: Save },
-];
 export function HopEditor({ hop, action }: HopEditorProps) {
   const { state, register, control, getValues, formAction } =
     useActionForm<HopInput>(action, hop!);
-  console.log(state);
   return (
     <Form className="flex" action={formAction}>
       <AppBarLayout

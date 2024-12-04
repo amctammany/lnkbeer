@@ -1,5 +1,6 @@
-import { RangeValue } from "@/components/Form/RangeSlider";
 import { Hop } from "@prisma/client";
+
+export type RangeValue = { min: number; max: number };
 
 export type HopInput = Hop & {
   alphaRange?: RangeValue;

@@ -1,21 +1,12 @@
-import {
-  ChangeEventHandler,
-  ComponentProps,
-  SyntheticEvent,
-  forwardRef,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import { Label } from "./Label";
 import { VariantProps, cva } from "class-variance-authority";
 //import { SchemaFieldError } from "@/lib/validateSchema";
-import { Input, inputStyles, InputProps } from "./Input";
+import { InputProps } from "./Input";
 //import { FieldValues, Path, UseControllerReturn } from "react-hook-form";
 import clsx from "clsx";
-import { TextField } from "./TextField";
-import { NumberField, NumberFieldRaw } from "./NumberField";
+import { NumberFieldRaw } from "./NumberField";
 
-const THUMB_SIZE = "12px";
 export type RangeFieldProps = //H extends Path<T> = Path<T>,
   {
     step?: number;
@@ -71,13 +62,11 @@ export function RangeField({
 
   //lowField,
   //highField,
-  size,
   error,
-  ref,
+  className,
   max = 100,
   min = 0,
 
-  className,
   ...props
 }: RangeFieldProps) {
   const [minValue, setMinValue] = useState((value ? value.min : min) ?? 0);
@@ -110,17 +99,18 @@ export function RangeField({
   const minPos = ((minValue - min) / (max - min)) * 100;
   const maxPos = ((maxValue - min) / (max - min)) * 100;
   return (
-    <Label inputSize={inputSize} label={label ?? ""} error={error}>
+    <Label
+      className={className}
+      inputSize={inputSize}
+      label={label ?? ""}
+      error={error}
+    >
       <div
         className="flex w-full"
         //style={{ "--thumb-size": THUMB_SIZE } as React.CSSProperties}
       >
         <NumberFieldRaw
-          //label={null}[var(--thumb-size)]
-          //name={`${name}[0]`}
           className="flex-shrink text-sm w-16 h-8"
-          //variant="tiny"
-          //inputSize={inputSize}
           value={minValue}
           onChange={handleMinChange}
         />
@@ -130,65 +120,31 @@ export function RangeField({
             <div className="absolute mx-0 h-[var(--thumb-size)] my-[calc(var(--thumb-size)*-.5)] w-[calc(100%+var(--thumb-size))]">
               <input
                 disabled={props.disabled || false}
-                //className={inputStyles({
-                //variant: error ? "error" : props.variant,
-                //size,
-                //})}
-                //className="absolute w-full pointer-events-none appearance-none h-full opacity-0 z-30 p-0"
                 className={inputClass}
                 name={name}
                 type="range"
                 step={step || 1}
-                //{...lowField.field}
-                //value={lowField.value}
-                //name={lowField.name}
                 onChange={handleMinChange}
-                //ref={lowField.field.ref}
                 min={min}
                 max={max}
                 value={minValue}
-                //defaultValue={defaultValue}
-                //onChange={onChange}
-                //onBlur={onBlur}
-                //value={value}
-                //ref={ref}
                 onWheel={(e) => e.currentTarget.blur()}
               />
               <input
                 disabled={props.disabled || false}
                 name={name}
-                //className="absolute w-full pointer-events-none appearance-none h-full opacity-0 z-30 p-0"
                 className={inputClass}
                 min={min}
                 max={max}
-                //className={inputStyles({
-                //variant: error ? "error" : props.variant,
-                //size,
-                //})}
                 type="range"
                 step={step || 1}
                 value={maxValue}
-                //{...highField.field}
-                //value={highField.value}
-                //name={highField.name}
-                //ref={highField.ref}
-                //onChange={handleChange}
                 onChange={handleMaxChange}
-                //name={name}
-                //defaultValue={defaultValue}
-                //onChange={onChange}
-                //onBlur={onBlur}
-                //value={value}
-                //ref={ref}
                 onWheel={(e) => e.currentTarget.blur()}
               />
             </div>
             <div className="w-full bg-blue-300 absolute h-[calc(--thumb-size)/4] ">
-              <div
-                //className="w-4 h-4 rounded-full absolute bg-pink-700 top-1/2 -translate-y-1/2 -ml-[5px]"
-                className={controlClass}
-                style={{ left: `${minPos}%` }}
-              />
+              <div className={controlClass} style={{ left: `${minPos}%` }} />
               <div className="absolute w-full top-1/2 -translate-y-1/2 h-1 bg-gray-300">
                 <div
                   className="absolute h-1 bg-pink-500 opacity-50"
@@ -201,10 +157,6 @@ export function RangeField({
         </div>
         <NumberFieldRaw
           className="flex-shrink text-sm w-16 h-8"
-          //name={`${name}[1]`}
-          //variant="tiny"
-          //label={null}
-          //inputSize={inputSize}
           value={maxValue}
           onChange={handleMaxChange}
         />
