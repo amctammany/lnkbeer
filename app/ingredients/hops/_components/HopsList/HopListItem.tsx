@@ -1,7 +1,6 @@
 import { ListItem } from "@/components/List/ListItem";
 import { ListItemIcon } from "@/components/List/ListItemIcon";
 import { ListItemText } from "@/components/List/ListItemText";
-import { Separator } from "@/components/ui/separator";
 import { Hop } from "@prisma/client";
 import {
   BicepsFlexed,

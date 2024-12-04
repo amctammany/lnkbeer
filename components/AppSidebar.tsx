@@ -1,10 +1,9 @@
+"use client";
 import {
   BookMarked,
-  ChartColumn,
   ChartLine,
   ChevronRight,
   FlaskConical,
-  GalleryVerticalEnd,
   Home,
   Hop,
   ReceiptText,
@@ -20,9 +19,6 @@ import {
 import {
   Sidebar,
   SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,

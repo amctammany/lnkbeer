@@ -1,7 +1,5 @@
 "use client";
-import Link from "next/link";
 import { SidebarTrigger, useSidebar } from "./ui/sidebar";
-import { Button } from "./ui/button";
 import clsx from "clsx";
 
 export interface AppBarAction {
@@ -23,7 +21,7 @@ export const AppBar = ({
   className,
   children,
 }: AppBarProps) => {
-  const { isMobile, state, openMobile, setOpenMobile } = useSidebar();
+  const { isMobile, state } = useSidebar();
 
   return (
     <div className="group peer" data-state={state} data-ismobile={isMobile}>
