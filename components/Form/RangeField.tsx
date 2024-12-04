@@ -15,7 +15,7 @@ import clsx from "clsx";
 import { TextField } from "./TextField";
 import { NumberField, NumberFieldRaw } from "./NumberField";
 
-const THUMB_SIZE = "8px";
+const THUMB_SIZE = "12px";
 export type RangeFieldProps = //H extends Path<T> = Path<T>,
   {
     step?: number;
@@ -34,7 +34,7 @@ const inputClass = clsx(
   "[&::-webkit-slider-thumb]:rounded-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:[pointer-events:all] [&::-webkit-slider-thumb]:w-[--thumb-size] [&::-webkit-slider-thumb]:h-[--thumb-size] [&::-webkit-slider-thumb]:cursor-grab [&::-webkit-slider-thumb]:bg-red-900 [border:0,none]  [&:focus::-webkit-slider-runnable-track]:bg-transparent [&:focus::-webkit-slider-runnable-track]:border-transparent [&:focus::-webkit-slider-runnable-track]:appearance-none [&:focus::-webkit-slider-runnable-track]:w-[--thumb-size] [&:focus::-webkit-slider-runnable-track]:h-[--thumb-size] [&:focus::-webkit-slider-runnable-track]:bg-red-900   [[&::-webkit-slider-thumb]&:hover]:[cursor:grabbing] ",
 );
 const controlClass = clsx(
-  "w-4 h-4 rounded-[50%] absolute top-1/2 bg-pink-400 z-[2] -translate-y-1/2 transform[translate3d(0,-50%,0)] ml-[-8px] pointer-events-none ",
+  "w-[calc(var(--thumb-size)/1)] h-[var(--thumb-size)] rounded-[50%] absolute top-1/2 bg-pink-400 z-[2] -translate-y-1/2 transform[translate3d(0,-50%,0)] ml-[calc(var(--thumb-size*-1/2))] pointer-events-none ",
 );
 
 const rangeFieldStyles = cva("input w-full", {
@@ -113,7 +113,7 @@ export function RangeField({
     <Label inputSize={inputSize} label={label ?? ""} error={error}>
       <div
         className="flex w-full"
-        style={{ "--thumb-size": THUMB_SIZE } as React.CSSProperties}
+        //style={{ "--thumb-size": THUMB_SIZE } as React.CSSProperties}
       >
         <NumberFieldRaw
           //label={null}[var(--thumb-size)]
@@ -127,7 +127,7 @@ export function RangeField({
 
         <div className="flex-grow">
           <div className="relative flex items-center mx-10 my-[calc(var(--thumb-size)/2)] pt-[1.6rem] h-[calc(var(--thumb-size)+1.0rem)]">
-            <div className="absolute mx-0 h-[var(--thumb-size)] my-[calc(-8px)] w-[calc(100%+var(--thumb-size))]">
+            <div className="absolute mx-0 h-[var(--thumb-size)] my-[calc(var(--thumb-size)*-.5)] w-[calc(100%+var(--thumb-size))]">
               <input
                 disabled={props.disabled || false}
                 //className={inputStyles({
@@ -183,15 +183,15 @@ export function RangeField({
                 onWheel={(e) => e.currentTarget.blur()}
               />
             </div>
-            <div className="w-full absolute h-[--thumb-size] ">
+            <div className="w-full bg-blue-300 absolute h-[calc(--thumb-size)/4] ">
               <div
                 //className="w-4 h-4 rounded-full absolute bg-pink-700 top-1/2 -translate-y-1/2 -ml-[5px]"
                 className={controlClass}
                 style={{ left: `${minPos}%` }}
               />
-              <div className="absolute w-full top-1/2 -translate-y-1/2 h-[6px] rounded-[3px] bg-gray-300">
+              <div className="absolute w-full top-1/2 -translate-y-1/2 h-1 bg-gray-300">
                 <div
-                  className="absolute h-full bg-pink-500 opacity-50"
+                  className="absolute h-1 bg-pink-500 opacity-50"
                   style={{ left: `${minPos}%`, right: `${100 - maxPos}%` }}
                 />
               </div>
