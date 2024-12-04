@@ -18,7 +18,7 @@ const listItemTextStyles = cva(["grid m-auto py-1 px-2 flex-auto"], {
     size: "default",
   },
 });
-const listItemTextPrimaryStyles = cva(["block witespace-nowrap"], {
+const listItemTextPrimaryStyles = cva(["block font-bold witespace-nowrap"], {
   variants: {
     size: {
       default: [""],

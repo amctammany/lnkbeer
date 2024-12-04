@@ -1,22 +1,23 @@
 import { Hop } from "@prisma/client";
-import Link from "next/link";
+import { HopListItem } from "./HopListItem";
+import { List } from "@/components/List/List";
+import { AppBarLayout } from "@/components/AppBarLayout";
 
 export type HopsListProps = {
   hops?: Hop[];
 };
 export function HopsList({ hops = [] }: HopsListProps) {
   return (
-    <div className="">
-      {hops.map((hop) => (
-        <Link
-          className="block px-2 py-3"
-          key={hop.id}
-          href={`/ingredients/hops/${hop.slug}`}
-        >
-          {hop.name}
-        </Link>
-      ))}
-    </div>
+    <AppBarLayout
+      title="Hops List"
+      actions={[{ text: "New", url: "/ingredients/hops/new" }]}
+    >
+      <List>
+        {hops.map((hop) => (
+          <HopListItem key={hop.id} hop={hop} />
+        ))}
+      </List>
+    </AppBarLayout>
   );
 }
 
