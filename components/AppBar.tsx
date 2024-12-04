@@ -21,13 +21,19 @@ export const AppBar = ({
   className,
   children,
 }: AppBarProps) => {
-  const { isMobile, state } = useSidebar();
+  const { isMobile, openMobile, open, state } = useSidebar();
+  console.log(openMobile);
 
   return (
-    <div className="group peer" data-state={state} data-ismobile={isMobile}>
+    <div
+      className="group peer"
+      data-open={isMobile ? openMobile : open}
+      data-state={state}
+      data-ismobile={isMobile}
+    >
       <header
         className={clsx(
-          "flex h-16 shrink-0 items-center gap-2 border-b px-4 group-data-[state=expanded]:w-[calc(100%_-_var(--sidebar-width))] group-data-[state=collapsed]:w-[calc(100%_-_var(--sidebar-width-icon))]",
+          "flex h-16 shrink-0 items-center gap-2 border-b px-4 group-data-[state=expanded]:w-[calc(100%_-_var(--sidebar-width))] group-data-[open=false]:w-full",
           className,
         )}
       >

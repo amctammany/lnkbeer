@@ -13,7 +13,7 @@ export function HopsList({ hops = [] }: HopsListProps) {
       title="Hops List"
       actions={[{ text: "New", url: "/ingredients/hops/new" }]}
     >
-      <div className="w-full lg:w-9/12 m-auto pt-0 h-[calc(100vh-80px)]">
+      <div className="w-full lg:w-9/12 m-auto pt-0 h-[calc(100vh-80px)] overflow-hidden">
         <h2>Hops</h2>
         <AutoSizer>
           {({ width, height }) => (
