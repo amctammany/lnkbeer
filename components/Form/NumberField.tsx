@@ -46,6 +46,7 @@ export function NumberField({
   variant,
   size,
   className,
+  suffix,
   inputSize = "full",
   error,
   ...props
@@ -53,6 +54,7 @@ export function NumberField({
   return (
     <Label
       //className={clsx(numberFieldStyles({ variant, size }))}
+      suffix={suffix}
       variant={variant}
       inputSize={inputSize}
       className={className}

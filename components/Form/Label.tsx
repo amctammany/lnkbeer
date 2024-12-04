@@ -91,7 +91,7 @@ export const Label = ({
 
         <div
           className={clsx(
-            "flex-shrink grid items-center align-middle justify-center border-black border border-l-0",
+            "flex-shrink grid items-center rounded-md rounded-l-none align-middle justify-center bg-slate-400 text-sm font-medium leading-none ",
             { hidden: !suffix },
           )}
         >

@@ -125,7 +125,7 @@ export function HopEditor({ hop, action }: HopEditorProps) {
               Composition
             </span>
             <div className="flex-grow">
-              <NumberField {...register("alpha")} step={0.01} />
+              <NumberField suffix="%" {...register("alpha")} step={0.01} />
               <NumberField {...register("beta")} step={0.01} />
               <NumberField {...register("caryophyllene")} step={0.01} />
               <NumberField {...register("cohumulone")} step={0.01} />
