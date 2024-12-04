@@ -15,6 +15,7 @@ import clsx from "clsx";
 import { TextField } from "./TextField";
 import { NumberField, NumberFieldRaw } from "./NumberField";
 
+const THUMB_SIZE = "8px";
 export type RangeFieldProps = //H extends Path<T> = Path<T>,
   {
     step?: number;
@@ -28,12 +29,12 @@ export type RangeFieldProps = //H extends Path<T> = Path<T>,
 
 const inputClass = clsx(
   "absolute w-full h-full z-[3] p-0 opacity-0 appearance-none pointer-events-none ",
-  "[&::-ms-track]:bg-transparent [&::-ms-track]:border-transparent [&::-ms-track]:appearance-none [&::-ms-thumb]:appearance-none [&::-ms-thumb]:[pointer-events:all] [&::-ms-thumb]:w-4 [&::-ms-thumb]:h-4 [&::-ms-thumb]:bg-red-900 [&::-ms-thumb]:cursor-grab [[&::-ms-thumb]&:active]:[cursor:grabbing]",
-  "[&::-moz-range-track]:bg-transparent [&::-moz-range-track]:border-transparent [&::-moz-range-track]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:[pointer-events:all] [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:bg-red-900 [&::-moz-range-thumb]:cursor-grab [[&::-moz-range-thumb]&:active]:[cursor:grabbing]",
-  "[&::-webkit-slider-thumb]:rounded-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:[pointer-events:all] [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:cursor-grab [&::-webkit-slider-thumb]:bg-red-900 [border:0,none]  [&:focus::-webkit-slider-runnable-track]:bg-transparent [&:focus::-webkit-slider-runnable-track]:border-transparent [&:focus::-webkit-slider-runnable-track]:appearance-none [&:focus::-webkit-slider-runnable-track]:w-4 [&:focus::-webkit-slider-runnable-track]:h-4 [&:focus::-webkit-slider-runnable-track]:bg-red-900   [[&::-webkit-slider-thumb]&:hover]:[cursor:grabbing] ",
+  "[&::-ms-track]:bg-transparent [&::-ms-track]:border-transparent [&::-ms-track]:appearance-none [&::-ms-thumb]:appearance-none [&::-ms-thumb]:[pointer-events:all] [&::-ms-thumb]:w-[--thumb-size] [&::-ms-thumb]:h-[--thumb-size] [&::-ms-thumb]:bg-red-900 [&::-ms-thumb]:cursor-grab [[&::-ms-thumb]&:active]:[cursor:grabbing]",
+  "[&::-moz-range-track]:bg-transparent [&::-moz-range-track]:border-transparent [&::-moz-range-track]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:[pointer-events:all] [&::-moz-range-thumb]:w-[--thumb-size] [&::-moz-range-thumb]:h-[--thumb-size] [&::-moz-range-thumb]:bg-red-900 [&::-moz-range-thumb]:cursor-grab [[&::-moz-range-thumb]&:active]:[cursor:grabbing]",
+  "[&::-webkit-slider-thumb]:rounded-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:[pointer-events:all] [&::-webkit-slider-thumb]:w-[--thumb-size] [&::-webkit-slider-thumb]:h-[--thumb-size] [&::-webkit-slider-thumb]:cursor-grab [&::-webkit-slider-thumb]:bg-red-900 [border:0,none]  [&:focus::-webkit-slider-runnable-track]:bg-transparent [&:focus::-webkit-slider-runnable-track]:border-transparent [&:focus::-webkit-slider-runnable-track]:appearance-none [&:focus::-webkit-slider-runnable-track]:w-[--thumb-size] [&:focus::-webkit-slider-runnable-track]:h-[--thumb-size] [&:focus::-webkit-slider-runnable-track]:bg-red-900   [[&::-webkit-slider-thumb]&:hover]:[cursor:grabbing] ",
 );
 const controlClass = clsx(
-  "w-6 h-6 rounded-[50%] absolute top-1/2 bg-pink-400 z-[2] -translate-y-1/2 transform[translate3d(0,-50%,0)] ml-[-8px] pointer-events-none ",
+  "w-4 h-4 rounded-[50%] absolute top-1/2 bg-pink-400 z-[2] -translate-y-1/2 transform[translate3d(0,-50%,0)] ml-[-8px] pointer-events-none ",
 );
 
 const rangeFieldStyles = cva("input w-full", {
@@ -110,9 +111,12 @@ export function RangeField({
   const maxPos = ((maxValue - min) / (max - min)) * 100;
   return (
     <Label inputSize={inputSize} label={label ?? ""} error={error}>
-      <div className="flex w-full">
+      <div
+        className="flex w-full"
+        style={{ "--thumb-size": THUMB_SIZE } as React.CSSProperties}
+      >
         <NumberFieldRaw
-          //label={null}
+          //label={null}[var(--thumb-size)]
           //name={`${name}[0]`}
           className="flex-shrink text-sm w-16 h-8"
           //variant="tiny"
@@ -122,8 +126,8 @@ export function RangeField({
         />
 
         <div className="flex-grow">
-          <div className="relative flex items-center mx-10 my-[8px] pt-[1.6rem] h-[calc(16px+1.0rem)]">
-            <div className="absolute mx-0 h-[16px] my-[calc(-8px)] w-[calc(100%+16px)]">
+          <div className="relative flex items-center mx-10 my-[calc(var(--thumb-size)/2)] pt-[1.6rem] h-[calc(var(--thumb-size)+1.0rem)]">
+            <div className="absolute mx-0 h-[var(--thumb-size)] my-[calc(-8px)] w-[calc(100%+var(--thumb-size))]">
               <input
                 disabled={props.disabled || false}
                 //className={inputStyles({
@@ -179,7 +183,7 @@ export function RangeField({
                 onWheel={(e) => e.currentTarget.blur()}
               />
             </div>
-            <div className="w-full absolute h-[16px] ">
+            <div className="w-full absolute h-[--thumb-size] ">
               <div
                 //className="w-4 h-4 rounded-full absolute bg-pink-700 top-1/2 -translate-y-1/2 -ml-[5px]"
                 className={controlClass}
