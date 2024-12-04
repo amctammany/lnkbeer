@@ -9,20 +9,15 @@ import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { HopInput, RangeValue } from "@/types/ingredient";
-import { Hop, HopUsage } from "@prisma/client";
+import { NumberKeys, RangeKeys } from "@/types/util";
+import { HopUsage } from "@prisma/client";
 import { Save } from "lucide-react";
-import { Controller, FieldValues, useForm } from "react-hook-form";
+import { Controller, FieldValues } from "react-hook-form";
 
 export type HopEditorProps = {
   hop?: HopInput | null;
   action: any;
 };
-export type NumberKeys<T extends object> = {
-  [K in keyof T]: NonNullable<T[K]> extends number ? K : never;
-}[keyof T];
-export type RangeKeys<T extends object> = {
-  [K in keyof T]: NonNullable<T[K]> extends RangeValue ? K : never;
-}[keyof T];
 type RangeFieldProp<T extends FieldValues> = {
   name: Required<RangeKeys<T>>;
   lowField: Required<NumberKeys<T>>;
