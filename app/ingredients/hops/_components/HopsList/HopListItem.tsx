@@ -3,7 +3,12 @@ import { ListItemIcon } from "@/components/List/ListItemIcon";
 import { ListItemText } from "@/components/List/ListItemText";
 import { Separator } from "@/components/ui/separator";
 import { Hop } from "@prisma/client";
-import { Hop as HopIcon } from "lucide-react";
+import {
+  BicepsFlexed,
+  Hop as HopIcon,
+  House,
+  SquareScissors,
+} from "lucide-react";
 import { Badge } from "@/components/Badge";
 export type HopListItemProps = {
   hop: Hop;
@@ -11,9 +16,15 @@ export type HopListItemProps = {
 export const HopListItem = ({ hop }: HopListItemProps) => {
   const secondaryText = (
     <div className="flex h-5 items-center space-x-4 text-sm ">
-      <Badge label="Country">{hop.country}</Badge>
-      <Badge label="Alpha">{hop.alpha}</Badge>
-      <Badge label="Usage">{hop.usage}</Badge>
+      <Badge icon={<House />} label="Country">
+        {hop.country}
+      </Badge>
+      <Badge icon={<BicepsFlexed />} label="Alpha">
+        {hop.alpha}
+      </Badge>
+      <Badge icon={<SquareScissors />} label="Usage">
+        {hop.usage}
+      </Badge>
     </div>
   );
   return (
