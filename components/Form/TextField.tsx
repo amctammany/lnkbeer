@@ -19,7 +19,7 @@ const textFieldStyles = cva(
       },
     },
     defaultVariants: { size: "default", variant: "default" },
-  }
+  },
 );
 export function TextField({
   name,
