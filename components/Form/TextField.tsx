@@ -1,10 +1,11 @@
 import { Label } from "./Label";
 //import { cva } from "class-variance-authority";
 import { Input, InputProps, inputStyles } from "./Input";
+import { cva, VariantProps } from "class-variance-authority";
+import clsx from "clsx";
 
-export type TextFieldProps = InputProps;
-/**
- * const textFieldStyles = cva(
+export type TextFieldProps = InputProps & VariantProps<typeof textFieldStyles>;
+const textFieldStyles = cva(
   "disabled:bg-slate-50 disabled:shadow-none disabled:text-slate-500 disabled:border-slate-200",
   {
     variants: {
@@ -18,9 +19,8 @@ export type TextFieldProps = InputProps;
       },
     },
     defaultVariants: { size: "default", variant: "default" },
-  },
+  }
 );
-*/
 export function TextField({
   name,
   error,
@@ -43,6 +43,7 @@ export function TextField({
     >
       <Input
         type="text"
+        className={clsx(inputStyles({ variant }), textFieldStyles({ variant }))}
         name={name}
         error={error}
         variant={variant}

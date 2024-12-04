@@ -2,6 +2,8 @@ import { Label } from "./Label";
 //import { VariantProps, cva } from "class-variance-authority";
 //import { SchemaFieldError } from "@/lib/validateSchema";
 import { Input, inputStyles, InputProps } from "./Input";
+import clsx from "clsx";
+import { cva, VariantProps } from "class-variance-authority";
 //import clsx from "clsx";
 
 export type NumberFieldProps = {
@@ -15,11 +17,10 @@ export type NumberFieldProps = {
   //onBlur?: (e: SyntheticEvent) => void;
   //value?: any;
   //ref: any;
-} & InputProps;
-//VariantProps<typeof numberFieldStyles>;
+} & InputProps &
+  VariantProps<typeof numberFieldStyles>;
 
-/**
-const numberFieldStyles = cva("input ", {
+const numberFieldStyles = cva("input form-input ", {
   variants: {
     variant: {
       default: [
@@ -38,7 +39,6 @@ const numberFieldStyles = cva("input ", {
   },
   defaultVariants: { size: "default", variant: "default" },
 });
- */
 
 export function NumberField({
   name,
@@ -53,7 +53,6 @@ export function NumberField({
 }: NumberFieldProps) {
   return (
     <Label
-      //className={clsx(numberFieldStyles({ variant, size }))}
       suffix={suffix}
       variant={variant}
       inputSize={inputSize}
@@ -62,6 +61,10 @@ export function NumberField({
       error={error}
     >
       <Input
+        className={clsx(
+          inputStyles({ variant, inputSize }),
+          numberFieldStyles({ variant, size }),
+        )}
         type="number"
         name={name}
         error={error}

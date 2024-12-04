@@ -31,7 +31,7 @@ const labelStyles = cva(
     defaultVariants: { inputSize: "default", variant: "default" },
   },
 );
-const labelLabelStyles = cva(["block capitalize my-auto"], {
+const labelLabelStyles = cva(["block capitalize my-auto mb-1"], {
   variants: {
     variant: {
       default: ["text-gray-600"],
