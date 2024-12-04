@@ -84,7 +84,6 @@ export const createHop = async (prev: any, formData: FormData) => {
   redirect(`/ingredients/hops/${res.slug}`);
 };
 export const updateHop = async (prev: any, formData: FormData) => {
-  console.log(prev, formData);
   const valid = validateSchema(formData, schema);
   if (!valid.success) return valid;
   const hop = valid.data;

@@ -22,7 +22,6 @@ export const AppBar = ({
   children,
 }: AppBarProps) => {
   const { isMobile, openMobile, open, state } = useSidebar();
-  console.log(openMobile);
 
   return (
     <div
