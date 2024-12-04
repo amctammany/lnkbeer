@@ -13,11 +13,11 @@ export type BadgeProps = {
 };
 export const Badge = ({ label, icon, value, children }: BadgeProps) => {
   return (
-    <div className="flex h-6">
-      <div className="grid border border-black border-r-0 bg-blue-500 text-white px-2 rounded-l-md [&>svg]:size-4 [&>svg]:my-auto [&>svg]:shrink-0">
+    <div className="flex h-4 md:h-6">
+      <div className="grid border border-black border-r-0 bg-blue-500 text-white px-2 rounded-l-md [&>svg]:size-3 md:[&>svg]:size-4 [&>svg]:my-auto [&>svg]:shrink-0">
         {icon ?? label}
       </div>
-      <span className="border border-black border-l-0 bg-white px-4 rounded-r-md">
+      <span className="border border-black border-l-0 bg-white px-4 rounded-r-md text-xs md:text-lg">
         {children ?? value}
       </span>
     </div>
