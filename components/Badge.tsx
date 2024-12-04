@@ -1,3 +1,10 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
+
 export type BadgeProps = {
   label?: string;
   value?: React.ReactNode;
@@ -14,5 +21,18 @@ export const Badge = ({ label, icon, value, children }: BadgeProps) => {
         {children ?? value}
       </span>
     </div>
+  );
+};
+
+export const TooltipBadge = (props: BadgeProps) => {
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger>
+          <Badge {...props} />
+        </TooltipTrigger>
+        <TooltipContent>{props.label}</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };

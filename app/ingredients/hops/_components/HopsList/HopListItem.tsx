@@ -9,16 +9,16 @@ import {
   House,
   SquareScissors,
 } from "lucide-react";
-import { Badge } from "@/components/Badge";
+import { Badge, TooltipBadge } from "@/components/Badge";
 export type HopListItemProps = {
   hop: Hop;
 };
 export const HopListItem = ({ hop }: HopListItemProps) => {
   const secondaryText = (
     <div className="flex h-5 items-center space-x-4 text-sm ">
-      <Badge icon={<House />} label="Country">
+      <TooltipBadge icon={<House />} label="Country">
         {hop.country}
-      </Badge>
+      </TooltipBadge>
       <Badge icon={<BicepsFlexed />} label="Alpha">
         {hop.alpha}
       </Badge>
