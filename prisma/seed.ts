@@ -4,13 +4,13 @@ import { prisma } from "../lib/client";
 import styles from "../data/styles.json";
 import hops from "../data/hops.json";
 import grains from "../data/grains.json";
-console.log(hops);
 async function main() {
   await prisma.account.deleteMany();
   await prisma.session.deleteMany();
   await prisma.style.deleteMany();
 
   await prisma.user.deleteMany();
+  await prisma.hopSensoryPanel.deleteMany();
   await prisma.hop.deleteMany();
   await prisma.fermentable.deleteMany();
   await prisma.style.createMany({
