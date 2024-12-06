@@ -9,9 +9,13 @@ type PropProps = {
 };
 export const Prop = ({ label, value }: PropProps) => {
   return (
-    <div>
-      <b className="font-bold px-2">{label}:</b>
-      <span>{value}</span>
+    <div className="flex h-8 ">
+      <span className="h-6 my-auto text-[11pt] font-bold text-gray-600 px-2 flex-shrink-0 ">
+        {label}:
+      </span>
+      <span className="h-6 my-auto text-[11pt] font-mono align-text-bottom flex-grow">
+        {value}
+      </span>
     </div>
   );
   /**

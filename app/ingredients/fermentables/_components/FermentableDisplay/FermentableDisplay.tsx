@@ -1,6 +1,7 @@
 import { Prop } from "@/app/ingredients/hops/_components/HopDisplay/SummaryTab";
 import { AppBarAction } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
+import { Card } from "@/components/ui/card";
 import { Fermentable } from "@prisma/client";
 
 export type FermentableDisplayProps = {
@@ -19,11 +20,14 @@ export function FermentableDisplay({ src }: FermentableDisplayProps) {
       actions={makeActions(src!)}
     >
       <div className="">
-        <Prop label="Name" value={src?.name} />
-        <Prop label="Country" value={src?.country} />
-        <Prop label="Color" value={src?.color} />
-        <Prop label="Potential" value={src?.potential} />
-        <Prop label="Power" value={src?.power} />
+        <Card className="m-4">
+          <Prop label="Name" value={src?.name} />
+          <Prop label="Country" value={src?.country} />
+          <Prop label="Notes" value={src?.notes} />
+          <Prop label="Color" value={src?.color} />
+          <Prop label="Potential" value={src?.potential} />
+          <Prop label="Power" value={src?.power} />
+        </Card>
       </div>
       ;
     </AppBarLayout>
