@@ -6,12 +6,14 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
+import { Plus } from "lucide-react";
 const columns: ColumnDef<Hop>[] = [
   {
     accessorKey: "name",
     header: Header<Hop>,
     cell: ({ getValue }) => (
       <Link
+        className="hover:underline"
         href={`/ingredients/hops/${slugify(getValue<string>(), { lower: true })}`}
       >
         {getValue<string>()}
@@ -32,14 +34,14 @@ const columns: ColumnDef<Hop>[] = [
   },
   { accessorKey: "usage", header: Header },
 ];
-export type HopsListProps = {
+export type HopsTableProps = {
   hops?: Hop[];
 };
-export function HopsList({ hops = [] }: HopsListProps) {
+export function HopsTable({ hops = [] }: HopsTableProps) {
   return (
     <AppBarLayout
       title="Hops List"
-      actions={[{ text: "New", url: "/ingredients/hops/new" }]}
+      actions={[{ text: "New", url: "/ingredients/hops/new", icon: Plus }]}
     >
       <div>
         <DataTable data={hops} columns={columns} />
@@ -47,8 +49,4 @@ export function HopsList({ hops = [] }: HopsListProps) {
     </AppBarLayout>
   );
 }
-/**{hops.map((hop) => (
-          <HopListItem key={hop.id} hop={hop} />
-        ))}
- */
-export default HopsList;
+export default HopsTable;
