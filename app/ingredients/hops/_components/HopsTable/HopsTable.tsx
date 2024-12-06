@@ -4,10 +4,19 @@ import { AppBarLayout } from "@/components/AppBarLayout";
 import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
+import Link from "next/link";
+import slugify from "slugify";
 const columns: ColumnDef<Hop>[] = [
   {
     accessorKey: "name",
     header: Header<Hop>,
+    cell: ({ getValue }) => (
+      <Link
+        href={`/ingredients/hops/${slugify(getValue<string>(), { lower: true })}`}
+      >
+        {getValue<string>()}
+      </Link>
+    ),
   },
   {
     accessorKey: "country",

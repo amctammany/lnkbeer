@@ -20,6 +20,7 @@ import {
   SidebarContent,
   SidebarHeader,
   SidebarMenu,
+  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
@@ -33,6 +34,7 @@ import {
   CollapsibleTrigger,
 } from "./ui/collapsible";
 import AdminNav from "@/app/admin/_components/AdminNav/AdminNav";
+import Link from "next/link";
 
 // Menu items.
 const items = [
@@ -89,13 +91,16 @@ export function AppSidebar() {
             <SidebarMenuButton
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              asChild
             >
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <ChartLine className="size-4" />
-              </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                LNK Brewing
-              </div>
+              <Link href="/">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  <ChartLine className="size-4" />
+                </div>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  LNK Brewing
+                </div>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -111,22 +116,26 @@ export function AppSidebar() {
                 className="group/collapsible"
               >
                 <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton tooltip={item.title}>
+                  <SidebarMenuButton tooltip={item.title} asChild>
+                    <Link href={item.url}>
                       {item.icon && <item.icon />}
                       <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                  <SidebarMenuAction>
+                    <CollapsibleTrigger asChild>
                       <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
+                    </CollapsibleTrigger>
+                  </SidebarMenuAction>
                   <CollapsibleContent>
                     <SidebarMenuSub>
                       {item.items.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
-                            <a href={subItem.url}>
+                            <Link href={subItem.url}>
                               {subItem.icon && <subItem.icon />}
                               <span>{subItem.title}</span>
-                            </a>
+                            </Link>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}
@@ -136,10 +145,10 @@ export function AppSidebar() {
               </Collapsible>
             ) : (
               <SidebarMenuButton key={item.title} tooltip={item.title} asChild>
-                <a href={item.url}>
+                <Link href={item.url}>
                   {item.icon && <item.icon />}
                   <span>{item.title}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             ),
           )}
