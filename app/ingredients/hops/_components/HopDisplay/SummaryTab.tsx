@@ -5,9 +5,9 @@ export type SummaryTabProps = {
 };
 type PropProps = {
   label: string;
-  value: string | number | null;
+  value?: string | number | null;
 };
-const Prop = ({ label, value }: PropProps) => {
+export const Prop = ({ label, value }: PropProps) => {
   return (
     <div>
       <b className="font-bold px-2">{label}:</b>

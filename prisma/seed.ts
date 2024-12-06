@@ -3,6 +3,7 @@ import { HopUsage, StyleCategory } from "@prisma/client";
 import { prisma } from "../lib/client";
 import styles from "../data/styles.json";
 import hops from "../data/hops.json";
+import grains from "../data/grains.json";
 console.log(hops);
 async function main() {
   await prisma.account.deleteMany();
@@ -11,6 +12,7 @@ async function main() {
 
   await prisma.user.deleteMany();
   await prisma.hop.deleteMany();
+  await prisma.fermentable.deleteMany();
   await prisma.style.createMany({
     data: styles.map(({ category, ...style }) => ({
       ...style,
@@ -25,6 +27,12 @@ async function main() {
 
       slug: slugify(hop.name, { lower: true }),
       usage: HopUsage[usage?.toLowerCase() as HopUsage] || HopUsage.dual,
+    })),
+  });
+  await prisma.fermentable.createMany({
+    data: grains.map((grain) => ({
+      ...grain,
+      slug: slugify(grain.name, { lower: true }),
     })),
   });
 }

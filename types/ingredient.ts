@@ -1,4 +1,4 @@
-import { Hop } from "@prisma/client";
+import { Fermentable, Hop } from "@prisma/client";
 
 export type RangeValue = { min: number; max: number };
 
@@ -12,3 +12,4 @@ export type HopInput = Hop & {
   myrceneRange?: RangeValue;
   totalOilRange?: RangeValue;
 };
+export type FermentableInput = Fermentable;

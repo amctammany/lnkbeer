@@ -177,3 +177,19 @@ model HopSensoryPanel {
   author        String?
   notes         String?
 }
+
+model Fermentable {
+  id           String  @id @unique @default(cuid())
+  name         String
+  slug         String  @unique
+  description  String?
+  notes        String?
+  manufacturer String?
+  country      String?
+  power        Int?
+  maxUsage     Float?
+  color        Float?
+  potential    Float?
+  stability    String?
+  //FermentableIngredient FermentableIngredient[]
+}
