@@ -10,10 +10,10 @@ const Header: ColumnDef<Hop>["header"] = ({ column }) => {
   return (
     <Button
       variant="ghost"
-      className="w-full"
+      className="w-full text-left flex"
       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
     >
-      <span className="capitalize">{column.id}</span>
+      <span className="capitalize flex-grow">{column.id}</span>
       {column.getIsSorted() && <Comp className="ml-2 h-4 w-4" />}
     </Button>
   );
