@@ -3,37 +3,23 @@ import { Hop } from "@prisma/client";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
-import { ArrowUp, ArrowDown } from "lucide-react";
-const Header: ColumnDef<Hop>["header"] = ({ column }) => {
-  const Comp = column.getIsSorted() === "desc" ? ArrowUp : ArrowDown;
-  return (
-    <Button
-      variant="ghost"
-      className="w-full text-left flex"
-      onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-    >
-      <span className="capitalize flex-grow">{column.id}</span>
-      {column.getIsSorted() && <Comp className="ml-2 h-4 w-4" />}
-    </Button>
-  );
-};
+import { Header } from "@/components/DataTable/Header";
 const columns: ColumnDef<Hop>[] = [
   {
     accessorKey: "name",
-    header: Header,
+    header: Header<Hop>,
   },
   {
     accessorKey: "country",
-    header: Header,
+    header: Header<Hop>,
   },
   {
     accessorKey: "alpha",
-    header: Header,
+    header: Header<Hop>,
   },
   {
     accessorKey: "beta",
-    header: Header,
+    header: Header<Hop>,
   },
   { accessorKey: "usage", header: Header },
 ];
