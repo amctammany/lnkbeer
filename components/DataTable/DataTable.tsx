@@ -57,7 +57,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="">
+    <div className="w-full">
       <div className="flex items-center px-2 py-4 ">
         <Input
           className="flex-grow bg-white"

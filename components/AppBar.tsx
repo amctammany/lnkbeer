@@ -25,7 +25,7 @@ export const AppBar = ({
 
   return (
     <div
-      className="group peer"
+      className="group peer relative"
       data-open={isMobile ? openMobile : open}
       data-state={state}
       data-ismobile={isMobile}

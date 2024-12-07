@@ -92,7 +92,7 @@ export function AppSidebar() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               asChild
             >
-              <Link href="/">
+              <Link prefetch={false} href="/">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <ChartLine className="size-4" />
                 </div>
@@ -116,7 +116,7 @@ export function AppSidebar() {
               >
                 <SidebarMenuItem>
                   <SidebarMenuButton tooltip={item.title} asChild>
-                    <Link href={item.url}>
+                    <Link prefetch={false} href={item.url}>
                       {item.icon && <item.icon />}
                       <span>{item.title}</span>
                     </Link>
@@ -131,7 +131,7 @@ export function AppSidebar() {
                       {item.items.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
-                            <Link href={subItem.url}>
+                            <Link prefetch={false} href={subItem.url}>
                               {subItem.icon && <subItem.icon />}
                               <span>{subItem.title}</span>
                             </Link>
@@ -144,7 +144,7 @@ export function AppSidebar() {
               </Collapsible>
             ) : (
               <SidebarMenuButton key={item.title} tooltip={item.title} asChild>
-                <Link href={item.url}>
+                <Link prefetch={false} href={item.url}>
                   {item.icon && <item.icon />}
                   <span>{item.title}</span>
                 </Link>
