@@ -17,6 +17,7 @@ async function main() {
   await prisma.style.deleteMany();
   await prisma.waterProfile.deleteMany();
   await prisma.equipmentProfile.deleteMany();
+  await prisma.mashProfile.deleteMany();
 
   await prisma.user.deleteMany();
   await prisma.hopSensoryPanel.deleteMany();
@@ -158,6 +159,35 @@ async function main() {
     },
   });
 
+  await prisma.mashProfile.create({
+    data: {
+      name: "Max Fermentability",
+      slug: slugify("Max Fermentability", { lower: true }),
+      description: "Maximum Fermentability",
+      steps: { create: [{ temperature: 152, time: 60 }] },
+      forks: {
+        create: {
+          name: "Max Fermentability (copy)",
+          slug: slugify("Max Fermentability (copy)", { lower: true }),
+          description: "Maximum Fermentability Copy",
+          steps: { create: [{ temperature: 154, time: 60 }] },
+        },
+      },
+    },
+  });
+  await prisma.mashProfile.create({
+    data: {
+      name: "Medium Fermentability with Mashout",
+      slug: slugify("Medium Fermentability with Mashout", { lower: true }),
+      description: "Medium Fermentability",
+      steps: {
+        create: [
+          { temperature: 152, time: 60 },
+          { temperature: 168, time: 10 },
+        ],
+      },
+    },
+  });
   await prisma.hop.createMany({
     data: hops.map(({ aromas, usage, flavorMap, ...hop }: any) => ({
       flavor: aromas,
