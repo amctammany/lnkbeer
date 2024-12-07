@@ -565,7 +565,8 @@ const SidebarMenuButton = React.forwardRef<
     const { isMobile, setOpenMobile, state } = useSidebar();
 
     const handleClick = (e) => {
-      if (isMobile) setOpenMobile(false);
+      setOpenMobile(false);
+      props.onClick?.(e);
     };
     const button = (
       <Comp
@@ -729,7 +730,8 @@ const SidebarMenuSubButton = React.forwardRef<
   const { isMobile, setOpenMobile, state } = useSidebar();
 
   const handleClick = (e) => {
-    if (isMobile) setOpenMobile(false);
+    setOpenMobile(false);
+    props.onClick?.(e);
   };
 
   return (
