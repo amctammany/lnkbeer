@@ -11,7 +11,9 @@ export const NavLink = ({ href, children, ...props }: NavLinkProps) => {
   const { isMobile, openMobile, setOpenMobile, toggleSidebar } = useSidebar();
   const { replace } = useRouter();
   const handleClick: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
-    if (isMobile && openMobile) setOpenMobile(false);
+    //if (isMobile && openMobile) setOpenMobile(false);
+    toggleSidebar();
+
     replace(e.currentTarget.href);
     e.preventDefault();
     return false;

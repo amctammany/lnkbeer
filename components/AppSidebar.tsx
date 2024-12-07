@@ -85,7 +85,7 @@ const items = [
 ];
 export function AppSidebar() {
   return (
-    <Sidebar variant="sidebar" collapsible="icon">
+    <Sidebar variant="inset" collapsible="icon">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
