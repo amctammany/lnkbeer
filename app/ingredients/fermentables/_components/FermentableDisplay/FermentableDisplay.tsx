@@ -19,7 +19,7 @@ export function FermentableDisplay({ src }: FermentableDisplayProps) {
       title={`Fermentable: ${src?.name}`}
       actions={makeActions(src!)}
     >
-      <div className="container pt-4">
+      <div className="pt-4">
         <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">
           <Prop label="Name" value={src?.name} />
           <Prop label="Country" value={src?.country} />

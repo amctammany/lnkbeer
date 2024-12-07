@@ -24,14 +24,14 @@ const rangeProps: RangeFieldProp<YeastInput>[] = [
   {
     name: "tempRange",
     min: 0,
-    max: 100,
+    max: 120,
     lowField: "tempLow",
     highField: "tempHigh",
   },
   {
     name: "attenuationRange",
     min: 0,
-    max: 100,
+    max: 1,
     lowField: "attenuationLow",
     highField: "attenuationHigh",
   },
@@ -61,7 +61,7 @@ export function YeastEditor({ src, action }: YeastEditorProps) {
                 options={YeastFlocculation}
               />
               <Select {...register("form")} options={YeastForm} />
-              {rangeProps.map(({ name, highField, lowField }) => (
+              {rangeProps.map(({ name, highField, lowField, min, max }) => (
                 <Controller
                   key={name}
                   name={name!}
@@ -82,8 +82,8 @@ export function YeastEditor({ src, action }: YeastEditorProps) {
                       value={field.value ?? { min: 0, max: 100 }}
                       label={name}
                       step={0.01}
-                      min={0}
-                      max={40}
+                      min={min ?? 0}
+                      max={max ?? 40}
                     />
                   )}
                 />
