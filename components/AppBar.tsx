@@ -25,14 +25,14 @@ export const AppBar = ({
 
   return (
     <div
-      className="group peer relative"
+      className="group peer relative w-full"
       data-open={isMobile ? openMobile : open}
       data-state={state}
       data-ismobile={isMobile}
     >
       <header
         className={clsx(
-          "flex h-16 shrink-0 items-center gap-2 border-b px-4 w-full lg:group-data-[state=collapsed]:w-[calc(100%_-_var(--sidebar-width-icon))] md:group-data-[state=expanded]:w-[calc(100%_-_var(--sidebar-width))] group-data-[open=false]:w-full transition-[width] ease-linear duration-50",
+          "flex h-16 shrink-0 items-center gap-2 border-b px-4 w-full lg:group-data-[state=collapsed]:w-[calc(100%-var(--sidebar-width-icon)-36px)] md:group-data-[state=expanded]:w-[calc(100%_-_var(--sidebar-width))] group-data-[open=false]:w-fll transition-[width] ease-linear duration-50",
           className,
         )}
       >

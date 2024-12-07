@@ -13,4 +13,7 @@ export type HopInput = Hop & {
   totalOilRange?: RangeValue;
 };
 export type FermentableInput = Fermentable;
-export type YeastInput = Yeast;
+export type YeastInput = Yeast & {
+  tempRange?: RangeValue;
+  attenuationRange?: RangeValue;
+};

@@ -3,27 +3,19 @@ import { AppBarLayout } from "@/components/AppBarLayout";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
 import { NumberField } from "@/components/Form/NumberField";
-import { RangeField } from "@/components/Form/RangeField";
+import { RangeField, RangeFieldProp } from "@/components/Form/RangeField";
 //import { RangeValue } from "@/components/Form/RangeSlider";
 import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { HopInput, RangeValue } from "@/types/ingredient";
-import { NumberKeys, RangeKeys } from "@/types/util";
 import { HopUsage } from "@prisma/client";
 import { Save } from "lucide-react";
-import { Controller, FieldValues } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
 export type HopEditorProps = {
   hop?: HopInput | null;
   action: any;
-};
-type RangeFieldProp<T extends FieldValues> = {
-  name: Required<RangeKeys<T>>;
-  lowField: Required<NumberKeys<T>>;
-  highField: Required<NumberKeys<T>>;
-  min?: number;
-  max?: number;
 };
 const rangeProps: RangeFieldProp<HopInput>[] = [
   {

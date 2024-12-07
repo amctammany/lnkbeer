@@ -6,6 +6,15 @@ import { InputProps } from "./Input";
 //import { FieldValues, Path, UseControllerReturn } from "react-hook-form";
 import clsx from "clsx";
 import { NumberFieldRaw } from "./NumberField";
+import { FieldValues } from "react-hook-form";
+import { NumberKeys, RangeKeys } from "@/types/util";
+export type RangeFieldProp<T extends FieldValues> = {
+  name: Required<RangeKeys<T>>;
+  lowField: Required<NumberKeys<T>>;
+  highField: Required<NumberKeys<T>>;
+  min?: number;
+  max?: number;
+};
 
 export type RangeFieldProps = //H extends Path<T> = Path<T>,
   {
