@@ -4,7 +4,7 @@ export type PropProps = {
 };
 export const Prop = ({ label, value }: PropProps) => {
   return (
-    <div className="flex h-8 align-text-bottom ">
+    <div className="flex align-text-bottom ">
       <span className="leading-6 my-auto font-mono font-bold text-gray-700 px-2 flex-shrink ">
         {label}:
       </span>

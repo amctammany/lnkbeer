@@ -47,7 +47,7 @@ export function FermentablesTable({
         { text: "New", url: "/ingredients/fermentables/new", icon: Plus },
       ]}
     >
-      <div>
+      <div className="relative overflow-auto">
         <DataTable data={fermentables} columns={columns} />
       </div>
     </AppBarLayout>
