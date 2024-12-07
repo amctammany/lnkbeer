@@ -1,6 +1,22 @@
 import { prisma } from "@/lib/client";
-import { ExtendedMashProfile } from "@/types/Profile";
+import { ExtendedMashProfile, ExtendedMashStep } from "@/types/Profile";
 import { cache } from "react";
+
+export const getMashStep = cache(async (id: number) => {
+  const step = await prisma.mashStep.findFirst({
+    where: { id: { equals: id } },
+    include: {
+      MashProfile: {
+        select: {
+          name: true,
+          slug: true,
+          steps: true,
+        },
+      },
+    },
+  });
+  return step;
+});
 
 export const getMashProfile = cache(async (slug: string) => {
   const profile = await prisma.mashProfile.findFirst({

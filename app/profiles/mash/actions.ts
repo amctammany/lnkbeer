@@ -1,12 +1,20 @@
 "use server";
 import { prisma } from "@/lib/client";
 import { validateSchema } from "@/lib/validateSchema";
-import { MashProfile } from "@prisma/client";
+import { MashProfile, MashStepType } from "@prisma/client";
 import { redirect } from "next/navigation";
 import slugify from "slugify";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
 
+const mashStepSchema = zfd.formData({
+  id: zfd.numeric(z.number().optional()),
+  name: zfd.text(z.string().optional()),
+  type: z.nativeEnum(MashStepType).default(MashStepType.temperature),
+  rampTime: zfd.numeric(z.number().optional()),
+  time: zfd.numeric(z.number().optional()),
+  temperature: zfd.numeric(z.number().optional()),
+});
 const mashSchema = zfd.formData({
   id: zfd.text(z.string().optional()),
   name: zfd.text(),
@@ -53,6 +61,25 @@ export const createMashProfile = async (prev: any, formData: FormData) => {
     },
   });
   redirect(`/profiles/mash/${res.slug}`);
+};
+export const updateMashStep = async (prev: any, formData: FormData) => {
+  const valid = validateSchema(formData, mashStepSchema);
+  if (!valid.success) return valid;
+  const { id, ...data } = valid.data;
+  const res = await prisma.mashStep.update({
+    where: { id },
+    data,
+    include: {
+      MashProfile: {
+        select: {
+          name: true,
+          slug: true,
+          id: true,
+        },
+      },
+    },
+  });
+  redirect(`/profiles/mash/${res?.MashProfile?.slug}/edit`);
 };
 export const updateMashProfile = async (prev: any, formData: FormData) => {
   //console.log(prev, formData.entries());

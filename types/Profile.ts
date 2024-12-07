@@ -21,6 +21,9 @@ export type ExtendedMashProfile = MashProfile & {
   steps: MashStep[];
   origin?: MashProfile;
 };
+export type ExtendedMashStep = MashStep & {
+  MashProfile: MashProfile;
+};
 
 export type WaterProfileInput = Omit<WaterProfile, "id"> & {
   id?: string;
@@ -29,6 +32,11 @@ export type EquipmentProfileInput = Omit<EquipmentProfile, "id"> & {
   id?: string;
 };
 export type MashProfileInput = Omit<MashProfile, "id"> & {
-  id?: number;
+  id?: string;
   steps: Omit<MashStep, "id" | "userId" | "mashProfileId">[];
+};
+export type MashStepInput = Omit<MashStep, "id"> & {
+  id?: number;
+  MashProfile: Partial<MashProfile>;
+  //steps: Omit<MashStep, "id" | "userId" | "mashProfileId">[];
 };

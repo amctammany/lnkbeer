@@ -1,53 +1,40 @@
-/**import { MashStep } from "@prisma/client";
-export type MashStepListItemProps = {
-  src: MashStep;
-};
-export function MashStepListItem(props: MashStepListItemProps) {
-  return <div className="">{props.src.name}</div>;
-}
-
-export default MashStepListItem;
-*/
-//import { AppIcon } from "@/components/AppIcon";
-import { ListItem } from "@/components/List/ListItem";
-//import { ListItemActions } from "@/components/List/ListItemActions";
-import { ListItemIcon } from "@/components/List/ListItemIcon";
-import { ListItemText } from "@/components/List/ListItemText";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-//import { InlineProp } from "@/components/Prop/InlineProp";
-//import { Prop } from "@/components/Prop";
 import { MashStep } from "@prisma/client";
 import React from "react";
-import { updateMashProfile } from "../../actions";
-import MashStepForm, { MashProfileFormContainer } from "./MashStepForm";
+import { ExtendedMashStep } from "@/types/Profile";
+import Link from "next/link";
 type MashStepTextProps = {
   src: MashStep;
 };
 export function MashStepText({ src }: MashStepTextProps) {
   return (
     <span className="capitalize">
-      {src.type} - {src.time} min @ {src.temperature}
+      {src.type} - {src.name} - {src.time} min @ {src.temperature}
     </span>
   );
 }
 
 export type MashStepListItemProps = {
-  src: MashStep;
+  src: ExtendedMashStep | MashStep;
   index: number;
 };
 export function MashStepListItem({ src, index }: MashStepListItemProps) {
+  const Comp = Object.hasOwn(src, "MashProfile") ? Link : "div";
+  const props: any =
+    Comp === "div"
+      ? {}
+      : {
+          href: `/profiles/mash/${(src as ExtendedMashStep)?.MashProfile?.slug}/edit/${src.id}`,
+        };
   return (
     <li>
-      <MashProfileFormContainer action={updateMashProfile}>
+      <Comp {...props}>
+        <MashStepText src={src} />
+        <b className="px-2">Ramp Time:</b>
+        <span>{src.rampTime} min</span>
+      </Comp>
+    </li>
+  ); /**
+      <MashProfileFormContainer src={src} action={updateMashProfile}>
         <Dialog>
           <DialogTrigger>
             <MashStepText src={src} />
@@ -60,7 +47,7 @@ export function MashStepListItem({ src, index }: MashStepListItemProps) {
               <DialogDescription>DialogDescription</DialogDescription>
             </DialogHeader>
             <div>
-              <MashStepForm src={src} action={updateMashProfile} />
+              <MashStepForm />
             </div>
             <DialogFooter>
               <Button type="submit">Save</Button>
@@ -68,8 +55,8 @@ export function MashStepListItem({ src, index }: MashStepListItemProps) {
           </DialogContent>
         </Dialog>
       </MashProfileFormContainer>
-    </li>
-  );
+    </li>*/
+  //);
   /**
   return (
     <ListItem border="none" key={src.id}>

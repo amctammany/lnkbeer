@@ -41,7 +41,11 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
           <Section title="Steps" actions={[{ text: "Add", icon: Plus }]}>
             <ul>
               {src?.steps.map((step, index) => (
-                <MashStepListItem key={step.id} src={step} index={index} />
+                <MashStepListItem
+                  key={step.id}
+                  src={{ MashProfile: src, ...step }}
+                  index={index}
+                />
               ))}
             </ul>
           </Section>
