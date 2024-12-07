@@ -106,22 +106,8 @@ export const updateMashProfile = async (prev: any, formData: FormData) => {
             },
           }
         : {}),
-
-      /**
-      owner: {
-        connect: { id: userId ?? undefined },
-      },
-      origin: {
-        connect: { id: forkedFrom ?? undefined },
-      },
-      */
     },
-    //include: {
-    //origin: true,
-    //owner: true,
-    //},
   });
-  //return { success: true, data: res };
 
   redirect(`/profiles/mash/${res.slug}`);
 };

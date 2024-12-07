@@ -17,6 +17,7 @@ async function main() {
   await prisma.style.deleteMany();
   await prisma.waterProfile.deleteMany();
   await prisma.equipmentProfile.deleteMany();
+  await prisma.mashStep.deleteMany();
   await prisma.mashProfile.deleteMany();
 
   await prisma.user.deleteMany();
