@@ -14,14 +14,15 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String
-  email         String    @unique
+  email         String         @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
   Style         Style[]
+  WaterProfile  WaterProfile[]
 }
 
 model Account {
@@ -232,4 +233,23 @@ model Yeast {
   attenuationLow  Float?
   attenuationHigh Float?
   //  YeastIngredient YeastIngredient[]
+}
+
+model WaterProfile {
+  id          String         @id @default(cuid())
+  userId      String?
+  owner       User?          @relation(fields: [userId], references: [id])
+  name        String
+  slug        String         @unique
+  calcium     Int
+  magnesium   Int
+  sodium      Int
+  chloride    Int
+  sulfate     Int
+  bicarbonate Int
+  description String?
+  //  Recipe         Recipe[]
+  forkedFrom  String?
+  origin      WaterProfile?  @relation("origin", fields: [forkedFrom], references: [id])
+  forks       WaterProfile[] @relation("origin")
 }

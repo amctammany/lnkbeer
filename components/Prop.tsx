@@ -1,5 +1,5 @@
 export type PropProps = {
-  label: string;
+  label: string | React.ReactNode;
   value?: string | number | null;
 };
 export const Prop = ({ label, value }: PropProps) => {
