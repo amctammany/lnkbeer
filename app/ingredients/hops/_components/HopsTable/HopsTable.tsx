@@ -14,6 +14,7 @@ const columns: ColumnDef<Hop>[] = [
     cell: ({ getValue }) => (
       <Link
         className="hover:underline"
+        prefetch={false}
         href={`/ingredients/hops/${slugify(getValue<string>(), { lower: true })}`}
       >
         {getValue<string>()}
