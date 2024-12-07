@@ -34,7 +34,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SidebarProvider defaultOpen={false}>
+        <SidebarProvider>
           <AppSidebar />
           <SidebarInset>{children}</SidebarInset>
         </SidebarProvider>
