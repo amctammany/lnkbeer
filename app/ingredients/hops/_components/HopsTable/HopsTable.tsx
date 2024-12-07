@@ -43,7 +43,7 @@ export function HopsTable({ hops = [] }: HopsTableProps) {
       title="Hops List"
       actions={[{ text: "New", url: "/ingredients/hops/new", icon: Plus }]}
     >
-      <div>
+      <div className="relative overflow-auto">
         <DataTable data={hops} columns={columns} />
       </div>
     </AppBarLayout>

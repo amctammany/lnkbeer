@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
           //className="max-w-sm"
         />
       </div>
-      <div className="relative overflow-x-scroll">
+      <div className="overflow-x-scroll">
         <Table className="flex-grow">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

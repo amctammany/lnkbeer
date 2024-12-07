@@ -42,7 +42,7 @@ export function YeastsTable({ yeasts = [] }: YeastsTableProps) {
       title="Yeasts List"
       actions={[{ text: "New", url: "/ingredients/yeasts/new", icon: Plus }]}
     >
-      <div className="overflow-x-scroll">
+      <div className="relative overflow-auto">
         <DataTable data={yeasts} columns={columns} />
       </div>
     </AppBarLayout>
