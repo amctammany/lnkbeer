@@ -95,7 +95,7 @@ export const Label = ({
             { hidden: !suffix },
           )}
         >
-          <span className="my-auto block text-sm px-2 font-bold">{suffix}</span>
+          <span className="my-auto block text-xs px-2 font-bold">{suffix}</span>
         </div>
       </div>
       <span
