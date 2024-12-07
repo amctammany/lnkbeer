@@ -33,7 +33,7 @@ export function Range({
   const valLeft = (100 * (value! - min)) / length;
   const width = (100 * ((v1 - v0) / 1)) / length;
   return (
-    <div className={clsx("mb-8 flex", className)}>
+    <div className={clsx("mb-8 flex flex-col", className)}>
       <h4 className="uppercase text-lg underline ">{label}</h4>
       <div className="block relative w-full h-5 bg-paper m-1 box-border">
         <div className="box-border absolute top-1/2 left-0 right-0 h-[1px] w-full bg-black before:h-4 before:w-[1px] before:top-0 before:left-3 before:bg-black before:absolute after:h-4 after:w-[1px] after:bg-black after:absolute after:top-0 after:right-3"></div>
