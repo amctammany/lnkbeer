@@ -29,11 +29,11 @@ export function MashProfileDisplay({ src }: MashProfileDisplayProps) {
           title="Steps"
           className="m-4 *:border-b-2 last-of-type:*:border-b-0 "
         >
-          <ul>
+          <ol className="p-0 *:border-b-2 last-of-type:*:border-b-0">
             {(src?.steps ?? []).map((step, index) => (
               <MashStepListItem key={step.id} src={step} index={index} />
             ))}
-          </ul>
+          </ol>
         </Section>
       </div>
       ;
