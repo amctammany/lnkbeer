@@ -33,9 +33,9 @@ export function FermentableEditor({ src, action }: FermentableEditorProps) {
               <Input type="hidden" {...register("id")} />
               <TextField {...register("name")} />
               <TextField {...register("country")} />
-              <NumberField {...register("color")} />
-              <NumberField {...register("potential")} />
-              <NumberField {...register("power")} />
+              <NumberField {...register("color")} step={0.01} />
+              <NumberField {...register("potential")} step={0.001} />
+              <NumberField {...register("power")} step={0.01} />
               <TextField {...register("notes")} />
 
               <TextField {...register("description")} />

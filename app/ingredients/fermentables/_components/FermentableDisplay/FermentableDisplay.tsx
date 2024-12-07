@@ -1,4 +1,4 @@
-import { Prop } from "@/app/ingredients/hops/_components/HopDisplay/SummaryTab";
+import { Prop } from "@/components/Prop";
 import { AppBarAction } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
@@ -19,8 +19,8 @@ export function FermentableDisplay({ src }: FermentableDisplayProps) {
       title={`Fermentable: ${src?.name}`}
       actions={makeActions(src!)}
     >
-      <div className="">
-        <Card className="m-4">
+      <div className="container pt-4">
+        <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">
           <Prop label="Name" value={src?.name} />
           <Prop label="Country" value={src?.country} />
           <Prop label="Notes" value={src?.notes} />
