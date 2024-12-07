@@ -1,4 +1,5 @@
 import {
+  Anvil,
   BookMarked,
   ChartLine,
   ChevronRight,
@@ -70,6 +71,7 @@ const items = [
         url: "/profiles/fermentation",
         icon: ChartLine,
       },
+      { title: "Equipment", url: "/profiles/equipment", icon: Anvil },
       { title: "Water", url: "/profiles/water", icon: Waves },
       { title: "Mash", url: "/profiles/mash", icon: Thermometer },
     ],

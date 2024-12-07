@@ -16,6 +16,7 @@ async function main() {
   await prisma.session.deleteMany();
   await prisma.style.deleteMany();
   await prisma.waterProfile.deleteMany();
+  await prisma.equipmentProfile.deleteMany();
 
   await prisma.user.deleteMany();
   await prisma.hopSensoryPanel.deleteMany();
@@ -42,7 +43,7 @@ async function main() {
       sodium: 8,
     },
   });
-  const jb = await prisma.waterProfile.create({
+  await prisma.waterProfile.create({
     data: {
       name: "Juicy Bits",
       slug: slugify("Juicy Bits", { lower: true }),
@@ -103,6 +104,58 @@ async function main() {
         usage: notes[1],
       }),
     ),
+  });
+  await prisma.equipmentProfile.create({
+    data: {
+      name: "Anvil 10.5",
+      slug: slugify("Anvil 10.5", { lower: true }),
+      description: "Anvil Foundry 10.5",
+      boilOffRate: 0.45,
+      trubLoss: 0.35,
+      mashLoss: 0,
+      fermenterLoss: 0.5,
+      batchVolume: 3.4,
+      preboilVolume: 4.5,
+      boilVolume: 4.5,
+      mashEfficiency: 68,
+      brewEfficiency: 5,
+      boilTime: 60,
+      forks: {
+        create: {
+          name: "Anvil 10.5 240V",
+          slug: slugify("Anvil 10.5 240V", { lower: true }),
+          description: "Anvil Foundry 10.5 at 240 V",
+          boilOffRate: 0.55,
+          trubLoss: 0.35,
+          mashLoss: 0,
+          fermenterLoss: 0.5,
+          batchVolume: 6.4,
+          preboilVolume: 4.5,
+          boilVolume: 4.5,
+          mashEfficiency: 72,
+          brewEfficiency: 62,
+          boilTime: 60,
+        },
+      },
+    },
+  });
+
+  await prisma.equipmentProfile.create({
+    data: {
+      name: "Anvil 6.5",
+      slug: slugify("Anvil 6.5", { lower: true }),
+      description: "Anvil Foundry",
+      boilOffRate: 0.45,
+      trubLoss: 0.35,
+      mashLoss: 0,
+      fermenterLoss: 0.5,
+      batchVolume: 2.4,
+      preboilVolume: 2.5,
+      boilVolume: 2.5,
+      mashEfficiency: 68,
+      brewEfficiency: 5,
+      boilTime: 60,
+    },
   });
 
   await prisma.hop.createMany({
