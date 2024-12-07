@@ -32,7 +32,6 @@ const columns: ColumnDef<Yeast>[] = [
     accessorKey: "flocculation",
     header: Header<Yeast>,
   },
-  { accessorKey: "usage", header: Header },
 ];
 export type YeastsTableProps = {
   yeasts?: Yeast[];
@@ -43,7 +42,9 @@ export function YeastsTable({ yeasts = [] }: YeastsTableProps) {
       title="Yeasts List"
       actions={[{ text: "New", url: "/ingredients/yeasts/new", icon: Plus }]}
     >
-      <DataTable data={yeasts} columns={columns} />
+      <div className="overflow-x-scroll">
+        <DataTable data={yeasts} columns={columns} />
+      </div>
     </AppBarLayout>
   );
 }

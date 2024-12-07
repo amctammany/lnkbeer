@@ -57,7 +57,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="md:group-data-[state=expanded]:w-[calc(100%_-_var(--sidebar-width))]">
+    <div className="">
       <div className="flex items-center px-2 py-4 ">
         <Input
           className="flex-grow bg-white"
@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
           //className="max-w-sm"
         />
       </div>
-      <div>
+      <div className="relative overflow-x-scroll">
         <Table className="flex-grow">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
