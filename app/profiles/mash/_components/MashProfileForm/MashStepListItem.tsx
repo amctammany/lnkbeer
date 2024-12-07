@@ -13,10 +13,22 @@ import { ListItem } from "@/components/List/ListItem";
 //import { ListItemActions } from "@/components/List/ListItemActions";
 import { ListItemIcon } from "@/components/List/ListItemIcon";
 import { ListItemText } from "@/components/List/ListItemText";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 //import { InlineProp } from "@/components/Prop/InlineProp";
 //import { Prop } from "@/components/Prop";
 import { MashStep } from "@prisma/client";
 import React from "react";
+import { updateMashProfile } from "../../actions";
+import MashStepForm, { MashProfileFormContainer } from "./MashStepForm";
 type MashStepTextProps = {
   src: MashStep;
 };
@@ -35,9 +47,27 @@ export type MashStepListItemProps = {
 export function MashStepListItem({ src, index }: MashStepListItemProps) {
   return (
     <li>
-      <MashStepText src={src} />
-      <b className="px-2">Ramp Time:</b>
-      <span>{src.rampTime} min</span>
+      <MashProfileFormContainer action={updateMashProfile}>
+        <Dialog>
+          <DialogTrigger>
+            <MashStepText src={src} />
+            <b className="px-2">Ramp Time:</b>
+            <span>{src.rampTime} min</span>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[825px]">
+            <DialogHeader>
+              <DialogTitle>Edit profile</DialogTitle>
+              <DialogDescription>DialogDescription</DialogDescription>
+            </DialogHeader>
+            <div>
+              <MashStepForm src={src} action={updateMashProfile} />
+            </div>
+            <DialogFooter>
+              <Button type="submit">Save</Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </MashProfileFormContainer>
     </li>
   );
   /**
