@@ -36,7 +36,6 @@ import {
 } from "./ui/collapsible";
 import AdminNav from "@/app/admin/_components/AdminNav/AdminNav";
 import Link from "next/link";
-import { NavLink } from "./NavLink";
 
 // Menu items.
 const items = [
@@ -94,14 +93,14 @@ export function AppSidebar() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               asChild
             >
-              <NavLink href="/">
+              <Link href="/">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <ChartLine className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   LNK Brewing
                 </div>
-              </NavLink>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -118,10 +117,10 @@ export function AppSidebar() {
               >
                 <SidebarMenuItem>
                   <SidebarMenuButton tooltip={item.title} asChild>
-                    <NavLink href={item.url}>
+                    <Link href={item.url}>
                       {item.icon && <item.icon />}
                       <span>{item.title}</span>
-                    </NavLink>
+                    </Link>
                   </SidebarMenuButton>
                   <SidebarMenuAction>
                     <CollapsibleTrigger asChild>
@@ -133,10 +132,10 @@ export function AppSidebar() {
                       {item.items.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
-                            <NavLink href={subItem.url}>
+                            <Link href={subItem.url}>
                               {subItem.icon && <subItem.icon />}
                               <span>{subItem.title}</span>
-                            </NavLink>
+                            </Link>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}
@@ -146,10 +145,10 @@ export function AppSidebar() {
               </Collapsible>
             ) : (
               <SidebarMenuButton key={item.title} tooltip={item.title} asChild>
-                <NavLink href={item.url}>
+                <Link href={item.url}>
                   {item.icon && <item.icon />}
                   <span>{item.title}</span>
-                </NavLink>
+                </Link>
               </SidebarMenuButton>
             ),
           )}
