@@ -59,8 +59,7 @@ export const updateMashProfile = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, mashSchema);
 
   if (valid.errors) return valid;
-  const { id, userId, forkedFrom, ...rest } =
-    valid.data || ({} as MashProfile);
+  const { id, userId, forkedFrom, ...rest } = valid.data || ({} as MashProfile);
   const res = await prisma.mashProfile.update({
     where: { id },
     data: {

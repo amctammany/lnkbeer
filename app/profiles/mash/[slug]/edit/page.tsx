@@ -7,9 +7,7 @@ type MashProfileEditorPageProps = {
   }>;
 };
 
-export async function generateMetadata({
-  params,
-}: MashProfileEditorPageProps) {
+export async function generateMetadata({ params }: MashProfileEditorPageProps) {
   const { slug } = await params;
   return {
     title: `LNK MashProfile: ${slug}`,
@@ -21,10 +19,5 @@ export default async function MashProfileEditorPage({
 }: MashProfileEditorPageProps) {
   const { slug } = await params;
   const mashProfile = await getMashProfile(slug);
-  return (
-    <MashProfileForm
-      src={mashProfile}
-      action={updateMashProfile}
-    />
-  );
+  return <MashProfileForm src={mashProfile} action={updateMashProfile} />;
 }

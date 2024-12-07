@@ -21,10 +21,5 @@ export default async function MashProfileCreatorPage({
 }: MashProfileCreatorPageProps) {
   const { slug } = await params;
   const mashProfile = await getMashProfile(slug);
-  return (
-    <MashProfileForm
-      src={mashProfile}
-      action={updateMashProfile}
-    />
-  );
+  return <MashProfileForm src={mashProfile} action={updateMashProfile} />;
 }
