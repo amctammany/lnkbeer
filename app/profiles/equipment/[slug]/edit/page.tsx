@@ -21,5 +21,10 @@ export default async function EquipmentProfileEditorPage({
 }: EquipmentProfileEditorPageProps) {
   const { slug } = await params;
   const equipmentProfile = await getEquipmentProfile(slug);
-  return <EquipmentProfileForm src={equipmentProfile} action={updateEquipmentProfile} />;
+  return (
+    <EquipmentProfileForm
+      src={equipmentProfile}
+      action={updateEquipmentProfile}
+    />
+  );
 }

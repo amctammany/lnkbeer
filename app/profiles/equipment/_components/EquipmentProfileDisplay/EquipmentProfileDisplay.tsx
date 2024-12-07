@@ -32,6 +32,12 @@ export function EquipmentProfileDisplay({ src }: EquipmentProfileDisplayProps) {
           <Prop label="Trub Loss" value={src?.trubLoss} unit="gal" />
           <Prop label="Mash Loss" value={src?.mashLoss} unit="gal" />
           <Prop label="Fermenter Loss" value={src?.fermenterLoss} unit="gal" />
+          <Prop
+            label="Grain Absorption"
+            value={src?.grainAbsorption}
+            unit="gal"
+          />
+          <Prop label="Water Grain Ratio" value={src?.waterGrainRatio} />
         </Card>
       </div>
       ;

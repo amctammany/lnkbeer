@@ -85,6 +85,16 @@ export function EquipmentProfileForm({
                   {...register("mashLoss")}
                   suffix="gal"
                 />
+                <NumberField
+                  step={0.01}
+                  {...register("grainAbsorption")}
+                  suffix="gal"
+                />
+                <NumberField
+                  step={0.01}
+                  {...register("waterGrainRatio")}
+                  suffix="gal"
+                />
               </div>
             </div>
           </div>
