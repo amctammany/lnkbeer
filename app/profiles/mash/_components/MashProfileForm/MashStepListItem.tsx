@@ -17,8 +17,13 @@ export function MashStepText({ src }: MashStepTextProps) {
 export type MashStepListItemProps = {
   src: ExtendedMashStep | MashStep;
   index: number;
+  children?: React.ReactNode | React.ReactNode[];
 };
-export function MashStepListItem({ src, index }: MashStepListItemProps) {
+export function MashStepListItem({
+  src,
+  index,
+  children,
+}: MashStepListItemProps) {
   return (
     <li className="list-item leading-4 py-2 px-1 hover:bg-slate-200 ">
       <div className="flex">
@@ -31,9 +36,7 @@ export function MashStepListItem({ src, index }: MashStepListItemProps) {
           </span>
           <span>{src.temperature} F</span>
         </div>
-        <div className="text-right">
-          <Button>X</Button>
-        </div>
+        <div className="text-right">{children}</div>
       </div>
     </li>
   );
