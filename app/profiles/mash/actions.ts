@@ -9,6 +9,7 @@ import { zfd } from "zod-form-data";
 
 const mashStepSchema = zfd.formData({
   id: zfd.numeric(z.number().optional()),
+  rank: zfd.numeric(z.number().min(0)),
   name: zfd.text(z.string().optional()),
   type: z.nativeEnum(MashStepType).default(MashStepType.temperature),
   rampTime: zfd.numeric(z.number().optional()),

@@ -305,6 +305,7 @@ model MashStep {
   id            Int          @id @default(autoincrement())
   type          MashStepType @default(temperature)
   name          String?
+  rank          Int
   temperature   Float
   time          Float
   rampTime      Float        @default(0)
