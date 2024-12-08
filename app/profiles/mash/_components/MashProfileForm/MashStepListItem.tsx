@@ -19,11 +19,16 @@ export type MashStepListItemProps = {
 };
 export function MashStepListItem({ src, index }: MashStepListItemProps) {
   return (
-    <li className="py-2 px-1 hover:bg-slate-200">
-      <b className="px-2">{index}</b>
-      <MashStepText src={src} />
-      <b className="px-2">Ramp Time:</b>
-      <span>{src.rampTime} min</span>
+    <li className="list-item py-2 px-1 hover:bg-slate-200 ">
+      <div className="grid grid-cols-3">
+        <span>
+          {src.type} - {src.name}
+        </span>
+        <span>
+          {src.time} min (Ramp: {src.rampTime} min)
+        </span>
+        <span>{src.temperature} F</span>
+      </div>
     </li>
   );
 }

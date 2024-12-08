@@ -25,11 +25,8 @@ export function MashProfileDisplay({ src }: MashProfileDisplayProps) {
             <Prop label="Description" value={src?.description} />
           </div>
         </Section>
-        <Section
-          title="Steps"
-          className="m-4 *:border-b-2 last-of-type:*:border-b-0 "
-        >
-          <ol className="p-0 *:border-b-2 last-of-type:*:border-b-0">
+        <Section title="Steps" className="m-4  ">
+          <ol className="list-decimal list-outside pl-6">
             {(src?.steps ?? []).map((step, index) => (
               <MashStepListItem key={step.id} src={step} index={index} />
             ))}
