@@ -8,7 +8,7 @@ import { FilterFn, SortingFn, sortingFns } from "@tanstack/react-table";
 declare module "@tanstack/react-table" {
   //add fuzzy filter to the filterFns
   interface FilterFns {
-    fuzzy: FilterFn<unknown>;
+    fuzzy?: FilterFn<unknown>;
   }
   interface FilterMeta {
     itemRank: RankingInfo;

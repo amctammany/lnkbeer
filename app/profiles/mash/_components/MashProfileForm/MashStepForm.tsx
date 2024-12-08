@@ -37,17 +37,21 @@ export function MashStepForm({ src, action, ...props }: MashStepFormProps) {
   return (
     <Dialog onOpenChange={handleOpen} defaultOpen={src !== undefined}>
       <DialogOverlay className="bg-black/30">
-        <DialogContent>
+        <DialogContent className="max-w-[680px]">
           <DialogHeader>
             <DialogTitle>Mash Step Editor</DialogTitle>
             <DialogDescription>Mash Step</DialogDescription>
           </DialogHeader>
 
           <Form action={formAction} {...props}>
-            <div className="block gap-2 w-full">
+            <div className="grid grid-cols-3 gap-2 w-full">
               <Input type="hidden" {...register("id")} />
-              <TextField {...register("name")} />
-              <Select {...register("type")} options={MashStepType} />
+              <TextField className="col-span-3" {...register("name")} />
+              <Select
+                className="col-span-3"
+                {...register("type")}
+                options={MashStepType}
+              />
 
               <NumberField {...register("temperature")} step={0.1} />
               <NumberField {...register("time")} step={0.1} />

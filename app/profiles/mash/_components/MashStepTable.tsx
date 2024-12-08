@@ -1,11 +1,12 @@
 "use client";
-import { MashProfile } from "@prisma/client";
+import { MashStep } from "@prisma/client";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { DataTable } from "@/components/DataTable";
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getSortedRowModel,
   SortingState,
   useReactTable,
@@ -13,60 +14,88 @@ import {
 import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
-import { Plus } from "lucide-react";
+import { ArrowDown, ArrowUp, Plus } from "lucide-react";
 import {
   Table,
-  TableBody,
-  TableCell,
-  TableHead,
   TableHeader,
   TableRow,
+  TableHead,
+  TableBody,
+  TableCell,
 } from "@/components/ui/table";
-import { table } from "console";
-import { useState } from "react";
 import { fuzzyFilter } from "@/lib/fuzzyFilter";
-const columns: ColumnDef<MashProfile>[] = [
+import { useState } from "react";
+import { ExtendedMashStep } from "@/types/Profile";
+import { Button } from "@/components/ui/button";
+const columns: ColumnDef<ExtendedMashStep>[] = [
   {
-    accessorKey: "name",
-    header: Header<MashProfile>,
-    cell: ({ getValue }) => (
+    id: "link",
+    accessorFn: (row) =>
+      `/profiles/mash/${row.MashProfile.slug}/edit/${row.id}`,
+    header: ({ column }) => {
+      const Comp = column.getIsSorted() === "desc" ? ArrowUp : ArrowDown;
+      return (
+        <Button
+          variant="ghost"
+          className="w-full text-left flex"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          <span className="capitalize flex-grow">Name</span>
+          {column.getIsSorted() && <Comp className="ml-2 h-4 w-4" />}
+        </Button>
+      );
+    },
+    cell: ({ getValue, row }) => (
       <Link
         className="hover:underline"
         prefetch={false}
-        href={`/profiles/mash/${slugify(getValue<string>(), { lower: true })}`}
+        href={row.getValue("link")}
       >
-        {getValue<string>()}
+        {row.getValue("name")}
       </Link>
     ),
   },
+  { accessorKey: "name", header: Header<ExtendedMashStep> },
+  { accessorKey: "type", header: Header<ExtendedMashStep> },
+  { accessorKey: "temperature", header: Header<ExtendedMashStep> },
+  { accessorKey: "time", header: Header<ExtendedMashStep> },
+  { accessorKey: "rampTime", header: Header<ExtendedMashStep> },
+  { accessorKey: "mashProfileId", header: Header<ExtendedMashStep> },
+  { accessorKey: "id", header: Header<ExtendedMashStep> },
 ];
-export type MashProfilesTableProps = {
-  mashProfiles?: MashProfile[];
+export type MashStepsTableProps = {
+  mashSteps?: ExtendedMashStep[];
 };
-export function MashProfilesTable({
-  mashProfiles = [],
-}: MashProfilesTableProps) {
+export function MashStepsTable({ mashSteps = [] }: MashStepsTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
-
   const table = useReactTable({
-    data: mashProfiles,
+    data: mashSteps,
     columns,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
-    //onColumnFiltersChange: setColumnFilters,
     filterFns: {
       fuzzy: fuzzyFilter,
     },
-    //globalFilterFn: "fuzzy",
-    //getFilteredRowModel: getFilteredRowModel(),
-    //onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: "fuzzy",
+    getFilteredRowModel: getFilteredRowModel(),
     state: {
-      //globalFilter,
       sorting,
-      //columnFilters,
+    },
+    initialState: {
+      columnVisibility: {
+        link: true,
+        name: false,
+        type: true,
+        temperature: true,
+        time: true,
+        rampTime: true,
+        mashProfileId: false,
+        id: false,
+      },
     },
     getCoreRowModel: getCoreRowModel(),
   });
+  console.log(mashSteps);
 
   return (
     <div className="overflow-x-scroll">
@@ -115,4 +144,4 @@ export function MashProfilesTable({
     </div>
   );
 }
-export default MashProfilesTable;
+export default MashStepsTable;
