@@ -5,10 +5,11 @@ import { Input } from "@/components/Form/Input";
 import { TextField } from "@/components/Form/TextField";
 import Section from "@/components/Section";
 import { useActionForm } from "@/hooks/useActionForm";
-import { ExtendedMashProfile } from "@/types/Profile";
+import { ExtendedMashProfile, ExtendedMashStep } from "@/types/Profile";
 import { MashProfile } from "@prisma/client";
 import { Plus, Save } from "lucide-react";
 import { MashStepListItem } from "./MashStepListItem";
+import Link from "next/link";
 
 export type MashProfileFormProps = {
   src?: ExtendedMashProfile | null;
@@ -33,11 +34,15 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
           <Section title="Steps" actions={[{ text: "Add", icon: Plus }]}>
             <ul>
               {src?.steps.map((step, index) => (
-                <MashStepListItem
+                <Link
+                  href={`/profiles/mash/${src?.slug}/edit/${step.id}`}
                   key={step.id}
-                  src={{ MashProfile: src, ...step }}
-                  index={index}
-                />
+                >
+                  <MashStepListItem
+                    src={{ MashProfile: src, ...step }}
+                    index={index}
+                  />
+                </Link>
               ))}
             </ul>
           </Section>
