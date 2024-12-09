@@ -11,6 +11,7 @@ import { Plus, Save } from "lucide-react";
 import { MashStepListItem } from "./MashStepListItem";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import MashStepActions from "./MashStepActions";
 
 export type MashProfileFormProps = {
   src?: ExtendedMashProfile | null;
@@ -35,14 +36,27 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
           <Section title="Steps" actions={[{ text: "Add", icon: Plus }]}>
             <ol className="list-decimal list-outside pl-6">
               {src?.steps.map((step, index) => (
-                <Link
-                  href={`/profiles/mash/${src?.slug}/edit/${step.id}`}
+                <li
                   key={step.id}
+                  className="list-item leading-4 py-2 px-1 hover:bg-slate-200 "
                 >
-                  <MashStepListItem key={step.id} src={step} index={index}>
-                    <Button>X</Button>
-                  </MashStepListItem>
-                </Link>
+                  <div className="flex w-full ">
+                    <Link
+                      className="flex-grow "
+                      href={`/profiles/mash/${src?.slug}/edit/${step.id}`}
+                    >
+                      <MashStepListItem
+                        key={step.id}
+                        src={step}
+                        index={index}
+                      />
+                    </Link>
+                    <MashStepActions
+                      className="mx-2"
+                      src={{ MashProfile: src, ...step }}
+                    />
+                  </div>
+                </li>
               ))}
             </ol>
           </Section>
