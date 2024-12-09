@@ -73,6 +73,32 @@ export const duplicateMashStep = async (src: ExtendedMashStep) => {
   //const valid = validateSchema(formData, mashStepSchema);
   //if (!valid.success) return;
 };
+export const shiftMashStep = async (dir: -1 | 1, src: ExtendedMashStep) => {
+  console.log(src, dir);
+  console.log(src.MashProfile.steps.length);
+  if (
+    src.rank + dir < 0 ||
+    src.rank + dir >= src.MashProfile.steps.length - 1
+  ) {
+    const other = await prisma.mashStep.updateMany({
+      where: {
+        mashProfileId: src.mashProfileId!,
+        rank: src.rank + dir,
+      },
+      data: {
+        rank: src.rank,
+      },
+    });
+    if (other.count === 1) {
+      const res = await prisma.mashStep.update({
+        where: { id: src.id },
+        data: { rank: src.rank + dir },
+      });
+      console.log({ other, res });
+      redirect(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
+    }
+  }
+};
 export const updateMashStep = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, mashStepSchema);
   if (!valid.success) return valid;

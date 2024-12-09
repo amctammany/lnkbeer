@@ -165,13 +165,13 @@ async function main() {
       name: "Max Fermentability",
       slug: slugify("Max Fermentability", { lower: true }),
       description: "Maximum Fermentability",
-      steps: { create: [{ temperature: 152, time: 60, rank: 1 }] },
+      steps: { create: [{ temperature: 152, time: 60, rank: 0 }] },
       forks: {
         create: {
           name: "Max Fermentability (copy)",
           slug: slugify("Max Fermentability (copy)", { lower: true }),
           description: "Maximum Fermentability Copy",
-          steps: { create: [{ temperature: 154, time: 60, rank: 1 }] },
+          steps: { create: [{ temperature: 154, time: 60, rank: 0 }] },
         },
       },
     },
@@ -183,8 +183,8 @@ async function main() {
       description: "Medium Fermentability",
       steps: {
         create: [
-          { temperature: 152, time: 60, rank: 1 },
-          { temperature: 168, time: 10, rank: 2 },
+          { temperature: 152, time: 60, rank: 0 },
+          { temperature: 168, time: 10, rank: 1 },
         ],
       },
     },

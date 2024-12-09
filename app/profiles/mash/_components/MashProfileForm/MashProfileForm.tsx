@@ -40,7 +40,7 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
                   key={step.id}
                   className="list-item leading-4 py-2 px-1 hover:bg-slate-200 "
                 >
-                  <div className="flex w-full ">
+                  <div className="flex w-full p-1">
                     <Link
                       className="flex-grow "
                       href={`/profiles/mash/${src?.slug}/edit/${step.id}`}

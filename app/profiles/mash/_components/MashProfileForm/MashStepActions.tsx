@@ -11,7 +11,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { ArrowBigDown, ArrowBigUp, CopyPlus, Ellipsis } from "lucide-react";
 import { ComponentProps } from "react";
-import { duplicateMashStep } from "../../actions";
+import { duplicateMashStep, shiftMashStep } from "@/app/profiles/mash/actions";
 
 export type MashStepActionsProps = {
   src: ExtendedMashStep;
@@ -39,13 +39,23 @@ export function MashStepActions({ src, className }: MashStepActionsProps) {
               <span>Duplicate</span>
             </Button>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <ArrowBigUp />
-            <span>Shift Up</span>
+          <DropdownMenuItem asChild>
+            <Button
+              variant="ghost"
+              onClick={handleClick(shiftMashStep.bind(null, -1))}
+            >
+              <ArrowBigUp />
+              <span>Shift Up</span>
+            </Button>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <ArrowBigDown />
-            <span>Shift Down</span>
+          <DropdownMenuItem asChild>
+            <Button
+              variant="ghost"
+              onClick={handleClick(shiftMashStep.bind(null, 1))}
+            >
+              <ArrowBigDown />
+              <span>Shift Down</span>
+            </Button>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

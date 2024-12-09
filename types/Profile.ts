@@ -22,7 +22,7 @@ export type ExtendedMashProfile = MashProfile & {
   origin?: MashProfile;
 };
 export type ExtendedMashStep = MashStep & {
-  MashProfile: MashProfile;
+  MashProfile: MashProfile & { steps: { id: number }[] };
 };
 
 export type WaterProfileInput = Omit<WaterProfile, "id"> & {

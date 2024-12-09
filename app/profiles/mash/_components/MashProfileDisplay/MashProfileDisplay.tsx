@@ -18,8 +18,8 @@ export function MashProfileDisplay({ src }: MashProfileDisplayProps) {
       title={`MashProfile: ${src?.name}`}
       actions={makeActions(src!)}
     >
-      <div className="pt-4">
-        <Section className="m-4  ">
+      <div className="gap-2 lg:w-9/12 mx-auto">
+        <Section title="General" className="m-4  ">
           <div className="p-0 *:border-b-2 last-of-type:*:border-b-0">
             <Prop label="Name" value={src?.name} />
             <Prop label="Description" value={src?.description} />

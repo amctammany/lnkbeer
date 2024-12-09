@@ -311,4 +311,6 @@ model MashStep {
   rampTime      Float        @default(0)
   MashProfile   MashProfile? @relation(fields: [mashProfileId], references: [id])
   mashProfileId String?
+
+  //@@unique([mashProfileId, rank])
 }
