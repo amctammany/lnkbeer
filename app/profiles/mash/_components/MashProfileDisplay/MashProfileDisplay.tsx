@@ -28,7 +28,12 @@ export function MashProfileDisplay({ src }: MashProfileDisplayProps) {
         <Section title="Steps" className="m-4  ">
           <ol className="list-decimal list-outside pl-6">
             {(src?.steps ?? []).map((step, index) => (
-              <MashStepListItem key={step.id} src={step} index={index} />
+              <li
+                key={step.id}
+                className="list-item leading-4 py-2 px-1 hover:bg-slate-200 "
+              >
+                <MashStepListItem src={step} index={index} />
+              </li>
             ))}
           </ol>
         </Section>

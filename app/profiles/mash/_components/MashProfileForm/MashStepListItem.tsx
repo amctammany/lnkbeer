@@ -21,7 +21,7 @@ export type MashStepListItemProps = {
 export function MashStepListItem({ src, index }: MashStepListItemProps) {
   const title = src.name ? `${src.name} (${src.type})` : src.type;
   return (
-    <div className="hover:bg-slate-200 flex-grow h-full grid grid-cols-3 text-center *:my-auto">
+    <div className="flex-grow h-full grid grid-cols-3 text-center *:my-auto">
       <span className="capitalize">{title}</span>
       <span>
         {src.time} min (Ramp: {src.rampTime} min)

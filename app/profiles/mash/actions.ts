@@ -1,6 +1,7 @@
 "use server";
 import { prisma } from "@/lib/client";
 import { validateSchema } from "@/lib/validateSchema";
+import { ExtendedMashStep } from "@/types/Profile";
 import { MashProfile, MashStepType } from "@prisma/client";
 import { redirect } from "next/navigation";
 import slugify from "slugify";
@@ -62,6 +63,15 @@ export const createMashProfile = async (prev: any, formData: FormData) => {
     },
   });
   redirect(`/profiles/mash/${res.slug}`);
+};
+export const duplicateMashStep = async (src: ExtendedMashStep) => {
+  console.log("duplicate", src);
+  //retuasync rn;
+  //const valid = validateSchema(formData, mashStepSchema);
+  //console.log(valid);
+  //const f = await Promise.resolve();
+  //const valid = validateSchema(formData, mashStepSchema);
+  //if (!valid.success) return;
 };
 export const updateMashStep = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, mashStepSchema);
