@@ -67,7 +67,6 @@ export const createMashProfile = async (prev: any, formData: FormData) => {
   redirect(`/profiles/mash/${res.slug}`);
 };
 export const removeMashStep = async (src: ExtendedMashStep) => {
-  console.log(src);
   const res = await prisma.mashStep.delete({
     where: {
       id: src.id,
@@ -79,17 +78,35 @@ export const removeMashStep = async (src: ExtendedMashStep) => {
   await prisma.mashStep.updateMany({
     where: {
       mashProfileId: res.mashProfileId,
-      rank: { gt: res.rank },
+      rank: { gte: res.rank + 1 },
     },
     data: {
       rank: { decrement: 1 },
     },
   });
   //console.log(res);
-  redirect(`/profiles/mash/${res.MashProfile?.slug}/edit`);
+  redirect(
+    `/profiles/mash/${res.MashProfile?.slug}/edit`,
+    RedirectType.replace,
+  );
 };
 export const duplicateMashStep = async (src: ExtendedMashStep) => {
-  console.log("duplicate", src);
+  const { id, MashProfile, ...data } = src;
+  await prisma.mashStep.updateMany({
+    where: {
+      mashProfileId: src.mashProfileId,
+      rank: { gte: src.rank + 1 },
+    },
+    data: {
+      rank: { increment: 1 },
+    },
+  });
+  const res = await prisma.mashStep.create({
+    data: { ...data, rank: src.rank + 1 },
+  });
+  //console.log(res);
+  redirect(`/profiles/mash/${MashProfile?.slug}/edit`, RedirectType.replace);
+
   //retuasync rn;
   //const valid = validateSchema(formData, mashStepSchema);
   //console.log(valid);
@@ -119,20 +136,18 @@ export const shiftMashStep = async (dir: -1 | 1, src: ExtendedMashStep) => {
           MashProfile: {
             select: {
               slug: true,
-              steps: {
-                select: {
-                  id: true,
-                },
-              },
+              steps: true,
             },
           },
         },
       });
-      //revalidatePath(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
-      redirect(
-        `/profiles/mash/${res?.MashProfile?.slug}/edit`,
-        RedirectType.push,
-      );
+      console.log(other, res);
+      //return res.MashProfile;
+      revalidatePath(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
+      //redirect(
+      //`/profiles/mash/${res?.MashProfile?.slug}/edit`,
+      //RedirectType.replace,
+      //);
     }
   }
 };

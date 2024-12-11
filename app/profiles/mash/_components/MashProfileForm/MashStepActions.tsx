@@ -29,7 +29,8 @@ export type MashStepActionsProps = {
 //import { duplicateMashStep } from "../../actions";
 export function MashStepActions({ src, className }: MashStepActionsProps) {
   const handleClick = (action) => async (e) => {
-    await action(src);
+    const res = await action(src);
+    console.log(res);
   };
   return (
     <div className={className}>

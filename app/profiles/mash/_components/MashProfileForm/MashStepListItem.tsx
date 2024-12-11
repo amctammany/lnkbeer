@@ -22,7 +22,9 @@ export function MashStepListItem({ src, index }: MashStepListItemProps) {
   const title = src.name ? `${src.name} (${src.type})` : src.type;
   return (
     <div className="flex-grow h-full grid grid-cols-3 text-center *:my-auto">
-      <span className="capitalize">{title}</span>
+      <span className="capitalize">
+        {src.rank}: {title}
+      </span>
       <span>
         {src.time} min (Ramp: {src.rampTime} min)
       </span>
