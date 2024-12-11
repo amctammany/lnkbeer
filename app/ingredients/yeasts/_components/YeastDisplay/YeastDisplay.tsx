@@ -1,5 +1,5 @@
 import { Prop } from "@/components/Prop";
-import { AppBarAction } from "@/components/AppBar";
+import { AppBarActionProps } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { Yeast } from "@prisma/client";
@@ -8,7 +8,7 @@ import { YeastInput } from "@/types/ingredient";
 export type YeastDisplayProps = {
   src?: YeastInput | null;
 };
-const makeActions: (yeast: Yeast) => AppBarAction[] = (yeast) => [
+const makeActions: (yeast: Yeast) => AppBarActionProps[] = (yeast) => [
   { text: "Edit", url: `/ingredients/yeasts/${yeast.slug}/edit` },
 ];
 

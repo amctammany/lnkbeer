@@ -1,5 +1,5 @@
 import { Prop } from "@/components/Prop";
-import { AppBarAction } from "@/components/AppBar";
+import { AppBarActionProps } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { Fermentable } from "@prisma/client";
@@ -7,7 +7,7 @@ import { Fermentable } from "@prisma/client";
 export type FermentableDisplayProps = {
   src?: Fermentable | null;
 };
-const makeActions: (fermentable: Fermentable) => AppBarAction[] = (
+const makeActions: (fermentable: Fermentable) => AppBarActionProps[] = (
   fermentable,
 ) => [
   { text: "Edit", url: `/ingredients/fermentables/${fermentable.slug}/edit` },

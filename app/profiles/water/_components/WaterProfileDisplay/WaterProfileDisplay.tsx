@@ -1,5 +1,5 @@
 import { Prop } from "@/components/Prop";
-import { AppBarAction } from "@/components/AppBar";
+import { AppBarActionProps } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { WaterProfile } from "@prisma/client";
@@ -8,9 +8,11 @@ import { Ca2, Cl, HCO3, MgSo4, Na, SO4 } from "@/components/Elements";
 export type WaterProfileDisplayProps = {
   src?: WaterProfile | null;
 };
-const makeActions: (waterProfile?: WaterProfile | null) => AppBarAction[] = (
-  waterProfile,
-) => [{ text: "Edit", url: `/profiles/water/${waterProfile?.slug}/edit` }];
+const makeActions: (
+  waterProfile?: WaterProfile | null,
+) => AppBarActionProps[] = (waterProfile) => [
+  { text: "Edit", url: `/profiles/water/${waterProfile?.slug}/edit` },
+];
 
 export function WaterProfileDisplay({ src }: WaterProfileDisplayProps) {
   return (

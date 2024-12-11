@@ -1,5 +1,5 @@
 import type { Style } from "@prisma/client";
-import type { AppBarAction } from "@/components/AppBar";
+import type { AppBarActionProps } from "@/components/AppBar";
 import { Save } from "lucide-react";
 import { List } from "@/components/List/List";
 import { StyleListItem } from "./StyleListItem";
@@ -8,7 +8,7 @@ export interface StylesListProps {
   styles: Style[];
 }
 
-const appbarItems: AppBarAction[] = [
+const appbarItems: AppBarActionProps[] = [
   { text: "Save", icon: Save },
   { text: "foo" },
 ];

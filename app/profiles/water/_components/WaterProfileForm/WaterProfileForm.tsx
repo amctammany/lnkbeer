@@ -13,7 +13,7 @@ import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { WaterProfile } from "@prisma/client";
-import { Activity, Save } from "lucide-react";
+import { Activity, Redo, Save } from "lucide-react";
 
 export type WaterProfileFormProps = {
   src?: WaterProfile | null;
@@ -29,7 +29,14 @@ export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
         title={`WaterProfile Editor: ${src?.name}`}
         actions={[
           { text: "Save", icon: Save, type: "submit" },
-          { text: "Actions", icon: Activity },
+          {
+            text: "Actions",
+            icon: Activity,
+            items: [
+              { text: "foo", icon: Save },
+              { text: "bar", icon: Redo },
+            ],
+          },
         ]}
       >
         <div className="grid grid-cols-4 gap-2 w-9/12 mx-auto">

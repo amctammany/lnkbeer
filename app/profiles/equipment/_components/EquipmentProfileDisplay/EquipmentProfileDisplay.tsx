@@ -1,5 +1,5 @@
 import { Prop } from "@/components/Prop";
-import { AppBarAction } from "@/components/AppBar";
+import { AppBarActionProps } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { EquipmentProfile } from "@prisma/client";
@@ -7,9 +7,9 @@ import { EquipmentProfile } from "@prisma/client";
 export type EquipmentProfileDisplayProps = {
   src?: EquipmentProfile | null;
 };
-const makeActions: (equipmentProfile: EquipmentProfile) => AppBarAction[] = (
-  equipmentProfile,
-) => [
+const makeActions: (
+  equipmentProfile: EquipmentProfile,
+) => AppBarActionProps[] = (equipmentProfile) => [
   { text: "Edit", url: `/profiles/equipment/${equipmentProfile.slug}/edit` },
 ];
 

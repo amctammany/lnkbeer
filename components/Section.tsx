@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { AppBarAction } from "./AppBar";
+import { AppBarActionProps } from "./AppBar";
 import { ComponentProps } from "react";
 import clsx from "clsx";
 
 export type SectionProps = {
   title?: string | React.ReactNode;
-  actions?: AppBarAction[];
+  actions?: AppBarActionProps[];
   children?: string | React.ReactNode | React.ReactNode[];
 } & ComponentProps<"div">;
 export function Section({

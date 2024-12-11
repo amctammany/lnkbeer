@@ -1,4 +1,4 @@
-import { AppBarAction } from "@/components/AppBar";
+import { AppBarActionProps } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { HopInput } from "@/types/ingredient";
 import { Hop } from "@prisma/client";
@@ -10,7 +10,7 @@ import { Hop as HopIcon } from "lucide-react";
 export type HopDisplayProps = {
   hop?: Hop | null;
 };
-const makeActions: (hop: Hop) => AppBarAction[] = (hop) => [
+const makeActions: (hop: Hop) => AppBarActionProps[] = (hop) => [
   { text: "Edit", url: `/ingredients/hops/${hop.slug}/edit` },
 ];
 export function HopDisplay({ hop }: HopDisplayProps) {
