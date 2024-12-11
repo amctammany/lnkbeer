@@ -1,7 +1,9 @@
 "use server";
 import { prisma } from "@/lib/client";
 import { validateSchema } from "@/lib/validateSchema";
+import { ExtendedWaterProfile } from "@/types/Profile";
 import { WaterProfile } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import slugify from "slugify";
 import { z, ZodIssue } from "zod";
@@ -95,4 +97,23 @@ export const updateWaterProfile = async (prev: any, formData: FormData) => {
   //return { success: true, data: res };
 
   redirect(`/profiles/water/${res.slug}`);
+};
+export const removeWaterProfile = async (src: ExtendedWaterProfile) => {
+  const res = await prisma.waterProfile.delete({
+    where: {
+      id: src.id,
+    },
+  });
+  //console.log(res);
+  redirect("/profiles/water");
+  //revalidatePath(`/profiles/water/${src?.slug}/edit`);
+};
+
+export const duplicateWaterProfile = async (src: ExtendedWaterProfile) => {
+  console.log(src);
+  const { id, userId, ...data } = src;
+  const res = await prisma.waterProfile.create({
+    data: data as any,
+  });
+  revalidatePath(`/profiles/water/${res?.slug}/edit`);
 };

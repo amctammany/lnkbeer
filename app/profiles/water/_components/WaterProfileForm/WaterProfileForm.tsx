@@ -14,6 +14,7 @@ import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { WaterProfile } from "@prisma/client";
 import { Activity, Redo, Save } from "lucide-react";
+import { duplicateWaterProfile, removeWaterProfile } from "../../actions";
 
 export type WaterProfileFormProps = {
   src?: WaterProfile | null;
@@ -23,6 +24,10 @@ export type WaterProfileFormProps = {
 export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
   const { state, register, control, getValues, formAction } =
     useActionForm<WaterProfile>(action, src!);
+  const handleClick = (action) => async (e) => {
+    await action(src);
+  };
+
   return (
     <Form className="flex" action={formAction}>
       <AppBarLayout
@@ -32,9 +37,10 @@ export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
           {
             text: "Actions",
             icon: Activity,
+            handleClick,
             items: [
-              { text: "foo", icon: Save },
-              { text: "bar", icon: Redo },
+              { text: "Duplicate", icon: Save, action: duplicateWaterProfile },
+              { text: "Remove", icon: Redo, action: removeWaterProfile },
             ],
           },
         ]}

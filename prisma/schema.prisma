@@ -250,7 +250,6 @@ model WaterProfile {
   sulfate     Float?         @default(0)
   bicarbonate Float?         @default(0)
   description String?
-  //  Recipe         Recipe[]
   forkedFrom  String?
   origin      WaterProfile?  @relation("origin", fields: [forkedFrom], references: [id])
   forks       WaterProfile[] @relation("origin")
