@@ -3,7 +3,8 @@ import { prisma } from "@/lib/client";
 import { validateSchema } from "@/lib/validateSchema";
 import { ExtendedMashStep } from "@/types/Profile";
 import { MashProfile, MashStepType } from "@prisma/client";
-import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { redirect, RedirectType } from "next/navigation";
 import slugify from "slugify";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
@@ -93,7 +94,11 @@ export const shiftMashStep = async (dir: -1 | 1, src: ExtendedMashStep) => {
         where: { id: src.id },
         data: { rank: src.rank + dir },
       });
-      redirect(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
+      revalidatePath(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
+      //redirect(
+      //`/profiles/mash/${src?.MashProfile?.slug}/edit`,
+      //RedirectType.replace,
+      //);
     }
   }
 };
