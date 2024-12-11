@@ -85,10 +85,11 @@ export const removeMashStep = async (src: ExtendedMashStep) => {
     },
   });
   //console.log(res);
-  redirect(
-    `/profiles/mash/${res.MashProfile?.slug}/edit`,
-    RedirectType.replace,
-  );
+  revalidatePath(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
+  //redirect(
+  //`/profiles/mash/${res.MashProfile?.slug}/edit`,
+  //RedirectType.replace,
+  //);
 };
 export const duplicateMashStep = async (src: ExtendedMashStep) => {
   const { id, MashProfile, ...data } = src;
@@ -105,7 +106,8 @@ export const duplicateMashStep = async (src: ExtendedMashStep) => {
     data: { ...data, rank: src.rank + 1 },
   });
   //console.log(res);
-  redirect(`/profiles/mash/${MashProfile?.slug}/edit`, RedirectType.replace);
+  //redirect(`/profiles/mash/${MashProfile?.slug}/edit`, RedirectType.replace);
+  revalidatePath(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
 
   //retuasync rn;
   //const valid = validateSchema(formData, mashStepSchema);

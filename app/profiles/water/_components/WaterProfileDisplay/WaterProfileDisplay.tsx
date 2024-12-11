@@ -8,15 +8,15 @@ import { Ca2, Cl, HCO3, MgSo4, Na, SO4 } from "@/components/Elements";
 export type WaterProfileDisplayProps = {
   src?: WaterProfile | null;
 };
-const makeActions: (waterProfile: WaterProfile) => AppBarAction[] = (
+const makeActions: (waterProfile?: WaterProfile | null) => AppBarAction[] = (
   waterProfile,
-) => [{ text: "Edit", url: `/profiles/water/${waterProfile.slug}/edit` }];
+) => [{ text: "Edit", url: `/profiles/water/${waterProfile?.slug}/edit` }];
 
 export function WaterProfileDisplay({ src }: WaterProfileDisplayProps) {
   return (
     <AppBarLayout
       title={`WaterProfile: ${src?.name}`}
-      actions={makeActions(src!)}
+      actions={makeActions(src)}
     >
       <div className="pt-4">
         <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">
