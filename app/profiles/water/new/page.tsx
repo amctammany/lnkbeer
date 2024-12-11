@@ -1,6 +1,3 @@
-import { WaterProfileForm } from "@/app/profiles/water/_components/WaterProfileForm";
-import { getWaterProfile } from "@/app/profiles/water/queries";
-import { updateWaterProfile } from "@/app/profiles/water/actions";
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/client";
@@ -36,6 +33,7 @@ export default async function WaterProfileCreatorPage({}: WaterProfileCreatorPag
     data: {
       name,
       slug: slugify(name, { lower: true }),
+      userId: user.id,
     },
   });
   redirect(`/profiles/water/${res.slug}/edit`);

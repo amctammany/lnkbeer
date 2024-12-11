@@ -16,7 +16,7 @@ export async function generateMetadata({}: EquipmentProfileCreatorPageProps) {
 export default async function EquipmentProfileCreatorPage({}: EquipmentProfileCreatorPageProps) {
   const session = await auth();
   if (!session?.user)
-    return redirect("/admin/login?returnUrl=/profiles/mash/new");
+    return redirect("/admin/login?callbackUrl=/profiles/equipment/new");
   const user = await prisma.user.findFirst({
     where: { id: session?.user?.id },
     include: {
@@ -29,7 +29,8 @@ export default async function EquipmentProfileCreatorPage({}: EquipmentProfileCr
     data: {
       name,
       slug: slugify(name, { lower: true }),
+      userId: user.id,
     },
   });
-  redirect(`/profiles/mash/${res.slug}/edit`);
+  redirect(`/profiles/equipment/${res.slug}/edit`);
 }

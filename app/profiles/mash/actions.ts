@@ -93,7 +93,6 @@ export const shiftMashStep = async (dir: -1 | 1, src: ExtendedMashStep) => {
         where: { id: src.id },
         data: { rank: src.rank + dir },
       });
-      console.log({ other, res });
       redirect(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
     }
   }
@@ -114,7 +113,6 @@ export const createMashStep = async (prev: any, formData: FormData) => {
       },
     },
   });
-  console.log(res);
   redirect(`/profiles/mash/${res?.MashProfile?.slug}/edit`);
 };
 

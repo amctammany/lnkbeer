@@ -20,15 +20,20 @@ export const AppBarLayout = ({
       <AppBar title={title} className="fixed bg-white  h-16 z-20">
         {actions.map((action) =>
           action.url ? (
-            <Button key={action.url} asChild size="sm" variant="secondary">
-              <Link href={action.url}>
+            <Link key={action.url} href={action.url}>
+              <Button
+                className="hover:bg-primary/20"
+                size="sm"
+                variant="secondary"
+              >
                 {action.icon && <action.icon />}
                 {action.text}
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           ) : (
             <Button
               type={action.type ?? "button"}
+              className="hover:bg-primary/20"
               key={action.text}
               size="sm"
               variant="secondary"

@@ -243,12 +243,12 @@ model WaterProfile {
   owner       User?          @relation(fields: [userId], references: [id])
   name        String
   slug        String         @unique
-  calcium     Float          @default(0)
-  magnesium   Float          @default(0)
-  sodium      Float          @default(0)
-  chloride    Float          @default(0)
-  sulfate     Float          @default(0)
-  bicarbonate Float          @default(0)
+  calcium     Float?         @default(0)
+  magnesium   Float?         @default(0)
+  sodium      Float?         @default(0)
+  chloride    Float?         @default(0)
+  sulfate     Float?         @default(0)
+  bicarbonate Float?         @default(0)
   description String?
   //  Recipe         Recipe[]
   forkedFrom  String?

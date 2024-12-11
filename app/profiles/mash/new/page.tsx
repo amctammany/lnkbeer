@@ -34,6 +34,7 @@ export default async function MashProfileCreatorPage({}: MashProfileCreatorPageP
     data: {
       name,
       slug: slugify(name, { lower: true }),
+      userId: user.id,
     },
   });
   redirect(`/profiles/mash/${res.slug}/edit`);
