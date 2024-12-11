@@ -29,6 +29,7 @@ export const getMashProfile = cache(async (slug: string) => {
 
         select: {
           id: true,
+          MashProfile: { select: { slug: true, name: true, id: true } },
           mashProfileId: true,
           name: true,
           temperature: true,

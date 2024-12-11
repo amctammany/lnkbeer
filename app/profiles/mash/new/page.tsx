@@ -9,6 +9,7 @@ import { prisma } from "@/lib/client";
 //import { MashStep } from "@prisma/client";
 //import clsx from "clsx";
 import { redirect } from "next/navigation";
+import slugify from "slugify";
 type MashProfileCreatorPageProps = any;
 
 export async function generateMetadata() {
@@ -23,11 +24,16 @@ export default async function MashProfileCreatorPage({}: MashProfileCreatorPageP
     return redirect("/admin/login?returnUrl=/profiles/mash/new");
   const user = await prisma.user.findFirst({
     where: { id: session?.user?.id },
+    include: {
+      mashProfiles: { select: { id: true, name: true } },
+    },
   });
+  if (!user) throw new Error("Invalid User?");
+  const name = `${user?.name} - MashProfile ${user?.mashProfiles.length}`;
   const res = await prisma.mashProfile.create({
     data: {
-      name: "name",
-      slug: "name",
+      name,
+      slug: slugify(name, { lower: true }),
     },
   });
   redirect(`/profiles/mash/${res.slug}/edit`);

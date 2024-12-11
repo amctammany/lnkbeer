@@ -46,6 +46,7 @@ export function MashStepForm({ src, action, ...props }: MashStepFormProps) {
           <Form action={formAction} {...props}>
             <div className="grid grid-cols-3 gap-2 w-full">
               <Input type="hidden" {...register("id")} />
+              <Input type="hidden" {...register("mashProfileId")} />
               <Input type="hidden" {...register("rank")} />
               <TextField className="col-span-3" {...register("name")} />
               <Select

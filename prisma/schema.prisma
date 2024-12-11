@@ -14,17 +14,17 @@ datasource db {
 }
 
 model User {
-  id               String             @id @default(cuid())
-  name             String
-  email            String             @unique
-  emailVerified    DateTime?
-  image            String?
-  accounts         Account[]
-  sessions         Session[]
-  Style            Style[]
-  WaterProfile     WaterProfile[]
-  EquipmentProfile EquipmentProfile[]
-  MashProfile      MashProfile[]
+  id                String             @id @default(cuid())
+  name              String
+  email             String             @unique
+  emailVerified     DateTime?
+  image             String?
+  accounts          Account[]
+  sessions          Session[]
+  Style             Style[]
+  waterProfiles     WaterProfile[]
+  equipmentProfiles EquipmentProfile[]
+  mashProfiles      MashProfile[]
 }
 
 model Account {

@@ -3,7 +3,11 @@ import {
   MashStepForm,
 } from "@/app/profiles/mash/_components/MashProfileForm";
 import { getMashProfile, getMashStep } from "@/app/profiles/mash/queries";
-import { updateMashProfile, updateMashStep } from "@/app/profiles/mash/actions";
+import {
+  createMashStep,
+  updateMashProfile,
+  updateMashStep,
+} from "@/app/profiles/mash/actions";
 import clsx from "clsx";
 import {
   ExtendedMashProfile,
@@ -34,11 +38,17 @@ export default async function MashStepEditorPage({
     id?.[0] !== undefined
       ? id?.[0] === "new"
         ? ({
+            MashProfile: {
+              slug: mashProfile.slug,
+              name: mashProfile.name,
+              id: mashProfile.id,
+            },
             mashProfileId: mashProfile.id,
             rank: mashProfile.steps.length,
           } as ExtendedMashStep)
         : await getMashStep(id?.[0])
       : undefined;
+  console.log({ id, mashProfile, mashStep });
   return (
     <>
       <MashProfileForm src={mashProfile} action={updateMashProfile} />
@@ -47,7 +57,7 @@ export default async function MashStepEditorPage({
           hidden: id === undefined || id?.[0] === undefined,
         })}
         src={mashStep! as MashStepInput}
-        action={updateMashStep as any}
+        action={(mashStep?.id ? updateMashStep : createMashStep) as any}
       />
     </>
   );

@@ -10,12 +10,13 @@ import { zfd } from "zod-form-data";
 
 const mashStepSchema = zfd.formData({
   id: zfd.text(z.string().optional()),
+  mashProfileId: zfd.text(z.string().optional()),
   rank: zfd.numeric(z.number().min(0)),
   name: zfd.text(z.string().optional()),
   type: z.nativeEnum(MashStepType).default(MashStepType.temperature),
   rampTime: zfd.numeric(z.number().optional()),
-  time: zfd.numeric(z.number().optional()),
-  temperature: zfd.numeric(z.number().optional()),
+  time: zfd.numeric(z.number()),
+  temperature: zfd.numeric(z.number()),
 });
 const mashSchema = zfd.formData({
   id: zfd.text(z.string().optional()),
@@ -97,6 +98,26 @@ export const shiftMashStep = async (dir: -1 | 1, src: ExtendedMashStep) => {
     }
   }
 };
+export const createMashStep = async (prev: any, formData: FormData) => {
+  const valid = validateSchema(formData, mashStepSchema);
+  if (!valid.success) return valid;
+  const { id, ...data } = valid.data;
+  const res = await prisma.mashStep.create({
+    data,
+    include: {
+      MashProfile: {
+        select: {
+          name: true,
+          slug: true,
+          id: true,
+        },
+      },
+    },
+  });
+  console.log(res);
+  redirect(`/profiles/mash/${res?.MashProfile?.slug}/edit`);
+};
+
 export const updateMashStep = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, mashStepSchema);
   if (!valid.success) return valid;
