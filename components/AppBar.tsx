@@ -11,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import React from "react";
 
 export interface AppBarActionProps {
   text?: string;
@@ -18,12 +19,14 @@ export interface AppBarActionProps {
   action?: any;
   type?: HTMLButtonElement["type"];
   url?: string;
+  children?: any;
   items?: Omit<AppBarActionProps, "items">[];
 }
 export const AppBarAction = ({
   text,
-  icon: Icon,
+  icon,
   action,
+  children,
   type,
 
   url,
@@ -37,7 +40,7 @@ export const AppBarAction = ({
       size="sm"
       variant="secondary"
     >
-      {Icon && <Icon />}
+      {icon}
       {text}
     </Button>
   );
@@ -50,26 +53,16 @@ export const AppBarAction = ({
           //variant="secondary"
         >
           <div className="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 h-8 rounded-md px-3 text-xs bg-secondary text-secondary-foreground shadow-sm hover:bg-primary/20">
-            {Icon && <Icon />}
+            {icon}
             {text}
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuLabel>{text}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {items.map((item) => (
+          {React.Children.map(children, (item) => (
             <DropdownMenuItem asChild key={item.text}>
-              {item.url ? (
-                <Link href={item.url}>
-                  {item.icon && <item.icon />}
-                  {item.text}
-                </Link>
-              ) : (
-                <span onClick={item.action}>
-                  {item.icon && <item.icon />}
-                  {item.text}
-                </span>
-              )}
+              {item}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>

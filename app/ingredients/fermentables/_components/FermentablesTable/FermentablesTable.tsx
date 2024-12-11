@@ -7,6 +7,8 @@ import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
 import { Plus } from "lucide-react";
+import { AppBarAction } from "@/components/AppBar";
+import { FermentableInput } from "@/types/ingredient";
 const columns: ColumnDef<Fermentable>[] = [
   {
     accessorKey: "name",
@@ -38,15 +40,16 @@ const columns: ColumnDef<Fermentable>[] = [
 export type FermentablesTableProps = {
   fermentables?: Fermentable[];
 };
+const FermentableTableActions = () => {
+  return [<AppBarAction key="new" text="New" icon={<Plus />} />];
+};
 export function FermentablesTable({
   fermentables = [],
 }: FermentablesTableProps) {
   return (
     <AppBarLayout
       title="Fermentables List"
-      actions={[
-        { text: "New", url: "/ingredients/fermentables/new", icon: Plus },
-      ]}
+      actions={<FermentableTableActions />}
     >
       <div className="relative overflow-auto">
         <DataTable data={fermentables} columns={columns} />

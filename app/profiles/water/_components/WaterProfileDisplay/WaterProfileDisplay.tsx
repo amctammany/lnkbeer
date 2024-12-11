@@ -1,24 +1,30 @@
 import { Prop } from "@/components/Prop";
-import { AppBarActionProps } from "@/components/AppBar";
+import { AppBarAction } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { WaterProfile } from "@prisma/client";
 import { Ca2, Cl, HCO3, MgSo4, Na, SO4 } from "@/components/Elements";
+import { Edit } from "lucide-react";
 
 export type WaterProfileDisplayProps = {
   src?: WaterProfile | null;
 };
-const makeActions: (
-  waterProfile?: WaterProfile | null,
-) => AppBarActionProps[] = (waterProfile) => [
-  { text: "Edit", url: `/profiles/water/${waterProfile?.slug}/edit` },
-];
+const WaterProfileDisplayActions = ({ src }: { src?: WaterProfile | null }) => {
+  return [
+    <AppBarAction
+      key="edit"
+      text="Edit"
+      url={`/profiles/water/${src?.slug}/edit`}
+      icon={<Edit />}
+    />,
+  ];
+};
 
 export function WaterProfileDisplay({ src }: WaterProfileDisplayProps) {
   return (
     <AppBarLayout
       title={`WaterProfile: ${src?.name}`}
-      actions={makeActions(src)}
+      actions={<WaterProfileDisplayActions src={src} />}
     >
       <div className="pt-4">
         <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">

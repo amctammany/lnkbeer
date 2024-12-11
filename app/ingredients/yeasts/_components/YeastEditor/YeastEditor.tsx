@@ -1,4 +1,5 @@
 "use client";
+import { AppBarAction } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
@@ -37,6 +38,11 @@ const rangeProps: RangeFieldProp<YeastInput>[] = [
   },
 ];
 
+const YeastEditorActions = () => {
+  return [
+    <AppBarAction key="save" text="Save" type="submit" icon={<Save />} />,
+  ];
+};
 export function YeastEditor({ src, action }: YeastEditorProps) {
   const { state, register, control, getValues, formAction } =
     useActionForm<YeastInput>(action, src!);
@@ -44,7 +50,7 @@ export function YeastEditor({ src, action }: YeastEditorProps) {
     <Form className="flex" action={formAction}>
       <AppBarLayout
         title={`Yeast Editor: ${src?.name}`}
-        actions={[{ text: "Save", icon: Save, type: "submit" }]}
+        actions={<YeastEditorActions />}
       >
         <div className="grid grid-cols-4 gap-2">
           <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 ">

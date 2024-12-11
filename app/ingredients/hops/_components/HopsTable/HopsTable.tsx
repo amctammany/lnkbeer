@@ -7,6 +7,7 @@ import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
 import { Plus } from "lucide-react";
+import { AppBarAction } from "@/components/AppBar";
 const columns: ColumnDef<Hop>[] = [
   {
     accessorKey: "name",
@@ -38,12 +39,20 @@ const columns: ColumnDef<Hop>[] = [
 export type HopsTableProps = {
   hops?: Hop[];
 };
+const HopsTableActions = () => {
+  return [
+    <AppBarAction
+      key="new"
+      url="/ingredients/hops/new"
+      text="New"
+      icon={<Plus />}
+    />,
+  ];
+};
+
 export function HopsTable({ hops = [] }: HopsTableProps) {
   return (
-    <AppBarLayout
-      title="Hops List"
-      actions={[{ text: "New", url: "/ingredients/hops/new", icon: Plus }]}
-    >
+    <AppBarLayout title="Hops List" actions={<HopsTableActions />}>
       <div className="relative overflow-auto">
         <DataTable data={hops} columns={columns} />
       </div>

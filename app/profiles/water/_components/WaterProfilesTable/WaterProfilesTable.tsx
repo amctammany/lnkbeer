@@ -7,6 +7,7 @@ import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
 import { Plus } from "lucide-react";
+import { AppBarAction } from "@/components/AppBar";
 const columns: ColumnDef<WaterProfile>[] = [
   {
     accessorKey: "name",
@@ -22,6 +23,17 @@ const columns: ColumnDef<WaterProfile>[] = [
     ),
   },
 ];
+const WaterProfilesTableActions = () => {
+  return [
+    <AppBarAction
+      key="new"
+      text="New"
+      url="/profiles/water/new"
+      icon={<Plus />}
+    />,
+  ];
+};
+
 export type WaterProfilesTableProps = {
   waterProfiles?: WaterProfile[];
 };
@@ -31,7 +43,7 @@ export function WaterProfilesTable({
   return (
     <AppBarLayout
       title="WaterProfiles List"
-      actions={[{ text: "New", url: "/profiles/water/new", icon: Plus }]}
+      actions={<WaterProfilesTableActions />}
     >
       <div className="relative overflow-auto">
         <DataTable data={waterProfiles} columns={columns} />

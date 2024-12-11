@@ -1,23 +1,28 @@
 import { Prop } from "@/components/Prop";
-import { AppBarActionProps } from "@/components/AppBar";
+import { AppBarAction, AppBarActionProps } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { Fermentable } from "@prisma/client";
+import { Edit } from "lucide-react";
 
 export type FermentableDisplayProps = {
   src?: Fermentable | null;
 };
-const makeActions: (fermentable: Fermentable) => AppBarActionProps[] = (
-  fermentable,
-) => [
-  { text: "Edit", url: `/ingredients/fermentables/${fermentable.slug}/edit` },
-];
-
+const FermentableDisplayActions = ({ src }: FermentableDisplayProps) => {
+  return [
+    <AppBarAction
+      key="edit"
+      text="Edit"
+      url={`/ingredients/fermentables/${src?.slug}/edit`}
+      icon={<Edit />}
+    />,
+  ];
+};
 export function FermentableDisplay({ src }: FermentableDisplayProps) {
   return (
     <AppBarLayout
       title={`Fermentable: ${src?.name}`}
-      actions={makeActions(src!)}
+      actions={<FermentableDisplayActions src={src} />}
     >
       <div className="pt-4">
         <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">

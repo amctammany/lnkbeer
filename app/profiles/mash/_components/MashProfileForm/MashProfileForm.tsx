@@ -12,15 +12,25 @@ import { MashStepListItem } from "./MashStepListItem";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import MashStepActions from "./MashStepActions";
+import { AppBarAction } from "@/components/AppBar";
 
 export type MashProfileFormProps = {
   src?: ExtendedMashProfile | null;
   action: any;
 };
+const MashProfileFormActions = ({
+  src,
+}: {
+  src?: ExtendedMashProfile | null;
+}) => {
+  return [<AppBarAction key="save" text="Save" type="submit" icon={Save} />];
+};
 
 export function MashProfileForm({ src, action }: MashProfileFormProps) {
-  const { state, register, control, getValues, formAction } =
-    useActionForm<MashProfile>(action, src!);
+  const { state, register, formAction } = useActionForm<MashProfile>(
+    action,
+    src!,
+  );
   const title = src?.name
     ? `MashProfile Editor: ${src?.name}`
     : "MashProfile Creator";
@@ -28,7 +38,7 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
     <Form className="flex" action={formAction}>
       <AppBarLayout
         title={title}
-        actions={[{ text: "Save", icon: Save, type: "submit" }]}
+        actions={<MashProfileFormActions src={src} />}
       >
         <div className="gap-2 lg:w-9/12 mx-auto">
           <Section title="General">
@@ -39,11 +49,11 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
           <Section
             title="Steps"
             actions={[
-              {
-                text: "Add",
-                icon: Plus,
-                url: `/profiles/mash/${src?.slug}/edit/new`,
-              },
+              <AppBarAction
+                key="Add"
+                url={`/profiles/mash/${src?.slug}/edit/new`}
+                icon={Plus}
+              />,
             ]}
           >
             <ol className="list-decimal list-outside pl-6">

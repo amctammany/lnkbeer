@@ -60,7 +60,7 @@ async function main() {
         create: {
           //forks: [],
           name: "amctammany Juicy Bits",
-          slug: slugify("amctammamy Juicy Bits", { lower: true }),
+          slug: slugify("amctammany Juicy Bits", { lower: true }),
           description: "Juicy!",
           calcium: 150,
           magnesium: 0,

@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 export type SectionProps = {
   title?: string | React.ReactNode;
-  actions?: AppBarActionProps[];
+  actions?: any; //AppBarActionProps[];
   children?: string | React.ReactNode | React.ReactNode[];
 } & ComponentProps<"div">;
 export function Section({
@@ -27,31 +27,7 @@ export function Section({
         })}
       >
         <span className="flex-grow">{title}</span>
-        {(actions ?? []).map((action) =>
-          action.url ? (
-            <Link key={action.url} href={action.url} scroll={false}>
-              <Button
-                className="hover:bg-primary/20"
-                size="sm"
-                variant="secondary"
-              >
-                {action.icon && <action.icon />}
-                {action.text}
-              </Button>
-            </Link>
-          ) : (
-            <Button
-              type={action.type ?? "button"}
-              className="hover:bg-primary/20"
-              key={action.text}
-              size="sm"
-              variant="secondary"
-            >
-              {action.icon && <action.icon />}
-              {action.text}
-            </Button>
-          ),
-        )}
+        {actions}
       </div>
       <div className="flex-grow">{children}</div>
     </div>

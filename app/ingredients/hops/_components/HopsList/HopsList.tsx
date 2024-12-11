@@ -9,10 +9,7 @@ export type HopsListProps = {
 };
 export function HopsList({ hops = [] }: HopsListProps) {
   return (
-    <AppBarLayout
-      title="Hops List"
-      actions={[{ text: "New", url: "/ingredients/hops/new" }]}
-    >
+    <AppBarLayout title="Hops List">
       <div className="w-full xl:w-9/12 m-auto pt-0 h-[calc(100vh-80px)] overflow-hidden">
         <h2>Hops</h2>
         <AutoSizer>

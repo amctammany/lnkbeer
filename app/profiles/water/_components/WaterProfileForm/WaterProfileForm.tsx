@@ -15,10 +15,24 @@ import { useActionForm } from "@/hooks/useActionForm";
 import { WaterProfile } from "@prisma/client";
 import { Activity, Redo, Save } from "lucide-react";
 import { duplicateWaterProfile, removeWaterProfile } from "../../actions";
+import { AppBarAction } from "@/components/AppBar";
 
 export type WaterProfileFormProps = {
   src?: WaterProfile | null;
   action: any;
+};
+const WaterProfileEditorActions = ({ src }: { src?: WaterProfile | null }) => {
+  return [
+    <AppBarAction key="save" text="Save" type="submit" icon={<Save />} />,
+    <AppBarAction key="actions" text="Actions" icon={<Save />}>
+      <AppBarAction
+        key="fork"
+        text="fork"
+        action={() => console.log("fork")}
+        icon={<Save />}
+      />
+    </AppBarAction>,
+  ];
 };
 
 export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
@@ -32,25 +46,7 @@ export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
     <Form className="flex" action={formAction}>
       <AppBarLayout
         title={`WaterProfile Editor: ${src?.name}`}
-        actions={[
-          { text: "Save", icon: Save, type: "submit" },
-          {
-            text: "Actions",
-            icon: Activity,
-            items: [
-              {
-                text: "Duplicate",
-                icon: Save,
-                action: handleClick(duplicateWaterProfile),
-              },
-              {
-                text: "Remove",
-                icon: Redo,
-                action: handleClick(removeWaterProfile),
-              },
-            ],
-          },
-        ]}
+        actions={<WaterProfileEditorActions src={src} />}
       >
         <div className="grid grid-cols-4 gap-2 w-9/12 mx-auto">
           <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 ">

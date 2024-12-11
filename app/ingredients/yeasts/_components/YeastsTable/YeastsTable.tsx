@@ -7,6 +7,7 @@ import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
 import { Plus } from "lucide-react";
+import { AppBarAction } from "@/components/AppBar";
 const columns: ColumnDef<Yeast>[] = [
   {
     accessorKey: "name",
@@ -37,12 +38,20 @@ const columns: ColumnDef<Yeast>[] = [
 export type YeastsTableProps = {
   yeasts?: Yeast[];
 };
+const YeastsTableActions = () => {
+  return [
+    <AppBarAction
+      key="new"
+      text="New"
+      url="/ingredients/yeasts/new"
+      icon={<Plus />}
+    />,
+  ];
+};
+
 export function YeastsTable({ yeasts = [] }: YeastsTableProps) {
   return (
-    <AppBarLayout
-      title="Yeasts List"
-      actions={[{ text: "New", url: "/ingredients/yeasts/new", icon: Plus }]}
-    >
+    <AppBarLayout title="Yeasts List" actions={<YeastsTableActions />}>
       <div className="relative overflow-auto">
         <DataTable data={yeasts} columns={columns} />
       </div>

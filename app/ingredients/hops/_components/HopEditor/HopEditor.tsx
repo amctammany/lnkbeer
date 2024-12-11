@@ -1,4 +1,5 @@
 "use client";
+import { AppBarAction } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
@@ -75,6 +76,12 @@ const rangeProps: RangeFieldProp<HopInput>[] = [
     highField: "totalOilHigh",
   },
 ];
+const HopEditorActions = () => {
+  return [
+    <AppBarAction key="save" text="Save" type="submit" icon={<Save />} />,
+  ];
+};
+
 export function HopEditor({ hop, action }: HopEditorProps) {
   const { state, register, control, getValues, formAction } =
     useActionForm<HopInput>(action, hop!);
@@ -82,7 +89,7 @@ export function HopEditor({ hop, action }: HopEditorProps) {
     <Form className="flex" action={formAction}>
       <AppBarLayout
         title={`Hop Editor: ${hop?.name}`}
-        actions={[{ text: "Save", icon: Save, type: "submit" }]}
+        actions={<HopEditorActions />}
       >
         <div className="grid grid-cols-4 gap-2">
           <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 md:col-span-2">

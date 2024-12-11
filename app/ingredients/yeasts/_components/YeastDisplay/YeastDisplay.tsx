@@ -1,20 +1,31 @@
 import { Prop } from "@/components/Prop";
-import { AppBarActionProps } from "@/components/AppBar";
+import { AppBarAction, AppBarActionProps } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { Yeast } from "@prisma/client";
 import { YeastInput } from "@/types/ingredient";
+import { Edit } from "lucide-react";
 
 export type YeastDisplayProps = {
   src?: YeastInput | null;
 };
-const makeActions: (yeast: Yeast) => AppBarActionProps[] = (yeast) => [
-  { text: "Edit", url: `/ingredients/yeasts/${yeast.slug}/edit` },
-];
+const YeastDisplayActions = ({ src }: { src?: YeastInput | null }) => {
+  return [
+    <AppBarAction
+      key="edit"
+      text="Edit"
+      url={`/ingredients/yeasts/${src?.slug}/edit`}
+      icon={<Edit />}
+    />,
+  ];
+};
 
 export function YeastDisplay({ src }: YeastDisplayProps) {
   return (
-    <AppBarLayout title={`Yeast: ${src?.name}`} actions={makeActions(src!)}>
+    <AppBarLayout
+      title={`Yeast: ${src?.name}`}
+      actions={<YeastDisplayActions src={src} />}
+    >
       <div className="pt-4">
         <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">
           <Prop label="Name" value={src?.name} />

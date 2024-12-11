@@ -7,6 +7,7 @@ import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
 import { Plus } from "lucide-react";
+import { AppBarAction } from "@/components/AppBar";
 const columns: ColumnDef<EquipmentProfile>[] = [
   {
     accessorKey: "name",
@@ -22,6 +23,21 @@ const columns: ColumnDef<EquipmentProfile>[] = [
     ),
   },
 ];
+const EquipmentProfilesTableActions = ({
+  src,
+}: {
+  src?: EquipmentProfile | null;
+}) => {
+  return [
+    <AppBarAction
+      key="new"
+      text="new"
+      url="/profiles/equipment/new"
+      icon={<Plus />}
+    />,
+  ];
+};
+
 export type EquipmentProfilesTableProps = {
   equipmentProfiles?: EquipmentProfile[];
 };
@@ -31,7 +47,7 @@ export function EquipmentProfilesTable({
   return (
     <AppBarLayout
       title="EquipmentProfiles List"
-      actions={[{ text: "New", url: "/profiles/equipment/new", icon: Plus }]}
+      actions={<EquipmentProfilesTableActions />}
     >
       <div className="relative overflow-auto">
         <DataTable data={equipmentProfiles} columns={columns} />

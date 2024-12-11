@@ -1,4 +1,5 @@
 "use client";
+import { AppBarAction } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
@@ -16,6 +17,13 @@ export type FermentableEditorProps = {
   src?: FermentableInput | null;
   action: any;
 };
+const FermentableEditorActions = ({
+  src,
+}: {
+  src?: FermentableInput | null;
+}) => {
+  return [<AppBarAction key="save" text="Save" icon={<Save />} />];
+};
 
 export function FermentableEditor({ src, action }: FermentableEditorProps) {
   const { state, register, control, getValues, formAction } =
@@ -24,7 +32,7 @@ export function FermentableEditor({ src, action }: FermentableEditorProps) {
     <Form className="flex" action={formAction}>
       <AppBarLayout
         title={`Fermentable Editor: ${src?.name}`}
-        actions={[{ text: "Save", icon: Save, type: "submit" }]}
+        actions={<FermentableEditorActions src={src} />}
       >
         <div className="grid grid-cols-4 gap-2">
           <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 ">

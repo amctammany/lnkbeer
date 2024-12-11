@@ -1,23 +1,32 @@
 import { Prop } from "@/components/Prop";
-import { AppBarActionProps } from "@/components/AppBar";
+import { AppBarAction, AppBarActionProps } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { EquipmentProfile } from "@prisma/client";
+import { Edit } from "lucide-react";
 
 export type EquipmentProfileDisplayProps = {
   src?: EquipmentProfile | null;
 };
-const makeActions: (
-  equipmentProfile: EquipmentProfile,
-) => AppBarActionProps[] = (equipmentProfile) => [
-  { text: "Edit", url: `/profiles/equipment/${equipmentProfile.slug}/edit` },
-];
+
+const EquipmentProfileDisplayActions = ({
+  src,
+}: EquipmentProfileDisplayProps) => {
+  return [
+    <AppBarAction
+      key="edit"
+      text="Edit"
+      url={`/profiles/equipment/${src?.slug}/edit`}
+      icon={<Edit />}
+    />,
+  ];
+};
 
 export function EquipmentProfileDisplay({ src }: EquipmentProfileDisplayProps) {
   return (
     <AppBarLayout
       title={`EquipmentProfile: ${src?.name}`}
-      actions={makeActions(src!)}
+      actions={<EquipmentProfileDisplayActions src={src} />}
     >
       <div className="pt-4">
         <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">

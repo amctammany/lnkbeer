@@ -1,5 +1,5 @@
 import { Prop } from "@/components/Prop";
-import { AppBarActionProps } from "@/components/AppBar";
+import { AppBarAction, AppBarActionProps } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { ExtendedMashProfile } from "@/types/Profile";
 import { MashStepListItem } from "../MashProfileForm/MashStepListItem";
@@ -10,13 +10,34 @@ export type MashProfileDisplayProps = {
 };
 const makeActions: (mashProfile: ExtendedMashProfile) => AppBarActionProps[] = (
   mashProfile,
-) => [{ text: "Edit", url: `/profiles/mash/${mashProfile.slug}/edit` }];
+) => [
+  { text: "Edit", url: `/profiles/mash/${mashProfile.slug}/edit` },
+  { text: "Fork", url: `/profiles/mash/${mashProfile.slug}/fork` },
+];
+const MashProfileDisplayActions = ({
+  src,
+}: {
+  src?: ExtendedMashProfile | null;
+}) => {
+  return [
+    <AppBarAction
+      key="edit"
+      text="Edit"
+      url={`/profiles/mash/${src?.slug}/edit`}
+    />,
+    <AppBarAction
+      key="fork"
+      text="Fork"
+      url={`/profiles/mash/${src?.slug}/fork`}
+    />,
+  ];
+};
 
 export function MashProfileDisplay({ src }: MashProfileDisplayProps) {
   return (
     <AppBarLayout
       title={`MashProfile: ${src?.name}`}
-      actions={makeActions(src!)}
+      actions={<MashProfileDisplayActions src={src} />}
     >
       <div className="gap-2 lg:w-9/12 mx-auto">
         <Section title="General" className="m-4  ">

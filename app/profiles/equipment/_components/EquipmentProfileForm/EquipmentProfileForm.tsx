@@ -1,4 +1,5 @@
 "use client";
+import { AppBarAction } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Ca2, HCO3, MgSo4, Na, SO4 } from "@/components/Elements";
 import { Form } from "@/components/Form/Form";
@@ -19,6 +20,15 @@ export type EquipmentProfileFormProps = {
   src?: EquipmentProfile | null;
   action: any;
 };
+const EquipmentProfileFormActions = ({
+  src,
+}: {
+  src?: EquipmentProfile | null;
+}) => {
+  return [
+    <AppBarAction key="save" text="Save" type="submit" icon={<Save />} />,
+  ];
+};
 
 export function EquipmentProfileForm({
   src,
@@ -30,7 +40,7 @@ export function EquipmentProfileForm({
     <Form className="flex" action={formAction}>
       <AppBarLayout
         title={`EquipmentProfile Editor: ${src?.name}`}
-        actions={[{ text: "Save", icon: Save, type: "submit" }]}
+        actions={<EquipmentProfileFormActions />}
       >
         <div className="gap-2 lg:w-9/12 mx-auto">
           <div className="m-2 border-2 flex flex-col rounded-sm ">

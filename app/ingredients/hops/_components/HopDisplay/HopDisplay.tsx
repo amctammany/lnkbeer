@@ -1,22 +1,32 @@
-import { AppBarActionProps } from "@/components/AppBar";
+import { AppBarAction } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
-import { HopInput } from "@/types/ingredient";
 import { Hop } from "@prisma/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CompositionTab from "./CompositionTab";
 import SummaryTab from "./SummaryTab";
-import { Hop as HopIcon } from "lucide-react";
+import { Edit, Hop as HopIcon, Save } from "lucide-react";
 
 export type HopDisplayProps = {
   hop?: Hop | null;
 };
-const makeActions: (hop: Hop) => AppBarActionProps[] = (hop) => [
-  { text: "Edit", url: `/ingredients/hops/${hop.slug}/edit` },
-];
+const HopDisplayActions = ({ src }: { src?: Hop | null }) => {
+  return [
+    <AppBarAction
+      key="edit"
+      text="Edit"
+      url={`/ingredients/hops/${src?.slug}/edit`}
+      icon={<Edit />}
+    />,
+  ];
+};
+
 export function HopDisplay({ hop }: HopDisplayProps) {
   if (!hop) return <div>Bad</div>;
   return (
-    <AppBarLayout title={`Hop: ${hop?.name}`} actions={makeActions(hop!)}>
+    <AppBarLayout
+      title={`Hop: ${hop?.name}`}
+      actions={<HopDisplayActions src={hop} />}
+    >
       <Tabs defaultValue="summary" className="">
         <TabsList className="flex justify-start">
           <HopIcon className="size-4 mx-4" />
