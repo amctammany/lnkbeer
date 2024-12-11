@@ -13,7 +13,7 @@ import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { WaterProfile } from "@prisma/client";
-import { Save } from "lucide-react";
+import { Activity, Save } from "lucide-react";
 
 export type WaterProfileFormProps = {
   src?: WaterProfile | null;
@@ -27,7 +27,10 @@ export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
     <Form className="flex" action={formAction}>
       <AppBarLayout
         title={`WaterProfile Editor: ${src?.name}`}
-        actions={[{ text: "Save", icon: Save, type: "submit" }]}
+        actions={[
+          { text: "Save", icon: Save, type: "submit" },
+          { text: "Actions", icon: Activity },
+        ]}
       >
         <div className="grid grid-cols-4 gap-2 w-9/12 mx-auto">
           <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 ">
