@@ -32,7 +32,10 @@ export function MashStepForm({ src, action, ...props }: MashStepFormProps) {
   //);
   //console.log(state);
   const handleOpen = (open: boolean) => {
-    if (!open) replace(`/profiles/mash/${src?.MashProfile.slug}/edit`);
+    if (!open)
+      replace(`/profiles/mash/${src?.MashProfile.slug}/edit`, {
+        scroll: false,
+      });
   };
   return (
     <Dialog onOpenChange={handleOpen} defaultOpen={src !== undefined}>

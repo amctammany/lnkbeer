@@ -29,7 +29,7 @@ export function Section({
         <span className="flex-grow">{title}</span>
         {(actions ?? []).map((action) =>
           action.url ? (
-            <Link key={action.url} href={action.url}>
+            <Link key={action.url} href={action.url} scroll={false}>
               <Button
                 className="hover:bg-primary/20"
                 size="sm"

@@ -56,6 +56,7 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
                     <Link
                       className="flex-grow "
                       href={`/profiles/mash/${src?.slug}/edit/${step.id}`}
+                      scroll={false}
                     >
                       <MashStepListItem
                         key={step.id}
