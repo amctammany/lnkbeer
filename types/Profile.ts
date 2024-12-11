@@ -22,7 +22,7 @@ export type ExtendedMashProfile = MashProfile & {
   origin?: MashProfile;
 };
 export type ExtendedMashStep = MashStep & {
-  MashProfile: MashProfile & { steps: { id: number }[] };
+  MashProfile: MashProfile & { steps: { id: string }[] };
 };
 
 export type WaterProfileInput = Omit<WaterProfile, "id"> & {
@@ -36,7 +36,7 @@ export type MashProfileInput = Omit<MashProfile, "id"> & {
   steps: Omit<MashStep, "id" | "userId" | "mashProfileId">[];
 };
 export type MashStepInput = Omit<MashStep, "id"> & {
-  id?: number;
+  id?: string;
   MashProfile: Partial<MashProfile>;
   //steps: Omit<MashStep, "id" | "userId" | "mashProfileId">[];
 };

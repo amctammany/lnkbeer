@@ -9,7 +9,7 @@ import { z } from "zod";
 import { zfd } from "zod-form-data";
 
 const mashStepSchema = zfd.formData({
-  id: zfd.numeric(z.number().optional()),
+  id: zfd.text(z.string().optional()),
   rank: zfd.numeric(z.number().min(0)),
   name: zfd.text(z.string().optional()),
   type: z.nativeEnum(MashStepType).default(MashStepType.temperature),
@@ -74,11 +74,9 @@ export const duplicateMashStep = async (src: ExtendedMashStep) => {
   //if (!valid.success) return;
 };
 export const shiftMashStep = async (dir: -1 | 1, src: ExtendedMashStep) => {
-  console.log(src, dir);
-  console.log(src.MashProfile.steps.length);
   if (
-    src.rank + dir < 0 ||
-    src.rank + dir >= src.MashProfile.steps.length - 1
+    src.rank + dir >= 0 ||
+    src.rank + dir <= src.MashProfile.steps.length - 1
   ) {
     const other = await prisma.mashStep.updateMany({
       where: {

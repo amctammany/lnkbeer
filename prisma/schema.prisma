@@ -302,7 +302,7 @@ enum MashStepType {
 }
 
 model MashStep {
-  id            Int          @id @default(autoincrement())
+  id            String       @id @default(cuid())
   type          MashStepType @default(temperature)
   name          String?
   rank          Int

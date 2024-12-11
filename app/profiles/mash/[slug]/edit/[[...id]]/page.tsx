@@ -26,12 +26,14 @@ export default async function MashStepEditorPage({
   const { slug, id } = await params;
   const mashProfile = await getMashProfile(slug);
   const mashStep =
-    id?.[0] !== undefined ? await getMashStep(parseInt(id?.[0])) : undefined;
+    id?.[0] !== undefined ? await getMashStep(id?.[0]) : undefined;
   return (
     <>
       <MashProfileForm src={mashProfile} action={updateMashProfile} />
       <MashStepForm
-        className={clsx("", { hidden: id?.[0] === undefined })}
+        className={clsx("", {
+          hidden: id === undefined || id?.[0] === undefined,
+        })}
         src={mashStep! as MashStepInput}
         action={updateMashStep as any}
       />
