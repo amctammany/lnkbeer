@@ -18,7 +18,6 @@ export interface AppBarActionProps {
   action?: any;
   type?: HTMLButtonElement["type"];
   url?: string;
-  handleClick?: any;
   items?: Omit<AppBarActionProps, "items">[];
 }
 export const AppBarAction = ({
@@ -28,7 +27,6 @@ export const AppBarAction = ({
   type,
 
   url,
-  handleClick,
   items,
 }: AppBarActionProps) => {
   const body = (
@@ -67,7 +65,7 @@ export const AppBarAction = ({
                   {item.text}
                 </Link>
               ) : (
-                <span onClick={handleClick(item.action)}>
+                <span onClick={item.action}>
                   {item.icon && <item.icon />}
                   {item.text}
                 </span>

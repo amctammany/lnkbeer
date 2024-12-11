@@ -37,10 +37,17 @@ export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
           {
             text: "Actions",
             icon: Activity,
-            handleClick,
             items: [
-              { text: "Duplicate", icon: Save, action: duplicateWaterProfile },
-              { text: "Remove", icon: Redo, action: removeWaterProfile },
+              {
+                text: "Duplicate",
+                icon: Save,
+                action: handleClick(duplicateWaterProfile),
+              },
+              {
+                text: "Remove",
+                icon: Redo,
+                action: handleClick(removeWaterProfile),
+              },
             ],
           },
         ]}
@@ -50,6 +57,8 @@ export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
             <span className="flex-shrink p-2 block bg-slate-300">General</span>
             <div className="flex-grow">
               <Input type="hidden" {...register("id")} />
+              <Input type="hidden" {...register("forkedFrom")} />
+              <Input type="hidden" {...register("userId")} />
               <TextField {...register("name")} />
               <TextField {...register("description")} />
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 ">
