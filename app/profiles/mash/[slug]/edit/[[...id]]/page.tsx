@@ -5,7 +5,12 @@ import {
 import { getMashProfile, getMashStep } from "@/app/profiles/mash/queries";
 import { updateMashProfile, updateMashStep } from "@/app/profiles/mash/actions";
 import clsx from "clsx";
-import { MashStepInput } from "@/types/Profile";
+import {
+  ExtendedMashProfile,
+  ExtendedMashStep,
+  MashStepInput,
+} from "@/types/Profile";
+import { MashProfile } from "@prisma/client";
 type MashStepEditorPageProps = {
   params: Promise<{
     slug: string;
@@ -26,7 +31,14 @@ export default async function MashStepEditorPage({
   const { slug, id } = await params;
   const mashProfile = await getMashProfile(slug);
   const mashStep =
-    id?.[0] !== undefined ? await getMashStep(id?.[0]) : undefined;
+    id?.[0] !== undefined
+      ? id?.[0] === "new"
+        ? ({
+            mashProfileId: mashProfile.id,
+            rank: mashProfile.steps.length,
+          } as ExtendedMashStep)
+        : await getMashStep(id?.[0])
+      : undefined;
   return (
     <>
       <MashProfileForm src={mashProfile} action={updateMashProfile} />

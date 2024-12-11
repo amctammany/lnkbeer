@@ -1,25 +1,54 @@
-import { MashProfileForm } from "@/app/profiles/mash/_components/MashProfileForm";
-import { getMashProfile } from "@/app/profiles/mash/queries";
-import { updateMashProfile } from "@/app/profiles/mash/actions";
-type MashProfileCreatorPageProps = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
+//import {
+//MashProfileForm,
+//MashStepForm,
+//} from "@/app/profiles/mash/_components/MashProfileForm";
+//import { createMashProfile, updateMashStep } from "@/app/profiles/mash/actions";
+import { auth } from "@/app/auth";
+import { prisma } from "@/lib/client";
+//import { ExtendedMashProfile, ExtendedMashStep } from "@/types/Profile";
+//import { MashStep } from "@prisma/client";
+//import clsx from "clsx";
+import { redirect } from "next/navigation";
+type MashProfileCreatorPageProps = any;
 
-export async function generateMetadata({
-  params,
-}: MashProfileCreatorPageProps) {
-  const { slug } = await params;
+export async function generateMetadata() {
   return {
-    title: `LNK MashProfile: ${slug}`,
+    title: "LNK Create MashProfile",
   };
 }
 
-export default async function MashProfileCreatorPage({
-  params,
-}: MashProfileCreatorPageProps) {
-  const { slug } = await params;
-  const mashProfile = await getMashProfile(slug);
-  return <MashProfileForm src={mashProfile} action={updateMashProfile} />;
+export default async function MashProfileCreatorPage({}: MashProfileCreatorPageProps) {
+  const session = await auth();
+  if (!session?.user)
+    return redirect("/admin/login?returnUrl=/profiles/mash/new");
+  const user = await prisma.user.findFirst({
+    where: { id: session?.user?.id },
+  });
+  const res = await prisma.mashProfile.create({
+    data: {
+      name: "name",
+      slug: "name",
+    },
+  });
+  redirect(`/profiles/mash/${res.slug}/edit`);
+  //const mashProfile = { steps: [] as MashStep[] } as ExtendedMashProfile;
+  //return <MashProfileForm src={mashProfile} action={createMashProfile} />;
+  //const { slug, } = await params;
+  //const mashProfile = await getMashProfile(slug);
+  //const mashStep =
+  //id?.[0] !== undefined ? await getMashStep(id?.[0]) : undefined;
+  /**
+  return (
+    <>
+      <MashProfileForm src={mashProfile} action={createMashProfile} />
+      <MashStepForm
+        className={clsx("", {
+          //hidden: id === undefined || id?.[0] === undefined,
+        })}
+        src={{} as ExtendedMashStep}
+        action={updateMashStep as any}
+      />
+    </>
+  );
+   */
 }

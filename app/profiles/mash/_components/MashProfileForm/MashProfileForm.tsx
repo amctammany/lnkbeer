@@ -21,10 +21,13 @@ export type MashProfileFormProps = {
 export function MashProfileForm({ src, action }: MashProfileFormProps) {
   const { state, register, control, getValues, formAction } =
     useActionForm<MashProfile>(action, src!);
+  const title = src?.name
+    ? `MashProfile Editor: ${src?.name}`
+    : "MashProfile Creator";
   return (
     <Form className="flex" action={formAction}>
       <AppBarLayout
-        title={`MashProfile Editor: ${src?.name}`}
+        title={title}
         actions={[{ text: "Save", icon: Save, type: "submit" }]}
       >
         <div className="gap-2 lg:w-9/12 mx-auto">
@@ -33,7 +36,16 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
             <TextField {...register("name")} />
             <TextField {...register("description")} />
           </Section>
-          <Section title="Steps" actions={[{ text: "Add", icon: Plus }]}>
+          <Section
+            title="Steps"
+            actions={[
+              {
+                text: "Add",
+                icon: Plus,
+                url: `/profiles/mash/${src?.slug}/edit/new`,
+              },
+            ]}
+          >
             <ol className="list-decimal list-outside pl-6">
               {src?.steps.map((step, index) => (
                 <li
