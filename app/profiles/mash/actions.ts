@@ -4,7 +4,7 @@ import { validateSchema } from "@/lib/validateSchema";
 import { ExtendedMashStep } from "@/types/Profile";
 import { MashProfile, MashStepType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { redirect, RedirectType } from "next/navigation";
+import { redirect } from "next/navigation";
 import slugify from "slugify";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
@@ -84,12 +84,7 @@ export const removeMashStep = async (src: ExtendedMashStep) => {
       rank: { decrement: 1 },
     },
   });
-  //console.log(res);
   revalidatePath(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
-  //redirect(
-  //`/profiles/mash/${res.MashProfile?.slug}/edit`,
-  //RedirectType.replace,
-  //);
 };
 export const duplicateMashStep = async (src: ExtendedMashStep) => {
   const { id, MashProfile, ...data } = src;
@@ -105,16 +100,7 @@ export const duplicateMashStep = async (src: ExtendedMashStep) => {
   const res = await prisma.mashStep.create({
     data: { ...data, rank: src.rank + 1 },
   });
-  //console.log(res);
-  //redirect(`/profiles/mash/${MashProfile?.slug}/edit`, RedirectType.replace);
   revalidatePath(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
-
-  //retuasync rn;
-  //const valid = validateSchema(formData, mashStepSchema);
-  //console.log(valid);
-  //const f = await Promise.resolve();
-  //const valid = validateSchema(formData, mashStepSchema);
-  //if (!valid.success) return;
 };
 export const shiftMashStep = async (dir: -1 | 1, src: ExtendedMashStep) => {
   if (
@@ -143,13 +129,7 @@ export const shiftMashStep = async (dir: -1 | 1, src: ExtendedMashStep) => {
           },
         },
       });
-      console.log(other, res);
-      //return res.MashProfile;
       revalidatePath(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
-      //redirect(
-      //`/profiles/mash/${res?.MashProfile?.slug}/edit`,
-      //RedirectType.replace,
-      //);
     }
   }
 };
@@ -192,7 +172,6 @@ export const updateMashStep = async (prev: any, formData: FormData) => {
   redirect(`/profiles/mash/${res?.MashProfile?.slug}/edit`);
 };
 export const updateMashProfile = async (prev: any, formData: FormData) => {
-  //console.log(prev, formData.entries());
   const valid = validateSchema(formData, mashSchema);
 
   if (valid.errors) return valid;

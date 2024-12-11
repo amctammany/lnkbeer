@@ -46,16 +46,11 @@ export const createEquipmentProfile = async (prev: any, formData: FormData) => {
             },
           }
         : {}),
-      //include: {
-      //origin: true,
-      //owner: true,
-      //},
     },
   });
   redirect(`/profiles/equipment/${res.slug}`);
 };
 export const updateEquipmentProfile = async (prev: any, formData: FormData) => {
-  //console.log(prev, formData.entries());
   const valid = validateSchema(formData, equipmentSchema);
 
   if (valid.errors) return valid;
@@ -80,22 +75,8 @@ export const updateEquipmentProfile = async (prev: any, formData: FormData) => {
             },
           }
         : {}),
-
-      /**
-      owner: {
-        connect: { id: userId ?? undefined },
-      },
-      origin: {
-        connect: { id: forkedFrom ?? undefined },
-      },
-      */
     },
-    //include: {
-    //origin: true,
-    //owner: true,
-    //},
   });
-  //return { success: true, data: res };
 
   redirect(`/profiles/equipment/${res.slug}`);
 };

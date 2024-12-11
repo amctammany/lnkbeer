@@ -6,7 +6,7 @@ import { WaterProfile } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import slugify from "slugify";
-import { z, ZodIssue } from "zod";
+import { z } from "zod";
 import { zfd } from "zod-form-data";
 
 const waterSchema = zfd.formData({
@@ -45,10 +45,6 @@ export const createWaterProfile = async (prev: any, formData: FormData) => {
             },
           }
         : {}),
-      //include: {
-      //origin: true,
-      //owner: true,
-      //},
     },
   });
   redirect(`/profiles/water/${res.slug}`);
@@ -79,27 +75,13 @@ export const updateWaterProfile = async (prev: any, formData: FormData) => {
             },
           }
         : {}),
-
-      /**
-      owner: {
-        connect: { id: userId ?? undefined },
-      },
-      origin: {
-        connect: { id: forkedFrom ?? undefined },
-      },
-      */
     },
-    //include: {
-    //origin: true,
-    //owner: true,
-    //},
   });
-  //return { success: true, data: res };
 
   redirect(`/profiles/water/${res.slug}`);
 };
 export const removeWaterProfile = async (src: ExtendedWaterProfile) => {
-  const res = await prisma.waterProfile.delete({
+  await prisma.waterProfile.delete({
     where: {
       id: src.id,
     },
