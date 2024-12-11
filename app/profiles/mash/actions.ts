@@ -66,6 +66,28 @@ export const createMashProfile = async (prev: any, formData: FormData) => {
   });
   redirect(`/profiles/mash/${res.slug}`);
 };
+export const removeMashStep = async (src: ExtendedMashStep) => {
+  console.log(src);
+  const res = await prisma.mashStep.delete({
+    where: {
+      id: src.id,
+    },
+    include: {
+      MashProfile: true,
+    },
+  });
+  await prisma.mashStep.updateMany({
+    where: {
+      mashProfileId: res.mashProfileId,
+      rank: { gt: res.rank },
+    },
+    data: {
+      rank: { decrement: 1 },
+    },
+  });
+  //console.log(res);
+  redirect(`/profiles/mash/${res.MashProfile?.slug}/edit`);
+};
 export const duplicateMashStep = async (src: ExtendedMashStep) => {
   console.log("duplicate", src);
   //retuasync rn;
@@ -93,12 +115,24 @@ export const shiftMashStep = async (dir: -1 | 1, src: ExtendedMashStep) => {
       const res = await prisma.mashStep.update({
         where: { id: src.id },
         data: { rank: src.rank + dir },
+        include: {
+          MashProfile: {
+            select: {
+              slug: true,
+              steps: {
+                select: {
+                  id: true,
+                },
+              },
+            },
+          },
+        },
       });
-      revalidatePath(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
-      //redirect(
-      //`/profiles/mash/${src?.MashProfile?.slug}/edit`,
-      //RedirectType.replace,
-      //);
+      //revalidatePath(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
+      redirect(
+        `/profiles/mash/${res?.MashProfile?.slug}/edit`,
+        RedirectType.push,
+      );
     }
   }
 };

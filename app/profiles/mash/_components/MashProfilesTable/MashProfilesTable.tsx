@@ -69,7 +69,7 @@ export function MashProfilesTable({
   });
 
   return (
-    <div className="overflow-x-scroll">
+    <div className="overflow-auto">
       <Table className="flex-grow">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
