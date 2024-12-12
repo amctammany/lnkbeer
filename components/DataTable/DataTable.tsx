@@ -22,6 +22,7 @@ import {
 import { useState } from "react";
 import { Input } from "@/components/Form/Input";
 import { fuzzyFilter } from "@/lib/fuzzyFilter";
+import clsx from "clsx";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -97,7 +98,10 @@ export function DataTable<TData, TValue>({
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
-                      className="last:mx-2 last:text-center"
+                      className={clsx("foo", {
+                        "text-right": cell.column.id === "actions",
+                        "mx-2": cell.column.id === "actions",
+                      })}
                       key={cell.id}
                     >
                       {flexRender(
