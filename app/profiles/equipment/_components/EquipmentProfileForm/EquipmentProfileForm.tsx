@@ -15,17 +15,11 @@ import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { EquipmentProfile } from "@prisma/client";
 import { Save } from "lucide-react";
+import EquipmentProfileFormActions from "./EquipmentProfileFormActions";
 
 export type EquipmentProfileFormProps = {
   src?: EquipmentProfile | null;
   action: any;
-};
-const EquipmentProfileFormActions = ({
-  src,
-}: {
-  src?: EquipmentProfile | null;
-}) => {
-  return [<AppBarItem key="save" text="Save" type="submit" icon={<Save />} />];
 };
 
 export function EquipmentProfileForm({

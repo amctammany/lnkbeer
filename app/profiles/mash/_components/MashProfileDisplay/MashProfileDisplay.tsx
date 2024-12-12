@@ -1,33 +1,12 @@
 import { Prop } from "@/components/Prop";
-import { AppBarItem, AppBarItemProps } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { ExtendedMashProfile } from "@/types/Profile";
 import { MashStepListItem } from "../MashProfileForm/MashStepListItem";
 import { Section } from "@/components/Section";
-import { Edit, ForkKnife } from "lucide-react";
+import MashProfileDisplayActions from "./MashProfileDisplayActions";
 
 export type MashProfileDisplayProps = {
   src?: ExtendedMashProfile | null;
-};
-const MashProfileDisplayActions = ({
-  src,
-}: {
-  src?: ExtendedMashProfile | null;
-}) => {
-  return [
-    <AppBarItem
-      key="edit"
-      text="Edit"
-      icon={<Edit />}
-      url={`/profiles/mash/${src?.slug}/edit`}
-    />,
-    <AppBarItem
-      key="fork"
-      text="Fork"
-      icon={<ForkKnife />}
-      url={`/profiles/mash/${src?.slug}/fork`}
-    />,
-  ];
 };
 
 export function MashProfileDisplay({ src }: MashProfileDisplayProps) {

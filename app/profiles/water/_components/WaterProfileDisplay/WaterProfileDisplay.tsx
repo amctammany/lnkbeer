@@ -1,30 +1,12 @@
 import { Prop } from "@/components/Prop";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
-import { WaterProfile } from "@prisma/client";
 import { Ca2, Cl, HCO3, MgSo4, Na, SO4 } from "@/components/Elements";
-import { Edit, ForkKnife } from "lucide-react";
-import { AppBarItem } from "@/components/AppBarItem";
 import { ExtendedWaterProfile } from "@/types/Profile";
+import WaterProfileDisplayActions from "./WaterProfileDisplayActions";
 
 export type WaterProfileDisplayProps = {
   src?: ExtendedWaterProfile | null;
-};
-const WaterProfileDisplayActions = ({ src }: { src?: WaterProfile | null }) => {
-  return [
-    <AppBarItem
-      key="edit"
-      text="Edit"
-      url={`/profiles/water/${src?.slug}/edit`}
-      icon={<Edit />}
-    />,
-    <AppBarItem
-      key="fork"
-      text="Fork"
-      url={`/profiles/water/${src?.slug}/fork`}
-      icon={<ForkKnife />}
-    />,
-  ];
 };
 
 export function WaterProfileDisplay({ src }: WaterProfileDisplayProps) {

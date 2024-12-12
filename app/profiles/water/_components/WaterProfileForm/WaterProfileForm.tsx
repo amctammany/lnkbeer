@@ -11,35 +11,11 @@ import { NumberField } from "@/components/Form/NumberField";
 import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { WaterProfile } from "@prisma/client";
-import { Activity, Redo, Save } from "lucide-react";
-import {
-  AppBarDropdown,
-  AppBarDropdownItem,
-} from "@/components/AppBarDropdown";
-import { AppBarItem } from "@/components/AppBarItem";
+import WaterProfileFormActions from "./WaterProfileFormActions";
 
 export type WaterProfileFormProps = {
   src?: WaterProfile | null;
   action: any;
-};
-const WaterProfileEditorActions = ({ src }: { src?: WaterProfile | null }) => {
-  const handleClick = (action) => async (e) => {
-    await action(src);
-  };
-
-  return [
-    <AppBarItem key="save" text="Save" type="submit" icon={<Save />} />,
-    <AppBarDropdown key="actions" text="Actions" icon={<Save />}>
-      <AppBarDropdownItem
-        key="fork"
-        text="fork"
-        action={handleClick(() => {
-          console.log("fork");
-        })}
-        icon={<Save />}
-      />
-    </AppBarDropdown>,
-  ];
 };
 
 export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
@@ -50,7 +26,7 @@ export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
     <Form className="flex" action={formAction}>
       <AppBarLayout
         title={`WaterProfile Editor: ${src?.name}`}
-        actions={<WaterProfileEditorActions src={src} />}
+        actions={<WaterProfileFormActions src={src} />}
       >
         <div className="grid grid-cols-4 gap-2 w-9/12 mx-auto">
           <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 ">
