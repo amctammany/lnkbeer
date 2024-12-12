@@ -1,4 +1,4 @@
-import { AppBarAction } from "@/components/AppBar";
+import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import type { User } from "@prisma/client";
 import { LogOut } from "lucide-react";
@@ -11,7 +11,7 @@ export interface DashboardProps {
 
 const DashboardActions = () => {
   return [
-    <AppBarAction
+    <AppBarItem
       key="signout"
       text="Sign Out"
       url="/api/auth/signout"

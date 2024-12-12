@@ -1,4 +1,4 @@
-import { AppBarAction } from "@/components/AppBar";
+import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Hop } from "@prisma/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -11,7 +11,7 @@ export type HopDisplayProps = {
 };
 const HopDisplayActions = ({ src }: { src?: Hop | null }) => {
   return [
-    <AppBarAction
+    <AppBarItem
       key="edit"
       text="Edit"
       url={`/ingredients/hops/${src?.slug}/edit`}

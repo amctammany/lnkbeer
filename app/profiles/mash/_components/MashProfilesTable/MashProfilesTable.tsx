@@ -1,7 +1,7 @@
 "use client";
 import { MashProfile } from "@prisma/client";
-import { AppBarLayout } from "@/components/AppBarLayout";
-import { DataTable } from "@/components/DataTable";
+//import { AppBarLayout } from "@/components/AppBarLayout";
+//import { DataTable } from "@/components/DataTable";
 import {
   ColumnDef,
   flexRender,
@@ -22,7 +22,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { table } from "console";
 import { useState } from "react";
 import { fuzzyFilter } from "@/lib/fuzzyFilter";
 const columns: ColumnDef<MashProfile>[] = [

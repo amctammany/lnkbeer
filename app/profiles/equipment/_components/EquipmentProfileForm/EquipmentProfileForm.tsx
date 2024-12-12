@@ -1,5 +1,5 @@
 "use client";
-import { AppBarAction } from "@/components/AppBar";
+import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Ca2, HCO3, MgSo4, Na, SO4 } from "@/components/Elements";
 import { Form } from "@/components/Form/Form";
@@ -25,9 +25,7 @@ const EquipmentProfileFormActions = ({
 }: {
   src?: EquipmentProfile | null;
 }) => {
-  return [
-    <AppBarAction key="save" text="Save" type="submit" icon={<Save />} />,
-  ];
+  return [<AppBarItem key="save" text="Save" type="submit" icon={<Save />} />];
 };
 
 export function EquipmentProfileForm({

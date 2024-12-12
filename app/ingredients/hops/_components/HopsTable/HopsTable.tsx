@@ -7,7 +7,7 @@ import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
 import { Plus } from "lucide-react";
-import { AppBarAction } from "@/components/AppBar";
+import { AppBarItem } from "@/components/AppBarItem";
 const columns: ColumnDef<Hop>[] = [
   {
     accessorKey: "name",
@@ -41,7 +41,7 @@ export type HopsTableProps = {
 };
 const HopsTableActions = () => {
   return [
-    <AppBarAction
+    <AppBarItem
       key="new"
       url="/ingredients/hops/new"
       text="New"

@@ -1,8 +1,7 @@
 import { Prop } from "@/components/Prop";
-import { AppBarAction, AppBarActionProps } from "@/components/AppBar";
+import { AppBarItem, AppBarItemProps } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
-import { Yeast } from "@prisma/client";
 import { YeastInput } from "@/types/ingredient";
 import { Edit } from "lucide-react";
 
@@ -11,7 +10,7 @@ export type YeastDisplayProps = {
 };
 const YeastDisplayActions = ({ src }: { src?: YeastInput | null }) => {
   return [
-    <AppBarAction
+    <AppBarItem
       key="edit"
       text="Edit"
       url={`/ingredients/yeasts/${src?.slug}/edit`}

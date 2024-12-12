@@ -1,12 +1,10 @@
 import clsx from "clsx";
-import { AppBar, AppBarAction, AppBarActionProps } from "./AppBar";
-import { Button } from "./ui/button";
-import Link from "next/link";
+import { AppBar } from "./AppBar";
 
 export type AppBarLayoutProps = {
   title?: string;
   className?: string;
-  actions?: React.ReactNode | React.ReactNode[]; //AppBarActionProps[];
+  actions?: React.ReactNode | React.ReactNode[]; //AppBarItemProps[];
   children?: React.ReactNode | React.ReactNode[];
 };
 export const AppBarLayout = ({

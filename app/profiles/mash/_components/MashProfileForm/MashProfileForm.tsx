@@ -12,7 +12,7 @@ import { MashStepListItem } from "./MashStepListItem";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import MashStepActions from "./MashStepActions";
-import { AppBarAction } from "@/components/AppBar";
+import { AppBarItem } from "@/components/AppBarItem";
 
 export type MashProfileFormProps = {
   src?: ExtendedMashProfile | null;
@@ -23,7 +23,7 @@ const MashProfileFormActions = ({
 }: {
   src?: ExtendedMashProfile | null;
 }) => {
-  return [<AppBarAction key="save" text="Save" type="submit" icon={Save} />];
+  return [<AppBarItem key="save" text="Save" type="submit" icon={<Save />} />];
 };
 
 export function MashProfileForm({ src, action }: MashProfileFormProps) {
@@ -49,10 +49,10 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
           <Section
             title="Steps"
             actions={[
-              <AppBarAction
+              <AppBarItem
                 key="Add"
                 url={`/profiles/mash/${src?.slug}/edit/new`}
-                icon={Plus}
+                icon={<Plus />}
               />,
             ]}
           >

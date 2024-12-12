@@ -4,8 +4,6 @@ import { Ca2, HCO3, MgSo4, Na, SO4 } from "@/components/Elements";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
 import { NumberField } from "@/components/Form/NumberField";
-import { RangeField, RangeFieldProp } from "@/components/Form/RangeField";
-import { Select } from "@/components/Form/Select";
 //import { NumberField } from "@/components/Form/NumberField";
 //import { RangeField } from "@/components/Form/RangeField";
 //import { RangeValue } from "@/components/Form/RangeSlider";
@@ -14,33 +12,39 @@ import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { WaterProfile } from "@prisma/client";
 import { Activity, Redo, Save } from "lucide-react";
-import { duplicateWaterProfile, removeWaterProfile } from "../../actions";
-import { AppBarAction } from "@/components/AppBar";
+import {
+  AppBarDropdown,
+  AppBarDropdownItem,
+} from "@/components/AppBarDropdown";
+import { AppBarItem } from "@/components/AppBarItem";
 
 export type WaterProfileFormProps = {
   src?: WaterProfile | null;
   action: any;
 };
 const WaterProfileEditorActions = ({ src }: { src?: WaterProfile | null }) => {
+  const handleClick = (action) => async (e) => {
+    await action(src);
+  };
+
   return [
-    <AppBarAction key="save" text="Save" type="submit" icon={<Save />} />,
-    <AppBarAction key="actions" text="Actions" icon={<Save />}>
-      <AppBarAction
+    <AppBarItem key="save" text="Save" type="submit" icon={<Save />} />,
+    <AppBarDropdown key="actions" text="Actions" icon={<Save />}>
+      <AppBarDropdownItem
         key="fork"
         text="fork"
-        action={() => console.log("fork")}
+        action={handleClick(() => {
+          Promise.resolve(console.log("fork"));
+        })}
         icon={<Save />}
       />
-    </AppBarAction>,
+    </AppBarDropdown>,
   ];
 };
 
 export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
   const { state, register, control, getValues, formAction } =
     useActionForm<WaterProfile>(action, src!);
-  const handleClick = (action) => async (e) => {
-    await action(src);
-  };
 
   return (
     <Form className="flex" action={formAction}>

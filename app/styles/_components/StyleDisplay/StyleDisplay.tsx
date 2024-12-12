@@ -1,4 +1,4 @@
-import { AppBarAction } from "@/components/AppBar";
+import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import type { Style } from "@prisma/client";
@@ -12,7 +12,7 @@ const makeActions = (style: Style | undefined | null) => [
 ];
 const StyleDisplayActions = ({ style }: StyleDisplayProps) => {
   return [
-    <AppBarAction
+    <AppBarItem
       key="edit"
       text="Edit"
       icon={<Edit />}

@@ -1,5 +1,5 @@
 import { Prop } from "@/components/Prop";
-import { AppBarAction, AppBarActionProps } from "@/components/AppBar";
+import { AppBarItem, AppBarItemProps } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { ExtendedMashProfile } from "@/types/Profile";
 import { MashStepListItem } from "../MashProfileForm/MashStepListItem";
@@ -8,24 +8,18 @@ import { Section } from "@/components/Section";
 export type MashProfileDisplayProps = {
   src?: ExtendedMashProfile | null;
 };
-const makeActions: (mashProfile: ExtendedMashProfile) => AppBarActionProps[] = (
-  mashProfile,
-) => [
-  { text: "Edit", url: `/profiles/mash/${mashProfile.slug}/edit` },
-  { text: "Fork", url: `/profiles/mash/${mashProfile.slug}/fork` },
-];
 const MashProfileDisplayActions = ({
   src,
 }: {
   src?: ExtendedMashProfile | null;
 }) => {
   return [
-    <AppBarAction
+    <AppBarItem
       key="edit"
       text="Edit"
       url={`/profiles/mash/${src?.slug}/edit`}
     />,
-    <AppBarAction
+    <AppBarItem
       key="fork"
       text="Fork"
       url={`/profiles/mash/${src?.slug}/fork`}

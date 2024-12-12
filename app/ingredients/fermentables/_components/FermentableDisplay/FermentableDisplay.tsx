@@ -1,5 +1,5 @@
 import { Prop } from "@/components/Prop";
-import { AppBarAction, AppBarActionProps } from "@/components/AppBar";
+import { AppBarItem, AppBarItemProps } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { Fermentable } from "@prisma/client";
@@ -10,7 +10,7 @@ export type FermentableDisplayProps = {
 };
 const FermentableDisplayActions = ({ src }: FermentableDisplayProps) => {
   return [
-    <AppBarAction
+    <AppBarItem
       key="edit"
       text="Edit"
       url={`/ingredients/fermentables/${src?.slug}/edit`}

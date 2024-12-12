@@ -1,17 +1,17 @@
 import { Prop } from "@/components/Prop";
-import { AppBarAction } from "@/components/AppBar";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { WaterProfile } from "@prisma/client";
 import { Ca2, Cl, HCO3, MgSo4, Na, SO4 } from "@/components/Elements";
 import { Edit } from "lucide-react";
+import { AppBarItem } from "@/components/AppBarItem";
 
 export type WaterProfileDisplayProps = {
   src?: WaterProfile | null;
 };
 const WaterProfileDisplayActions = ({ src }: { src?: WaterProfile | null }) => {
   return [
-    <AppBarAction
+    <AppBarItem
       key="edit"
       text="Edit"
       url={`/profiles/water/${src?.slug}/edit`}

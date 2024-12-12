@@ -1,5 +1,5 @@
 "use client";
-import { AppBarAction } from "@/components/AppBar";
+import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
@@ -22,7 +22,7 @@ const FermentableEditorActions = ({
 }: {
   src?: FermentableInput | null;
 }) => {
-  return [<AppBarAction key="save" text="Save" icon={<Save />} />];
+  return [<AppBarItem key="save" text="Save" icon={<Save />} />];
 };
 
 export function FermentableEditor({ src, action }: FermentableEditorProps) {
