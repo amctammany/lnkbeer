@@ -1,4 +1,5 @@
 import { Trash } from "lucide-react";
+import { Button } from "./ui/button";
 
 export type RemoveButtonProps = {
   id?: number | string;
@@ -13,12 +14,16 @@ export const RemoveButton = ({
   return (
     <form action={action}>
       <input type="hidden" name={name} value={id} />
-      <button
+      <Button
+        variant="destructive"
         type="submit"
-        className="border-red-300 border hover:text-red-300  hover:bg-white bg-red-300 text-white rounded-md p-2"
+        size="sm"
+        className="w-full flex-grow"
+        //className="border-red-300 border hover:text-red-300  hover:bg-white bg-red-300 text-white rounded-md p-2"
       >
-        <Trash className="h-5 w-5 " />
-      </button>
+        <Trash />
+        <span>Remove</span>
+      </Button>
     </form>
   );
 };

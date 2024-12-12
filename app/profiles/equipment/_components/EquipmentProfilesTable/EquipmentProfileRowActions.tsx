@@ -8,10 +8,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { CellContext } from "@tanstack/react-table";
-import { MoreHorizontal, Link } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import slugify from "slugify";
 import { removeEquipmentProfile } from "@/app/profiles/equipment/actions";
 import { RemoveButton } from "@/components/RemoveButton";
+import Link from "next/link";
 
 export function EquipmentProfileRowActions<T>({
   row,
@@ -30,11 +31,11 @@ export function EquipmentProfileRowActions<T>({
           <Link
             href={`/profiles/equipment/${slugify(row.getValue("name"), { lower: true })}/fork`}
           >
-            Fork
+            <span>Fork</span>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem asChild>
           <RemoveButton
             name="slug"
             id={slugify(row.getValue("name"), { lower: true })}
