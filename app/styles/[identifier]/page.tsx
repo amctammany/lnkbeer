@@ -17,5 +17,5 @@ export default async function StyleDisplayPage({
 }: StyleDisplayPageProps) {
   const { identifier } = await params;
   const style = await getStyle(identifier);
-  return <StyleDisplay style={style} />;
+  return <StyleDisplay src={style} />;
 }

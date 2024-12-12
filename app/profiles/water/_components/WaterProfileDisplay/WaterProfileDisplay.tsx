@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Ca2, Cl, HCO3, MgSo4, Na, SO4 } from "@/components/Elements";
 import { ExtendedWaterProfile } from "@/types/Profile";
 import WaterProfileDisplayActions from "./WaterProfileDisplayActions";
+import Link from "next/link";
 
 export type WaterProfileDisplayProps = {
   src?: ExtendedWaterProfile | null;
@@ -18,6 +19,17 @@ export function WaterProfileDisplay({ src }: WaterProfileDisplayProps) {
       <div className="pt-4">
         <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">
           <Prop label="Name" value={src?.name} />
+          <Prop
+            label="Forked From"
+            value={
+              <Link
+                className="underline"
+                href={`/profiles/water/${src?.origin?.slug}`}
+              >
+                {src?.origin?.name}
+              </Link>
+            }
+          />
           <Prop label="Forks" value={src?.forks.length} />
           <Prop label={<Ca2 />} value={src?.calcium} unit="ppm" />
           <Prop label={<Cl />} value={src?.chloride} unit="ppm" />

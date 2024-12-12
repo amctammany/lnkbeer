@@ -4,6 +4,7 @@ import { ExtendedMashProfile } from "@/types/Profile";
 import { MashStepListItem } from "../MashProfileForm/MashStepListItem";
 import { Section } from "@/components/Section";
 import MashProfileDisplayActions from "./MashProfileDisplayActions";
+import Link from "next/link";
 
 export type MashProfileDisplayProps = {
   src?: ExtendedMashProfile | null;
@@ -20,6 +21,18 @@ export function MashProfileDisplay({ src }: MashProfileDisplayProps) {
           <div className="p-0 *:border-b-2 last-of-type:*:border-b-0">
             <Prop label="Name" value={src?.name} />
             <Prop label="Description" value={src?.description} />
+            <Prop
+              label="Forked From"
+              value={
+                <Link
+                  className="underline"
+                  href={`/profiles/equipment/${src?.origin?.slug}`}
+                >
+                  {src?.origin?.name}
+                </Link>
+              }
+            />
+
             <Prop label="Forks" value={src?.forks.length} />
           </div>
         </Section>
