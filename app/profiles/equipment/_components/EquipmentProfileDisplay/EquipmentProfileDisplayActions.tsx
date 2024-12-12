@@ -1,7 +1,4 @@
-import { Prop } from "@/components/Prop";
 import { AppBarItem } from "@/components/AppBarItem";
-import { AppBarLayout } from "@/components/AppBarLayout";
-import { Card } from "@/components/ui/card";
 import { Edit, ForkKnife } from "lucide-react";
 import { ExtendedEquipmentProfile } from "@/types/Profile";
 

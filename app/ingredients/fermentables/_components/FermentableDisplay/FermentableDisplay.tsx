@@ -1,5 +1,5 @@
 import { Prop } from "@/components/Prop";
-import { AppBarItem, AppBarItemProps } from "@/components/AppBarItem";
+import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { Fermentable } from "@prisma/client";

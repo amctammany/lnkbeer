@@ -20,7 +20,6 @@ export default async function EquipmentProfileForkPage({
   const count = await prisma.equipmentProfile.count({
     where: { userId: session.user.id, forkedFrom: id },
   });
-  console.log(session.user);
   const name = `${session.user.name} - ${old.name} (${count})`;
 
   const fork = await prisma.equipmentProfile.create({

@@ -5,25 +5,17 @@ import { Input } from "@/components/Form/Input";
 import { TextField } from "@/components/Form/TextField";
 import Section from "@/components/Section";
 import { useActionForm } from "@/hooks/useActionForm";
-import { ExtendedMashProfile, ExtendedMashStep } from "@/types/Profile";
-import { MashProfile } from "@prisma/client";
+import { ExtendedMashProfile } from "@/types/Profile";
 import { Plus, Save } from "lucide-react";
 import { MashStepListItem } from "./MashStepListItem";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import MashStepActions from "./MashStepActions";
 import { AppBarItem } from "@/components/AppBarItem";
+import { MashProfileFormActions } from "./MashProfileFormActions";
 
 export type MashProfileFormProps = {
   src?: ExtendedMashProfile | null;
   action: any;
-};
-const MashProfileFormActions = ({
-  src,
-}: {
-  src?: ExtendedMashProfile | null;
-}) => {
-  return [<AppBarItem key="save" text="Save" type="submit" icon={<Save />} />];
 };
 
 export function MashProfileForm({ src, action }: MashProfileFormProps) {
