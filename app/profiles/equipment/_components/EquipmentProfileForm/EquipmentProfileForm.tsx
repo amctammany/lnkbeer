@@ -51,16 +51,19 @@ export function EquipmentProfileForm({
                 <NumberField
                   step={0.01}
                   {...register("boilTime")}
+                  error={state.errors?.boilTime}
                   suffix="gal"
                 />
                 <NumberField
                   step={0.01}
                   {...register("batchVolume")}
+                  error={state.errors?.batchVolume}
                   suffix="gal"
                 />
                 <NumberField
                   step={0.01}
                   {...register("preboilVolume")}
+                  error={state.errors?.preboilVolume}
                   suffix="gal"
                 />
                 <NumberField

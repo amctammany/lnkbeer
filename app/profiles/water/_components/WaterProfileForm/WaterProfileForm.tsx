@@ -34,7 +34,7 @@ const WaterProfileEditorActions = ({ src }: { src?: WaterProfile | null }) => {
         key="fork"
         text="fork"
         action={handleClick(() => {
-          Promise.resolve(console.log("fork"));
+          console.log("fork");
         })}
         icon={<Save />}
       />
