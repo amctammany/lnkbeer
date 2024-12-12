@@ -19,7 +19,7 @@ export const AppBar = ({
 
   const tit =
     typeof title === "string" ? (
-      <span className="flex-grow">{title}</span>
+      <span className="flex-grow truncate">{title}</span>
     ) : (
       title
     );

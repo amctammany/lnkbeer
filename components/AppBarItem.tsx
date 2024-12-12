@@ -27,7 +27,7 @@ export const AppBarItem = ({
       {...(action ? { onClick: action } : {})}
     >
       {icon}
-      <span>{text}</span>
+      <span className="hidden truncate sm:block">{text}</span>
     </Button>
   );
   return url ? <Link href={url}>{body}</Link> : body;
