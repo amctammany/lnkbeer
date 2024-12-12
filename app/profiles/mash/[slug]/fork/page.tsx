@@ -14,7 +14,7 @@ export default async function MashProfileForkPage({
 }: MashProfileForkPageProps) {
   const { slug } = await params;
   const session = await auth();
-  if (!session?.user) {
+  if (!session?.user.id) {
     throw new Error("Unauthorized User");
   }
   const { id, owner, origin, steps, ...old } = await getMashProfile(slug);

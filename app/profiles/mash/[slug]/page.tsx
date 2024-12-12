@@ -20,5 +20,6 @@ export default async function MashProfileDisplayPage({
 }: MashProfileDisplayPageProps) {
   const { slug } = await params;
   const mashProfile = await getMashProfile(slug);
+  console.log(mashProfile);
   return <MashProfileDisplay src={mashProfile} />;
 }

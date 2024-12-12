@@ -13,6 +13,7 @@ export default async function Page() {
   const session = await auth();
 
   if (!session || !session?.user?.email) return redirect("/");
+  console.log(session);
   const user = await prisma.user.findFirst({
     where: { email: session?.user?.email },
   });
