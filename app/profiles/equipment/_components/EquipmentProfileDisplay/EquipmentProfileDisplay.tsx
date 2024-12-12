@@ -3,6 +3,7 @@ import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { ExtendedEquipmentProfile } from "@/types/Profile";
 import { EquipmentProfileDisplayActions } from "./EquipmentProfileDisplayActions";
+import Link from "next/link";
 
 export type EquipmentProfileDisplayProps = {
   src?: ExtendedEquipmentProfile | null;
@@ -17,6 +18,17 @@ export function EquipmentProfileDisplay({ src }: EquipmentProfileDisplayProps) {
       <div className="pt-4">
         <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">
           <Prop label="Name" value={src?.name} />
+          <Prop
+            label="Forked From"
+            value={
+              <Link
+                className="underline"
+                href={`/profiles/equipment/${src?.origin?.slug}`}
+              >
+                {src?.origin?.name}
+              </Link>
+            }
+          />
           <Prop label="Forks" value={src?.forks.length} />
           <Prop label="Description" value={src?.description} />
           <Prop label="Batch Volume" value={src?.batchVolume} unit="gal" />

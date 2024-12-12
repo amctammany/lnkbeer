@@ -1,6 +1,6 @@
 export type PropProps = {
   label: string | React.ReactNode;
-  value?: string | number | null;
+  value?: string | number | null | React.ReactNode;
   unit?: string | React.ReactNode;
 };
 export const Prop = ({ label, value, unit }: PropProps) => {
