@@ -6,7 +6,7 @@ import { TextField } from "@/components/Form/TextField";
 import Section from "@/components/Section";
 import { useActionForm } from "@/hooks/useActionForm";
 import { ExtendedMashProfile } from "@/types/Profile";
-import { Plus, Save } from "lucide-react";
+import { Plus } from "lucide-react";
 import { MashStepListItem } from "./MashStepListItem";
 import Link from "next/link";
 import MashStepActions from "./MashStepActions";

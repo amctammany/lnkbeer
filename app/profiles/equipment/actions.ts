@@ -2,6 +2,7 @@
 import { prisma } from "@/lib/client";
 import { validateSchema } from "@/lib/validateSchema";
 import { EquipmentProfile } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import slugify from "slugify";
 import { z } from "zod";
@@ -22,6 +23,16 @@ const equipmentSchema = zfd.formData({
   mashEfficiency: zfd.numeric(z.number().min(0).max(100).optional()),
   brewEfficiency: zfd.numeric(z.number().min(0).max(100).optional()),
 });
+const removeSchema = zfd.formData({
+  slug: zfd.text(),
+});
+export async function removeEquipmentProfile(formData: FormData) {
+  const { slug } = removeSchema.parse(formData);
+  await prisma.equipmentProfile.delete({
+    where: { slug },
+  });
+  revalidatePath("/profiles/equipment");
+}
 
 export const createEquipmentProfile = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, equipmentSchema);

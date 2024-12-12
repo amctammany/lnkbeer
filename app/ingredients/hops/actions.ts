@@ -70,6 +70,16 @@ const schema = zfd.formData({
   purpose: zfd.text(z.string().optional()),
   notes: zfd.text(z.string().optional()),
 });
+const removeSchema = zfd.formData({
+  id: zfd.numeric(),
+});
+export async function removeHop(formData: FormData) {
+  const { id } = removeSchema.parse(formData);
+  await prisma.hop.delete({
+    where: { id },
+  });
+  redirect("/recipes");
+}
 
 export const createHop = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, schema);

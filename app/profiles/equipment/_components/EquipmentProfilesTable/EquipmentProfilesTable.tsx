@@ -6,17 +6,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
-import EquipmentProfilesTableActions from "./EquipmentProfilesTableActions";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import { EquipmentProfilesTableActions } from "./EquipmentProfilesTableActions";
+import { EquipmentProfileRowActions } from "./EquipmentProfileRowActions";
 const columns: ColumnDef<EquipmentProfile>[] = [
   {
     accessorKey: "name",
@@ -34,31 +25,7 @@ const columns: ColumnDef<EquipmentProfile>[] = [
   {
     id: "actions",
     enableHiding: false,
-    cell: ({ row }) => {
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem asChild>
-              <Link
-                href={`/profiles/equipment/${slugify(row.getValue("name"), { lower: true })}/fork`}
-              >
-                Fork
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Remove</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    cell: EquipmentProfileRowActions<EquipmentProfile>,
   },
 ];
 
