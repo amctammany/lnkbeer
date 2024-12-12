@@ -1,6 +1,7 @@
 "use client";
 import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
+import AppBarTitle from "@/components/AppBarTitle";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
 import { NumberField } from "@/components/Form/NumberField";
@@ -11,7 +12,7 @@ import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { HopInput, RangeValue } from "@/types/ingredient";
 import { HopUsage } from "@prisma/client";
-import { Save } from "lucide-react";
+import { HopIcon, Save } from "lucide-react";
 import { Controller } from "react-hook-form";
 
 export type HopEditorProps = {
@@ -86,7 +87,9 @@ export function HopEditor({ hop, action }: HopEditorProps) {
   return (
     <Form className="flex" action={formAction}>
       <AppBarLayout
-        title={`Hop Editor: ${hop?.name}`}
+        title={
+          <AppBarTitle icon={<HopIcon />}>{hop?.name ?? "Creator"}</AppBarTitle>
+        }
         actions={<HopEditorActions />}
       >
         <div className="grid grid-cols-4 gap-2">

@@ -5,6 +5,8 @@ import { Ca2, Cl, HCO3, MgSo4, Na, SO4 } from "@/components/Elements";
 import { ExtendedWaterProfile } from "@/types/Profile";
 import WaterProfileDisplayActions from "./WaterProfileDisplayActions";
 import Link from "next/link";
+import AppBarTitle from "@/components/AppBarTitle";
+import { Waves } from "lucide-react";
 
 export type WaterProfileDisplayProps = {
   src?: ExtendedWaterProfile | null;
@@ -13,7 +15,7 @@ export type WaterProfileDisplayProps = {
 export function WaterProfileDisplay({ src }: WaterProfileDisplayProps) {
   return (
     <AppBarLayout
-      title={`WaterProfile: ${src?.name}`}
+      title={<AppBarTitle icon={<Waves />}>List</AppBarTitle>}
       actions={<WaterProfileDisplayActions src={src} />}
     >
       <div className="pt-4">

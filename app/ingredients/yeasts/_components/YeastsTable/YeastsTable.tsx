@@ -5,9 +5,10 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
-import { Plus } from "lucide-react";
+import { FlaskConical, Plus } from "lucide-react";
 import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
+import AppBarTitle from "@/components/AppBarTitle";
 const columns: ColumnDef<Yeast>[] = [
   {
     accessorKey: "name",
@@ -51,7 +52,10 @@ const YeastsTableActions = () => {
 
 export function YeastsTable({ yeasts = [] }: YeastsTableProps) {
   return (
-    <AppBarLayout title="Yeasts List" actions={<YeastsTableActions />}>
+    <AppBarLayout
+      title={<AppBarTitle icon={<FlaskConical />}>List</AppBarTitle>}
+      actions={<YeastsTableActions />}
+    >
       <div className="relative overflow-auto">
         <DataTable data={yeasts} columns={columns} />
       </div>

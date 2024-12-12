@@ -5,6 +5,8 @@ import { MashStepListItem } from "../MashProfileForm/MashStepListItem";
 import { Section } from "@/components/Section";
 import MashProfileDisplayActions from "./MashProfileDisplayActions";
 import Link from "next/link";
+import AppBarTitle from "@/components/AppBarTitle";
+import { Thermometer } from "lucide-react";
 
 export type MashProfileDisplayProps = {
   src?: ExtendedMashProfile | null;
@@ -13,7 +15,7 @@ export type MashProfileDisplayProps = {
 export function MashProfileDisplay({ src }: MashProfileDisplayProps) {
   return (
     <AppBarLayout
-      title={`MashProfile: ${src?.name}`}
+      title={<AppBarTitle icon={<Thermometer />}>{src?.name}</AppBarTitle>}
       actions={<MashProfileDisplayActions src={src} />}
     >
       <div className="gap-2 lg:w-9/12 mx-auto">

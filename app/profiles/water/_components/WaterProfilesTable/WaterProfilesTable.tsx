@@ -7,6 +7,8 @@ import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
 import WaterProfilesTableActions from "./WaterProfilesTableActions";
+import AppBarTitle from "@/components/AppBarTitle";
+import { Waves } from "lucide-react";
 const columns: ColumnDef<WaterProfile>[] = [
   {
     accessorKey: "name",
@@ -31,7 +33,7 @@ export function WaterProfilesTable({
 }: WaterProfilesTableProps) {
   return (
     <AppBarLayout
-      title="WaterProfiles List"
+      title={<AppBarTitle icon={<Waves />}>List</AppBarTitle>}
       actions={<WaterProfilesTableActions />}
     >
       <div className="relative overflow-auto">

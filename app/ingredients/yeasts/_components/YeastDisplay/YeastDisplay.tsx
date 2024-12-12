@@ -3,7 +3,8 @@ import { AppBarItem, AppBarItemProps } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { YeastInput } from "@/types/ingredient";
-import { Edit } from "lucide-react";
+import { Edit, FlaskConical } from "lucide-react";
+import AppBarTitle from "@/components/AppBarTitle";
 
 export type YeastDisplayProps = {
   src?: YeastInput | null;
@@ -22,7 +23,7 @@ const YeastDisplayActions = ({ src }: { src?: YeastInput | null }) => {
 export function YeastDisplay({ src }: YeastDisplayProps) {
   return (
     <AppBarLayout
-      title={`Yeast: ${src?.name}`}
+      title={<AppBarTitle icon={<FlaskConical />}>{src?.name}</AppBarTitle>}
       actions={<YeastDisplayActions src={src} />}
     >
       <div className="pt-4">

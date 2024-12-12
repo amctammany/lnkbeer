@@ -1,6 +1,7 @@
 "use client";
 import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
+import { AppBarTitle } from "@/components/AppBarTitle";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
 import { NumberField } from "@/components/Form/NumberField";
@@ -14,7 +15,7 @@ import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { RangeValue, YeastInput } from "@/types/ingredient";
 import { YeastFlocculation, YeastForm, YeastType } from "@prisma/client";
-import { Save } from "lucide-react";
+import { FlaskConical, Save } from "lucide-react";
 import { Controller } from "react-hook-form";
 
 export type YeastEditorProps = {
@@ -47,7 +48,7 @@ export function YeastEditor({ src, action }: YeastEditorProps) {
   return (
     <Form className="flex" action={formAction}>
       <AppBarLayout
-        title={`Yeast Editor: ${src?.name}`}
+        title={<AppBarTitle icon={<FlaskConical />}>{src?.name}</AppBarTitle>}
         actions={<YeastEditorActions />}
       >
         <div className="grid grid-cols-4 gap-2">

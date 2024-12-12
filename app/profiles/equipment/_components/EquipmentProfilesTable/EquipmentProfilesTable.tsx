@@ -8,6 +8,8 @@ import Link from "next/link";
 import slugify from "slugify";
 import { EquipmentProfilesTableActions } from "./EquipmentProfilesTableActions";
 import { EquipmentProfileRowActions } from "./EquipmentProfileRowActions";
+import { Anvil } from "lucide-react";
+import AppBarTitle from "@/components/AppBarTitle";
 const columns: ColumnDef<EquipmentProfile>[] = [
   {
     accessorKey: "name",
@@ -37,7 +39,7 @@ export function EquipmentProfilesTable({
 }: EquipmentProfilesTableProps) {
   return (
     <AppBarLayout
-      title="EquipmentProfiles List"
+      title={<AppBarTitle icon={<Anvil />}>List</AppBarTitle>}
       actions={<EquipmentProfilesTableActions />}
     >
       <div className="relative overflow-auto">

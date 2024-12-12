@@ -12,6 +12,8 @@ import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { WaterProfile } from "@prisma/client";
 import WaterProfileFormActions from "./WaterProfileFormActions";
+import AppBarTitle from "@/components/AppBarTitle";
+import { Waves } from "lucide-react";
 
 export type WaterProfileFormProps = {
   src?: WaterProfile | null;
@@ -25,7 +27,9 @@ export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
   return (
     <Form className="flex" action={formAction}>
       <AppBarLayout
-        title={`WaterProfile Editor: ${src?.name}`}
+        title={
+          <AppBarTitle icon={<Waves />}>{src?.name ?? "Creator"}</AppBarTitle>
+        }
         actions={<WaterProfileFormActions src={src} />}
       >
         <div className="grid grid-cols-4 gap-2 lg:w-9/12 mx-auto">

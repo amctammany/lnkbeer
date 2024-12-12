@@ -1,15 +1,16 @@
 import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
-import { Hop } from "@prisma/client";
+import { Hop as HopType } from "@prisma/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CompositionTab from "./CompositionTab";
 import SummaryTab from "./SummaryTab";
 import { Edit, Hop as HopIcon, Save } from "lucide-react";
+import AppBarTitle from "@/components/AppBarTitle";
 
 export type HopDisplayProps = {
-  hop?: Hop | null;
+  hop?: HopType | null;
 };
-const HopDisplayActions = ({ src }: { src?: Hop | null }) => {
+const HopDisplayActions = ({ src }: { src?: HopType | null }) => {
   return [
     <AppBarItem
       key="edit"
@@ -24,7 +25,7 @@ export function HopDisplay({ hop }: HopDisplayProps) {
   if (!hop) return <div>Bad</div>;
   return (
     <AppBarLayout
-      title={`Hop: ${hop?.name}`}
+      title={<AppBarTitle icon={<HopIcon />}>{hop?.name}</AppBarTitle>}
       actions={<HopDisplayActions src={hop} />}
     >
       <Tabs defaultValue="summary" className="">

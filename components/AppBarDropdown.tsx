@@ -54,7 +54,7 @@ export const AppBarDropdown = ({
       <DropdownMenuTrigger className="hover:bg-primary/20" asChild>
         <Button variant="secondary">
           {icon}
-          <span>{text}</span>
+          <span className="hidden truncate sm:block">{text}</span>
           <ChevronDown />
         </Button>
       </DropdownMenuTrigger>
