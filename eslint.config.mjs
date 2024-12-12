@@ -10,8 +10,9 @@ import prettierConfigRecommended from "eslint-plugin-prettier/recommended";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+  //baseDirectory: __dirname,
 
+  baseDirectory: import.meta.dirname,
   //recommendedConfig: js.configs.recommended,
   //allConfig: js.configs.all,
 });
@@ -23,6 +24,7 @@ const patchedConfig = fixupConfigRules([
   }),
 ]);
 
+/** @type {import('eslint').Linter.Config[]} */
 const config = [
   ...patchedConfig,
 
@@ -43,9 +45,32 @@ const config = [
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
+        ecmaFeatures: {
+          jsx: true,
+        },
       },
     },
   },
 ];
 
-export default config;
+/** @type {import('eslint').Linter.Config[]} */
+const eslintConfig = [
+  ...compat.config({
+    extends: ["next/core-web-vitals", "next/typescript"],
+    rules: {
+      "react/no-unescaped-entities": "off",
+      "@next/next/no-page-custom-font": "off",
+    },
+  }),
+  { ignores: [".next/*", "components/ui/**/*", "tailwind.config.ts", "*.mjs"] },
+  ts.configs.eslintRecommended,
+  prettierConfigRecommended,
+  {
+    rules: {
+      "no-console": "warn",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  },
+];
+export default eslintConfig;
