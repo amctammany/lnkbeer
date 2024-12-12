@@ -6,8 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
-import { Plus } from "lucide-react";
-import { AppBarItem } from "@/components/AppBarItem";
+import EquipmentProfilesTableActions from "./EquipmentProfilesTableActions";
 const columns: ColumnDef<EquipmentProfile>[] = [
   {
     accessorKey: "name",
@@ -23,20 +22,6 @@ const columns: ColumnDef<EquipmentProfile>[] = [
     ),
   },
 ];
-const EquipmentProfilesTableActions = ({
-  src,
-}: {
-  src?: EquipmentProfile | null;
-}) => {
-  return [
-    <AppBarItem
-      key="new"
-      text="new"
-      url="/profiles/equipment/new"
-      icon={<Plus />}
-    />,
-  ];
-};
 
 export type EquipmentProfilesTableProps = {
   equipmentProfiles?: EquipmentProfile[];
