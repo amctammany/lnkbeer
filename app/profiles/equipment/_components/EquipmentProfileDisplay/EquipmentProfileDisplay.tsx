@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/card";
 import { ExtendedEquipmentProfile } from "@/types/Profile";
 import { EquipmentProfileDisplayActions } from "./EquipmentProfileDisplayActions";
 import Link from "next/link";
+import { Anvil } from "lucide-react";
+import AppBarTitle from "@/components/AppBarTitle";
 
 export type EquipmentProfileDisplayProps = {
   src?: ExtendedEquipmentProfile | null;
@@ -12,7 +14,7 @@ export type EquipmentProfileDisplayProps = {
 export function EquipmentProfileDisplay({ src }: EquipmentProfileDisplayProps) {
   return (
     <AppBarLayout
-      title={`EquipmentProfile: ${src?.name}`}
+      title={<AppBarTitle icon={<Anvil />}>{src?.name}</AppBarTitle>}
       actions={<EquipmentProfileDisplayActions src={src} />}
     >
       <div className="pt-4">

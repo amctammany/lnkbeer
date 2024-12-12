@@ -14,8 +14,9 @@ import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { EquipmentProfile } from "@prisma/client";
-import { Save } from "lucide-react";
+import { Anvil, Save } from "lucide-react";
 import EquipmentProfileFormActions from "./EquipmentProfileFormActions";
+import AppBarTitle from "@/components/AppBarTitle";
 
 export type EquipmentProfileFormProps = {
   src?: EquipmentProfile | null;
@@ -31,7 +32,7 @@ export function EquipmentProfileForm({
   return (
     <Form className="flex" action={formAction}>
       <AppBarLayout
-        title={`EquipmentProfile Editor: ${src?.name}`}
+        title={<AppBarTitle icon={<Anvil />}>{src?.name}</AppBarTitle>}
         actions={<EquipmentProfileFormActions />}
       >
         <div className="gap-2 lg:w-9/12 mx-auto">
