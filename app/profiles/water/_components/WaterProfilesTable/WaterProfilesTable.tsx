@@ -6,8 +6,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
-import { Plus } from "lucide-react";
-import { AppBarItem } from "@/components/AppBarItem";
+import WaterProfilesTableActions from "./WaterProfilesTableActions";
 const columns: ColumnDef<WaterProfile>[] = [
   {
     accessorKey: "name",
@@ -23,16 +22,6 @@ const columns: ColumnDef<WaterProfile>[] = [
     ),
   },
 ];
-const WaterProfilesTableActions = () => {
-  return [
-    <AppBarItem
-      key="new"
-      text="New"
-      url="/profiles/water/new"
-      icon={<Plus />}
-    />,
-  ];
-};
 
 export type WaterProfilesTableProps = {
   waterProfiles?: WaterProfile[];
