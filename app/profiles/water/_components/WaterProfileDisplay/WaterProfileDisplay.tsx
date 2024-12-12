@@ -3,11 +3,12 @@ import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { WaterProfile } from "@prisma/client";
 import { Ca2, Cl, HCO3, MgSo4, Na, SO4 } from "@/components/Elements";
-import { Edit } from "lucide-react";
+import { Edit, ForkKnife } from "lucide-react";
 import { AppBarItem } from "@/components/AppBarItem";
+import { ExtendedWaterProfile } from "@/types/Profile";
 
 export type WaterProfileDisplayProps = {
-  src?: WaterProfile | null;
+  src?: ExtendedWaterProfile | null;
 };
 const WaterProfileDisplayActions = ({ src }: { src?: WaterProfile | null }) => {
   return [
@@ -16,6 +17,12 @@ const WaterProfileDisplayActions = ({ src }: { src?: WaterProfile | null }) => {
       text="Edit"
       url={`/profiles/water/${src?.slug}/edit`}
       icon={<Edit />}
+    />,
+    <AppBarItem
+      key="fork"
+      text="Fork"
+      url={`/profiles/water/${src?.slug}/fork`}
+      icon={<ForkKnife />}
     />,
   ];
 };
@@ -29,6 +36,7 @@ export function WaterProfileDisplay({ src }: WaterProfileDisplayProps) {
       <div className="pt-4">
         <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">
           <Prop label="Name" value={src?.name} />
+          <Prop label="Forks" value={src?.forks.length} />
           <Prop label={<Ca2 />} value={src?.calcium} unit="ppm" />
           <Prop label={<Cl />} value={src?.chloride} unit="ppm" />
           <Prop label={<MgSo4 />} value={src?.magnesium} unit="ppm" />

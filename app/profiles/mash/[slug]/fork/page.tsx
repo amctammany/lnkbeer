@@ -17,11 +17,11 @@ export default async function MashProfileForkPage({
   if (!session?.user.id) {
     throw new Error("Unauthorized User");
   }
-  const { id, owner, origin, steps, ...old } = await getMashProfile(slug);
+  const { id, owner, origin, forks, steps, ...old } =
+    await getMashProfile(slug);
   const count = await prisma.mashProfile.count({
     where: { userId: session.user.id, forkedFrom: id },
   });
-  console.log(session.user);
   const name = `${session.user.name} - ${old.name} (${count})`;
 
   const fork = await prisma.mashProfile.create({
@@ -41,6 +41,7 @@ export default async function MashProfileForkPage({
     },
     include: {
       steps: true,
+      forks: { select: { id: true } },
     },
   });
   return <MashProfileForm src={fork} action={updateMashProfile} />;

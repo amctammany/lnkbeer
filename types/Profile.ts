@@ -10,16 +10,19 @@ export type ExtendedWaterProfile = WaterProfile & {
   //id?: number;
   owner?: BaseUser;
   origin?: WaterProfile;
+  forks: Pick<ExtendedWaterProfile, "id">[];
 };
 export type ExtendedEquipmentProfile = EquipmentProfile & {
   //id?: number;
   owner?: BaseUser;
   origin?: EquipmentProfile;
+  forks: Pick<ExtendedEquipmentProfile, "id">[];
 };
 export type ExtendedMashProfile = MashProfile & {
   owner?: BaseUser;
   steps: MashStep[];
   origin?: MashProfile;
+  forks: Pick<ExtendedMashProfile, "id">[];
 };
 export type ExtendedMashStep = MashStep & {
   MashProfile: MashProfile & { steps: { id: string }[] };

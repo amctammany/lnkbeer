@@ -92,8 +92,16 @@ export const removeWaterProfile = async (src: ExtendedWaterProfile) => {
 };
 
 export const duplicateWaterProfile = async (src: ExtendedWaterProfile) => {
-  console.log(src);
-  const { id, userId, owner, origin, name: oldName, forkedFrom, ...data } = src;
+  const {
+    id,
+    userId,
+    forks,
+    owner,
+    origin,
+    name: oldName,
+    forkedFrom,
+    ...data
+  } = src;
   const name = `${userId}-${oldName}`;
   const res = await prisma.waterProfile.create({
     data: {

@@ -4,6 +4,7 @@ import { AppBarLayout } from "@/components/AppBarLayout";
 import { ExtendedMashProfile } from "@/types/Profile";
 import { MashStepListItem } from "../MashProfileForm/MashStepListItem";
 import { Section } from "@/components/Section";
+import { Edit, ForkKnife } from "lucide-react";
 
 export type MashProfileDisplayProps = {
   src?: ExtendedMashProfile | null;
@@ -17,11 +18,13 @@ const MashProfileDisplayActions = ({
     <AppBarItem
       key="edit"
       text="Edit"
+      icon={<Edit />}
       url={`/profiles/mash/${src?.slug}/edit`}
     />,
     <AppBarItem
       key="fork"
       text="Fork"
+      icon={<ForkKnife />}
       url={`/profiles/mash/${src?.slug}/fork`}
     />,
   ];
@@ -38,6 +41,7 @@ export function MashProfileDisplay({ src }: MashProfileDisplayProps) {
           <div className="p-0 *:border-b-2 last-of-type:*:border-b-0">
             <Prop label="Name" value={src?.name} />
             <Prop label="Description" value={src?.description} />
+            <Prop label="Forks" value={src?.forks.length} />
           </div>
         </Section>
         <Section title="Steps" className="m-4  ">

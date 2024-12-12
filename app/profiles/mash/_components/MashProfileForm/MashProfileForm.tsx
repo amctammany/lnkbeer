@@ -27,7 +27,7 @@ const MashProfileFormActions = ({
 };
 
 export function MashProfileForm({ src, action }: MashProfileFormProps) {
-  const { state, register, formAction } = useActionForm<MashProfile>(
+  const { state, register, formAction } = useActionForm<ExtendedMashProfile>(
     action,
     src!,
   );

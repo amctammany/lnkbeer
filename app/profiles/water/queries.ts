@@ -8,6 +8,7 @@ export const getWaterProfile = cache(async (slug: string) => {
     include: {
       owner: true,
       origin: true,
+      forks: { select: { id: true } },
     },
   });
   return profile as ExtendedWaterProfile;

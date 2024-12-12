@@ -24,6 +24,7 @@ export const getMashProfile = cache(async (slug: string) => {
     include: {
       owner: true,
       origin: true,
+      forks: { select: { id: true } },
       steps: {
         orderBy: { rank: "asc" },
 
