@@ -84,11 +84,9 @@ const HopsTableActions = () => {
 
 export function HopsTable({ hops = [] }: HopsTableProps) {
   return (
-    <AppBarLayout title="Hops List" actions={<HopsTableActions />}>
-      <div className="relative overflow-auto">
-        <DataTable data={hops} columns={columns} />
-      </div>
-    </AppBarLayout>
+    <div className="relative overflow-auto">
+      <DataTable data={hops} columns={columns} />
+    </div>
   );
 }
 export default HopsTable;
