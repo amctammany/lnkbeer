@@ -36,7 +36,7 @@ export const AppBar = ({
           className,
         )}
       >
-        <div className="h-10 grid aspect-square border-r-2 border-b-2 border-black ">
+        <div className="h-10 grid aspect-square bg-gray-800/20 ">
           <SidebarTrigger variant="ghost" className="m-auto " />
         </div>
         {tit}
