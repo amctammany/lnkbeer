@@ -3,7 +3,7 @@ import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { Fermentable } from "@prisma/client";
-import { Edit } from "lucide-react";
+import { Edit, Wheat } from "lucide-react";
 
 export type FermentableDisplayProps = {
   src?: Fermentable | null;
@@ -21,7 +21,12 @@ const FermentableDisplayActions = ({ src }: FermentableDisplayProps) => {
 export function FermentableDisplay({ src }: FermentableDisplayProps) {
   return (
     <AppBarLayout
-      title={`Fermentable: ${src?.name}`}
+      title={
+        <div className="flex-grow w-full inline-flex [&_svg]:size-5 text-lg [&_svg]:shrink-0 items-center justify-start gap-2 ">
+          <Wheat />
+          <span>{src?.name}</span>
+        </div>
+      }
       actions={<FermentableDisplayActions src={src} />}
     >
       <div className="pt-4">

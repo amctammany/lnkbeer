@@ -28,7 +28,7 @@ export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
         title={`WaterProfile Editor: ${src?.name}`}
         actions={<WaterProfileFormActions src={src} />}
       >
-        <div className="grid grid-cols-4 gap-2 w-9/12 mx-auto">
+        <div className="grid grid-cols-4 gap-2 lg:w-9/12 mx-auto">
           <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 ">
             <span className="flex-shrink p-2 block bg-slate-300">General</span>
             <div className="flex-grow">
