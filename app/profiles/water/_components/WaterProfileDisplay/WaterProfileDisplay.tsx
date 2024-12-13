@@ -15,7 +15,7 @@ export type WaterProfileDisplayProps = {
 export function WaterProfileDisplay({ src }: WaterProfileDisplayProps) {
   return (
     <AppBarLayout
-      title={<AppBarTitle icon={<Waves />}>List</AppBarTitle>}
+      title={<AppBarTitle icon={<Waves />}>{src?.name}</AppBarTitle>}
       actions={<WaterProfileDisplayActions src={src} />}
     >
       <div className="pt-4">

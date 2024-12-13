@@ -33,7 +33,7 @@ export function WaterProfilesTable({
 }: WaterProfilesTableProps) {
   return (
     <AppBarLayout
-      title={<AppBarTitle icon={<Waves />}>List</AppBarTitle>}
+      title={<AppBarTitle icon={<Waves />}>Water Profiles</AppBarTitle>}
       actions={<WaterProfilesTableActions />}
     >
       <div className="relative overflow-auto">

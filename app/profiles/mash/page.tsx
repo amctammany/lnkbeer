@@ -11,7 +11,7 @@ export default async function MashProfilesListPage() {
   const mashProfiles = await getMashProfiles();
   return (
     <AppBarLayout
-      title={<AppBarTitle icon={<Thermometer />}>List</AppBarTitle>}
+      title={<AppBarTitle icon={<Thermometer />}>Mash Profiles</AppBarTitle>}
       actions={<MashProfilesTableActions />}
     >
       <MashProfilesTable mashProfiles={mashProfiles} />

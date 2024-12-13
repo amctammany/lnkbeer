@@ -39,7 +39,7 @@ export function EquipmentProfilesTable({
 }: EquipmentProfilesTableProps) {
   return (
     <AppBarLayout
-      title={<AppBarTitle icon={<Anvil />}>List</AppBarTitle>}
+      title={<AppBarTitle icon={<Anvil />}>Equipment Profiles</AppBarTitle>}
       actions={<EquipmentProfilesTableActions />}
     >
       <div className="relative overflow-auto">
