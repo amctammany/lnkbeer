@@ -30,7 +30,7 @@ export function TableSearch<T>({ table, children }: TableSearchProps<T>) {
         <CollapsibleTrigger
           asChild
           className={clsx("hidden", {
-            block: Array.isArray(children) && children.length > 0,
+            "inline-flex": Array.isArray(children) && children.length > 0,
           })}
         >
           <Button variant="secondary" className="mx-2">
