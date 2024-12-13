@@ -1,5 +1,5 @@
 import { HopDisplay } from "@/app/ingredients/hops/_components/HopDisplay";
-import { getHop } from "@/app/ingredients/hops/queries";
+import { getHop, getHops } from "@/app/ingredients/hops/queries";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import AppBarTitle from "@/components/AppBarTitle";
 import { Hop } from "lucide-react";
@@ -15,7 +15,13 @@ export async function generateMetadata({ params }: HopDisplayPageProps) {
     title: `LNK Hop: ${slug}`,
   };
 }
+export async function generateStaticParams() {
+  const hops = await getHops();
 
+  return hops.map((hop) => ({
+    slug: hop.slug,
+  }));
+}
 export default async function HopDisplayPage({ params }: HopDisplayPageProps) {
   const { slug } = await params;
   const hop = await getHop(slug);
