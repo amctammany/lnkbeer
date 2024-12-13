@@ -23,15 +23,21 @@ import { useState } from "react";
 import { Input } from "@/components/Form/Input";
 import { fuzzyFilter } from "@/lib/fuzzyFilter";
 import clsx from "clsx";
+import TableSearch from "./TableSearch";
+import FilterInput from "./FilterInput";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  filters?: any[];
+  children?: React.ReactNode | React.ReactNode[];
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  filters,
+  children,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -59,16 +65,11 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="w-full">
-      <div className="flex items-center px-2 py-4 ">
-        <Input
-          className="flex-grow bg-white"
-          type="search"
-          placeholder="Search"
-          value={(table.getState().globalFilter as string) ?? ""}
-          onChange={(event) => table.setGlobalFilter(event.target.value)}
-          //className="max-w-sm"
-        />
-      </div>
+      <TableSearch table={table}>
+        {filters?.map(({ name }) => (
+          <FilterInput key={name} name={name} table={table} />
+        ))}
+      </TableSearch>
       <div className="overflow-auto">
         <Table className="flex-grow">
           <TableHeader>

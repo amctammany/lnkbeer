@@ -9,6 +9,7 @@ import { FlaskConical, Plus } from "lucide-react";
 import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import AppBarTitle from "@/components/AppBarTitle";
+import FilterInput from "@/components/DataTable/FilterInput";
 const columns: ColumnDef<Yeast>[] = [
   {
     accessorKey: "name",
@@ -57,7 +58,11 @@ export function YeastsTable({ yeasts = [] }: YeastsTableProps) {
       actions={<YeastsTableActions />}
     >
       <div className="relative overflow-auto">
-        <DataTable data={yeasts} columns={columns} />
+        <DataTable
+          data={yeasts}
+          columns={columns}
+          filters={[{ name: "manufacturer" }]}
+        />
       </div>
     </AppBarLayout>
   );
