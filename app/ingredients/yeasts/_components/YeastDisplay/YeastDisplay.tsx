@@ -1,6 +1,8 @@
-import { Prop } from "@/components/Prop";
-import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { YeastInput } from "@/types/ingredient";
+import { FlaskConical } from "lucide-react";
+import { YeastSummaryTab } from "./YeastSummaryTab";
+import { YeastAnalyticsTab } from "./YeastAnalyticsTab";
 
 export type YeastDisplayProps = {
   src?: YeastInput | null;
@@ -8,24 +10,20 @@ export type YeastDisplayProps = {
 
 export function YeastDisplay({ src }: YeastDisplayProps) {
   return (
-    <div className="">
-      <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">
-        <Prop label="Name" value={src?.name} />
-        <Prop label="Notes" value={src?.notes} />
-        <Prop label="Manufacturer" value={src?.manufacturer} />
-        <Prop label="Attenuation" value={src?.attenuation} />
-        <Prop
-          label="Attenuation Range"
-          value={`${src?.attenuationLow} - ${src?.attenuationHigh}`}
-        />
-        <Prop
-          label="Temperature Range"
-          value={`${src?.tempLow} - ${src?.tempHigh}`}
-        />
-        <Prop label="Type" value={src?.type} />
-        <Prop label="Flocculation" value={src?.flocculation} />
-      </Card>
-    </div>
+    <Tabs defaultValue="summary" className="">
+      <TabsList className="flex justify-start">
+        <FlaskConical className="size-4 mx-4" />
+        <TabsTrigger value="summary">Summary</TabsTrigger>
+        <TabsTrigger value="analytics">Analytics</TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="summary">
+        <YeastSummaryTab src={src} />
+      </TabsContent>
+      <TabsContent value="analytics">
+        <YeastAnalyticsTab src={src} />
+      </TabsContent>
+    </Tabs>
   );
 }
 
