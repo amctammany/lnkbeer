@@ -35,7 +35,7 @@ export const AppBarItem = ({
             {...(action ? { onClick: action } : {})}
           >
             {icon}
-            <span className="hidden text-sm lg:text-lg truncate sm:block">
+            <span className="hidden text-sm lg:text-md truncate sm:block">
               {text}
             </span>
           </Button>
