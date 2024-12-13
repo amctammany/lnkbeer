@@ -26,7 +26,9 @@ export function Section({
           hidden: title === undefined,
         })}
       >
-        <span className="flex-grow">{title}</span>
+        <span className="flex-grow my-auto font-extrabold text-xl px-2">
+          {title}
+        </span>
         {actions}
       </div>
       <div className="flex-grow">{children}</div>

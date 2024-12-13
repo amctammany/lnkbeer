@@ -49,6 +49,7 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
               <AppBarItem
                 key="Add"
                 url={`/profiles/mash/${src?.slug}/edit/new`}
+                text="Add"
                 icon={<Plus />}
               />,
             ]}
@@ -72,7 +73,7 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
                       />
                     </Link>
                     <MashStepActions
-                      className="mx-2"
+                      className="mx-2 hidden md:block"
                       src={{ MashProfile: src, ...step }}
                     />
                   </div>
