@@ -20,7 +20,7 @@ export const AppBarItem = ({
   const body = (
     <Button
       type={type ?? "button"}
-      className="hover:bg-primary/20 [&_svg]:size-6 lg:[&_svg]:size-6 p-1 lg:p-2 m-1 lg:mx-4 lg:my-2"
+      className="hover:bg-primary/20 [&_svg]:size-6 lg:[&_svg]:size-6 p-1 lg:p-2 m-1 "
       key={text}
       variant="secondary"
       {...(action ? { onClick: action } : {})}

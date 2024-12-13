@@ -32,7 +32,7 @@ export const AppBar = ({
     >
       <header
         className={clsx(
-          "flex h-10 shrink-0 items-center gap-2 border-b pr-4 w-full lg:group-data-[state=collapsed]:w-[calc(100%-var(--sidebar-width-icon)-36px)] md:group-data-[state=expanded]:w-[calc(100%_-_var(--sidebar-width))] group-data-[open=false]:w-fll transition-[width] ease-linear duration-50",
+          "flex h-10 shrink-0 items-center gap-1 lg:gap-2 border-b pr-4 w-full lg:group-data-[state=collapsed]:w-[calc(100%-var(--sidebar-width-icon)-36px)] md:group-data-[state=expanded]:w-[calc(100%_-_var(--sidebar-width))] group-data-[open=false]:w-fll transition-[width] ease-linear duration-50",
           className,
         )}
       >
