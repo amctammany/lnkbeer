@@ -5,10 +5,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
-import { Plus } from "lucide-react";
-import { AppBarItem } from "@/components/AppBarItem";
-import { FermentableInput } from "@/types/ingredient";
-import { AppBarLayout } from "@/components/AppBarLayout";
 const columns: ColumnDef<Fermentable>[] = [
   {
     accessorKey: "name",
@@ -40,21 +36,13 @@ const columns: ColumnDef<Fermentable>[] = [
 export type FermentablesTableProps = {
   fermentables?: Fermentable[];
 };
-const FermentableTableActions = () => {
-  return [<AppBarItem key="new" text="New" icon={<Plus />} />];
-};
 export function FermentablesTable({
   fermentables = [],
 }: FermentablesTableProps) {
   return (
-    <AppBarLayout
-      title="Fermentables List"
-      actions={<FermentableTableActions />}
-    >
-      <div className="relative overflow-auto">
-        <DataTable data={fermentables} columns={columns} />
-      </div>
-    </AppBarLayout>
+    <div className="relative overflow-auto">
+      <DataTable data={fermentables} columns={columns} />
+    </div>
   );
 }
 export default FermentablesTable;

@@ -29,7 +29,7 @@ export const AppBarItem = ({
         <TooltipTrigger asChild>
           <Button
             type={type ?? "button"}
-            className="hover:bg-primary/20 [&_svg]:size-6 lg:[&_svg]:size-6 p-1 lg:p-2 m-1 "
+            className="hover:bg-primary/20 [&_svg]:size-6 sm:[&_svg]:size-4 p-1 lg:p-2 m-1 "
             key={text}
             variant="secondary"
             {...(action ? { onClick: action } : {})}

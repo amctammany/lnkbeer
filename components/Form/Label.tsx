@@ -18,7 +18,7 @@ const labelStyles = cva(
   {
     variants: {
       variant: {
-        default: ["mx-0 mb-2 p-2 block"],
+        default: ["mx-0 mb-0 p-2 block"],
         error: ["border-warning-500 border-2"],
         inline: ["grid grid-cols-2"],
       },
