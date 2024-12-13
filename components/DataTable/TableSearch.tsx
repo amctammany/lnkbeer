@@ -19,6 +19,7 @@ export function TableSearch<T>({ table, children }: TableSearchProps<T>) {
       <div className="flex items-center px-2 py-4 ">
         <Input
           className="flex-grow bg-white"
+          name="globalSearch"
           type="search"
           placeholder="Search"
           value={(table.getState().globalFilter as string) ?? ""}

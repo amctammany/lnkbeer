@@ -19,7 +19,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useMemo, useState } from "react";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 import { Input } from "@/components/Form/Input";
 import { fuzzyFilter } from "@/lib/fuzzyFilter";
 import clsx from "clsx";
@@ -64,10 +70,8 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
   });
   const onFilterChange = useMemo(
-    () => (event) => {
-      return table
-        .getColumn(event.currentTarget.name)
-        ?.setFilterValue(event.target.value);
+    () => (name, value) => {
+      return table.getColumn(name)?.setFilterValue(value);
     },
     [table],
   );

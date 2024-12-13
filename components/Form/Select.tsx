@@ -86,6 +86,7 @@ SelectProps) {
     >
       <div className={clsx("flex w-full")}>
         <select {...props} className={selectStyles({ inputSize, variant })}>
+          <option value=""></option>
           {opts}
         </select>
       </div>

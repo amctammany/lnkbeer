@@ -2,6 +2,7 @@ import { Table } from "@tanstack/react-table";
 import { Input } from "../Form/Input";
 import { FieldValues } from "react-hook-form";
 import { TextField } from "../Form/TextField";
+import { DebouncedInput } from "../Form/DebouncedInput";
 
 export type FilterInputProps<T = any> = {
   //table: T extends Table<infer R> ? R : T;
@@ -12,7 +13,7 @@ export type FilterInputProps<T = any> = {
 export function FilterInput({ value, onChange, name }: FilterInputProps) {
   return (
     <div className="">
-      <TextField
+      <DebouncedInput
         className="flex-grow bg-white"
         label={name}
         name={name}

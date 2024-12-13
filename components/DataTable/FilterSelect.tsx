@@ -1,3 +1,4 @@
+import { ChangeEventHandler, useCallback } from "react";
 import { Select } from "../Form/Select";
 
 export type FilterSelectProps<T = any> = {
@@ -13,6 +14,10 @@ export function FilterSelect({
   options = {},
   name,
 }: FilterSelectProps) {
+  const handleChange = useCallback<ChangeEventHandler<HTMLSelectElement>>(
+    (e) => onChange(name, e.target.value),
+    [onChange, name],
+  );
   return (
     <div className="">
       <Select
@@ -21,7 +26,7 @@ export function FilterSelect({
         name={name}
         value={value}
         options={options}
-        onChange={onChange}
+        onChange={handleChange}
         //className="max-w-sm"
       />
     </div>
