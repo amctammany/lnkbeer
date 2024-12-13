@@ -80,7 +80,8 @@ export const updateWaterProfile = async (prev: any, formData: FormData) => {
 
   redirect(`/profiles/water/${res.slug}`);
 };
-export const removeWaterProfile = async (src: ExtendedWaterProfile) => {
+export const removeWaterProfile = async (src?: WaterProfile | null) => {
+  if (!src) return;
   await prisma.waterProfile.delete({
     where: {
       id: src.id,

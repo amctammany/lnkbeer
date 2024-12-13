@@ -1,11 +1,12 @@
 "use client";
 import { WaterProfile } from "@prisma/client";
-import { Activity, Redo, Save } from "lucide-react";
+import { Activity, Delete, ForkKnife, Redo, Save } from "lucide-react";
 import {
   AppBarDropdown,
   AppBarDropdownItem,
 } from "@/components/AppBarDropdown";
 import { AppBarItem } from "@/components/AppBarItem";
+import { removeWaterProfile } from "../../actions";
 
 export type WaterProfileFormActionsProps = {
   src?: WaterProfile | null;
@@ -21,12 +22,16 @@ export const WaterProfileFormActions = ({
     <AppBarItem key="save" text="Save" type="submit" icon={<Save />} />,
     <AppBarDropdown key="actions" text="Actions" icon={<Save />}>
       <AppBarDropdownItem
-        key="fork"
-        text="fork"
-        action={handleClick(() => {
-          console.log("fork");
-        })}
-        icon={<Save />}
+        text="Fork"
+        url={`/profiles/water/${src?.slug}/fork`}
+        icon={<ForkKnife />}
+      />
+      <AppBarDropdownItem
+        text="Remove"
+        action={() => {
+          removeWaterProfile(src);
+        }}
+        icon={<Delete />}
       />
     </AppBarDropdown>,
   ];

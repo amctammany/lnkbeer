@@ -3,8 +3,13 @@ import { AppBarItem, AppBarItemProps } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Card } from "@/components/ui/card";
 import { YeastInput } from "@/types/ingredient";
-import { Edit, FlaskConical } from "lucide-react";
+import { Activity, Delete, Edit, FlaskConical, Save } from "lucide-react";
 import AppBarTitle from "@/components/AppBarTitle";
+import {
+  AppBarDropdown,
+  AppBarDropdownItem,
+} from "@/components/AppBarDropdown";
+import { removeYeast } from "../../actions";
 
 export type YeastDisplayProps = {
   src?: YeastInput | null;
@@ -17,6 +22,25 @@ const YeastDisplayActions = ({ src }: { src?: YeastInput | null }) => {
       url={`/ingredients/yeasts/${src?.slug}/edit`}
       icon={<Edit />}
     />,
+    <AppBarDropdown key="actions" icon={<Activity />} text="Actions">
+      <AppBarDropdownItem
+        key="fork"
+        text="fork"
+        action={() => {
+          console.log("fork");
+        }}
+        icon={<Save />}
+      />
+
+      <AppBarDropdownItem
+        key="remove"
+        text="remove"
+        action={() => {
+          removeYeast(src?.id);
+        }}
+        icon={<Delete />}
+      />
+    </AppBarDropdown>,
   ];
 };
 

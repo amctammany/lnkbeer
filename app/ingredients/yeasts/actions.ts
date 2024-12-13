@@ -1,5 +1,5 @@
 "use server";
-import { YeastFlocculation, YeastForm, YeastType } from "@prisma/client";
+import { Yeast, YeastFlocculation, YeastForm, YeastType } from "@prisma/client";
 import { prisma } from "@/lib/client";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -61,4 +61,15 @@ export const updateYeast = async (prev: any, formData: FormData) => {
     data,
   });
   redirect(`/ingredients/yeasts/${res.slug}`);
+};
+export const removeYeast = async (id?: string) => {
+  if (!id) return;
+  await prisma.yeast.delete({
+    where: {
+      id,
+    },
+  });
+  //console.log(res);
+  redirect("/profiles/water");
+  //revalidatePath(`/profiles/water/${src?.slug}/edit`);
 };

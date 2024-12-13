@@ -29,7 +29,7 @@ export const AppBarDropdownItem = ({
     </>
   );
   return url ? (
-    <DropdownMenuItem className="w-full" key={text}>
+    <DropdownMenuItem asChild className="w-full" key={text}>
       <Link href={url}>{body}</Link>
     </DropdownMenuItem>
   ) : (
