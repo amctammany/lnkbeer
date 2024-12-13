@@ -19,7 +19,7 @@ export const AppBarLayout = ({
         {actions}
       </AppBar>
 
-      <div className={clsx("mt-16 ", className)}>{children}</div>
+      <div className={clsx("mt-10 ", className)}>{children}</div>
     </div>
   );
 };
