@@ -19,7 +19,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Input } from "@/components/Form/Input";
 import { fuzzyFilter } from "@/lib/fuzzyFilter";
 import clsx from "clsx";
@@ -62,7 +62,15 @@ export function DataTable<TData, TValue>({
     },
     getCoreRowModel: getCoreRowModel(),
   });
-
+  const onFilterChange = useMemo(
+    () => (event) => {
+      console.log(event.currentTarget);
+      return table
+        .getColumn(event.currentTarget.name)
+        ?.setFilterValue(event.target.value);
+    },
+    [table],
+  );
   return (
     <div className="w-full">
       <TableSearch table={table}>
@@ -71,9 +79,7 @@ export function DataTable<TData, TValue>({
             key={name}
             name={name}
             value={(table.getColumn(name)?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn(name)?.setFilterValue(event.target.value)
-            }
+            onChange={onFilterChange}
           />
         ))}
       </TableSearch>

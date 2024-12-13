@@ -15,6 +15,7 @@ export function FilterInput({ value, onChange, name }: FilterInputProps) {
       <TextField
         className="flex-grow bg-white"
         label={name}
+        name={name}
         placeholder="Search"
         value={value}
         onChange={onChange}
