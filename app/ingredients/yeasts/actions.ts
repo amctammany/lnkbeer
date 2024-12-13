@@ -62,11 +62,11 @@ export const updateYeast = async (prev: any, formData: FormData) => {
   });
   redirect(`/ingredients/yeasts/${res.slug}`);
 };
-export const removeYeast = async (id?: string) => {
-  if (!id) return;
+export const removeYeast = async (slug?: string) => {
+  if (!slug) return;
   await prisma.yeast.delete({
     where: {
-      id,
+      slug,
     },
   });
   //console.log(res);

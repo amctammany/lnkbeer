@@ -41,34 +41,19 @@ const columns: ColumnDef<Yeast>[] = [
 export type YeastsTableProps = {
   yeasts?: Yeast[];
 };
-const YeastsTableActions = () => {
-  return [
-    <AppBarItem
-      key="new"
-      text="New"
-      url="/ingredients/yeasts/new"
-      icon={<Plus />}
-    />,
-  ];
-};
 
 export function YeastsTable({ yeasts = [] }: YeastsTableProps) {
   return (
-    <AppBarLayout
-      title={<AppBarTitle icon={<FlaskConical />}>List</AppBarTitle>}
-      actions={<YeastsTableActions />}
-    >
-      <div className="relative overflow-auto">
-        <DataTable
-          data={yeasts}
-          columns={columns}
-          filters={[
-            { name: "manufacturer" },
-            { name: "flocculation", options: YeastFlocculation },
-          ]}
-        />
-      </div>
-    </AppBarLayout>
+    <div className="relative overflow-auto">
+      <DataTable
+        data={yeasts}
+        columns={columns}
+        filters={[
+          { name: "manufacturer" },
+          { name: "flocculation", options: YeastFlocculation },
+        ]}
+      />
+    </div>
   );
 }
 export default YeastsTable;

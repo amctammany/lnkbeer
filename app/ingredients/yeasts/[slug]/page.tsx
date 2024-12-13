@@ -1,4 +1,8 @@
+import { AppBarLayout } from "@/components/AppBarLayout";
+import AppBarTitle from "@/components/AppBarTitle";
+import { FlaskConical } from "lucide-react";
 import { YeastDisplay } from "../_components/YeastDisplay";
+import { YeastDisplayActions } from "../_components/YeastDisplay/YeastDisplayActions";
 import { getYeast } from "../queries";
 type YeastDisplayPageProps = {
   params: Promise<{
@@ -18,5 +22,12 @@ export default async function YeastDisplayPage({
 }: YeastDisplayPageProps) {
   const { slug } = await params;
   const yeast = await getYeast(slug);
-  return <YeastDisplay src={yeast} />;
+  return (
+    <AppBarLayout
+      title={<AppBarTitle icon={<FlaskConical />}>{yeast?.name}</AppBarTitle>}
+      actions={<YeastDisplayActions slug={slug} />}
+    >
+      <YeastDisplay src={yeast} />
+    </AppBarLayout>
+  );
 }
