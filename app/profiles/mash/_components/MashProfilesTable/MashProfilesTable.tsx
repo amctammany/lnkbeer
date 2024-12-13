@@ -2,28 +2,12 @@
 import { MashProfile } from "@prisma/client";
 //import { AppBarLayout } from "@/components/AppBarLayout";
 //import { DataTable } from "@/components/DataTable";
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  SortingState,
-  useReactTable,
-} from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
-import { Plus } from "lucide-react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { useState } from "react";
-import { fuzzyFilter } from "@/lib/fuzzyFilter";
+import { MashProfileRowActions } from "./MashProfileRowActions";
+import { DataTable } from "@/components/DataTable";
 const columns: ColumnDef<MashProfile>[] = [
   {
     accessorKey: "name",
@@ -38,6 +22,11 @@ const columns: ColumnDef<MashProfile>[] = [
       </Link>
     ),
   },
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: MashProfileRowActions<MashProfile>,
+  },
 ];
 export type MashProfilesTableProps = {
   mashProfiles?: MashProfile[];
@@ -45,28 +34,12 @@ export type MashProfilesTableProps = {
 export function MashProfilesTable({
   mashProfiles = [],
 }: MashProfilesTableProps) {
-  const [sorting, setSorting] = useState<SortingState>([]);
-
-  const table = useReactTable({
-    data: mashProfiles,
-    columns,
-    onSortingChange: setSorting,
-    getSortedRowModel: getSortedRowModel(),
-    //onColumnFiltersChange: setColumnFilters,
-    filterFns: {
-      fuzzy: fuzzyFilter,
-    },
-    //globalFilterFn: "fuzzy",
-    //getFilteredRowModel: getFilteredRowModel(),
-    //onGlobalFilterChange: setGlobalFilter,
-    state: {
-      //globalFilter,
-      sorting,
-      //columnFilters,
-    },
-    getCoreRowModel: getCoreRowModel(),
-  });
-
+  return (
+    <div className="relative overflow-auto">
+      <DataTable data={mashProfiles} columns={columns} />
+    </div>
+  );
+  /**
   return (
     <div className="overflow-auto">
       <Table className="flex-grow">
@@ -113,5 +86,6 @@ export function MashProfilesTable({
       </Table>
     </div>
   );
+     */
 }
 export default MashProfilesTable;

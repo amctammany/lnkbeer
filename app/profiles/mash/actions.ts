@@ -133,6 +133,17 @@ export const shiftMashStep = async (dir: -1 | 1, src: ExtendedMashStep) => {
     }
   }
 };
+const removeSchema = zfd.formData({
+  slug: zfd.text(),
+});
+export async function removeMashProfile(formData: FormData) {
+  const { slug } = removeSchema.parse(formData);
+  await prisma.mashProfile.delete({
+    where: { slug },
+  });
+  revalidatePath("/profiles/mash");
+}
+
 export const createMashStep = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, mashStepSchema);
   if (!valid.success) return valid;
