@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import React from "react";
+import {
+  TooltipContent,
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 export interface AppBarItemProps {
   text?: string;
@@ -18,18 +24,25 @@ export const AppBarItem = ({
   url,
 }: AppBarItemProps) => {
   const body = (
-    <Button
-      type={type ?? "button"}
-      className="hover:bg-primary/20 [&_svg]:size-6 lg:[&_svg]:size-6 p-1 lg:p-2 m-1 "
-      key={text}
-      variant="secondary"
-      {...(action ? { onClick: action } : {})}
-    >
-      {icon}
-      <span className="hidden text-sm lg:text-lg truncate sm:block">
-        {text}
-      </span>
-    </Button>
+    <TooltipProvider delayDuration={200}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            type={type ?? "button"}
+            className="hover:bg-primary/20 [&_svg]:size-6 lg:[&_svg]:size-6 p-1 lg:p-2 m-1 "
+            key={text}
+            variant="secondary"
+            {...(action ? { onClick: action } : {})}
+          >
+            {icon}
+            <span className="hidden text-sm lg:text-lg truncate sm:block">
+              {text}
+            </span>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>{text}</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
   return url ? <Link href={url}>{body}</Link> : body;
 };
