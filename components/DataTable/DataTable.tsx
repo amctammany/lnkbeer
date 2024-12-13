@@ -67,7 +67,14 @@ export function DataTable<TData, TValue>({
     <div className="w-full">
       <TableSearch table={table}>
         {filters?.map(({ name }) => (
-          <FilterInput key={name} name={name} table={table} />
+          <FilterInput
+            key={name}
+            name={name}
+            value={(table.getColumn(name)?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn(name)?.setFilterValue(event.target.value)
+            }
+          />
         ))}
       </TableSearch>
       <div className="overflow-auto">
