@@ -1,6 +1,6 @@
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { FermentableDisplay } from "../_components/FermentableDisplay";
-import { getFermentable } from "../queries";
+import { getFermentable, getFermentables } from "../queries";
 import { FermentableDisplayActions } from "../_components/FermentableDisplay/FermentableDisplayActions";
 import AppBarTitle from "@/components/AppBarTitle";
 import { Wheat } from "lucide-react";
@@ -17,6 +17,13 @@ export async function generateMetadata({
   return {
     title: `LNK Fermentable: ${slug}`,
   };
+}
+export async function generateStaticParams() {
+  const fermentables = await getFermentables();
+
+  return fermentables.map(({ slug }) => ({
+    slug,
+  }));
 }
 
 export default async function FermentableDisplayPage({
