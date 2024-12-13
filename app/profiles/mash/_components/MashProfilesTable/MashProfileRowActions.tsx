@@ -40,7 +40,6 @@ export function MashProfileRowActions<T>({ row }: CellContext<T, unknown>) {
             action={removeMashProfile}
           />
         </DropdownMenuItem>
-        <DropdownMenuItem>View payment details</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

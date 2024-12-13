@@ -1,4 +1,4 @@
-"use client";
+//"use client";
 import { WaterProfile } from "@prisma/client";
 import { Activity, Delete, ForkKnife, Redo, Save } from "lucide-react";
 import {
@@ -14,10 +14,6 @@ export type WaterProfileFormActionsProps = {
 export const WaterProfileFormActions = ({
   src,
 }: WaterProfileFormActionsProps) => {
-  const handleClick = (action) => async (e) => {
-    await action(src);
-  };
-
   return [
     <AppBarItem key="save" text="Save" type="submit" icon={<Save />} />,
     <AppBarDropdown key="actions" text="Actions" icon={<Save />}>

@@ -33,7 +33,9 @@ export function TableSearch<T>({ table, children }: TableSearchProps<T>) {
           </Button>
         </CollapsibleTrigger>
       </div>
-      <CollapsibleContent>{children} </CollapsibleContent>
+      <CollapsibleContent className="bg-slate-200/50">
+        {children}
+      </CollapsibleContent>
     </Collapsible>
   );
 }

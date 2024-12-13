@@ -14,7 +14,7 @@ export function FilterInput({ value, onChange, name }: FilterInputProps) {
   return (
     <div className="">
       <DebouncedInput
-        className="flex-grow bg-white"
+        className="flex-grow "
         label={name}
         name={name}
         placeholder="Search"

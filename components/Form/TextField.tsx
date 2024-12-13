@@ -6,12 +6,12 @@ import clsx from "clsx";
 
 export type TextFieldProps = InputProps & VariantProps<typeof textFieldStyles>;
 const textFieldStyles = cva(
-  "disabled:bg-slate-50 disabled:shadow-none disabled:text-slate-500 disabled:border-slate-200",
+  "disabled:bg-slate-50 disabled:shadow-none disabled:text-slate-500 disabled:border-slate-200 bg-white",
   {
     variants: {
       variant: {
-        error: ["border-2 border-red-500"],
-        default: ["block"],
+        error: ["border-2 border-red-500 "],
+        default: ["block border-2 "],
       },
       size: {
         default: ["w-full"],
