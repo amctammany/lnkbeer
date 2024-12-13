@@ -26,7 +26,7 @@ export function YeastDisplay({ src }: YeastDisplayProps) {
       title={<AppBarTitle icon={<FlaskConical />}>{src?.name}</AppBarTitle>}
       actions={<YeastDisplayActions src={src} />}
     >
-      <div className="pt-4">
+      <div className="">
         <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">
           <Prop label="Name" value={src?.name} />
           <Prop label="Notes" value={src?.notes} />

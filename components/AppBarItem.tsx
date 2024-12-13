@@ -20,14 +20,15 @@ export const AppBarItem = ({
   const body = (
     <Button
       type={type ?? "button"}
-      className="hover:bg-primary/20"
+      className="hover:bg-primary/20 [&_svg]:size-6 lg:[&_svg]:size-6 p-1 lg:p-2 m-1 lg:mx-4 lg:my-2"
       key={text}
-      size="sm"
       variant="secondary"
       {...(action ? { onClick: action } : {})}
     >
       {icon}
-      <span className="hidden truncate sm:block">{text}</span>
+      <span className="hidden text-sm lg:text-lg truncate sm:block">
+        {text}
+      </span>
     </Button>
   );
   return url ? <Link href={url}>{body}</Link> : body;
