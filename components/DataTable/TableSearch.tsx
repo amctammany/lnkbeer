@@ -8,6 +8,7 @@ import {
 } from "../ui/collapsible";
 import { Input } from "../ui/input";
 import { useReactTable } from "@tanstack/react-table";
+import clsx from "clsx";
 
 export type TableSearchProps<T> = {
   table: ReturnType<typeof useReactTable<T>>;
@@ -26,7 +27,12 @@ export function TableSearch<T>({ table, children }: TableSearchProps<T>) {
           onChange={(event) => table.setGlobalFilter(event.target.value)}
           //className="max-w-sm"
         />
-        <CollapsibleTrigger asChild>
+        <CollapsibleTrigger
+          asChild
+          className={clsx("hidden", {
+            block: Array.isArray(children) && children.length > 0,
+          })}
+        >
           <Button variant="secondary" className="mx-2">
             Advanced
             <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
