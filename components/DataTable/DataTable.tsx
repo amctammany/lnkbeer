@@ -25,6 +25,7 @@ import { fuzzyFilter } from "@/lib/fuzzyFilter";
 import clsx from "clsx";
 import TableSearch from "./TableSearch";
 import FilterInput from "./FilterInput";
+import FilterSelect from "./FilterSelect";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -64,7 +65,6 @@ export function DataTable<TData, TValue>({
   });
   const onFilterChange = useMemo(
     () => (event) => {
-      console.log(event.currentTarget);
       return table
         .getColumn(event.currentTarget.name)
         ?.setFilterValue(event.target.value);
@@ -74,14 +74,24 @@ export function DataTable<TData, TValue>({
   return (
     <div className="w-full">
       <TableSearch table={table}>
-        {filters?.map(({ name }) => (
-          <FilterInput
-            key={name}
-            name={name}
-            value={(table.getColumn(name)?.getFilterValue() as string) ?? ""}
-            onChange={onFilterChange}
-          />
-        ))}
+        {filters?.map(({ name, options }) =>
+          options ? (
+            <FilterSelect
+              key={name}
+              name={name}
+              value={(table.getColumn(name)?.getFilterValue() as string) ?? ""}
+              options={options}
+              onChange={onFilterChange}
+            />
+          ) : (
+            <FilterInput
+              key={name}
+              name={name}
+              value={(table.getColumn(name)?.getFilterValue() as string) ?? ""}
+              onChange={onFilterChange}
+            />
+          ),
+        )}
       </TableSearch>
       <div className="overflow-auto">
         <Table className="flex-grow">

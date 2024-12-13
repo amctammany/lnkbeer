@@ -1,5 +1,5 @@
 "use client";
-import { Yeast } from "@prisma/client";
+import { Yeast, YeastFlocculation } from "@prisma/client";
 import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
@@ -35,6 +35,7 @@ const columns: ColumnDef<Yeast>[] = [
   {
     accessorKey: "flocculation",
     header: Header<Yeast>,
+    filterFn: "equals",
   },
 ];
 export type YeastsTableProps = {
@@ -61,7 +62,10 @@ export function YeastsTable({ yeasts = [] }: YeastsTableProps) {
         <DataTable
           data={yeasts}
           columns={columns}
-          filters={[{ name: "manufacturer" }]}
+          filters={[
+            { name: "manufacturer" },
+            { name: "flocculation", options: YeastFlocculation },
+          ]}
         />
       </div>
     </AppBarLayout>
