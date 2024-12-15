@@ -14,17 +14,18 @@ datasource db {
 }
 
 model User {
-  id                String             @id @default(cuid())
-  name              String
-  email             String             @unique
-  emailVerified     DateTime?
-  image             String?
-  accounts          Account[]
-  sessions          Session[]
-  Style             Style[]
-  waterProfiles     WaterProfile[]
-  equipmentProfiles EquipmentProfile[]
-  mashProfiles      MashProfile[]
+  id                   String                @id @default(cuid())
+  name                 String
+  email                String                @unique
+  emailVerified        DateTime?
+  image                String?
+  accounts             Account[]
+  sessions             Session[]
+  Style                Style[]
+  waterProfiles        WaterProfile[]
+  equipmentProfiles    EquipmentProfile[]
+  mashProfiles         MashProfile[]
+  fermentationProfiles FermentationProfile[]
 }
 
 model Account {
@@ -310,6 +311,42 @@ model MashStep {
   rampTime      Float        @default(0)
   MashProfile   MashProfile? @relation(fields: [mashProfileId], references: [id])
   mashProfileId String?
+
+  //@@unique([mashProfileId, rank])
+}
+
+model FermentationProfile {
+  id          String                @id @default(cuid())
+  name        String
+  slug        String                @unique
+  description String?
+  steps       FermentationStep[]
+  userId      String?
+  owner       User?                 @relation(fields: [userId], references: [id])
+  forkedFrom  String?
+  origin      FermentationProfile?  @relation("origin", fields: [forkedFrom], references: [id])
+  forks       FermentationProfile[] @relation("origin")
+  //  Recipe          Recipe[]
+}
+
+enum FermentationStepType {
+  primary
+  secondary
+  tertiary
+  coldcrash
+  conditioning
+}
+
+model FermentationStep {
+  id                    String               @id @default(cuid())
+  type                  FermentationStepType @default(primary)
+  name                  String?
+  rank                  Int
+  temperature           Float
+  time                  Float
+  rampTime              Float                @default(0)
+  FermentationProfile   FermentationProfile? @relation(fields: [fermentationProfileId], references: [id])
+  fermentationProfileId String?
 
   //@@unique([mashProfileId, rank])
 }
