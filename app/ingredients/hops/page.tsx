@@ -12,7 +12,7 @@ export default async function HopsListPage() {
   const hops = await getHops();
   return (
     <AppBarLayout
-      title={<AppBarTitle icon={<Hop />}>List</AppBarTitle>}
+      title={<AppBarTitle icon={<Hop />}>Hops</AppBarTitle>}
       actions={<HopsTableActions />}
     >
       <HopsTable hops={hops} />;

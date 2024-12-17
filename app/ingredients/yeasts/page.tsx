@@ -12,7 +12,7 @@ export default async function YeastsListPage() {
   const yeasts = await getYeasts();
   return (
     <AppBarLayout
-      title={<AppBarTitle icon={<FlaskConical />}>List</AppBarTitle>}
+      title={<AppBarTitle icon={<FlaskConical />}>Yeasts</AppBarTitle>}
       actions={<YeastsTableActions />}
     >
       <YeastsTable yeasts={yeasts} />
