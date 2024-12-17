@@ -1,17 +1,16 @@
-import { AppBarItem } from "@/components/AppBarItem";
-import { AppBarLayout } from "@/components/AppBarLayout";
-import { Hop as HopType } from "@prisma/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CompositionTab from "./CompositionTab";
 import SummaryTab from "./SummaryTab";
-import { Edit, Hop as HopIcon, Save } from "lucide-react";
-import AppBarTitle from "@/components/AppBarTitle";
+import { Hop as HopIcon } from "lucide-react";
+import { getHop } from "@/app/ingredients/hops/queries";
+import { Suspense } from "react";
 
 export type HopDisplayProps = {
-  hop?: HopType | null;
+  slug: string;
 };
 
-export function HopDisplay({ hop }: HopDisplayProps) {
+export async function HopDisplay({ slug }: HopDisplayProps) {
+  const hop = await getHop(slug);
   if (!hop) return <div>Bad</div>;
   return (
     <Tabs defaultValue="summary" className="">
@@ -22,10 +21,14 @@ export function HopDisplay({ hop }: HopDisplayProps) {
       </TabsList>
 
       <TabsContent value="summary">
-        <SummaryTab src={hop} />
+        <Suspense fallback={<div>Loading</div>}>
+          <SummaryTab src={hop} />
+        </Suspense>
       </TabsContent>
       <TabsContent value="composition">
-        <CompositionTab src={hop} />
+        <Suspense fallback={<div>Loading</div>}>
+          <CompositionTab src={hop} />
+        </Suspense>
       </TabsContent>
     </Tabs>
   );

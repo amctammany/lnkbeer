@@ -1,9 +1,10 @@
 import { HopDisplay } from "@/app/ingredients/hops/_components/HopDisplay";
-import { getHop, getHops } from "@/app/ingredients/hops/queries";
+import { getHops } from "@/app/ingredients/hops/queries";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import AppBarTitle from "@/components/AppBarTitle";
 import { Hop } from "lucide-react";
 import { HopDisplayActions } from "@/app/ingredients/hops/_components/HopDisplay/HopDisplayActions";
+import { Suspense } from "react";
 interface HopDisplayPageProps {
   params: Promise<{
     slug: string;
@@ -24,13 +25,14 @@ export async function generateStaticParams() {
 }
 export default async function HopDisplayPage({ params }: HopDisplayPageProps) {
   const { slug } = await params;
-  const hop = await getHop(slug);
   return (
     <AppBarLayout
-      title={<AppBarTitle icon={<Hop />}>{hop?.name}</AppBarTitle>}
-      actions={<HopDisplayActions src={hop} />}
+      title={<AppBarTitle icon={<Hop />}>{slug}</AppBarTitle>}
+      actions={<HopDisplayActions slug={slug} />}
     >
-      <HopDisplay hop={hop} />;
+      <Suspense fallback={<div>loading?</div>}>
+        <HopDisplay slug={slug} />;
+      </Suspense>
     </AppBarLayout>
   );
 }
