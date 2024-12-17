@@ -1,6 +1,6 @@
 import {
   Anvil,
-  BookMarked,
+  BookType,
   ChartLine,
   ChevronRight,
   FlaskConical,
@@ -76,7 +76,7 @@ const items = [
       { title: "Mash", url: "/profiles/mash", icon: Thermometer },
     ],
   },
-  { title: "Styles", url: "/styles", icon: BookMarked },
+  { title: "Styles", url: "/styles", icon: BookType },
   {
     title: "Settings",
     url: "#",
