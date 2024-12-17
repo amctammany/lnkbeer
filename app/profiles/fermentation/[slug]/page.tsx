@@ -2,7 +2,7 @@ import { AppBarLayout } from "@/components/AppBarLayout";
 import { FermentationProfileDisplay } from "../_components/FermentationProfileDisplay";
 import { getFermentationProfile } from "../queries";
 import AppBarTitle from "@/components/AppBarTitle";
-import { Anvil } from "lucide-react";
+import { ChartLine } from "lucide-react";
 import FermentationProfileDisplayActions from "../_components/FermentationProfileDisplay/FermentationProfileDisplayActions";
 type FermentationProfileDisplayPageProps = {
   params: Promise<{
@@ -27,7 +27,9 @@ export default async function FermentationProfileDisplayPage({
   return (
     <AppBarLayout
       title={
-        <AppBarTitle icon={<Anvil />}>{fermentationProfile?.name}</AppBarTitle>
+        <AppBarTitle icon={<ChartLine />}>
+          {fermentationProfile?.name}
+        </AppBarTitle>
       }
       actions={<FermentationProfileDisplayActions src={fermentationProfile} />}
     >

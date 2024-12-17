@@ -1,17 +1,14 @@
 import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
+import AppBarTitle from "@/components/AppBarTitle";
 import { Prop } from "@/components/Prop";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import type { Style } from "@prisma/client";
-import { Edit } from "lucide-react";
-import Link from "next/link";
+import { BookType, Edit } from "lucide-react";
 import React from "react";
 export interface StyleDisplayProps {
   src?: Style | null;
 }
-const makeActions = (style: Style | undefined | null) => [
-  { text: "Edit", url: `/styles/${style?.slug}/edit` },
-];
 const StyleDisplayActions = ({ src }: StyleDisplayProps) => {
   return [
     <AppBarItem
@@ -25,10 +22,15 @@ const StyleDisplayActions = ({ src }: StyleDisplayProps) => {
 export function StyleDisplay({ src }: StyleDisplayProps) {
   return (
     <AppBarLayout
-      title={`Style: ${src?.identifier} : ${src?.name}`}
+      title={
+        <AppBarTitle icon={<BookType />}>
+          <span className="font-bold">{src?.identifier}</span>
+          <span className="font-light">{src?.name}</span>
+        </AppBarTitle>
+      }
       actions={<StyleDisplayActions src={src} />}
     >
-      <div className="p-10">
+      <div className="p-4">
         <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">
           <Prop label="Name" value={src?.name} />
           <Prop label="Overall" value={src?.overall} />
