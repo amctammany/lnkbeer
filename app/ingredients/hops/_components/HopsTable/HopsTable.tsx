@@ -1,13 +1,11 @@
 "use client";
 import { Hop } from "@prisma/client";
-import { AppBarLayout } from "@/components/AppBarLayout";
 import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
 import { MoreHorizontal, Plus } from "lucide-react";
-import { AppBarItem } from "@/components/AppBarItem";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -61,7 +59,6 @@ const columns: ColumnDef<Hop>[] = [
             <DropdownMenuItem>Fork</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>Remove</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -70,16 +67,6 @@ const columns: ColumnDef<Hop>[] = [
 ];
 export type HopsTableProps = {
   hops?: Hop[];
-};
-const HopsTableActions = () => {
-  return [
-    <AppBarItem
-      key="new"
-      url="/ingredients/hops/new"
-      text="New"
-      icon={<Plus />}
-    />,
-  ];
 };
 
 export function HopsTable({ hops = [] }: HopsTableProps) {
