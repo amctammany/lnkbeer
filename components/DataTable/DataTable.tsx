@@ -34,6 +34,7 @@ import TableSelection from "./TableSelection";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  selectable?: boolean;
   filters?: any[];
   children?: React.ReactNode | React.ReactNode[];
 }
@@ -42,6 +43,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   filters,
+  selectable = true,
   children,
 }: DataTableProps<TData, TValue>) {
   "use no memo";
@@ -52,7 +54,35 @@ export function DataTable<TData, TValue>({
 
   const table = useReactTable({
     data,
-    columns,
+    columns: selectable
+      ? [
+          {
+            id: "select",
+            header: ({ table }) => (
+              <Checkbox
+                checked={
+                  table.getIsAllPageRowsSelected() ||
+                  (table.getIsSomePageRowsSelected() && "indeterminate")
+                }
+                onCheckedChange={(value) =>
+                  table.toggleAllPageRowsSelected(!!value)
+                }
+                aria-label="Select all"
+              />
+            ),
+            cell: ({ row }) => (
+              <Checkbox
+                checked={row.getIsSelected()}
+                onCheckedChange={(value) => row.toggleSelected(!!value)}
+                aria-label="Select row"
+              />
+            ),
+            enableSorting: false,
+            enableHiding: false,
+          },
+          ...columns,
+        ]
+      : columns,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
