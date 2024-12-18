@@ -15,6 +15,7 @@ export type TableSearchProps<T> = {
   children?: React.ReactNode | React.ReactNode[];
 };
 export function TableSearch<T>({ table, children }: TableSearchProps<T>) {
+  "use no memo";
   return (
     <Collapsible className="group/collapsible">
       <div className="flex items-center px-2 py-4 ">

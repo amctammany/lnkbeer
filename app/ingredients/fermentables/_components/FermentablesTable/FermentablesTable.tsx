@@ -1,4 +1,5 @@
 "use client";
+"use no memo";
 import { Fermentable } from "@prisma/client";
 import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
@@ -87,6 +88,7 @@ export type FermentablesTableProps = {
 export function FermentablesTable({
   fermentables = [],
 }: FermentablesTableProps) {
+  "use no memo";
   return (
     <div className="relative overflow-auto">
       <DataTable data={fermentables} columns={cols} />

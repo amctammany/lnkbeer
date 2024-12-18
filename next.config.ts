@@ -5,7 +5,9 @@ const nextConfig: NextConfig = {
   /* config options here */
   experimental: {
     ppr: "incremental",
-    //reactCompiler: true,
+    reactCompiler: {
+      compilationMode: "infer",
+    },
     staleTimes: {
       dynamic: 30,
       static: 180,
