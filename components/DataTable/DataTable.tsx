@@ -7,6 +7,7 @@ import {
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
+  RowSelectionState,
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
@@ -19,19 +20,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  useCallback,
-  useMemo,
-  useState,
-} from "react";
-import { Input } from "@/components/Form/Input";
+import { useMemo, useState } from "react";
 import { fuzzyFilter } from "@/lib/fuzzyFilter";
 import clsx from "clsx";
 import TableSearch from "./TableSearch";
 import FilterInput from "./FilterInput";
 import FilterSelect from "./FilterSelect";
+import { Checkbox } from "../ui/checkbox";
+import { Badge } from "../Badge";
+import { Wheat } from "lucide-react";
+import TableSelection from "./TableSelection";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -49,6 +47,7 @@ export function DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState<any>([]);
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const table = useReactTable({
     data,
@@ -61,11 +60,14 @@ export function DataTable<TData, TValue>({
     },
     globalFilterFn: "fuzzy",
     getFilteredRowModel: getFilteredRowModel(),
+    onRowSelectionChange: setRowSelection,
+    enableRowSelection: true,
     onGlobalFilterChange: setGlobalFilter,
     state: {
       globalFilter,
       sorting,
       columnFilters,
+      rowSelection,
     },
     getCoreRowModel: getCoreRowModel(),
   });
