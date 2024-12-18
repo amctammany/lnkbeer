@@ -19,8 +19,9 @@ function IndeterminateCheckbox({
     if (typeof indeterminate === "boolean") {
       ref.current.indeterminate = !rest.checked && indeterminate;
     }
-  }, [ref, indeterminate]);
+  }, [ref, rest.checked, indeterminate]);
 
+  console.log(ref);
   return (
     <input
       type="checkbox"
@@ -30,69 +31,62 @@ function IndeterminateCheckbox({
     />
   );
 }
+const cols: ColumnDef<Fermentable>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: "name",
+    header: Header<Fermentable>,
+    cell: ({ getValue }) => (
+      <Link
+        className="hover:underline"
+        prefetch={false}
+        href={`/ingredients/fermentables/${slugify(getValue<string>(), { lower: true })}`}
+      >
+        {getValue<string>()}
+      </Link>
+    ),
+  },
+  {
+    accessorKey: "country",
+    header: Header<Fermentable>,
+  },
+  {
+    accessorKey: "potential",
+    header: Header<Fermentable>,
+  },
+  {
+    accessorKey: "power",
+    header: Header<Fermentable>,
+  },
+  { accessorKey: "usage", header: Header },
+];
 export type FermentablesTableProps = {
   fermentables?: Fermentable[];
 };
 export function FermentablesTable({
   fermentables = [],
 }: FermentablesTableProps) {
-  const cols: ColumnDef<Fermentable>[] = useMemo(
-    () => [
-      {
-        id: "select",
-        header: ({ table }) => (
-          <IndeterminateCheckbox
-            {...{
-              checked: table.getIsAllRowsSelected(),
-              indeterminate: table.getIsSomeRowsSelected(),
-              onChange: table.getToggleAllRowsSelectedHandler(),
-            }}
-            aria-label="Select all"
-          />
-        ),
-        cell: ({ row }) => (
-          <IndeterminateCheckbox
-            {...{
-              checked: row.getIsSelected(),
-              disabled: !row.getCanSelect(),
-              indeterminate: row.getIsSomeSelected(),
-              onChange: row.getToggleSelectedHandler(),
-            }}
-          />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-      },
-      {
-        accessorKey: "name",
-        header: Header<Fermentable>,
-        cell: ({ getValue }) => (
-          <Link
-            className="hover:underline"
-            prefetch={false}
-            href={`/ingredients/fermentables/${slugify(getValue<string>(), { lower: true })}`}
-          >
-            {getValue<string>()}
-          </Link>
-        ),
-      },
-      {
-        accessorKey: "country",
-        header: Header<Fermentable>,
-      },
-      {
-        accessorKey: "potential",
-        header: Header<Fermentable>,
-      },
-      {
-        accessorKey: "power",
-        header: Header<Fermentable>,
-      },
-      { accessorKey: "usage", header: Header },
-    ],
-    [],
-  );
-
   return (
     <div className="relative overflow-auto">
       <DataTable data={fermentables} columns={cols} />
