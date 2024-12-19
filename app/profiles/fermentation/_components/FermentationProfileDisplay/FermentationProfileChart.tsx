@@ -33,11 +33,19 @@ const chartConfig = {
 } satisfies ChartConfig;
 function generateChartData(src: ExtendedFermentationProfile) {
   const res = src.steps.reduce((acc, step) => {
-    const stepData = Array.from({ length: step.time }, (_, index) => ({
+    const prevTemp = acc.length === 0 ? 0 : acc[acc.length - 1].temperature;
+    const mod = prevTemp < step.temperature ? 1 : -1;
+    const rampData = Array.from({ length: step.rampTime }, (_, index) => ({
       day: index + acc.length,
+      temperature: prevTemp + mod * (index / step.rampTime) * step.temperature,
+    }));
+
+    const stepData = Array.from({ length: step.time }, (_, index) => ({
+      day: index + acc.length + step.rampTime,
       temperature: step.temperature,
     }));
-    return acc.concat(...stepData);
+
+    return acc.concat(...rampData, ...stepData);
   }, [] as any[]);
   return res;
 }
