@@ -5,10 +5,11 @@ import { Save } from "lucide-react";
 export type EquipmentProfileFormActionsProps = {
   src?: EquipmentProfile | null;
 };
-export const EquipmentProfileFormActions = ({
-  src,
-}: EquipmentProfileFormActionsProps) => {
-  return [<AppBarItem key="save" text="Save" type="submit" icon={<Save />} />];
-};
+export const EquipmentProfileFormActions =
+  ({}: EquipmentProfileFormActionsProps) => {
+    return [
+      <AppBarItem key="save" text="Save" type="submit" icon={<Save />} />,
+    ];
+  };
 
 export default EquipmentProfileFormActions;

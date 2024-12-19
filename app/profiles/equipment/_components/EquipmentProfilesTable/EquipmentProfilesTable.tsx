@@ -1,15 +1,11 @@
 "use client";
 import { EquipmentProfile } from "@prisma/client";
-import { AppBarLayout } from "@/components/AppBarLayout";
 import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
-import { EquipmentProfilesTableActions } from "./EquipmentProfilesTableActions";
 import { EquipmentProfileRowActions } from "./EquipmentProfileRowActions";
-import { Anvil } from "lucide-react";
-import AppBarTitle from "@/components/AppBarTitle";
 const columns: ColumnDef<EquipmentProfile>[] = [
   {
     accessorKey: "name",
@@ -38,14 +34,9 @@ export function EquipmentProfilesTable({
   equipmentProfiles = [],
 }: EquipmentProfilesTableProps) {
   return (
-    <AppBarLayout
-      title={<AppBarTitle icon={<Anvil />}>Equipment Profiles</AppBarTitle>}
-      actions={<EquipmentProfilesTableActions />}
-    >
-      <div className="relative overflow-auto">
-        <DataTable data={equipmentProfiles} columns={columns} />
-      </div>
-    </AppBarLayout>
+    <div className="relative overflow-auto">
+      <DataTable data={equipmentProfiles} columns={columns} />
+    </div>
   );
 }
 export default EquipmentProfilesTable;

@@ -1,4 +1,8 @@
+import { AppBarLayout } from "@/components/AppBarLayout";
+import AppBarTitle from "@/components/AppBarTitle";
+import { Anvil } from "lucide-react";
 import { EquipmentProfileDisplay } from "../_components/EquipmentProfileDisplay";
+import EquipmentProfileDisplayActions from "../_components/EquipmentProfileDisplay/EquipmentProfileDisplayActions";
 import { getEquipmentProfile } from "../queries";
 type EquipmentProfileDisplayPageProps = {
   params: Promise<{
@@ -20,5 +24,14 @@ export default async function EquipmentProfileDisplayPage({
 }: EquipmentProfileDisplayPageProps) {
   const { slug } = await params;
   const equipmentProfile = await getEquipmentProfile(slug);
-  return <EquipmentProfileDisplay src={equipmentProfile} />;
+  return (
+    <AppBarLayout
+      title={
+        <AppBarTitle icon={<Anvil />}>{equipmentProfile?.name}</AppBarTitle>
+      }
+      actions={<EquipmentProfileDisplayActions src={equipmentProfile} />}
+    >
+      <EquipmentProfileDisplay src={equipmentProfile} />
+    </AppBarLayout>
+  );
 }
