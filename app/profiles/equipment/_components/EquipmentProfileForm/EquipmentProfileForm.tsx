@@ -1,20 +1,13 @@
 "use client";
-import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
-import { Ca2, HCO3, MgSo4, Na, SO4 } from "@/components/Elements";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
 import { NumberField } from "@/components/Form/NumberField";
-import { RangeField, RangeFieldProp } from "@/components/Form/RangeField";
 import { Select } from "@/components/Form/Select";
-//import { NumberField } from "@/components/Form/NumberField";
-//import { RangeField } from "@/components/Form/RangeField";
-//import { RangeValue } from "@/components/Form/RangeSlider";
-//import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
 import { EquipmentProfile, SpargeMethodType } from "@prisma/client";
-import { Anvil, Save } from "lucide-react";
+import { Anvil } from "lucide-react";
 import EquipmentProfileFormActions from "./EquipmentProfileFormActions";
 import AppBarTitle from "@/components/AppBarTitle";
 
@@ -27,8 +20,10 @@ export function EquipmentProfileForm({
   src,
   action,
 }: EquipmentProfileFormProps) {
-  const { state, register, control, getValues, formAction } =
-    useActionForm<EquipmentProfile>(action, src!);
+  const { state, register, formAction } = useActionForm<EquipmentProfile>(
+    action,
+    src!,
+  );
   return (
     <Form className="flex" action={formAction}>
       <AppBarLayout
