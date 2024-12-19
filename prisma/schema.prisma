@@ -256,28 +256,47 @@ model WaterProfile {
   forks       WaterProfile[] @relation("origin")
 }
 
+enum SpargeMethodType {
+  default
+  batchSparge
+  flySparge
+  none
+}
+
 model EquipmentProfile {
-  id              String             @id @default(cuid())
-  userId          String?
-  owner           User?              @relation(fields: [userId], references: [id])
-  forkedFrom      String?
-  origin          EquipmentProfile?  @relation("origin", fields: [forkedFrom], references: [id])
-  forks           EquipmentProfile[] @relation("origin")
-  name            String
-  slug            String             @unique
-  description     String?
-  batchVolume     Float?
-  boilVolume      Float?
-  preboilVolume   Float?
-  boilTime        Float?
-  brewEfficiency  Float?
-  mashEfficiency  Float?
-  boilOffRate     Float?
-  trubLoss        Float?             @default(0)
-  mashLoss        Float?             @default(0)
-  fermenterLoss   Float?             @default(0)
-  grainAbsorption Float?             @default(0.5)
-  waterGrainRatio Float?             @default(1.5)
+  id                  String             @id @default(cuid())
+  userId              String?
+  owner               User?              @relation(fields: [userId], references: [id])
+  forkedFrom          String?
+  origin              EquipmentProfile?  @relation("origin", fields: [forkedFrom], references: [id])
+  forks               EquipmentProfile[] @relation("origin")
+  name                String
+  slug                String             @unique
+  description         String?
+  batchVolume         Float?
+  boilVolume          Float?
+  preboilVolume       Float?
+  boilTime            Float?
+  brewEfficiency      Float?
+  mashEfficiency      Float?
+  spargeMethod        SpargeMethodType?  @default(default)
+  boilOffRate         Float?
+  kettleTopOff        Float?             @default(0)
+  fermenterterTopOff  Float?             @default(0)
+  hopUtilization      Float?             @default(1)
+  mashTunDeadSpace    Float?             @default(0)
+  mashTunVolume       Float?
+  mashTunWeight       Float?
+  mashTunHeatCapacity Float?             @default(0.12)
+  mashTunMinimum      Float?
+  mashTunMaximum      Float?
+  spargeMinimum       Float?
+  spargeMaximum       Float?
+  trubLoss            Float?             @default(0)
+  mashLoss            Float?             @default(0)
+  fermenterLoss       Float?             @default(0)
+  grainAbsorption     Float?             @default(0.5)
+  waterGrainRatio     Float?             @default(1.5)
   //  Recipe          Recipe[]
 }
 

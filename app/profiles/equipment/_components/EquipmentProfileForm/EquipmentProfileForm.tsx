@@ -13,7 +13,7 @@ import { Select } from "@/components/Form/Select";
 //import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
-import { EquipmentProfile } from "@prisma/client";
+import { EquipmentProfile, SpargeMethodType } from "@prisma/client";
 import { Anvil, Save } from "lucide-react";
 import EquipmentProfileFormActions from "./EquipmentProfileFormActions";
 import AppBarTitle from "@/components/AppBarTitle";
@@ -42,6 +42,10 @@ export function EquipmentProfileForm({
               <Input type="hidden" {...register("id")} />
               <TextField {...register("name")} />
               <TextField {...register("description")} />
+              <Select
+                {...register("spargeMethod")}
+                options={SpargeMethodType}
+              />
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
                 <NumberField
                   step={0.01}
@@ -101,6 +105,27 @@ export function EquipmentProfileForm({
                   {...register("waterGrainRatio")}
                   suffix="gal"
                 />
+                <NumberField
+                  step={0.01}
+                  {...register("fermenterterTopOff")}
+                  suffix="gal"
+                />
+                <NumberField
+                  step={0.01}
+                  {...register("kettleTopOff")}
+                  suffix="gal"
+                />
+                <NumberField
+                  step={0.01}
+                  {...register("mashTunVolume")}
+                  suffix="gal"
+                />
+                <NumberField
+                  step={0.01}
+                  {...register("mashTunWeight")}
+                  suffix="lbs"
+                />
+                <NumberField step={0.01} {...register("mashTunHeatCapacity")} />
               </div>
             </div>
           </div>

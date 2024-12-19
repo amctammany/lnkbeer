@@ -12,15 +12,17 @@ import hops from "../data/hops.json";
 import grains from "../data/grains.json";
 import yeasts from "../data/yeasts.json";
 async function main() {
-  await prisma.account.deleteMany();
-  await prisma.session.deleteMany();
+  //await prisma.account.deleteMany();
+  //await prisma.session.deleteMany();
   await prisma.style.deleteMany();
   await prisma.waterProfile.deleteMany();
   await prisma.equipmentProfile.deleteMany();
   await prisma.mashStep.deleteMany();
   await prisma.mashProfile.deleteMany();
+  await prisma.fermentationStep.deleteMany();
+  await prisma.fermentationProfile.deleteMany();
 
-  await prisma.user.deleteMany();
+  //await prisma.user.deleteMany();
   await prisma.hopSensoryPanel.deleteMany();
   await prisma.hop.deleteMany();
   await prisma.fermentable.deleteMany();
@@ -121,6 +123,11 @@ async function main() {
       boilVolume: 4.5,
       mashEfficiency: 68,
       brewEfficiency: 5,
+      mashTunDeadSpace: 0,
+      mashTunHeatCapacity: 0.3,
+      mashTunVolume: 14,
+      mashTunWeight: 18,
+      spargeMethod: "default",
       boilTime: 60,
       forks: {
         create: {
@@ -157,6 +164,11 @@ async function main() {
       mashEfficiency: 68,
       brewEfficiency: 5,
       boilTime: 60,
+      mashTunDeadSpace: 0,
+      mashTunHeatCapacity: 0.3,
+      mashTunVolume: 8,
+      mashTunWeight: 8,
+      spargeMethod: "default",
     },
   });
 

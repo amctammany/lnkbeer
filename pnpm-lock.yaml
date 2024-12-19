@@ -10,13 +10,13 @@ importers:
     dependencies:
       '@auth/prisma-adapter':
         specifier: ^2.7.4
-        version: 2.7.4(@prisma/client@6.0.1(prisma@6.0.1))
+        version: 2.7.4(@prisma/client@6.1.0(prisma@6.1.0))
       '@hookform/resolvers':
         specifier: ^3.9.1
         version: 3.9.1(react-hook-form@7.53.2(react@19.0.0))
       '@prisma/client':
-        specifier: ^6.0.1
-        version: 6.0.1(prisma@6.0.1)
+        specifier: ^6.1.0
+        version: 6.1.0(prisma@6.1.0)
       '@radix-ui/react-avatar':
         specifier: ^1.1.1
         version: 1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -72,11 +72,11 @@ importers:
         specifier: ^0.462.0
         version: 0.462.0(react@19.0.0)
       next:
-        specifier: 15.1.1-canary.12
-        version: 15.1.1-canary.12(@babel/core@7.26.0)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 15.1.1-canary.13
+        version: 15.1.1-canary.13(@babel/core@7.26.0)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-auth:
         specifier: 5.0.0-beta.25
-        version: 5.0.0-beta.25(next@15.1.1-canary.12(@babel/core@7.26.0)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
+        version: 5.0.0-beta.25(next@15.1.1-canary.13(@babel/core@7.26.0)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -166,8 +166,8 @@ importers:
         specifier: ^8
         version: 8.4.49
       prisma:
-        specifier: ^6.0.1
-        version: 6.0.1
+        specifier: ^6.1.0
+        version: 6.1.0
       tailwindcss:
         specifier: ^3.4.1
         version: 3.4.15(ts-node@10.9.2(@types/node@20.17.8)(typescript@5.7.2))
@@ -561,56 +561,56 @@ packages:
   '@next/bundle-analyzer@15.0.3':
     resolution: {integrity: sha512-x7ZNvpoQPO0C5ZG//qVp21Qs3v6+C8LBJmdu9DKj4/NmjlnwoQ7dqRZ/nKZcwVhkFT7BHf+Qd5FaeHq9IDJvDQ==}
 
-  '@next/env@15.1.1-canary.12':
-    resolution: {integrity: sha512-8jh0yUEk+tGbgaZWBCU+kYD7y0sukwGTFdBBEbbwvXFSHuPcd65R6ss5HfxjNXqxx8gs4+uFVlUFfthLMc3Tlg==}
+  '@next/env@15.1.1-canary.13':
+    resolution: {integrity: sha512-UfKG9Z1cGzdpNfVs5fTbBwj7ksjZ8b8MZZdpPbBG/zzODpdSc0IjsGvCuBjxtFBniC0tJg1GJv8wu+vAaDTiWg==}
 
   '@next/eslint-plugin-next@15.0.3':
     resolution: {integrity: sha512-3Ln/nHq2V+v8uIaxCR6YfYo7ceRgZNXfTd3yW1ukTaFbO+/I8jNakrjYWODvG9BuR2v5kgVtH/C8r0i11quOgw==}
 
-  '@next/swc-darwin-arm64@15.1.1-canary.12':
-    resolution: {integrity: sha512-sOsUB3xS5dMPvw6+xM5h8n8F6c37UvmQS8VBr5l0R8XrcmcfHn13NdAWsxGptvePCdqK16m7m7rgHD60OuCvbg==}
+  '@next/swc-darwin-arm64@15.1.1-canary.13':
+    resolution: {integrity: sha512-1R4ovk4QIz5lBh6JSu5QJhWIjZBho8PrM+obpoPUtGDUQWFNpnEpPyOcZgJFZR5L8+sAf3zZxNzJI2wEyk+y6A==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
 
-  '@next/swc-darwin-x64@15.1.1-canary.12':
-    resolution: {integrity: sha512-EqXWaJfJD0H28SFSs6sh5iNHCWNHlv5ZWNwEXOYqfK7NG0KEx1NmhFzTiefWcvgE1Mwtbt1W4iZriiiLuVadTQ==}
+  '@next/swc-darwin-x64@15.1.1-canary.13':
+    resolution: {integrity: sha512-kIM8X64TIjcxA1b9EnI/bTVBul9L5VhredmPOKbI1GzocsJWYXwbXrsDHzGXD35TwNNsxdlHuf9DqTrHa0SJFw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
 
-  '@next/swc-linux-arm64-gnu@15.1.1-canary.12':
-    resolution: {integrity: sha512-2G2o06m/5NGQ+H9AiykuvfjEoC422NfzgcSSoP9Jo1RpWGUMcxH8/e46/Ljq6zrtRDXLlA8NqxE7KM8/xWHYIg==}
+  '@next/swc-linux-arm64-gnu@15.1.1-canary.13':
+    resolution: {integrity: sha512-ZYU5NnqWUW4L6d+/s0EMRBzvAPCLOdjXcQ5l0zRjPa0YP2kekqwL0KjKzCUfhTXolycRBiZK9oWXm7N+UuXX8A==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-arm64-musl@15.1.1-canary.12':
-    resolution: {integrity: sha512-iiDrM7WvT2gGI0ujEkDqOymQs+q2+EmdCgxnXyEX6pzErcXvsNH2KMHcNNlCbE2mXy0iXRjCJbJPOTc1y+EUsw==}
+  '@next/swc-linux-arm64-musl@15.1.1-canary.13':
+    resolution: {integrity: sha512-V9qlbw9Otf8so9gzzLSe8UJMGoeFwfPcGyY7T5QPEtzfluW5C+iGc26orFYVHt6Xqr09nXW7UnXr3kgtQY36pQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-x64-gnu@15.1.1-canary.12':
-    resolution: {integrity: sha512-xIj8FnwQReI7OZLqYHf0NpcseiLhJD69S8Ln5PjrRKQhrUV52YVZekULVNLXk/ZPJt3TtsRqJgEAkRlFhnpSxQ==}
+  '@next/swc-linux-x64-gnu@15.1.1-canary.13':
+    resolution: {integrity: sha512-BBMkgseFXqBmG4zv6hhfr26bX7Uv4EV04tfrrqP/8CoasYoOJq/wm7AWEuzP6XMUFfo/7Aiz4N0Qw4AO1m6sPw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-linux-x64-musl@15.1.1-canary.12':
-    resolution: {integrity: sha512-0OtOIleTRWZu4Xwia4t8vj4Blv8CIQJdOru/M4H7NOCIGeD362ecQEjE8RIric3jlWN/9FPXa4Evs2OJVpvLBw==}
+  '@next/swc-linux-x64-musl@15.1.1-canary.13':
+    resolution: {integrity: sha512-0qNru0aL8GVvjAhuYS09PWPMQFxBdN2fpdeG/Asb5d39VkIKjO8hEMI3EF8Hq7868Y1EmXFCLSu8Feekbg3uAA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-win32-arm64-msvc@15.1.1-canary.12':
-    resolution: {integrity: sha512-8fkPT1nliopZkbicjnocR33+cXzb8CGypIFMisnd6YROoF5484ot4LtLXMNzKRyrTJAYVXNq0uyPO4f87wVXwA==}
+  '@next/swc-win32-arm64-msvc@15.1.1-canary.13':
+    resolution: {integrity: sha512-5YNvo2FIS7jRVO611GVSEW/7kFAbyMNRqb6VCru2Gf1/moTMymHU/b0s57LdsSQVkkuMOL46nOnTfk/b7f66tw==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
 
-  '@next/swc-win32-x64-msvc@15.1.1-canary.12':
-    resolution: {integrity: sha512-FdXcNAn0C1GB1CZ6vKu/4h8bkcaQjoBiXxR7z0H2rSnd0TbMjnvA25+Ofxe+NuiYcjN05vEihPiFUp5RyYaglw==}
+  '@next/swc-win32-x64-msvc@15.1.1-canary.13':
+    resolution: {integrity: sha512-nUayjAJVr4DcKgP0avDX56uWW788Yk+4+mk2iJQ2UAQYi2UCyWe7EW9mknjMCUsu5qdEq1AWnBv2gtCJyO2Dqw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -645,8 +645,8 @@ packages:
   '@polka/url@1.0.0-next.28':
     resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==}
 
-  '@prisma/client@6.0.1':
-    resolution: {integrity: sha512-60w7kL6bUxz7M6Gs/V+OWMhwy94FshpngVmOY05TmGD0Lhk+Ac0ZgtjlL6Wll9TD4G03t4Sq1wZekNVy+Xdlbg==}
+  '@prisma/client@6.1.0':
+    resolution: {integrity: sha512-AbQYc5+EJKm1Ydfq3KxwcGiy7wIbm4/QbjCKWWoNROtvy7d6a3gmAGkKjK0iUCzh+rHV8xDhD5Cge8ke/kiy5Q==}
     engines: {node: '>=18.18'}
     peerDependencies:
       prisma: '*'
@@ -654,20 +654,20 @@ packages:
       prisma:
         optional: true
 
-  '@prisma/debug@6.0.1':
-    resolution: {integrity: sha512-jQylgSOf7ibTVxqBacnAlVGvek6fQxJIYCQOeX2KexsfypNzXjJQSS2o5s+Mjj2Np93iSOQUaw6TvPj8syhG4w==}
+  '@prisma/debug@6.1.0':
+    resolution: {integrity: sha512-0himsvcM4DGBTtvXkd2Tggv6sl2JyUYLzEGXXleFY+7Kp6rZeSS3hiTW9mwtUlXrwYbJP6pwlVNB7jYElrjWUg==}
 
-  '@prisma/engines-version@5.23.0-27.5dbef10bdbfb579e07d35cc85fb1518d357cb99e':
-    resolution: {integrity: sha512-JmIds0Q2/vsOmnuTJYxY4LE+sajqjYKhLtdOT6y4imojqv5d/aeVEfbBGC74t8Be1uSp0OP8lxIj2OqoKbLsfQ==}
+  '@prisma/engines-version@6.1.0-21.11f085a2012c0f4778414c8db2651556ee0ef959':
+    resolution: {integrity: sha512-PdJqmYM2Fd8K0weOOtQThWylwjsDlTig+8Pcg47/jszMuLL9iLIaygC3cjWJLda69siRW4STlCTMSgOjZzvKPQ==}
 
-  '@prisma/engines@6.0.1':
-    resolution: {integrity: sha512-4hxzI+YQIR2uuDyVsDooFZGu5AtixbvM2psp+iayDZ4hRrAHo/YwgA17N23UWq7G6gRu18NvuNMb48qjP3DPQw==}
+  '@prisma/engines@6.1.0':
+    resolution: {integrity: sha512-GnYJbCiep3Vyr1P/415ReYrgJUjP79fBNc1wCo7NP6Eia0CzL2Ot9vK7Infczv3oK7JLrCcawOSAxFxNFsAERQ==}
 
-  '@prisma/fetch-engine@6.0.1':
-    resolution: {integrity: sha512-T36bWFVGeGYYSyYOj9d+O9G3sBC+pAyMC+jc45iSL63/Haq1GrYjQPgPMxrEj9m739taXrupoysRedQ+VyvM/Q==}
+  '@prisma/fetch-engine@6.1.0':
+    resolution: {integrity: sha512-asdFi7TvPlEZ8CzSZ/+Du5wZ27q6OJbRSXh+S8ISZguu+S9KtS/gP7NeXceZyb1Jv1SM1S5YfiCv+STDsG6rrg==}
 
-  '@prisma/get-platform@6.0.1':
-    resolution: {integrity: sha512-zspC9vlxAqx4E6epMPMLLBMED2VD8axDe8sPnquZ8GOsn6tiacWK0oxrGK4UAHYzYUVuMVUApJbdXB2dFpLhvg==}
+  '@prisma/get-platform@6.1.0':
+    resolution: {integrity: sha512-ia8bNjboBoHkmKGGaWtqtlgQOhCi7+f85aOkPJKgNwWvYrT6l78KgojLekE8zMhVk0R9lWcifV0Pf8l3/15V0Q==}
 
   '@radix-ui/number@1.1.0':
     resolution: {integrity: sha512-V3gRzhVNU1ldS5XhAPTom1fOIo4ccrjjJgmE+LI2h/WaFpHmx0MQApT+KZHnx8abG6Avtfcz4WoEciMnpFT3HQ==}
@@ -2231,8 +2231,8 @@ packages:
       nodemailer:
         optional: true
 
-  next@15.1.1-canary.12:
-    resolution: {integrity: sha512-CSJXkPtNUOt3FptORfeOTCuCCJ0hdG9Lk6ZglTU21KMwlXWtVYkZyp/r0tmZUrXiJ8YIkccq4p8kpQIGbsQRhA==}
+  next@15.1.1-canary.13:
+    resolution: {integrity: sha512-tKcL1TSD7xX8m23vkcKiOzUGFjJw35swO9pEZ8q169OmA1YtQuzAcL9sriu86tpaIBVqPwNCfVhKQQBjUoOMaA==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
     hasBin: true
     peerDependencies:
@@ -2432,8 +2432,8 @@ packages:
   pretty-format@3.8.0:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
 
-  prisma@6.0.1:
-    resolution: {integrity: sha512-CaMNFHkf+DDq8zq3X/JJsQ4Koy7dyWwwtOKibkT/Am9j/tDxcfbg7+lB1Dzhx18G/+RQCMgjPYB61bhRqteNBQ==}
+  prisma@6.1.0:
+    resolution: {integrity: sha512-aFI3Yi+ApUxkwCJJwyQSwpyzUX7YX3ihzuHNHOyv4GJg3X5tQsmRaJEnZ+ZyfHpMtnyahhmXVfbTZ+lS8ZtfKw==}
     engines: {node: '>=18.18'}
     hasBin: true
 
@@ -2937,10 +2937,10 @@ snapshots:
       preact: 10.24.3
       preact-render-to-string: 6.5.11(preact@10.24.3)
 
-  '@auth/prisma-adapter@2.7.4(@prisma/client@6.0.1(prisma@6.0.1))':
+  '@auth/prisma-adapter@2.7.4(@prisma/client@6.1.0(prisma@6.1.0))':
     dependencies:
       '@auth/core': 0.37.4
-      '@prisma/client': 6.0.1(prisma@6.0.1)
+      '@prisma/client': 6.1.0(prisma@6.1.0)
     transitivePeerDependencies:
       - '@simplewebauthn/browser'
       - '@simplewebauthn/server'
@@ -3305,34 +3305,34 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@next/env@15.1.1-canary.12': {}
+  '@next/env@15.1.1-canary.13': {}
 
   '@next/eslint-plugin-next@15.0.3':
     dependencies:
       fast-glob: 3.3.1
 
-  '@next/swc-darwin-arm64@15.1.1-canary.12':
+  '@next/swc-darwin-arm64@15.1.1-canary.13':
     optional: true
 
-  '@next/swc-darwin-x64@15.1.1-canary.12':
+  '@next/swc-darwin-x64@15.1.1-canary.13':
     optional: true
 
-  '@next/swc-linux-arm64-gnu@15.1.1-canary.12':
+  '@next/swc-linux-arm64-gnu@15.1.1-canary.13':
     optional: true
 
-  '@next/swc-linux-arm64-musl@15.1.1-canary.12':
+  '@next/swc-linux-arm64-musl@15.1.1-canary.13':
     optional: true
 
-  '@next/swc-linux-x64-gnu@15.1.1-canary.12':
+  '@next/swc-linux-x64-gnu@15.1.1-canary.13':
     optional: true
 
-  '@next/swc-linux-x64-musl@15.1.1-canary.12':
+  '@next/swc-linux-x64-musl@15.1.1-canary.13':
     optional: true
 
-  '@next/swc-win32-arm64-msvc@15.1.1-canary.12':
+  '@next/swc-win32-arm64-msvc@15.1.1-canary.13':
     optional: true
 
-  '@next/swc-win32-x64-msvc@15.1.1-canary.12':
+  '@next/swc-win32-x64-msvc@15.1.1-canary.13':
     optional: true
 
   '@nodelib/fs.scandir@2.1.5':
@@ -3358,30 +3358,30 @@ snapshots:
 
   '@polka/url@1.0.0-next.28': {}
 
-  '@prisma/client@6.0.1(prisma@6.0.1)':
+  '@prisma/client@6.1.0(prisma@6.1.0)':
     optionalDependencies:
-      prisma: 6.0.1
+      prisma: 6.1.0
 
-  '@prisma/debug@6.0.1': {}
+  '@prisma/debug@6.1.0': {}
 
-  '@prisma/engines-version@5.23.0-27.5dbef10bdbfb579e07d35cc85fb1518d357cb99e': {}
+  '@prisma/engines-version@6.1.0-21.11f085a2012c0f4778414c8db2651556ee0ef959': {}
 
-  '@prisma/engines@6.0.1':
+  '@prisma/engines@6.1.0':
     dependencies:
-      '@prisma/debug': 6.0.1
-      '@prisma/engines-version': 5.23.0-27.5dbef10bdbfb579e07d35cc85fb1518d357cb99e
-      '@prisma/fetch-engine': 6.0.1
-      '@prisma/get-platform': 6.0.1
+      '@prisma/debug': 6.1.0
+      '@prisma/engines-version': 6.1.0-21.11f085a2012c0f4778414c8db2651556ee0ef959
+      '@prisma/fetch-engine': 6.1.0
+      '@prisma/get-platform': 6.1.0
 
-  '@prisma/fetch-engine@6.0.1':
+  '@prisma/fetch-engine@6.1.0':
     dependencies:
-      '@prisma/debug': 6.0.1
-      '@prisma/engines-version': 5.23.0-27.5dbef10bdbfb579e07d35cc85fb1518d357cb99e
-      '@prisma/get-platform': 6.0.1
+      '@prisma/debug': 6.1.0
+      '@prisma/engines-version': 6.1.0-21.11f085a2012c0f4778414c8db2651556ee0ef959
+      '@prisma/get-platform': 6.1.0
 
-  '@prisma/get-platform@6.0.1':
+  '@prisma/get-platform@6.1.0':
     dependencies:
-      '@prisma/debug': 6.0.1
+      '@prisma/debug': 6.1.0
 
   '@radix-ui/number@1.1.0': {}
 
@@ -5050,15 +5050,15 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  next-auth@5.0.0-beta.25(next@15.1.1-canary.12(@babel/core@7.26.0)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0):
+  next-auth@5.0.0-beta.25(next@15.1.1-canary.13(@babel/core@7.26.0)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0):
     dependencies:
       '@auth/core': 0.37.2
-      next: 15.1.1-canary.12(@babel/core@7.26.0)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      next: 15.1.1-canary.13(@babel/core@7.26.0)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
 
-  next@15.1.1-canary.12(@babel/core@7.26.0)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  next@15.1.1-canary.13(@babel/core@7.26.0)(babel-plugin-react-compiler@19.0.0-beta-201e55d-20241215)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
-      '@next/env': 15.1.1-canary.12
+      '@next/env': 15.1.1-canary.13
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
@@ -5068,14 +5068,14 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       styled-jsx: 5.1.6(@babel/core@7.26.0)(react@19.0.0)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 15.1.1-canary.12
-      '@next/swc-darwin-x64': 15.1.1-canary.12
-      '@next/swc-linux-arm64-gnu': 15.1.1-canary.12
-      '@next/swc-linux-arm64-musl': 15.1.1-canary.12
-      '@next/swc-linux-x64-gnu': 15.1.1-canary.12
-      '@next/swc-linux-x64-musl': 15.1.1-canary.12
-      '@next/swc-win32-arm64-msvc': 15.1.1-canary.12
-      '@next/swc-win32-x64-msvc': 15.1.1-canary.12
+      '@next/swc-darwin-arm64': 15.1.1-canary.13
+      '@next/swc-darwin-x64': 15.1.1-canary.13
+      '@next/swc-linux-arm64-gnu': 15.1.1-canary.13
+      '@next/swc-linux-arm64-musl': 15.1.1-canary.13
+      '@next/swc-linux-x64-gnu': 15.1.1-canary.13
+      '@next/swc-linux-x64-musl': 15.1.1-canary.13
+      '@next/swc-win32-arm64-msvc': 15.1.1-canary.13
+      '@next/swc-win32-x64-msvc': 15.1.1-canary.13
       babel-plugin-react-compiler: 19.0.0-beta-201e55d-20241215
       sharp: 0.33.5
     transitivePeerDependencies:
@@ -5241,9 +5241,9 @@ snapshots:
 
   pretty-format@3.8.0: {}
 
-  prisma@6.0.1:
+  prisma@6.1.0:
     dependencies:
-      '@prisma/engines': 6.0.1
+      '@prisma/engines': 6.1.0
     optionalDependencies:
       fsevents: 2.3.3
 

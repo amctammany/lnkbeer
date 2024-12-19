@@ -39,9 +39,30 @@ export function EquipmentProfileDisplay({ src }: EquipmentProfileDisplayProps) {
           <Prop label="Brew Efficiency" value={src?.brewEfficiency} unit="%" />
           <Prop label="Boil Off Rate" value={src?.boilOffRate} unit="gal/hr" />
           <Prop label="Pre-Boil Volume" value={src?.preboilVolume} unit="gal" />
+          <Prop
+            label="Fermenter Top Off"
+            value={src?.fermenterterTopOff}
+            unit="gal"
+          />
+          <Prop label="Kettle Top Off" value={src?.kettleTopOff} unit="gal" />
           <Prop label="Trub Loss" value={src?.trubLoss} unit="gal" />
           <Prop label="Mash Loss" value={src?.mashLoss} unit="gal" />
           <Prop label="Fermenter Loss" value={src?.fermenterLoss} unit="gal" />
+
+          <Prop label="Hop Utilization" value={src?.hopUtilization} unit="%" />
+          <Prop
+            label="Mash Tun Dead Space"
+            value={src?.mashTunDeadSpace}
+            unit="gal"
+          />
+          <Prop label="Mash Tun Volume" value={src?.mashTunVolume} unit="gal" />
+          <Prop label="Mash Tun Weight" value={src?.mashTunWeight} unit="gal" />
+          <Prop
+            label="Mash Tun Heat Capacity"
+            value={src?.mashTunHeatCapacity}
+            unit="gal"
+          />
+
           <Prop
             label="Grain Absorption"
             value={src?.grainAbsorption}
