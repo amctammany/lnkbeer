@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { HeaderContext, RowData } from "@tanstack/react-table";
 import { ArrowUp, ArrowDown } from "lucide-react";
@@ -5,7 +6,6 @@ import { ArrowUp, ArrowDown } from "lucide-react";
 
 export const Header = <T extends RowData = unknown, V = unknown>({
   column,
-  table,
 }: HeaderContext<T, V>): any => {
   const Comp = column.getIsSorted() === "desc" ? ArrowUp : ArrowDown;
   return (
