@@ -1,3 +1,4 @@
+"use client";
 import { Prop } from "@/components/Prop";
 import Section from "@/components/Section";
 import { ExtendedFermentationProfile } from "@/types/Profile";
@@ -7,7 +8,9 @@ import { Card } from "@/components/ui/card";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { ChartLine } from "lucide-react";
-const FermentationChart = dynamic(() => import("./FermentationProfileChart"));
+const FermentationChart = dynamic(() => import("./FermentationProfileChart"), {
+  ssr: false,
+});
 export type FermentationProfileDisplayProps = {
   src?: ExtendedFermentationProfile | null;
 };
