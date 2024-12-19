@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/chart";
 import { ExtendedFermentationProfile } from "@/types/Profile";
 import { TrendingUp } from "lucide-react";
-import { LineChart, CartesianGrid, XAxis, Line, YAxis } from "recharts";
+import { LineChart, CartesianGrid, XAxis, Line, YAxis, Label } from "recharts";
 
 const chartData = [
   { month: "January", desktop: 186 },
@@ -62,18 +62,29 @@ export function FermentationProfileChart({
             margin={{
               left: 12,
               right: 12,
+              bottom: 12,
             }}
           >
             <CartesianGrid vertical={false} />
-            <YAxis dataKey="temperature" label="Temperature" />
+            <YAxis
+              dataKey="temperature"
+              label={{
+                value: "Temperature",
+                angle: -90,
+                offet: 0,
+                position: "insideLeft",
+              }}
+            />
             <XAxis
               dataKey="day"
               //tickLine={false}
               //axisLine={false}
-              label="Duration (day)"
-              tickMargin={8}
+              //tickMargin={8}
+
               //tickFormatter={(value) => value.slice(0, 3)}
-            />
+            >
+              <Label value="Duration" offset={-8} position="insideBottom" />
+            </XAxis>
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
