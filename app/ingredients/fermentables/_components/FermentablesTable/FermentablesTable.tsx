@@ -25,6 +25,11 @@ const cols: ColumnDef<Fermentable>[] = [
     header: Header<Fermentable>,
   },
   {
+    accessorKey: "color",
+    header: Header<Fermentable>,
+  },
+
+  {
     accessorKey: "potential",
     header: Header<Fermentable>,
   },
