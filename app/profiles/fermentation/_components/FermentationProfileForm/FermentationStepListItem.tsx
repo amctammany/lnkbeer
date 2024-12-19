@@ -25,11 +25,9 @@ export function FermentationStepListItem({
   const title = src.name ? `${src.name} (${src.type})` : src.type;
   return (
     <div className="flex-grow h-full grid grid-cols-3 text-center *:my-auto">
-      <span className="capitalize">
-        {src.rank}: {title}
-      </span>
+      <span className="capitalize">{title}</span>
       <span>
-        {src.time} min (Ramp: {src.rampTime} min)
+        {src.time} days (Ramp: {src.rampTime} days)
       </span>
       <span>{src.temperature} F</span>
     </div>
