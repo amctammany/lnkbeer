@@ -2,11 +2,13 @@ import type { DefaultSession, NextAuthConfig } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "./lib/client";
+import { UserRoles } from "@prisma/client";
 declare module "next-auth" {
   /**
    * Returned by `auth`, `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
   interface Session {
+    role: UserRoles;
     user: {
       /** The user's postal address. */
       username: string;
@@ -50,6 +52,7 @@ export const authConfig = {
       //session.accessToken = token.accessToken;
       //session.user = token.user as any;
       session.user.id = token.sub!;
+      session.role = token.role as UserRoles;
 
       return session;
     },
@@ -61,6 +64,7 @@ export const authConfig = {
       });
       if (currentUser) {
         token.user = currentUser;
+        token.role = currentUser.role;
       }
       return token;
     },
