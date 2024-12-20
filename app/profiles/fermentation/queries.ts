@@ -1,8 +1,5 @@
 import { prisma } from "@/lib/client";
-import {
-  ExtendedFermentationProfile,
-  ExtendedFermentationStep,
-} from "@/types/Profile";
+import { ExtendedFermentationProfile } from "@/types/Profile";
 import { cache } from "react";
 
 export const getFermentationStep = cache(async (id: string) => {
