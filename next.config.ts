@@ -4,6 +4,7 @@ import analyze from "@next/bundle-analyzer";
 const nextConfig: NextConfig = {
   /* config options here */
   experimental: {
+    authInterrupts: true,
     ppr: "incremental",
     reactCompiler: {
       compilationMode: "infer",

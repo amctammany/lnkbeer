@@ -34,6 +34,17 @@ export const authConfig = {
   //callbacks: {},
   session: { strategy: "jwt" },
   callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const isOnDashboard = nextUrl.pathname.startsWith("/dashboard");
+      if (isOnDashboard) {
+        if (isLoggedIn) return true;
+        return false; // Redirect unauthenticated users to login page
+      } else if (isLoggedIn) {
+        return Response.redirect(new URL("/dashboard", nextUrl));
+      }
+      return true;
+    },
     async session({ session, token, user }) {
       // Send properties to the client, like an access_token and user id from a provider.
       //session.accessToken = token.accessToken;
