@@ -13,11 +13,10 @@ import {
 } from "@/app/profiles/fermentation/actions";
 import clsx from "clsx";
 import {
-  ExtendedFermentationProfile,
   ExtendedFermentationStep,
   FermentationStepInput,
 } from "@/types/Profile";
-import { FermentationProfile } from "@prisma/client";
+import { authorizeResource } from "@/lib/authorizeResource";
 type FermentationStepEditorPageProps = {
   params: Promise<{
     slug: string;
@@ -38,7 +37,11 @@ export default async function FermentationStepEditorPage({
   params,
 }: FermentationStepEditorPageProps) {
   const { slug, id } = await params;
-  const fermentationProfile = await getFermentationProfile(slug);
+  const fermentationProfile = await authorizeResource(
+    getFermentationProfile,
+    slug,
+  );
+  //const fermentationProfile = await getFermentationProfile(slug);
   const fermentationStep =
     id?.[0] !== undefined
       ? id?.[0] === "new"
@@ -53,7 +56,6 @@ export default async function FermentationStepEditorPage({
           } as ExtendedFermentationStep)
         : await getFermentationStep(id?.[0])
       : undefined;
-  console.log({ id, fermentationProfile, fermentationStep });
   return (
     <>
       <FermentationProfileForm

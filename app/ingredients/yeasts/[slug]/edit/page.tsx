@@ -1,7 +1,7 @@
 import { YeastEditor } from "@/app/ingredients/yeasts/_components/YeastEditor";
 import { getYeast } from "@/app/ingredients/yeasts/queries";
 import { updateYeast } from "../../actions";
-import { authorizeResource } from "@/lib/authorizeUser";
+import { authorizeResource } from "@/lib/authorizeResource";
 type YeastEditorPageProps = {
   params: Promise<{
     slug: string;
