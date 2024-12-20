@@ -6,6 +6,7 @@ import { cache } from "react";
 export const getHop = cache(async (slug: string) => {
   const hop = await prisma.hop.findFirst({
     where: { slug },
+    include: { hopSensoryPanels: true },
   });
   return hop;
 });

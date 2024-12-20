@@ -44,7 +44,7 @@ function parseHop(data: T) {
 }
 
 const schema = zfd.formData({
-  id: zfd.numeric(z.number().optional()),
+  id: zfd.text(z.string().optional()),
   name: zfd.text(z.string()),
   description: zfd.text(z.string().optional()),
   flavor: zfd.text(z.string().optional()),
@@ -71,7 +71,7 @@ const schema = zfd.formData({
   notes: zfd.text(z.string().optional()),
 });
 const removeSchema = zfd.formData({
-  id: zfd.numeric(),
+  id: zfd.text(),
 });
 export async function removeHop(formData: FormData) {
   const { id } = removeSchema.parse(formData);

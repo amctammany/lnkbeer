@@ -33,6 +33,7 @@ model User {
   equipmentProfiles    EquipmentProfile[]
   mashProfiles         MashProfile[]
   fermentationProfiles FermentationProfile[]
+  hopSensoryPanels     HopSensoryPanel[]
 }
 
 model Account {
@@ -112,7 +113,7 @@ enum HopUsage {
 }
 
 model Hop {
-  id                Int       @id @default(autoincrement())
+  id                String    @id @default(cuid())
   name              String
   slug              String    @unique
   description       String?
@@ -162,12 +163,12 @@ model Hop {
   substitutesString String[]
   styles            String[]
   //HopIngredient     HopIngredient[]
-  HopSensoryPanel   HopSensoryPanel[]
+  hopSensoryPanels  HopSensoryPanel[]
 }
 
 model HopSensoryPanel {
   id            Int     @id @default(autoincrement())
-  hopId         Int?
+  hopId         String?
   slug          String  @unique
   hop           Hop     @relation(fields: [slug], references: [slug])
   sweetAromatic Float
@@ -185,7 +186,11 @@ model HopSensoryPanel {
   woody         Float
   spicy         Float
   year          Int?
-  author        String?
+  producer      String?
+  batchInfo     String?
+  lotNumber     String?
+  userId        String?
+  user          User?   @relation(fields: [userId], references: [id])
   notes         String?
 }
 

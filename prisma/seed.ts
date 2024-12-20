@@ -1,4 +1,4 @@
-import slugify from "slugify";
+import slugify from "../lib/slugify";
 import {
   HopUsage,
   StyleCategory,
@@ -11,6 +11,7 @@ import styles from "../data/styles.json";
 import hops from "../data/hops.json";
 import grains from "../data/grains.json";
 import yeasts from "../data/yeasts.json";
+import yakima from "../data/yakima.json";
 async function main() {
   //await prisma.account.deleteMany();
   //await prisma.session.deleteMany();
@@ -206,7 +207,7 @@ async function main() {
       flavor: aromas,
       ...hop,
 
-      slug: slugify(hop.name, { lower: true }),
+      slug: slugify(hop.name),
       usage: HopUsage[usage?.toLowerCase() as HopUsage] || HopUsage.dual,
     })),
   });
@@ -216,6 +217,40 @@ async function main() {
       slug: slugify(grain.name, { lower: true }),
     })),
   });
+  const data = await Promise.allSettled(
+    yakima.map(async ({ flavorMap, aromas, ...hop }) => {
+      return await prisma.hop.upsert({
+        where: {
+          slug: slugify(hop.name),
+        },
+        update: {
+          ...hop,
+          hopSensoryPanels: {
+            upsert: {
+              where: {
+                slug: hop.slug,
+              },
+              update: { ...flavorMap },
+              create: {
+                ...flavorMap,
+              },
+            },
+          },
+          flavor: aromas,
+        },
+        create: {
+          ...hop,
+          flavor: aromas,
+          hopSensoryPanels: {
+            create: flavorMap,
+          },
+        },
+        include: {
+          hopSensoryPanels: true,
+        },
+      });
+    }),
+  );
 }
 main()
   .then(async () => {
