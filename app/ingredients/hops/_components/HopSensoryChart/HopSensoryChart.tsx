@@ -18,19 +18,11 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { ExtendedHop } from "@/types/ingredient";
-const chartData = [
-  { month: "January", desktop: 186 },
-  { month: "February", desktop: 305 },
-  { month: "March", desktop: 237 },
-  { month: "April", desktop: 273 },
-  { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
-];
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
-    color: "hsl(var(--chart-1))",
+  value: {
+    label: "Value",
+    color: "hsl(var(--chart-3))",
   },
 } satisfies ChartConfig;
 
@@ -92,20 +84,13 @@ export function HopSensoryChart({ src }: HopSensoryChartProps) {
             <PolarGrid />
             <Radar
               dataKey="value"
-              fill="var(--color-desktop)"
+              fill="var(--color-value)"
               fillOpacity={0.6}
             />
           </RadarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="flex items-center gap-2 leading-none text-muted-foreground">
-          January - June 2024
-        </div>
-      </CardFooter>
+      <CardFooter className="flex-col gap-2 text-sm">Legend?</CardFooter>
     </Card>
   );
 }
