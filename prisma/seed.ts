@@ -1,5 +1,6 @@
 import slugify from "../lib/slugify";
 import {
+  CharacteristicAroma,
   HopUsage,
   StyleCategory,
   YeastFlocculation,
@@ -216,6 +217,17 @@ async function main() {
       ...grain,
       slug: slugify(grain.name, { lower: true }),
     })),
+  });
+  const characteristicAromas: Omit<CharacteristicAroma, "id">[] = [
+    { group: "DriedFruit", name: "Date" },
+    { group: "DriedFruit", name: "Dried Apricot" },
+    { group: "DriedFruit", name: "Dried Fig" },
+    { group: "DriedFruit", name: "Raisin" },
+    { group: "Berry", name: "Black Currant" },
+    { group: "Berry", name: "Blueberry" },
+  ];
+  await prisma.characteristicAroma.createMany({
+    data: characteristicAromas,
   });
   const data = await Promise.allSettled(
     yakima.map(async ({ flavorMap, aromas, ...hop }) => {

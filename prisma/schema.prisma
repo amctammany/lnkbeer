@@ -171,20 +171,23 @@ model HopSensoryPanel {
   hopId         String?
   slug          String  @unique
   hop           Hop     @relation(fields: [slug], references: [slug])
-  sweetAromatic Float
-  berry         Float
-  stoneFruit    Float
-  pomme         Float
-  melon         Float
-  tropical      Float
-  citrus        Float
-  floral        Float
-  herbal        Float
-  vegetal       Float
-  grassy        Float
-  earthy        Float
-  woody         Float
-  spicy         Float
+  sweetAromatic Float   @default(0)
+  berry         Float   @default(0)
+  stoneFruit    Float   @default(0)
+  pomme         Float   @default(0)
+  melon         Float   @default(0)
+  tropical      Float   @default(0)
+  citrus        Float   @default(0)
+  floral        Float   @default(0)
+  herbal        Float   @default(0)
+  vegetal       Float   @default(0)
+  grassy        Float   @default(0)
+  earthy        Float   @default(0)
+  woody         Float   @default(0)
+  spicy         Float   @default(0)
+  onionGarlic   Float   @default(0)
+  driedFruit    Float   @default(0)
+  dank          Float   @default(0)
   year          Int?
   producer      String?
   batchInfo     String?
@@ -192,6 +195,35 @@ model HopSensoryPanel {
   userId        String?
   user          User?   @relation(fields: [userId], references: [id])
   notes         String?
+}
+
+enum AromaGroups {
+  DriedFruit
+  Berry
+  StoneFruit
+  Pomme
+  Melon
+  Tropical
+  Citrus
+  Floral
+  Herbal
+  Vegetal
+  Grassy
+  Earthy
+  Woody
+  Spicy
+  SweetAromatic
+  OnionGarlic
+  Dank
+  OffFlavors
+}
+
+model CharacteristicAroma {
+  id    String      @id @unique @default(cuid())
+  name  String
+  group AromaGroups
+
+  @@unique([name, group])
 }
 
 model Fermentable {
