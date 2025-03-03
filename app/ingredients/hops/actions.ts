@@ -121,6 +121,7 @@ export const createHopNote = async (prev: any, formData: FormData) => {
       user: { connect: { email: userEmail } },
       hop: { connect: { slug } },
       ...Object.keys(sensoryPanel).reduce((acc, k) => {
+        if (k === "id") return acc;
         acc[k] = sensoryPanel[k] / 10;
         return acc;
       }, {}),
