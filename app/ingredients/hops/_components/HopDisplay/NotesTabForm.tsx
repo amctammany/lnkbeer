@@ -101,7 +101,7 @@ export function NotesTabForm({ action, src }: NotesTabFormProps) {
     "driedFruit",
     "dank",
   ].reduce((acc, prop) => {
-    acc[prop] = src?.sensoryPanel[prop]?.toString() ?? "0";
+    acc[prop] = src?.sensoryPanel?.[prop]?.toString() ?? "0";
     return acc;
   }, {});
   const { state, register, control, getValues, formAction } =
