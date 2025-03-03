@@ -23,6 +23,7 @@ async function main() {
   await prisma.mashProfile.deleteMany();
   await prisma.fermentationStep.deleteMany();
   await prisma.fermentationProfile.deleteMany();
+  await prisma.characteristicAroma.deleteMany();
 
   //await prisma.user.deleteMany();
   await prisma.hopSensoryPanel.deleteMany();
@@ -240,7 +241,10 @@ async function main() {
           hopSensoryPanels: {
             upsert: {
               where: {
-                slug: hop.slug,
+                pId: {
+                  userId: "a",
+                  slug: hop.slug,
+                },
               },
               update: { ...flavorMap },
               create: {

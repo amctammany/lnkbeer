@@ -17,15 +17,22 @@ export async function NotesTab({ src }: NotesTabProps) {
   const hopNote =
     (await prisma.hopNote.findFirst({
       where: { userEmail: session?.user?.email, hopId: src?.id },
-    })) || ({ userEmail: session?.user?.email, hopId: src?.id } as HopNote);
+      include: { hop: true, sensoryPanel: true },
+    })) ||
+    ({
+      userEmail: session?.user?.email,
+      hopId: src?.id,
+      hop: { slug: src.slug },
+    } as any);
 
+  //console.log(hopNote);
   return (
     <div className="">
       <Card className="m-4 *:border-b-2 *:last-of-type:border-b-0 ">
         <h4>Notes</h4>
         <Prop label="Name" value={src.name} />
         <NotesTabForm
-          action={hopNote?.userEmail ? updateHopNote : createHopNote}
+          action={hopNote?.uid ? updateHopNote : createHopNote}
           src={hopNote}
         />
       </Card>

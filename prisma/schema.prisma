@@ -169,44 +169,50 @@ model Hop {
 }
 
 model HopSensoryPanel {
-  id            Int     @id @default(autoincrement())
+  id            Int      @id @default(autoincrement())
   hopId         String?
-  slug          String  @unique
-  hop           Hop     @relation(fields: [slug], references: [slug])
-  sweetAromatic Float   @default(0)
-  berry         Float   @default(0)
-  stoneFruit    Float   @default(0)
-  pomme         Float   @default(0)
-  melon         Float   @default(0)
-  tropical      Float   @default(0)
-  citrus        Float   @default(0)
-  floral        Float   @default(0)
-  herbal        Float   @default(0)
-  vegetal       Float   @default(0)
-  grassy        Float   @default(0)
-  earthy        Float   @default(0)
-  woody         Float   @default(0)
-  spicy         Float   @default(0)
-  onionGarlic   Float   @default(0)
-  driedFruit    Float   @default(0)
-  dank          Float   @default(0)
+  slug          String
+  hop           Hop      @relation(fields: [slug], references: [slug])
+  sweetAromatic Float    @default(0)
+  berry         Float    @default(0)
+  stoneFruit    Float    @default(0)
+  pomme         Float    @default(0)
+  melon         Float    @default(0)
+  tropical      Float    @default(0)
+  citrus        Float    @default(0)
+  floral        Float    @default(0)
+  herbal        Float    @default(0)
+  vegetal       Float    @default(0)
+  grassy        Float    @default(0)
+  earthy        Float    @default(0)
+  woody         Float    @default(0)
+  spicy         Float    @default(0)
+  onionGarlic   Float    @default(0)
+  driedFruit    Float    @default(0)
+  dank          Float    @default(0)
   year          Int?
   producer      String?
   batchInfo     String?
   lotNumber     String?
   userId        String?
-  user          User?   @relation(fields: [userId], references: [id])
+  user          User?    @relation(fields: [userId], references: [id])
   notes         String?
+  HopNote       HopNote?
+
+  @@unique(name: "pId", fields: [slug, userId])
 }
 
 model HopNote {
-  //id        Int     @id @default(autoincrement())
-  hopId     String
-  userEmail String
-  batch     String?
-  comments  String?
-  hop       Hop     @relation(fields: [hopId], references: [id])
-  user      User?   @relation(fields: [userEmail], references: [email])
+  uid            Int             @unique @default(autoincrement())
+  slug           String
+  hopId          String
+  sensoryPanelId Int             @unique
+  userEmail      String
+  batch          String?
+  comments       String?
+  hop            Hop             @relation(fields: [slug], references: [slug])
+  user           User            @relation(fields: [userEmail], references: [email])
+  sensoryPanel   HopSensoryPanel @relation(fields: [sensoryPanelId], references: [id])
 
   @@id(name: "id", [hopId, userEmail])
 }

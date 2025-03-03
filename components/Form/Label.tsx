@@ -20,7 +20,7 @@ const labelStyles = cva(
       variant: {
         default: ["mx-0 mb-0 p-2 block"],
         error: ["border-warning-500 border-2"],
-        inline: ["grid grid-cols-2"],
+        inline: ["grid auto-cols-auto grid-cols-2"],
       },
       inputSize: {
         default: ["px-2 py-1", ""],

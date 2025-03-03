@@ -2,6 +2,7 @@
 import { prisma } from "@/lib/client";
 import { validateSchema } from "@/lib/validateSchema";
 import { HopUsage } from "@prisma/client";
+import { connect, sensitiveHeaders } from "http2";
 import { redirect } from "next/navigation";
 import slugify from "slugify";
 import { z } from "zod";
@@ -43,12 +44,6 @@ function parseHop(data: T) {
   } as any;
 }
 
-const noteSchema = zfd.formData({
-  id: zfd.numeric(z.number().optional()),
-  userEmail: zfd.text(z.string()),
-  hopId: zfd.text(z.string()),
-  comments: zfd.text(z.string().optional()),
-});
 const schema = zfd.formData({
   id: zfd.text(z.string().optional()),
   name: zfd.text(z.string()),
@@ -86,6 +81,33 @@ export async function removeHop(formData: FormData) {
   });
   redirect("/recipes");
 }
+const noteSchema = zfd.formData({
+  id: zfd.numeric(z.number().optional()),
+  userEmail: zfd.text(z.string()),
+  slug: zfd.text(z.string()),
+  hopId: zfd.text(z.string()),
+  comments: zfd.text(z.string().optional()),
+  sensoryPanel: z.object({
+    id: zfd.numeric(z.number().optional()),
+    sweetAromatic: zfd.numeric(z.number().default(0)),
+    berry: zfd.numeric(z.number().default(0)),
+    stoneFruit: zfd.numeric(z.number().default(0)),
+    pomme: zfd.numeric(z.number().default(0)),
+    melon: zfd.numeric(z.number().default(0)),
+    tropical: zfd.numeric(z.number().default(0)),
+    citrus: zfd.numeric(z.number().default(0)),
+    floral: zfd.numeric(z.number().default(0)),
+    herbal: zfd.numeric(z.number().default(0)),
+    vegetal: zfd.numeric(z.number().default(0)),
+    grassy: zfd.numeric(z.number().default(0)),
+    earthy: zfd.numeric(z.number().default(0)),
+    woody: zfd.numeric(z.number().default(0)),
+    spicy: zfd.numeric(z.number().default(0)),
+    onionGarlic: zfd.numeric(z.number().default(0)),
+    driedFruit: zfd.numeric(z.number().default(0)),
+    dank: zfd.numeric(z.number().default(0)),
+  }),
+});
 
 export const createHopNote = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, noteSchema);
@@ -93,12 +115,26 @@ export const createHopNote = async (prev: any, formData: FormData) => {
   if (!valid.success) return valid;
   //const f = validateSchema(formData, schema);
   //const d = schema.parse(formData);
-  const data = valid.data;
+  const { id, userEmail, hopId, slug, comments, ...sensoryPanel } = valid.data;
+  const panel = await prisma.hopSensoryPanel.create({
+    data: { hop: { connect: { slug } }, ...sensoryPanel },
+  });
   //const data = parseHop(hop);
   const res = await prisma.hopNote.create({
-    data,
+    data: {
+      userEmail,
+      hopId,
+      slug,
+      sensoryPanelId: panel.id,
+      //hop: { connect: { id: hopId } },
+      comments,
+      //sensoryPanel: {
+      //connect: { id: panel.id },
+      //},
+    },
     include: {
-      hop: { select: { slug: true } },
+      sensoryPanel: true,
+      hop: true,
     },
   });
   redirect(`/ingredients/hops/${res.hop.slug}`);
@@ -106,12 +142,27 @@ export const createHopNote = async (prev: any, formData: FormData) => {
 export const updateHopNote = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, noteSchema);
   if (!valid.success) return valid;
-  const data = valid.data;
+  //console.log(valid.data);
+  const { sensoryPanel, slug, userEmail, ...data } = valid.data;
+  const es = await prisma.hopSensoryPanel.update({
+    where: { id: sensoryPanel?.id },
+    data: {
+      ...sensoryPanel,
+    },
+  });
+  console.log(es);
   const res = await prisma.hopNote.update({
-    where: { id: { hopId: data.hopId, userEmail: data.userEmail } },
-    data,
+    where: { id: { hopId: data.hopId, userEmail } },
+    data: {
+      ...data,
+      sensoryPanel: {
+        connect: { id: es.id },
+        //update: { where: { id: sensoryPanel?.id }, data: sensoryPanel },
+      },
+    },
     include: {
       hop: { select: { slug: true } },
+      sensoryPanel: true,
     },
   });
   redirect(`/ingredients/hops/${res.hop.slug}`);
