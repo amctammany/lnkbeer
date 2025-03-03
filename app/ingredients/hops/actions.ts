@@ -43,6 +43,12 @@ function parseHop(data: T) {
   } as any;
 }
 
+const noteSchema = zfd.formData({
+  id: zfd.numeric(z.number().optional()),
+  userEmail: zfd.text(z.string()),
+  hopId: zfd.text(z.string()),
+  comments: zfd.text(z.string().optional()),
+});
 const schema = zfd.formData({
   id: zfd.text(z.string().optional()),
   name: zfd.text(z.string()),
@@ -81,6 +87,35 @@ export async function removeHop(formData: FormData) {
   redirect("/recipes");
 }
 
+export const createHopNote = async (prev: any, formData: FormData) => {
+  const valid = validateSchema(formData, noteSchema);
+  console.log(valid);
+  if (!valid.success) return valid;
+  //const f = validateSchema(formData, schema);
+  //const d = schema.parse(formData);
+  const data = valid.data;
+  //const data = parseHop(hop);
+  const res = await prisma.hopNote.create({
+    data,
+    include: {
+      hop: { select: { slug: true } },
+    },
+  });
+  redirect(`/ingredients/hops/${res.hop.slug}`);
+};
+export const updateHopNote = async (prev: any, formData: FormData) => {
+  const valid = validateSchema(formData, noteSchema);
+  if (!valid.success) return valid;
+  const data = valid.data;
+  const res = await prisma.hopNote.update({
+    where: { id: { hopId: data.hopId, userEmail: data.userEmail } },
+    data,
+    include: {
+      hop: { select: { slug: true } },
+    },
+  });
+  redirect(`/ingredients/hops/${res.hop.slug}`);
+};
 export const createHop = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, schema);
   if (!valid.success) return valid;

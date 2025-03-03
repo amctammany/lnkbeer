@@ -34,6 +34,7 @@ model User {
   mashProfiles         MashProfile[]
   fermentationProfiles FermentationProfile[]
   hopSensoryPanels     HopSensoryPanel[]
+  hopNote              HopNote[]
 }
 
 model Account {
@@ -164,6 +165,7 @@ model Hop {
   styles            String[]
   //HopIngredient     HopIngredient[]
   hopSensoryPanels  HopSensoryPanel[]
+  hopNote           HopNote[]
 }
 
 model HopSensoryPanel {
@@ -197,14 +199,16 @@ model HopSensoryPanel {
   notes         String?
 }
 
-model hopNote {
-  id        Int     @id @default(autoincrement())
+model HopNote {
+  //id        Int     @id @default(autoincrement())
   hopId     String
   userEmail String
   batch     String?
-  comments  String
+  comments  String?
+  hop       Hop     @relation(fields: [hopId], references: [id])
+  user      User?   @relation(fields: [userEmail], references: [email])
 
-  @@unique([hopId, userEmail])
+  @@id(name: "id", [hopId, userEmail])
 }
 
 enum AromaGroups {

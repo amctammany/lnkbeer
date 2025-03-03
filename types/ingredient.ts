@@ -1,9 +1,16 @@
-import { Fermentable, Hop, HopSensoryPanel, Yeast } from "@prisma/client";
+import {
+  Fermentable,
+  Hop,
+  HopNote,
+  HopSensoryPanel,
+  Yeast,
+} from "@prisma/client";
 
 export type RangeValue = { min: number; max: number };
 export type ExtendedHop = Hop & {
   hopSensoryPanels?: HopSensoryPanel[];
 };
+export type HopNoteInput = HopNote & {};
 export type HopInput = Hop & {
   alphaRange?: RangeValue;
   betaRange?: RangeValue;
