@@ -131,88 +131,90 @@ export function NotesTabForm({ action, src }: NotesTabFormProps) {
 
         <RangeSelect
           {...register("sensoryPanel.stoneFruit", {
-            value: src?.sensoryPanel.stoneFruit.toString(),
+            value: src?.sensoryPanel?.stoneFruit.toString(),
           })}
         />
 
         <RangeSelect
           {...register("sensoryPanel.pomme", {
-            value: src?.sensoryPanel.pomme.toString(),
+            value: src?.sensoryPanel?.pomme.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.berry", {
-            value: src?.sensoryPanel.berry.toString(),
+            value: src?.sensoryPanel?.berry.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.melon", {
-            value: src?.sensoryPanel.melon.toString(),
+            value: src?.sensoryPanel?.melon.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.tropical", {
-            value: src?.sensoryPanel.tropical.toString(),
+            value: src?.sensoryPanel?.tropical.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.citrus", {
-            value: src?.sensoryPanel.citrus.toString(),
+            value: src?.sensoryPanel?.citrus.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.floral", {
-            value: src?.sensoryPanel.floral.toString(),
+            value: src?.sensoryPanel?.floral.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.herbal", {
-            value: src?.sensoryPanel.herbal.toString(),
+            value: src?.sensoryPanel?.herbal.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.vegetal", {
-            value: src?.sensoryPanel.vegetal.toString(),
+            value: src?.sensoryPanel?.vegetal.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.grassy", {
-            value: src?.sensoryPanel.grassy.toString(),
+            value: src?.sensoryPanel?.grassy.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.woody", {
-            value: src?.sensoryPanel.woody.toString(),
+            value: src?.sensoryPanel?.woody.toString(),
           })}
         />
 
         <RangeSelect
           {...register("sensoryPanel.earthy", {
-            value: src?.sensoryPanel.earthy.toString(),
+            value: src?.sensoryPanel?.earthy.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.spicy", {
-            value: src?.sensoryPanel.spicy.toString(),
+            value: src?.sensoryPanel?.spicy.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.onionGarlic", {
-            value: src?.sensoryPanel.onionGarlic.toString(),
+            value: src?.sensoryPanel?.onionGarlic.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.driedFruit", {
-            value: src?.sensoryPanel.driedFruit.toString(),
+            value: src?.sensoryPanel?.driedFruit.toString(),
           })}
         />
         <RangeSelect
           {...register("sensoryPanel.dank", {
-            value: src?.sensoryPanel.dank.toString(),
+            value: src?.sensoryPanel?.dank.toString(),
           })}
         />
       </div>
-      <input type="submit" />
+      <div>
+        <input type="submit" />
+      </div>
     </Form>
   );
 }

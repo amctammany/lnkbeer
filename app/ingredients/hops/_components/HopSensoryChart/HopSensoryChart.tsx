@@ -36,6 +36,7 @@ function makeChartData(src: ExtendedHop) {
       tropical,
       berry,
       stoneFruit,
+      dank,
       herbal,
       floral,
       grassy,
@@ -48,6 +49,7 @@ function makeChartData(src: ExtendedHop) {
         pomme,
         citrus,
         melon,
+        dank,
         tropical,
         berry,
         stoneFruit,
@@ -77,7 +79,7 @@ export function HopSensoryChart({ src }: HopSensoryChartProps) {
           config={chartConfig}
           className="mx-auto aspect-square max-h-[450px]"
         >
-          <RadarChart data={data?.[0]}>
+          <RadarChart data={data?.[data.length - 1]}>
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <PolarAngleAxis dataKey="aroma" tickLine={true} tickCount={6} />
             <PolarGrid />

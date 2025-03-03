@@ -115,9 +115,15 @@ export const createHopNote = async (prev: any, formData: FormData) => {
   if (!valid.success) return valid;
   //const f = validateSchema(formData, schema);
   //const d = schema.parse(formData);
-  const { id, userEmail, hopId, slug, comments, ...sensoryPanel } = valid.data;
+  const { id, userEmail, hopId, slug, comments, sensoryPanel } = valid.data;
   const panel = await prisma.hopSensoryPanel.create({
-    data: { hop: { connect: { slug } }, ...sensoryPanel },
+    data: {
+      hop: { connect: { slug } },
+      ...Object.keys(sensoryPanel).reduce((acc, k) => {
+        acc[k] = sensoryPanel[k] / 10;
+        return acc;
+      }, {}),
+    },
   });
   //const data = parseHop(hop);
   const res = await prisma.hopNote.create({
@@ -147,7 +153,13 @@ export const updateHopNote = async (prev: any, formData: FormData) => {
   const es = await prisma.hopSensoryPanel.update({
     where: { id: sensoryPanel?.id },
     data: {
-      ...sensoryPanel,
+      slug,
+      userEmail,
+      //...sensoryPanel,
+      ...Object.keys(sensoryPanel).reduce((acc, k) => {
+        acc[k] = sensoryPanel[k] / 10;
+        return acc;
+      }, {}),
     },
   });
   console.log(es);

@@ -195,7 +195,8 @@ model HopSensoryPanel {
   batchInfo     String?
   lotNumber     String?
   userId        String?
-  user          User?    @relation(fields: [userId], references: [id])
+  userEmail     String?
+  user          User?    @relation(fields: [userEmail], references: [email])
   notes         String?
   HopNote       HopNote?
 
