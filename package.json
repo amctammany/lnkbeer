@@ -10,7 +10,7 @@
     "start": "next start",
     "lint": "eslint . --fix",
     "precommit": "pnpm build",
-    "prepare": "husky install",
+    "prepare": "husky",
     "postinstall": "prisma generate && prisma db push --accept-data-loss"
   },
   "dependencies": {

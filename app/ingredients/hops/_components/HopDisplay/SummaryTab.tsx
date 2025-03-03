@@ -13,6 +13,8 @@ export function SummaryTab({ src }: SummaryTabProps) {
         <Prop label="Country" value={src.country} />
         <Prop label="Usage" value={src.usage} />
         <Prop label="Characteristics" value={src.characteristics} />
+        <Prop label="Alpha" value={src.alpha} />
+        <Prop label="Beta" value={src.beta} />
       </Card>
     </div>
   );
