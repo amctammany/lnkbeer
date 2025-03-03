@@ -79,17 +79,24 @@ const RangeSelect = ({
   );
 };
 export function NotesTabForm({ action, src }: NotesTabFormProps) {
+  const sensoryPanel = [
+    "stoneFruit",
+    "berry",
+    "pomme",
+    "melon",
+    "tropical",
+    "",
+  ].reduce((acc, prop) => {
+    acc[prop] = src?.sensoryPanel[prop]?.toString() ?? "0";
+    return acc;
+  }, {});
   const { state, register, control, getValues, formAction } =
     useActionForm<HopNoteInput>(
       action,
       {
         ...src,
         //stoneFruit: src?.sensoryPanel.stoneFruit.toString(),
-        sensoryPanel: {
-          ...src?.sensoryPanel,
-          stoneFruit: src?.sensoryPanel.stoneFruit?.toString(),
-          pomme: src?.sensoryPanel.pomme?.toString(),
-        },
+        sensoryPanel,
       }!,
     );
 
@@ -112,11 +119,77 @@ export function NotesTabForm({ action, src }: NotesTabFormProps) {
             value: src?.sensoryPanel.stoneFruit.toString(),
           })}
         />
+
         <RangeSelect
           {...register("sensoryPanel.pomme", {
             value: src?.sensoryPanel.pomme.toString(),
           })}
-          //value={src?.sensoryPanel.pomme.toString()}
+        />
+        <RangeSelect
+          {...register("sensoryPanel.berry", {
+            value: src?.sensoryPanel.berry.toString(),
+          })}
+        />
+        <RangeSelect
+          {...register("sensoryPanel.melon", {
+            value: src?.sensoryPanel.melon.toString(),
+          })}
+        />
+        <RangeSelect
+          {...register("sensoryPanel.tropical", {
+            value: src?.sensoryPanel.tropical.toString(),
+          })}
+        />
+        <RangeSelect
+          {...register("sensoryPanel.citrus", {
+            value: src?.sensoryPanel.citrus.toString(),
+          })}
+        />
+        <RangeSelect
+          {...register("sensoryPanel.floral", {
+            value: src?.sensoryPanel.floral.toString(),
+          })}
+        />
+        <RangeSelect
+          {...register("sensoryPanel.herbal", {
+            value: src?.sensoryPanel.herbal.toString(),
+          })}
+        />
+        <RangeSelect
+          {...register("sensoryPanel.vegetal", {
+            value: src?.sensoryPanel.vegetal.toString(),
+          })}
+        />
+        <RangeSelect
+          {...register("sensoryPanel.grassy", {
+            value: src?.sensoryPanel.grassy.toString(),
+          })}
+        />
+
+        <RangeSelect
+          {...register("sensoryPanel.earthy", {
+            value: src?.sensoryPanel.earthy.toString(),
+          })}
+        />
+        <RangeSelect
+          {...register("sensoryPanel.spicy", {
+            value: src?.sensoryPanel.spicy.toString(),
+          })}
+        />
+        <RangeSelect
+          {...register("sensoryPanel.onionGarlic", {
+            value: src?.sensoryPanel.onionGarlic.toString(),
+          })}
+        />
+        <RangeSelect
+          {...register("sensoryPanel.driedFruit", {
+            value: src?.sensoryPanel.driedFruit.toString(),
+          })}
+        />
+        <RangeSelect
+          {...register("sensoryPanel.dank", {
+            value: src?.sensoryPanel.dank.toString(),
+          })}
         />
         <input type="submit" />
       </div>
