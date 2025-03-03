@@ -9,10 +9,11 @@ import { Hop, HopNote, HopSensoryPanel } from "@prisma/client";
 import { useController, UseFormRegisterReturn } from "react-hook-form";
 import { TextField } from "@/components/Form/TextField";
 import { Slider } from "@/components/ui/slider";
+import { useState } from "react";
 type HopNoteInput = Partial<HopNote> & {
   id?: any;
   slug?: any;
-  sensoryPanel?: Partial<HopSensoryPanel>;
+  sensoryPanel?: any; // Partial<HopSensoryPanel>;
   flavor?: number;
   stoneFruit?: number;
   pomme?: number;
@@ -47,21 +48,30 @@ const RangeSelecter = ({ control, name, ...props }: any) => {
 const RangeSelect = ({
   value,
   ...props
-}: UseFormRegisterReturn & { value: any }) => {
+}: UseFormRegisterReturn & { value?: any }) => {
   //console.log(props);
+  //const [v, setV] = useState(value);
+  //const handleChange = (e) => {
+  //console.log(e.target.name, e.target.value);
+  //setV(e.target.value);
+  //};
+
   return (
     <Label className="items-center " label={<b>{props.name}</b>}>
       {Array.from({ length: 11 }).map((_, i) => (
         <div key={i} className="flex max-w-8 items-center space-y-0 space-x-2 ">
-          <label htmlFor={`opt-${i}`}>
+          <label htmlFor={`opt-${props.name}-${i}`}>
             <b>{i}</b>
           </label>
           <input
             {...props}
             type="radio"
-            id={`opt-${i}`}
+            key={`opt-${props.name}-${i}`}
+            id={`opt-${props.name}-${i}`}
+            //name={props.name}
+            //onChange={handleChange}
             value={i.toString()}
-            checked={value.toString() === i.toString()}
+            //checked={props.ref.current.toString() === i.toString()}
           />
         </div>
       ))}
@@ -70,7 +80,18 @@ const RangeSelect = ({
 };
 export function NotesTabForm({ action, src }: NotesTabFormProps) {
   const { state, register, control, getValues, formAction } =
-    useActionForm<HopNoteInput>(action, src!);
+    useActionForm<HopNoteInput>(
+      action,
+      {
+        ...src,
+        //stoneFruit: src?.sensoryPanel.stoneFruit.toString(),
+        sensoryPanel: {
+          ...src?.sensoryPanel,
+          stoneFruit: src?.sensoryPanel.stoneFruit?.toString(),
+          pomme: src?.sensoryPanel.pomme?.toString(),
+        },
+      }!,
+    );
 
   //console.log(src);
   return (
@@ -86,17 +107,17 @@ export function NotesTabForm({ action, src }: NotesTabFormProps) {
         <div>
           <TextArea {...register("comments")} />
         </div>
-        <RangeSelecter
-          control={control}
-          //{...register("sensoryPanel.stoneFruit")}
-          //value={getValues("sensoryPanel.stoneFruit")}
+        <RangeSelect
+          {...register("sensoryPanel.stoneFruit", {
+            value: src?.sensoryPanel.stoneFruit.toString(),
+          })}
         />
         <RangeSelect
-          {...register("sensoryPanel.pomme")}
-          value={src?.sensoryPanel.pomme.toString()}
+          {...register("sensoryPanel.pomme", {
+            value: src?.sensoryPanel.pomme.toString(),
+          })}
+          //value={src?.sensoryPanel.pomme.toString()}
         />
-        <Slider {...register("sensoryPanel.onionGarlic")} min={0} max={10} />
-        <Slider {...register("sensoryPanel.sweetAromatic")} min={0} max={10} />
         <input type="submit" />
       </div>
     </Form>
