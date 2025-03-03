@@ -152,6 +152,7 @@ export const updateHopNote = async (prev: any, formData: FormData) => {
   if (!valid.success) return valid;
   //console.log(valid.data);
   const { sensoryPanel, slug, userEmail, ...data } = valid.data;
+  if (!sensoryPanel.id) return;
   const es = await prisma.hopSensoryPanel.update({
     where: { id: sensoryPanel?.id },
     include: { user: true },
