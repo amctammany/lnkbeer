@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CompositionTab from "./CompositionTab";
+import NotesTab from "./NotesTab";
 import SummaryTab from "./SummaryTab";
 import SensoryTab from "./SensoryTab";
 import { Hop as HopIcon } from "lucide-react";
@@ -20,6 +21,7 @@ export async function HopDisplay({ slug }: HopDisplayProps) {
         <TabsTrigger value="summary">Summary</TabsTrigger>
         <TabsTrigger value="composition">Oil Composition</TabsTrigger>
         <TabsTrigger value="sensory">Sensory</TabsTrigger>
+        <TabsTrigger value="notes">Notes</TabsTrigger>
       </TabsList>
 
       <TabsContent value="summary">
@@ -35,6 +37,11 @@ export async function HopDisplay({ slug }: HopDisplayProps) {
       <TabsContent value="sensory">
         <Suspense fallback={<div>Loading</div>}>
           <SensoryTab src={hop} />
+        </Suspense>
+      </TabsContent>
+      <TabsContent value="notes">
+        <Suspense fallback={<div>Loading</div>}>
+          <NotesTab src={hop} />
         </Suspense>
       </TabsContent>
     </Tabs>

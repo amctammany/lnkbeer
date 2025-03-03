@@ -197,6 +197,16 @@ model HopSensoryPanel {
   notes         String?
 }
 
+model hopNote {
+  id        Int     @id @default(autoincrement())
+  hopId     String
+  userEmail String
+  batch     String?
+  comments  String
+
+  @@unique([hopId, userEmail])
+}
+
 enum AromaGroups {
   DriedFruit
   Berry
