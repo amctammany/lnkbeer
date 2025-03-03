@@ -14,7 +14,7 @@ export const Header = <T extends RowData = unknown, V = unknown>({
       className="w-full text-left flex"
       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
     >
-      <span className="capitalize flex-grow">{column.id}</span>
+      <span className="capitalize grow">{column.id}</span>
       {column.getIsSorted() && <Comp className="ml-2 h-4 w-4" />}
     </Button>
   );

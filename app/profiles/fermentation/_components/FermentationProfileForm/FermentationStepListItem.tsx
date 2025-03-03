@@ -24,7 +24,7 @@ export function FermentationStepListItem({
 }: FermentationStepListItemProps) {
   const title = src.name ? `${src.name} (${src.type})` : src.type;
   return (
-    <div className="flex-grow h-full grid grid-cols-3 text-center *:my-auto">
+    <div className="grow h-full grid grid-cols-3 text-center *:my-auto">
       <span className="capitalize">{title}</span>
       <span>
         {src.time} days (Ramp: {src.rampTime} days)

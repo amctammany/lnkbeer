@@ -42,7 +42,7 @@ export function MashProfilesTable({
   /**
   return (
     <div className="overflow-auto">
-      <Table className="flex-grow">
+      <Table className="grow">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>

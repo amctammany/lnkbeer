@@ -17,7 +17,7 @@ export const StyleListItem = ({ style }: StyleListItemProps) => {
         <div className="text-lg ">{style.identifier}</div>
       </ListItemIcon>
       <ListItemText
-        className="flex-grow"
+        className="grow"
         primary={style.name}
         secondary={style.category}
       />

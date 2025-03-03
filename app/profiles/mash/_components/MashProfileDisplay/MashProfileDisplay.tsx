@@ -12,7 +12,7 @@ export function MashProfileDisplay({ src }: MashProfileDisplayProps) {
   return (
     <div className="gap-2 lg:w-9/12 mx-auto">
       <Section title="General" className="m-4  ">
-        <div className="p-0 *:border-b-2 last-of-type:*:border-b-0">
+        <div className="p-0 *:border-b-2 *:last-of-type:border-b-0">
           <Prop label="Name" value={src?.name} />
           <Prop label="Description" value={src?.description} />
           <Prop

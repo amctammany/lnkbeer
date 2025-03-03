@@ -94,8 +94,8 @@ export function HopEditor({ hop, action }: HopEditorProps) {
       >
         <div className="grid grid-cols-4 gap-2">
           <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 md:col-span-2">
-            <span className="flex-shrink p-2 block bg-slate-300">General</span>
-            <div className="flex-grow">
+            <span className="shrink p-2 block bg-slate-300">General</span>
+            <div className="grow">
               <Input
                 type="hidden"
                 {...register("id", { valueAsNumber: true })}
@@ -111,10 +111,8 @@ export function HopEditor({ hop, action }: HopEditorProps) {
           </div>
 
           <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 md:col-span-2">
-            <span className="flex-shrink p-2 block bg-slate-300">
-              Composition
-            </span>
-            <div className="flex-grow">
+            <span className="shrink p-2 block bg-slate-300">Composition</span>
+            <div className="grow">
               <NumberField suffix="%" {...register("alpha")} step={0.01} />
               <NumberField {...register("beta")} step={0.01} />
               <NumberField {...register("caryophyllene")} step={0.01} />

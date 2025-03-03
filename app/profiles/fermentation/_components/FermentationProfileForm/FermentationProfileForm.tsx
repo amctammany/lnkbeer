@@ -63,7 +63,7 @@ export function FermentationProfileForm({
                 >
                   <div className="flex w-full p-1">
                     <Link
-                      className="flex-grow "
+                      className="grow "
                       href={`/profiles/fermentation/${src?.slug}/edit/${step.id}`}
                       scroll={false}
                     >

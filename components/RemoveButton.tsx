@@ -18,7 +18,7 @@ export const RemoveButton = ({
         variant="destructive"
         type="submit"
         size="sm"
-        className="w-full flex-grow"
+        className="w-full grow"
         //className="border-red-300 border hover:text-red-300  hover:bg-white bg-red-300 text-white rounded-md p-2"
       >
         <Trash />

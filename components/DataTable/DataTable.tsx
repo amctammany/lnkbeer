@@ -131,7 +131,7 @@ export function DataTable<TData, TValue>({
         )}
       </TableSearch>
       <div className="overflow-auto">
-        <Table className="flex-grow border-t-2 border-gray-200">
+        <Table className="grow border-t-2 border-gray-200">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

@@ -22,16 +22,16 @@ export function Section({
       {...props}
     >
       <div
-        className={clsx("flex-shrink p-2 flex bg-slate-300", {
+        className={clsx("shrink p-2 flex bg-slate-300", {
           hidden: title === undefined,
         })}
       >
-        <span className="flex-grow my-auto font-extrabold text-xl px-2">
+        <span className="grow my-auto font-extrabold text-xl px-2">
           {title}
         </span>
         {actions}
       </div>
-      <div className="flex-grow">{children}</div>
+      <div className="grow">{children}</div>
     </div>
   );
 }

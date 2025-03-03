@@ -21,7 +21,7 @@ export function FilterSelect({
   return (
     <div className="">
       <Select
-        className="flex-grow shadow-sm"
+        className="grow shadow-xs"
         label={name}
         name={name}
         value={value}

@@ -31,7 +31,7 @@ export function StyleDisplay({ src }: StyleDisplayProps) {
       actions={<StyleDisplayActions src={src} />}
     >
       <div className="p-4">
-        <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">
+        <Card className="m-4 *:border-b-2 *:last-of-type:border-b-0 ">
           <Prop label="Name" value={src?.name} />
           <Prop label="Overall" value={src?.overall} />
           <Prop label="Aroma" value={src?.aroma} />
@@ -48,7 +48,7 @@ export function StyleDisplay({ src }: StyleDisplayProps) {
         {Object.entries(src || {}).map(([key, value]) => (
           <div key={key} className="flex border-2 mb-1">
             <span className="bg-slate-200 px-2">{key}</span>
-            <span className="flex-grow px-2">{value}</span>
+            <span className="grow px-2">{value}</span>
           </div>
         ))}
       </div>

@@ -62,7 +62,7 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
                 >
                   <div className="flex w-full p-1">
                     <Link
-                      className="flex-grow "
+                      className="grow "
                       href={`/profiles/mash/${src?.slug}/edit/${step.id}`}
                       scroll={false}
                     >

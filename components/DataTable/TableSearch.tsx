@@ -20,7 +20,7 @@ export function TableSearch<T>({ table, children }: TableSearchProps<T>) {
     <Collapsible className="group/collapsible">
       <div className="flex items-center px-2 py-4 ">
         <Input
-          className="flex-grow bg-white"
+          className="grow bg-white"
           name="globalSearch"
           type="search"
           placeholder="Search"

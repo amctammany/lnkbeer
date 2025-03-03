@@ -53,8 +53,8 @@ export function YeastEditor({ src, action }: YeastEditorProps) {
       >
         <div className="grid grid-cols-4 gap-2">
           <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 ">
-            <span className="flex-shrink p-2 block bg-slate-300">General</span>
-            <div className="flex-grow">
+            <span className="shrink p-2 block bg-slate-300">General</span>
+            <div className="grow">
               <Input type="hidden" {...register("id")} />
               <TextField {...register("name")} />
               <TextField {...register("manufacturer")} />

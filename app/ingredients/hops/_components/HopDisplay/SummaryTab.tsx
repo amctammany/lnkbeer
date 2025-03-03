@@ -8,7 +8,7 @@ export type SummaryTabProps = {
 export function SummaryTab({ src }: SummaryTabProps) {
   return (
     <div className="">
-      <Card className="m-4 *:border-b-2 last-of-type:*:border-b-0 ">
+      <Card className="m-4 *:border-b-2 *:last-of-type:border-b-0 ">
         <Prop label="Name" value={src.name} />
         <Prop label="Country" value={src.country} />
         <Prop label="Usage" value={src.usage} />
