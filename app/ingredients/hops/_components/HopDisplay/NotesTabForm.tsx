@@ -59,7 +59,10 @@ const RangeSelect = ({
   return (
     <Label className="items-center " label={<b>{props.name}</b>}>
       {Array.from({ length: 11 }).map((_, i) => (
-        <div key={i} className="flex max-w-8 items-center space-y-0 space-x-2 ">
+        <div
+          key={i}
+          className="flex max-w-8 mx-2 items-center space-y-0 space-x-2 "
+        >
           <label htmlFor={`opt-${props.name}-${i}`}>
             <b>{i}</b>
           </label>
@@ -85,7 +88,18 @@ export function NotesTabForm({ action, src }: NotesTabFormProps) {
     "pomme",
     "melon",
     "tropical",
-    "",
+    "citrus",
+    "sweetAromatic",
+    "floral",
+    "herbal",
+    "vegetal",
+    "grassy",
+    "earthy",
+    "woody",
+    "spicy",
+    "onionGarlic",
+    "driedFruit",
+    "dank",
   ].reduce((acc, prop) => {
     acc[prop] = src?.sensoryPanel[prop]?.toString() ?? "0";
     return acc;
@@ -114,6 +128,7 @@ export function NotesTabForm({ action, src }: NotesTabFormProps) {
         <div>
           <TextArea {...register("comments")} />
         </div>
+
         <RangeSelect
           {...register("sensoryPanel.stoneFruit", {
             value: src?.sensoryPanel.stoneFruit.toString(),
@@ -165,6 +180,11 @@ export function NotesTabForm({ action, src }: NotesTabFormProps) {
             value: src?.sensoryPanel.grassy.toString(),
           })}
         />
+        <RangeSelect
+          {...register("sensoryPanel.woody", {
+            value: src?.sensoryPanel.woody.toString(),
+          })}
+        />
 
         <RangeSelect
           {...register("sensoryPanel.earthy", {
@@ -191,8 +211,8 @@ export function NotesTabForm({ action, src }: NotesTabFormProps) {
             value: src?.sensoryPanel.dank.toString(),
           })}
         />
-        <input type="submit" />
       </div>
+      <input type="submit" />
     </Form>
   );
 }
