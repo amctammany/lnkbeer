@@ -209,7 +209,7 @@ export function NotesTabForm({ action, aromas, src }: NotesTabFormProps) {
             <AromaSelect
               group={"StoneFruit"}
               {...register("sensoryPanel.aromaIds", {
-                value: (src?.sensoryPanel.aromas ?? []).map(({ id }) => id),
+                value: (src?.sensoryPanel?.aromas ?? []).map(({ id }) => id),
               })}
               aromas={aromas.filter(({ group }) => group === "DriedFruit")}
             />
