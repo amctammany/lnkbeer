@@ -226,7 +226,7 @@ model HopNote {
   comments       String?
   hop            Hop             @relation(fields: [slug], references: [slug])
   user           User            @relation(fields: [userEmail], references: [email])
-  sensoryPanel   HopSensoryPanel @relation(fields: [sensoryPanelId], references: [id])
+  sensoryPanel   HopSensoryPanel @relation(fields: [sensoryPanelId], references: [id], onDelete: Cascade)
 
   @@id(name: "id", [hopId, userEmail])
 }
@@ -241,7 +241,7 @@ enum AromaGroups {
   Citrus
   Floral
   Herbal
-  Vegetals
+  Vegetal
   Grassy
   Earthy
   Woody

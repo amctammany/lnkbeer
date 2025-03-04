@@ -1,5 +1,6 @@
 import slugify from "../lib/slugify";
 import {
+  AromaGroups,
   CharacteristicAroma,
   HopUsage,
   StyleCategory,
@@ -23,10 +24,11 @@ async function main() {
   await prisma.mashProfile.deleteMany();
   await prisma.fermentationStep.deleteMany();
   await prisma.fermentationProfile.deleteMany();
-  await prisma.characteristicAroma.deleteMany();
 
   //await prisma.user.deleteMany();
+  await prisma.hopNote.deleteMany();
   await prisma.hopSensoryPanel.deleteMany();
+  await prisma.characteristicAroma.deleteMany();
   await prisma.hop.deleteMany();
   await prisma.fermentable.deleteMany();
   await prisma.yeast.deleteMany();
@@ -219,14 +221,56 @@ async function main() {
       slug: slugify(grain.name, { lower: true }),
     })),
   });
-  const characteristicAromas: Omit<CharacteristicAroma, "id">[] = [
-    { group: "DriedFruit", name: "Date" },
-    { group: "DriedFruit", name: "Dried Apricot" },
-    { group: "DriedFruit", name: "Dried Fig" },
-    { group: "DriedFruit", name: "Raisin" },
-    { group: "Berry", name: "Black Currant" },
-    { group: "Berry", name: "Blueberry" },
-  ];
+  const o: Record<AromaGroups, string[]> = {
+    DriedFruit: ["Date", "Dried Apricot", "Dried Fig", "Raisin"],
+    Berry: ["Black Currant", "Blueberry", "Grape", "Raspberry", "Strawberry"],
+    StoneFruit: ["Apricot", "Cherry", "Peach", "Plum"],
+    Pomme: ["Apple", "Pear"],
+    Melon: ["Canteloupe", "Cucumber", "Honeydew", "Watermelon"],
+    Tropical: [
+      "Banana",
+      "Coconut",
+      "Guava",
+      "Lychee",
+      "Mango",
+      "Passion Fruit",
+      "Pineapple",
+    ],
+    Citrus: ["Grapefruit", "Lemon", "Lemongrass", "Lime", "Orange"],
+    Floral: ["Cherry Blossom", "Geranium", "Jasmine", "Rose", "Soapy"],
+    Herbal: ["Black Tea", "Dill", "Green Tea", "Mint", "Rosemary", "Thyme"],
+    Vegetal: ["Cabbage", "Celery", "Green Pepper", "Tomato Plant"],
+    Grassy: ["Green Grass", "Hay"],
+    Earthy: ["Barnyard", "Compost", "Geosmin", "Leather", "Mushroom", "Soil"],
+    Woody: ["Cedar", "Pine", "Resinous", "Sawdust", "Tea Tree", "Tobacco"],
+    Spicy: ["Anise", "Black Pepper", "Cinnamon", "Clove", "Ginger"],
+    SweetAromatic: [
+      "Bubblegum",
+      "Caramel",
+      "Chocolate",
+      "Creamy",
+      "Honey",
+      "Vanilla",
+    ],
+    OnionGarlic: ["Garlic", "Green Onion", "Onion"],
+    Dank: ["Cannabis"],
+    OffFlavors: [
+      "Burnt Rubber",
+      "Cardboard",
+      "Catty",
+      "Cheesy",
+      "Musty",
+      "Plastic/Waxy",
+      "Smoky",
+      "Sulfur",
+      "Sweaty",
+    ],
+  };
+  const characteristicAromas: Omit<CharacteristicAroma, "id">[] = Object.keys(o)
+    .map((group) => o[group].map((name) => ({ name, group })))
+    .reduce((acc, arr) => {
+      return acc.concat(arr);
+    }, []);
   await prisma.characteristicAroma.createMany({
     data: characteristicAromas,
   });
@@ -242,7 +286,7 @@ async function main() {
             upsert: {
               where: {
                 pId: {
-                  userId: "a",
+                  userId: "ADMIN",
                   slug: hop.slug,
                 },
               },
