@@ -17,15 +17,15 @@ export async function NotesTab({ src }: NotesTabProps) {
   const hopNote =
     (await prisma.hopNote.findFirst({
       where: { userEmail: session?.user?.email, hopId: src?.id },
-      include: { hop: true, sensoryPanel: true },
+      include: { hop: true, sensoryPanel: { include: { aromas: true } } },
     })) ||
     ({
       userEmail: session?.user?.email,
       hopId: src?.id,
       hop: { slug: src.slug },
     } as any);
-
-  //console.log(hopNote);
+  const aromas = await prisma.characteristicAroma.findMany();
+  console.log(hopNote, aromas);
   return (
     <div className="">
       <Card className="m-4 *:border-b-2 *:last-of-type:border-b-0 ">
@@ -34,6 +34,7 @@ export async function NotesTab({ src }: NotesTabProps) {
         <NotesTabForm
           action={hopNote?.uid ? updateHopNote : createHopNote}
           src={hopNote}
+          aromas={aromas}
         />
       </Card>
     </div>

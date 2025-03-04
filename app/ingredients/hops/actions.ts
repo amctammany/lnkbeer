@@ -106,6 +106,7 @@ const noteSchema = zfd.formData({
     onionGarlic: zfd.numeric(z.number().default(0)),
     driedFruit: zfd.numeric(z.number().default(0)),
     dank: zfd.numeric(z.number().default(0)),
+    aromaIds: zfd.repeatable(),
   }),
 });
 
@@ -119,8 +120,12 @@ export const createHopNote = async (prev: any, formData: FormData) => {
   const panel = await prisma.hopSensoryPanel.create({
     data: {
       user: { connect: { email: userEmail } },
+      aromas: {
+        connect: (sensoryPanel.aromaIds ?? []).map((id) => ({ id })), // [{id}]//{ id: { in: sensoryPanel.aromas.map(({ id }) => id) } },
+      },
       hop: { connect: { slug } },
       ...Object.keys(sensoryPanel).reduce((acc, k) => {
+        if (k === "aromaIds") return acc;
         if (k === "id") return acc;
         acc[k] = sensoryPanel[k] / 10;
         return acc;
@@ -141,7 +146,7 @@ export const createHopNote = async (prev: any, formData: FormData) => {
       //},
     },
     include: {
-      sensoryPanel: true,
+      sensoryPanel: { include: { aromas: true } },
       hop: true,
     },
   });
@@ -159,14 +164,21 @@ export const updateHopNote = async (prev: any, formData: FormData) => {
     data: {
       slug,
       userEmail,
+      aromas: {
+        connect: (sensoryPanel.aromaIds ?? []).map((id) => ({ id })), // [{id}]//{ id: { in: sensoryPanel.aromas.map(({ id }) => id) } },
+      },
+
       //user: { connect: { email: userEmail } },
       //...sensoryPanel,
       ...Object.keys(sensoryPanel).reduce((acc, k) => {
+        if (k === "aromaIds") return acc;
+        if (k === "id") return acc;
         acc[k] = sensoryPanel[k] / 10;
         return acc;
       }, {}),
     },
   });
+  console.log(es);
   const res = await prisma.hopNote.update({
     where: { id: { hopId: data.hopId, userEmail } },
     data: {
@@ -178,7 +190,7 @@ export const updateHopNote = async (prev: any, formData: FormData) => {
     },
     include: {
       hop: { select: { slug: true } },
-      sensoryPanel: true,
+      sensoryPanel: { include: { aromas: true } },
     },
   });
   redirect(`/ingredients/hops/${res.hop.slug}`);

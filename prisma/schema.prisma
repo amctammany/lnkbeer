@@ -169,39 +169,52 @@ model Hop {
 }
 
 model HopSensoryPanel {
-  id            Int      @id @default(autoincrement())
+  id            Int                   @id @default(autoincrement())
   hopId         String?
   slug          String
-  hop           Hop      @relation(fields: [slug], references: [slug])
-  sweetAromatic Float    @default(0)
-  berry         Float    @default(0)
-  stoneFruit    Float    @default(0)
-  pomme         Float    @default(0)
-  melon         Float    @default(0)
-  tropical      Float    @default(0)
-  citrus        Float    @default(0)
-  floral        Float    @default(0)
-  herbal        Float    @default(0)
-  vegetal       Float    @default(0)
-  grassy        Float    @default(0)
-  earthy        Float    @default(0)
-  woody         Float    @default(0)
-  spicy         Float    @default(0)
-  onionGarlic   Float    @default(0)
-  driedFruit    Float    @default(0)
-  dank          Float    @default(0)
+  hop           Hop                   @relation(fields: [slug], references: [slug])
+  sweetAromatic Float                 @default(0)
+  berry         Float                 @default(0)
+  stoneFruit    Float                 @default(0)
+  pomme         Float                 @default(0)
+  melon         Float                 @default(0)
+  tropical      Float                 @default(0)
+  citrus        Float                 @default(0)
+  floral        Float                 @default(0)
+  herbal        Float                 @default(0)
+  vegetal       Float                 @default(0)
+  grassy        Float                 @default(0)
+  earthy        Float                 @default(0)
+  woody         Float                 @default(0)
+  spicy         Float                 @default(0)
+  onionGarlic   Float                 @default(0)
+  driedFruit    Float                 @default(0)
+  dank          Float                 @default(0)
   year          Int?
   producer      String?
   batchInfo     String?
   lotNumber     String?
   userId        String?
   userEmail     String?
-  user          User?    @relation(fields: [userEmail], references: [email])
+  user          User?                 @relation(fields: [userEmail], references: [email])
   notes         String?
   HopNote       HopNote?
+  aromas        CharacteristicAroma[]
+  //aromas        SensoryAroma[] //@relation(fields: [aromaIds], references: [id])
 
   @@unique(name: "pId", fields: [slug, userId])
 }
+
+//model SensoryAroma {
+//aromaId               String
+//aroma                 CharacteristicAroma @relation(fields: [characteristicAromaId], references: [id])
+//sensoryPanelId        String
+//SensoryPanel          HopSensoryPanel     @relation(fields: [hopSensoryPanelId], references: [id])
+//characteristicAromaId String
+//hopSensoryPanelId     Int
+
+//@@id(name: "id", [aromaId, sensoryPanelId])
+//}
 
 model HopNote {
   uid            Int             @unique @default(autoincrement())
@@ -228,7 +241,7 @@ enum AromaGroups {
   Citrus
   Floral
   Herbal
-  Vegetal
+  Vegetals
   Grassy
   Earthy
   Woody
@@ -240,9 +253,10 @@ enum AromaGroups {
 }
 
 model CharacteristicAroma {
-  id    String      @id @unique @default(cuid())
-  name  String
-  group AromaGroups
+  id            String            @id @unique @default(cuid())
+  name          String
+  group         AromaGroups
+  sensoryPanels HopSensoryPanel[]
 
   @@unique([name, group])
 }

@@ -5,7 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/Form/Label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useActionForm } from "@/hooks/useActionForm";
-import { Hop, HopNote, HopSensoryPanel } from "@prisma/client";
+import {
+  AromaGroups,
+  CharacteristicAroma,
+  Hop,
+  HopNote,
+  HopSensoryPanel,
+} from "@prisma/client";
 import { useController, UseFormRegisterReturn } from "react-hook-form";
 import { TextField } from "@/components/Form/TextField";
 import { Slider } from "@/components/ui/slider";
@@ -13,14 +19,23 @@ import { useState } from "react";
 type HopNoteInput = Partial<HopNote> & {
   id?: any;
   slug?: any;
+  aromaIds?: string[];
   sensoryPanel?: any; // Partial<HopSensoryPanel>;
   flavor?: number;
   stoneFruit?: number;
   pomme?: number;
 };
 export type NotesTabFormProps = {
-  src?: HopNote & { hop: Hop; sensoryPanel: HopSensoryPanel };
+  src?: HopNote & {
+    aromaIds: string[];
+    hop: Hop;
+    sensoryPanel: HopSensoryPanel & {
+      aromas?: CharacteristicAroma[];
+      aromaIds?: string[];
+    };
+  };
   //user?: any;
+  aromas: CharacteristicAroma[];
   action?: any;
 };
 const RangeSelecter = ({ control, name, ...props }: any) => {
@@ -44,11 +59,16 @@ const RangeSelecter = ({ control, name, ...props }: any) => {
     </Label>
   );
 };
-
-const RangeSelect = ({
-  value,
+const AromaSelect = ({
+  label,
+  group,
+  aromas,
   ...props
-}: UseFormRegisterReturn & { value?: any }) => {
+}: UseFormRegisterReturn & {
+  aromas: CharacteristicAroma[];
+  group?: AromaGroups;
+  label?: React.ReactNode;
+}) => {
   //console.log(props);
   //const [v, setV] = useState(value);
   //const handleChange = (e) => {
@@ -58,7 +78,50 @@ const RangeSelect = ({
 
   return (
     <div className="grid items-center  my-3">
-      <b className="flex-grow">{props.name}</b>
+      <b className="flex-grow">{label ?? props.name}</b>
+      <div className="flex items-center ">
+        {aromas.map((aroma) => (
+          <div
+            key={aroma.id}
+            className="flex border b-1 items-center space-y-2 space-x-2 "
+          >
+            <label
+              className="border b-1 p-2 gap-0"
+              htmlFor={`aroma-${aroma.id}`}
+            >
+              <input
+                {...props}
+                type="checkbox"
+                key={`aroma-${aroma.id}`}
+                id={`aroma-${aroma.id}`}
+                //name={props.name}
+                //onChange={handleChange}
+                value={aroma.id.toString()}
+                //checked={props.ref.current.toString() === i.toString()}
+              />
+              <span className="px-2">{aroma.name}</span>
+            </label>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const RangeSelect = ({
+  label,
+  ...props
+}: UseFormRegisterReturn & { label?: React.ReactNode }) => {
+  //console.log(props);
+  //const [v, setV] = useState(value);
+  //const handleChange = (e) => {
+  //console.log(e.target.name, e.target.value);
+  //setV(e.target.value);
+  //};
+
+  return (
+    <div className="grid items-center  my-3">
+      <b className="flex-grow">{label ?? props.name}</b>
       <div className="flex items-center ">
         <b className="my-auto text-lg">0</b>
         {Array.from({ length: 11 }).map((_, i) => (
@@ -85,7 +148,7 @@ const RangeSelect = ({
     </div>
   );
 };
-export function NotesTabForm({ action, src }: NotesTabFormProps) {
+export function NotesTabForm({ action, aromas, src }: NotesTabFormProps) {
   const sensoryPanel = [
     "stoneFruit",
     "berry",
@@ -105,7 +168,7 @@ export function NotesTabForm({ action, src }: NotesTabFormProps) {
     "driedFruit",
     "dank",
   ].reduce((acc, prop) => {
-    acc[prop] = src?.sensoryPanel?.[prop]?.toString() ?? "0";
+    acc[prop] = ((src?.sensoryPanel?.[prop] ?? 0) * 10)?.toString();
     return acc;
   }, {});
   const { state, register, control, getValues, formAction } =
@@ -138,9 +201,17 @@ export function NotesTabForm({ action, src }: NotesTabFormProps) {
           </div>
           <div>
             <RangeSelect
+              label="Stone Fruit"
               {...register("sensoryPanel.stoneFruit", {
                 value: src?.sensoryPanel?.stoneFruit.toString(),
               })}
+            />
+            <AromaSelect
+              group={"StoneFruit"}
+              {...register("sensoryPanel.aromaIds", {
+                value: (src?.sensoryPanel.aromas ?? []).map(({ id }) => id),
+              })}
+              aromas={aromas.filter(({ group }) => group === "DriedFruit")}
             />
 
             <RangeSelect
