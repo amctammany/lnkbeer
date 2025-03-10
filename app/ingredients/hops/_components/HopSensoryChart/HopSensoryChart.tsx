@@ -1,6 +1,6 @@
 "use client";
 
-import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
+import { Legend, PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 
 import {
   Card,
@@ -26,7 +26,7 @@ const chartConfig = {
 
   value: {
     label: "Value",
-    color: "hsl(var(--chart-3))",
+    color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
 function makeChartData(src: ExtendedHop) {
@@ -96,11 +96,18 @@ export function HopSensoryChart({ src, data: d }: HopSensoryChartProps) {
             <PolarAngleAxis dataKey="aroma" tickLine={true} tickCount={6} />
             <PolarGrid />
             <Radar
+              name="Global Avg"
               dataKey="value"
               fill="var(--color-value)"
               fillOpacity={0.6}
             />
-            <Radar dataKey="user" fill="var(--color-value)" fillOpacity={0.9} />
+            <Radar
+              name="User"
+              dataKey="user"
+              fill="var(--color-user)"
+              fillOpacity={0.9}
+            />
+            <Legend />
           </RadarChart>
         </ChartContainer>
       </CardContent>
