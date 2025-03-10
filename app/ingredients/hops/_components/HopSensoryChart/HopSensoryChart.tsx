@@ -71,6 +71,41 @@ export type HopSensoryChartProps = {
   src?: ExtendedHop | null;
   data: HopSensoryChartData;
 };
+const renderLegend = (props) => {
+  const { payload } = props;
+
+  console.log(payload);
+  return (
+    <ul className="">
+      {payload.map((entry, index) => (
+        <li key={`item-${index}`} className="mx-3 inline-flex border px-2 py-1">
+          <label htmlFor={`item-${index}`}>
+            <input id={`item-${index}`} type="checkbox" name={"selectedData"} />
+            <span className={`grow px-2 `} style={{ color: entry.color }}>
+              {entry.value}
+            </span>
+            <svg
+              className="inline align-middle mr-1 recharts-surface"
+              width="14"
+              height="14"
+              viewBox="0 0 32 32"
+              //style="display: inline-block; vertical-align: middle; margin-right: 4px;"
+            >
+              <title></title>
+              <desc></desc>
+              <path
+                stroke="none"
+                fill={entry.color}
+                d="M0,4h32v24h-32z"
+                className="recharts-legend-icon"
+              ></path>
+            </svg>
+          </label>
+        </li>
+      ))}
+    </ul>
+  );
+};
 export function HopSensoryChart({ src, data: d }: HopSensoryChartProps) {
   //const data = makeChartData(src!);
   const data = Object.entries(d).map(([aroma, { value, user }]) => ({
@@ -107,7 +142,7 @@ export function HopSensoryChart({ src, data: d }: HopSensoryChartProps) {
               fill="var(--color-user)"
               fillOpacity={0.9}
             />
-            <Legend />
+            <Legend content={renderLegend} />
           </RadarChart>
         </ChartContainer>
       </CardContent>
