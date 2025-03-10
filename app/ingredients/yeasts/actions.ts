@@ -4,8 +4,8 @@ import { prisma } from "@/lib/client";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
-import slugify from "slugify";
 import { validateSchema } from "@/lib/validateSchema";
+import slugify from "@/lib/slugify";
 //import { FieldValues } from "react-hook-form";
 //import { YeastInput } from "@/types/Ingredient";
 

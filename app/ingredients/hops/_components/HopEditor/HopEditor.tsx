@@ -100,6 +100,8 @@ export function HopEditor({ hop, action }: HopEditorProps) {
                 type="hidden"
                 {...register("id", { valueAsNumber: true })}
               />
+              <Input type="hidden" {...register("slug")} />
+
               <TextField {...register("name")} />
               <TextField {...register("description")} />
               <Select

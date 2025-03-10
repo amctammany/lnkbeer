@@ -1,11 +1,11 @@
 "use server";
 import { prisma } from "@/lib/client";
+import slugify from "@/lib/slugify";
 import { validateSchema } from "@/lib/validateSchema";
 import { ExtendedMashStep } from "@/types/Profile";
 import { MashProfile, MashStepType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import slugify from "slugify";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
 

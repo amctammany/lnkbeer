@@ -1,10 +1,10 @@
 "use server";
 import { prisma } from "@/lib/client";
+import slugify from "@/lib/slugify";
 import { validateSchema } from "@/lib/validateSchema";
 import { HopUsage } from "@prisma/client";
 import { connect, sensitiveHeaders } from "http2";
 import { redirect } from "next/navigation";
-import slugify from "slugify";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
 
@@ -212,6 +212,7 @@ export const updateHop = async (prev: any, formData: FormData) => {
   if (!valid.success) return valid;
   const hop = valid.data;
   const data = parseHop(hop);
+  console.log(data);
   const res = await prisma.hop.update({
     where: { id: data.id },
     data,

@@ -1,9 +1,9 @@
 "use server";
 //import { FermentableUsage } from "@prisma/client";
 import { prisma } from "@/lib/client";
+import slugify from "@/lib/slugify";
 import { validateSchema } from "@/lib/validateSchema";
 import { redirect } from "next/navigation";
-import slugify from "slugify";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
 
