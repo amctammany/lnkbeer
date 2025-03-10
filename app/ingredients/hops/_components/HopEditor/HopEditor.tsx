@@ -108,6 +108,7 @@ export function HopEditor({ hop, action }: HopEditorProps) {
                 {...register("usage")}
                 className="w-full"
                 options={HopUsage}
+                error={state.errors?.usage}
               />
             </div>
           </div>
@@ -115,15 +116,48 @@ export function HopEditor({ hop, action }: HopEditorProps) {
           <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 md:col-span-2">
             <span className="shrink p-2 block bg-slate-300">Composition</span>
             <div className="grow">
-              <NumberField suffix="%" {...register("alpha")} step={0.01} />
-              <NumberField {...register("beta")} step={0.01} />
-              <NumberField {...register("caryophyllene")} step={0.01} />
-              <NumberField {...register("cohumulone")} step={0.01} />
-              <NumberField {...register("humulene")} step={0.01} />
-              <NumberField {...register("farnesene")} step={0.01} />
-              <NumberField {...register("myrcene")} step={0.01} />
+              <NumberField
+                suffix="%"
+                {...register("alpha")}
+                error={state.errors?.alpha}
+                step={0.01}
+              />
+              <NumberField
+                {...register("beta")}
+                step={0.01}
+                error={state.errors?.beta}
+              />
+              <NumberField
+                {...register("caryophyllene")}
+                step={0.01}
+                error={state.errors?.caryophyllene}
+              />
+              <NumberField
+                {...register("cohumulone")}
+                step={0.01}
+                error={state.errors?.cohumulone}
+              />
+              <NumberField
+                {...register("humulene")}
+                step={0.01}
+                error={state.errors?.humulene}
+              />
+              <NumberField
+                {...register("farnesene")}
+                error={state.errors?.farnesene}
+                step={0.01}
+              />
+              <NumberField
+                {...register("myrcene")}
+                step={0.01}
+                error={state.errors?.myrcene}
+              />
 
-              <NumberField {...register("totalOil")} step={0.01} />
+              <NumberField
+                {...register("totalOil")}
+                step={0.01}
+                error={state.errors?.totalOil}
+              />
               {rangeProps.map(({ name, highField, lowField }) => (
                 <Controller
                   key={name}

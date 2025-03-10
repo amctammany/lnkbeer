@@ -19,7 +19,7 @@ const labelStyles = cva(
     variants: {
       variant: {
         default: ["mx-0 mb-0 p-2 block"],
-        error: ["border-warning-500 border-2"],
+        error: ["p-2 block"],
         inline: ["grid auto-cols-auto grid-cols-2"],
       },
       inputSize: {
@@ -31,11 +31,27 @@ const labelStyles = cva(
     defaultVariants: { inputSize: "default", variant: "default" },
   },
 );
+const labelChildStyles = cva(["w-full flex"], {
+  variants: {
+    variant: {
+      default: ["text-gray-600"],
+      error: ["text-destructive"],
+      inline: ["text-gray-600"],
+    },
+    inputSize: {
+      default: [""],
+      full: [],
+      small: [""],
+    },
+  },
+  defaultVariants: { inputSize: "default", variant: "default" },
+});
+
 const labelLabelStyles = cva(["block capitalize my-auto mb-1"], {
   variants: {
     variant: {
       default: ["text-gray-600"],
-      error: ["text-warning-400"],
+      error: ["text-destructive"],
       inline: ["text-gray-600"],
     },
     inputSize: {
@@ -46,7 +62,7 @@ const labelLabelStyles = cva(["block capitalize my-auto mb-1"], {
   },
   defaultVariants: { inputSize: "default", variant: "default" },
 });
-const errorStyles = cva(["capitalize text-warning-400"], {
+const errorStyles = cva(["capitalize text-destructive text-xs mx-2"], {
   variants: {
     variant: {
       default: ["hidden"],
@@ -86,7 +102,7 @@ export const Label = ({
       >
         {label}
       </span>
-      <div className="flex w-full">
+      <div className={labelChildStyles({ variant: error ? "error" : variant })}>
         {children}
 
         <div

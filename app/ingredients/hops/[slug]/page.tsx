@@ -28,7 +28,7 @@ export default async function HopDisplayPage({ params }: HopDisplayPageProps) {
   const hop = await getHop(slug);
   return (
     <AppBarLayout
-      title={<AppBarTitle icon={<Hop />}>{slug}</AppBarTitle>}
+      title={<AppBarTitle icon={<Hop />}>{hop?.name}</AppBarTitle>}
       actions={<HopDisplayActions slug={slug} />}
     >
       <Suspense fallback={<div>loading?</div>}>

@@ -38,9 +38,14 @@ export const AppBar = ({
       >
         <div className="h-10 grid aspect-square bg-gray-800/20 ">
           <SidebarTrigger
-            onClick={(e) => e.preventDefault()}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            }}
             variant="ghost"
             className="m-auto "
+            type="button"
           />
         </div>
         {tit}
