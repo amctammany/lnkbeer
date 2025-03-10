@@ -1,8 +1,6 @@
 "use client";
-import { Form } from "@/components/Form/Form";
 import { TextArea } from "@/components/Form/TextArea";
 import { Button } from "@/components/ui/button";
-import { useActionForm } from "@/hooks/useActionForm";
 import {
   AromaGroups,
   CharacteristicAroma,
@@ -18,10 +16,6 @@ import {
 } from "react-hook-form";
 import clsx from "clsx";
 import { lowerFirst } from "@/lib/utils";
-import { AppBarLayout } from "@/components/AppBarLayout";
-import AppBarTitle from "@/components/AppBarTitle";
-import { HopSensoryEditorActions } from "./HopSensoryEditorActions";
-import { Hop } from "lucide-react";
 export type HopNoteInput = Partial<HopNote> & {
   id?: any;
   slug?: any;

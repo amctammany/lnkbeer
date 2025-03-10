@@ -95,3 +95,4 @@ export function HopSensoryChart({ src }: HopSensoryChartProps) {
     </Card>
   );
 }
+export default HopSensoryChart;

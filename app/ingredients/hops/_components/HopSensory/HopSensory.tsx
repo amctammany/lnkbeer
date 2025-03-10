@@ -1,7 +1,13 @@
+"use client";
 import type { Hop } from "@prisma/client";
 import { Prop } from "@/components/Prop";
 import { Card } from "@/components/ui/card";
-import { HopSensoryChart } from "../HopSensoryChart";
+//import { HopSensoryChart } from "../HopSensoryChart";
+import dynamic from "next/dynamic";
+const HopSensoryChart = dynamic(
+  () => import("../HopSensoryChart/HopSensoryChart"),
+  { ssr: false },
+);
 
 export type HopSensoryProps = {
   //slug: string;
