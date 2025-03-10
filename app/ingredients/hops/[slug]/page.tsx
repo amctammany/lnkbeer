@@ -32,7 +32,7 @@ export default async function HopDisplayPage({ params }: HopDisplayPageProps) {
       actions={<HopDisplayActions slug={slug} />}
     >
       <Suspense fallback={<div>loading?</div>}>
-        <HopDisplay hop={hop} />;
+        <HopDisplay hop={hop} />
       </Suspense>
     </AppBarLayout>
   );

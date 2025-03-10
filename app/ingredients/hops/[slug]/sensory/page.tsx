@@ -37,7 +37,7 @@ export default async function HopSensoryPage({ params }: HopSensoryPageProps) {
       actions={<HopSensoryActions slug={slug} />}
     >
       <Suspense fallback={<div>loading?</div>}>
-        <HopSensory hop={hop} />;
+        <HopSensory hop={hop} />
       </Suspense>
     </AppBarLayout>
   );

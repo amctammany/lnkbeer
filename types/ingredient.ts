@@ -1,4 +1,5 @@
 import {
+  AromaGroups,
   Fermentable,
   Hop,
   HopNote,
@@ -26,3 +27,4 @@ export type YeastInput = Yeast & {
   tempRange?: RangeValue;
   attenuationRange?: RangeValue;
 };
+export type HopSensoryChartData = Record<Uncapitalize<AromaGroups>, number>;

@@ -48,7 +48,7 @@ export default async function HopSensoryEditorPage({
 
   return (
     <Suspense fallback={<div>loading?</div>}>
-      <HopSensoryEditor src={hop} hopNote={hopNote} aromas={aromas} />;
+      <HopSensoryEditor src={hop} hopNote={hopNote} aromas={aromas} />
     </Suspense>
   );
 }

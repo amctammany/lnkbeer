@@ -16,7 +16,8 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { ExtendedHop } from "@/types/ingredient";
+import { ExtendedHop, HopSensoryChartData } from "@/types/ingredient";
+import { AromaGroups, HopSensoryPanel } from "@prisma/client";
 
 const chartConfig = {
   value: {
@@ -24,7 +25,6 @@ const chartConfig = {
     color: "hsl(var(--chart-3))",
   },
 } satisfies ChartConfig;
-
 function makeChartData(src: ExtendedHop) {
   return src?.hopSensoryPanels?.map(
     ({
@@ -65,9 +65,12 @@ function makeChartData(src: ExtendedHop) {
 }
 export type HopSensoryChartProps = {
   src?: ExtendedHop | null;
+  data: HopSensoryChartData;
 };
-export function HopSensoryChart({ src }: HopSensoryChartProps) {
-  const data = makeChartData(src!);
+export function HopSensoryChart({ src, data: d }: HopSensoryChartProps) {
+  //const data = makeChartData(src!);
+  const data = Object.entries(d).map(([aroma, value]) => ({ aroma, value }));
+
   return (
     <Card>
       <CardHeader className="items-center pb-4">
@@ -79,7 +82,7 @@ export function HopSensoryChart({ src }: HopSensoryChartProps) {
           config={chartConfig}
           className="mx-auto aspect-square max-h-[450px]"
         >
-          <RadarChart data={data?.[data.length - 1]}>
+          <RadarChart data={data}>
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <PolarAngleAxis dataKey="aroma" tickLine={true} tickCount={6} />
             <PolarGrid />

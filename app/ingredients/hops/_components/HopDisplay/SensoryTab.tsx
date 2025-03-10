@@ -5,11 +5,7 @@ export type SensoryTabProps = {
   src: ExtendedHop;
 };
 export function SensoryTab({ src }: SensoryTabProps) {
-  return (
-    <div className="">
-      <HopSensoryChart src={src} />
-    </div>
-  );
+  return <div className=""></div>;
 }
 
 export default SensoryTab;
