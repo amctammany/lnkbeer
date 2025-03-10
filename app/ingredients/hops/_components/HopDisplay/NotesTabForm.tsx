@@ -12,10 +12,18 @@ import {
   HopNote,
   HopSensoryPanel,
 } from "@prisma/client";
-import { useController, UseFormRegisterReturn } from "react-hook-form";
+import {
+  FieldValues,
+  Path,
+  useController,
+  UseFormRegisterReturn,
+  UseFormReturn,
+} from "react-hook-form";
 import { TextField } from "@/components/Form/TextField";
 import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
+import clsx from "clsx";
+import { lowerFirst } from "@/lib/utils";
 type HopNoteInput = Partial<HopNote> & {
   id?: any;
   slug?: any;
@@ -60,11 +68,13 @@ const RangeSelecter = ({ control, name, ...props }: any) => {
   );
 };
 const AromaSelect = ({
+  className,
   label,
   group,
   aromas,
   ...props
 }: UseFormRegisterReturn & {
+  className?: string;
   aromas: CharacteristicAroma[];
   group?: AromaGroups;
   label?: React.ReactNode;
@@ -77,19 +87,19 @@ const AromaSelect = ({
   //};
 
   return (
-    <div className="grid items-center  my-3">
-      <b className="flex-grow">{label ?? props.name}</b>
-      <div className="flex items-center ">
+    <div className={clsx("grid items-center  my-0 gap-3", className)}>
+      <div className="flex items-center gap-4">
         {aromas.map((aroma) => (
           <div
             key={aroma.id}
-            className="flex border b-1 items-center space-y-2 space-x-2 "
+            className="flex border b-1 rounded-lg justify-around items-center space-y-2 space-x-2 "
           >
             <label
-              className="border b-1 p-2 gap-0"
+              className="border b-1 m-auto px-1 gap-0 has-checked:bg-red-100"
               htmlFor={`aroma-${aroma.id}`}
             >
               <input
+                className="peer size-3"
                 {...props}
                 type="checkbox"
                 key={`aroma-${aroma.id}`}
@@ -99,7 +109,9 @@ const AromaSelect = ({
                 value={aroma.id.toString()}
                 //checked={props.ref.current.toString() === i.toString()}
               />
-              <span className="px-2">{aroma.name}</span>
+              <span className="px-2 text-sm peer-checked:text-blue peer-checked:underline">
+                {aroma.name}
+              </span>
             </label>
           </div>
         ))}
@@ -107,11 +119,46 @@ const AromaSelect = ({
     </div>
   );
 };
-
+function HopAromaForm<T extends FieldValues>({
+  label,
+  name,
+  className,
+  aromas,
+  rangeProps,
+  aromaProps,
+  //...props,
+}: {
+  aromas: any;
+  name: Path<T>;
+  className?: string;
+  label?: React.ReactNode;
+  rangeProps: UseFormRegisterReturn;
+  aromaProps: UseFormRegisterReturn;
+}) {
+  return (
+    <div className={clsx("flex", className)}>
+      <div className="m-auto px-2">
+        <span className=" shrink">{label ?? name}</span>
+      </div>
+      <RangeSelect
+        className="grow"
+        //label="Stone Fruit"
+        {...rangeProps}
+      />
+      <AromaSelect
+        className="grow"
+        group={"StoneFruit"}
+        {...aromaProps}
+        aromas={aromas}
+      />
+    </div>
+  );
+}
 const RangeSelect = ({
   label,
+  className,
   ...props
-}: UseFormRegisterReturn & { label?: React.ReactNode }) => {
+}: UseFormRegisterReturn & { className?: string; label?: React.ReactNode }) => {
   //console.log(props);
   //const [v, setV] = useState(value);
   //const handleChange = (e) => {
@@ -120,31 +167,37 @@ const RangeSelect = ({
   //};
 
   return (
-    <div className="grid items-center  my-3">
-      <b className="flex-grow">{label ?? props.name}</b>
-      <div className="flex items-center ">
-        <b className="my-auto text-lg">0</b>
-        {Array.from({ length: 11 }).map((_, i) => (
-          <div
-            key={i}
-            className="flex border b-1 items-center space-y-2 space-x-2 "
+    <div
+      className={clsx(
+        "flex justify-evenly items-stretch justify-items-stretch my-0",
+        className,
+      )}
+    >
+      <b className="m-auto ">0</b>
+      {Array.from({ length: 11 }).map((_, i) => (
+        <div
+          key={i}
+          className="grid border grid-flow-col-dense auto-cols-auto justify-self-auto b-1 m-auto items-center space-y-2 space-x-2 au "
+        >
+          <label
+            className="self-stretch p-1 gap-0"
+            htmlFor={`opt-${props.name}-${i}`}
           >
-            <label className="p-2 gap-0" htmlFor={`opt-${props.name}-${i}`}>
-              <input
-                {...props}
-                type="radio"
-                key={`opt-${props.name}-${i}`}
-                id={`opt-${props.name}-${i}`}
-                //name={props.name}
-                //onChange={handleChange}
-                value={i.toString()}
-                //checked={props.ref.current.toString() === i.toString()}
-              />
-            </label>
-          </div>
-        ))}
-        <b className="my-auto text-lg">10</b>
-      </div>
+            <input
+              className="size-2"
+              {...props}
+              type="radio"
+              key={`opt-${props.name}-${i}`}
+              id={`opt-${props.name}-${i}`}
+              //name={props.name}
+              //onChange={handleChange}
+              value={i.toString()}
+              //checked={props.ref.current.toString() === i.toString()}
+            />
+          </label>
+        </div>
+      ))}
+      <b className="my-auto text-lg">10</b>
     </div>
   );
 };
@@ -181,6 +234,9 @@ export function NotesTabForm({ action, aromas, src }: NotesTabFormProps) {
       }!,
     );
 
+  const aromaRegister = register("sensoryPanel.aromaIds", {
+    value: (src?.sensoryPanel?.aromas ?? []).map(({ id }) => id),
+  });
   //console.log(src);
   return (
     <div className="grid auto-rows-auto w-full">
@@ -200,41 +256,47 @@ export function NotesTabForm({ action, aromas, src }: NotesTabFormProps) {
             <TextArea {...register("comments")} />
           </div>
           <div>
-            <RangeSelect
-              label="Stone Fruit"
-              {...register("sensoryPanel.stoneFruit", {
-                value: src?.sensoryPanel?.stoneFruit.toString(),
-              })}
-            />
-            <AromaSelect
-              group={"StoneFruit"}
-              {...register("sensoryPanel.aromaIds", {
-                value: (src?.sensoryPanel?.aromas ?? []).map(({ id }) => id),
-              })}
-              aromas={aromas.filter(({ group }) => group === "DriedFruit")}
-            />
+            {[
+              "StoneFruit",
+              "Pomme",
+              "Berry",
+              "Melon",
+              "Tropical",
+              "Citrus",
+              "Floral",
+              "Herbal",
+              "Vegetal",
+              "Grassy",
+              "Woody",
+              "Spicy",
+              "OnionGarlic",
+              "DriedFruit",
+              "Dank",
+            ].map((k) => (
+              <HopAromaForm
+                aromas={aromas.filter(({ group }) => group === k)}
+                key={k}
+                label={k}
+                name={`sensoryPanel.${lowerFirst(k)}`}
+                rangeProps={register(`sensoryPanel.${lowerFirst(k)}`, {
+                  value: src?.sensoryPanel?.[lowerFirst(k)]?.toString(),
+                })}
+                aromaProps={aromaRegister}
+              />
+            ))}
+          </div>
+          <div>
+            <Button type="submit">Save</Button>
+          </div>
+        </div>
+      </Form>
+    </div>
+  );
+}
 
-            <RangeSelect
-              {...register("sensoryPanel.pomme", {
-                value: src?.sensoryPanel?.pomme.toString(),
-              })}
-            />
-            <RangeSelect
-              {...register("sensoryPanel.berry", {
-                value: src?.sensoryPanel?.berry.toString(),
-              })}
-            />
-            <RangeSelect
-              {...register("sensoryPanel.melon", {
-                value: src?.sensoryPanel?.melon.toString(),
-              })}
-            />
-            <RangeSelect
-              {...register("sensoryPanel.tropical", {
-                value: src?.sensoryPanel?.tropical.toString(),
-              })}
-            />
-            <RangeSelect
+export default NotesTabForm;
+/**
+ *        <RangeSelect
               {...register("sensoryPanel.citrus", {
                 value: src?.sensoryPanel?.citrus.toString(),
               })}
@@ -290,14 +352,4 @@ export function NotesTabForm({ action, aromas, src }: NotesTabFormProps) {
                 value: src?.sensoryPanel?.dank.toString(),
               })}
             />
-          </div>
-          <div>
-            <Button type="submit">Save</Button>
-          </div>
-        </div>
-      </Form>
-    </div>
-  );
-}
-
-export default NotesTabForm;
+ */
