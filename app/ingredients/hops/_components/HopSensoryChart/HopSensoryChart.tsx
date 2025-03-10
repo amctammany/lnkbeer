@@ -64,7 +64,7 @@ function makeChartData(src: ExtendedHop) {
         vegetal,
         woody,
         spicy,
-      }).map(([aroma, value]) => ({ aroma, value })),
+      }).map(([aroma, value]) => ({ aroma, value }))
   );
 }
 export type HopSensoryChartProps = {
@@ -140,13 +140,15 @@ export function HopSensoryChart({ src, data: d }: HopSensoryChartProps) {
               name="User"
               dataKey="user"
               fill="var(--color-user)"
-              fillOpacity={0.9}
+              fillOpacity={0.7}
             />
             <Legend content={renderLegend} />
           </RadarChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col gap-2 text-sm">Legend?</CardFooter>
+      <CardFooter className="flex-col gap-2 text-sm">
+        Legend Controls??
+      </CardFooter>
     </Card>
   );
 }
