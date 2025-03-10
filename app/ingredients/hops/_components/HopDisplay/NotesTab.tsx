@@ -25,7 +25,6 @@ export async function NotesTab({ src }: NotesTabProps) {
       hop: { slug: src.slug },
     } as any);
   const aromas = await prisma.characteristicAroma.findMany();
-  console.log(hopNote, aromas);
   return (
     <div className="">
       <Card className="m-4 *:border-b-2 *:last-of-type:border-b-0 ">

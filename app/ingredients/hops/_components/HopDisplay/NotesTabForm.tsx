@@ -2,8 +2,6 @@
 import { Form } from "@/components/Form/Form";
 import { TextArea } from "@/components/Form/TextArea";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/Form/Label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useActionForm } from "@/hooks/useActionForm";
 import {
   AromaGroups,
@@ -12,16 +10,7 @@ import {
   HopNote,
   HopSensoryPanel,
 } from "@prisma/client";
-import {
-  FieldValues,
-  Path,
-  useController,
-  UseFormRegisterReturn,
-  UseFormReturn,
-} from "react-hook-form";
-import { TextField } from "@/components/Form/TextField";
-import { Slider } from "@/components/ui/slider";
-import { useState } from "react";
+import { FieldValues, Path, UseFormRegisterReturn } from "react-hook-form";
 import clsx from "clsx";
 import { lowerFirst } from "@/lib/utils";
 type HopNoteInput = Partial<HopNote> & {
@@ -46,27 +35,6 @@ export type NotesTabFormProps = {
   aromas: CharacteristicAroma[];
   action?: any;
 };
-const RangeSelecter = ({ control, name, ...props }: any) => {
-  //console.log(props);
-  const { field, fieldState } = useController({ name, control });
-  return (
-    <Label className="items-center " label={<b>{props.name}</b>}>
-      {Array.from({ length: 11 }).map((_, i) => (
-        <div key={i} className="flex max-w-8 items-center space-y-0 space-x-2 ">
-          <label htmlFor={`opt-${i}`}>
-            <b>{i}</b>
-          </label>
-          <input
-            {...field}
-            type="radio"
-            id={`opt-${i}`}
-            //checked={value.toString() === i.toString()}
-          />
-        </div>
-      ))}
-    </Label>
-  );
-};
 const AromaSelect = ({
   className,
   label,
@@ -79,13 +47,6 @@ const AromaSelect = ({
   group?: AromaGroups;
   label?: React.ReactNode;
 }) => {
-  //console.log(props);
-  //const [v, setV] = useState(value);
-  //const handleChange = (e) => {
-  //console.log(e.target.name, e.target.value);
-  //setV(e.target.value);
-  //};
-
   return (
     <div className={clsx("grid items-center  my-0 gap-3", className)}>
       <div className="flex items-center gap-4">
@@ -140,17 +101,8 @@ function HopAromaForm<T extends FieldValues>({
       <div className="m-auto px-2">
         <span className=" shrink">{label ?? name}</span>
       </div>
-      <RangeSelect
-        className="grow"
-        //label="Stone Fruit"
-        {...rangeProps}
-      />
-      <AromaSelect
-        className="grow"
-        group={"StoneFruit"}
-        {...aromaProps}
-        aromas={aromas}
-      />
+      <RangeSelect className="grow" {...rangeProps} />
+      <AromaSelect className="grow" {...aromaProps} aromas={aromas} />
     </div>
   );
 }
@@ -159,13 +111,6 @@ const RangeSelect = ({
   className,
   ...props
 }: UseFormRegisterReturn & { className?: string; label?: React.ReactNode }) => {
-  //console.log(props);
-  //const [v, setV] = useState(value);
-  //const handleChange = (e) => {
-  //console.log(e.target.name, e.target.value);
-  //setV(e.target.value);
-  //};
-
   return (
     <div
       className={clsx(
@@ -229,7 +174,6 @@ export function NotesTabForm({ action, aromas, src }: NotesTabFormProps) {
       action,
       {
         ...src,
-        //stoneFruit: src?.sensoryPanel.stoneFruit.toString(),
         sensoryPanel,
       }!,
     );
@@ -237,7 +181,6 @@ export function NotesTabForm({ action, aromas, src }: NotesTabFormProps) {
   const aromaRegister = register("sensoryPanel.aromaIds", {
     value: (src?.sensoryPanel?.aromas ?? []).map(({ id }) => id),
   });
-  //console.log(src);
   return (
     <div className="grid auto-rows-auto w-full">
       <Form action={formAction}>
@@ -295,61 +238,3 @@ export function NotesTabForm({ action, aromas, src }: NotesTabFormProps) {
 }
 
 export default NotesTabForm;
-/**
- *        <RangeSelect
-              {...register("sensoryPanel.citrus", {
-                value: src?.sensoryPanel?.citrus.toString(),
-              })}
-            />
-            <RangeSelect
-              {...register("sensoryPanel.floral", {
-                value: src?.sensoryPanel?.floral.toString(),
-              })}
-            />
-            <RangeSelect
-              {...register("sensoryPanel.herbal", {
-                value: src?.sensoryPanel?.herbal.toString(),
-              })}
-            />
-            <RangeSelect
-              {...register("sensoryPanel.vegetal", {
-                value: src?.sensoryPanel?.vegetal.toString(),
-              })}
-            />
-            <RangeSelect
-              {...register("sensoryPanel.grassy", {
-                value: src?.sensoryPanel?.grassy.toString(),
-              })}
-            />
-            <RangeSelect
-              {...register("sensoryPanel.woody", {
-                value: src?.sensoryPanel?.woody.toString(),
-              })}
-            />
-
-            <RangeSelect
-              {...register("sensoryPanel.earthy", {
-                value: src?.sensoryPanel?.earthy.toString(),
-              })}
-            />
-            <RangeSelect
-              {...register("sensoryPanel.spicy", {
-                value: src?.sensoryPanel?.spicy.toString(),
-              })}
-            />
-            <RangeSelect
-              {...register("sensoryPanel.onionGarlic", {
-                value: src?.sensoryPanel?.onionGarlic.toString(),
-              })}
-            />
-            <RangeSelect
-              {...register("sensoryPanel.driedFruit", {
-                value: src?.sensoryPanel?.driedFruit.toString(),
-              })}
-            />
-            <RangeSelect
-              {...register("sensoryPanel.dank", {
-                value: src?.sensoryPanel?.dank.toString(),
-              })}
-            />
- */
