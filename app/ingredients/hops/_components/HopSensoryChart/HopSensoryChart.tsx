@@ -17,6 +17,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { ExtendedHop, HopSensoryChartData } from "@/types/ingredient";
+import { useState } from "react";
 
 const chartConfig = {
   user: {
@@ -24,6 +25,14 @@ const chartConfig = {
     color: "hsl(var(--chart-1))",
   },
 
+  expert: {
+    label: "Expert",
+    color: "hsl(var(--chart-2))",
+  },
+  avg: {
+    label: "Average",
+    color: "hsl(var(--chart-4))",
+  },
   value: {
     label: "Value",
     color: "hsl(var(--chart-2))",
@@ -64,56 +73,85 @@ function makeChartData(src: ExtendedHop) {
         vegetal,
         woody,
         spicy,
-      }).map(([aroma, value]) => ({ aroma, value }))
+      }).map(([aroma, value]) => ({ aroma, value })),
   );
 }
 export type HopSensoryChartProps = {
   src?: ExtendedHop | null;
   data: HopSensoryChartData;
 };
-const renderLegend = (props) => {
-  const { payload } = props;
-
-  console.log(payload);
-  return (
-    <ul className="">
-      {payload.map((entry, index) => (
-        <li key={`item-${index}`} className="mx-3 inline-flex border px-2 py-1">
-          <label htmlFor={`item-${index}`}>
-            <input id={`item-${index}`} type="checkbox" name={"selectedData"} />
-            <span className={`grow px-2 `} style={{ color: entry.color }}>
-              {entry.value}
-            </span>
-            <svg
-              className="inline align-middle mr-1 recharts-surface"
-              width="14"
-              height="14"
-              viewBox="0 0 32 32"
-              //style="display: inline-block; vertical-align: middle; margin-right: 4px;"
-            >
-              <title></title>
-              <desc></desc>
-              <path
-                stroke="none"
-                fill={entry.color}
-                d="M0,4h32v24h-32z"
-                className="recharts-legend-icon"
-              ></path>
-            </svg>
-          </label>
-        </li>
-      ))}
-    </ul>
-  );
-};
-export function HopSensoryChart({ src, data: d }: HopSensoryChartProps) {
+export function HopSensoryChart({ src, data: _data }: HopSensoryChartProps) {
   //const data = makeChartData(src!);
-  const data = Object.entries(d).map(([aroma, { value, user }]) => ({
-    aroma,
-    value,
-    user,
-  }));
-  console.log(data);
+  const data = Object.entries(_data).map(
+    ([aroma, { value, avg, user, expert }]) => ({
+      aroma,
+      value,
+      avg,
+      user,
+      expert,
+    }),
+  );
+  const useUser = data.every(({ user }) => user !== undefined);
+  const useAvg = data.every(({ avg }) => avg !== undefined);
+  const useExpert = data.every(({ expert }) => expert !== undefined);
+
+  const [showUser, setShowUser] = useState<boolean>(useUser);
+  const [showAvg, setShowAvg] = useState<boolean>(useAvg);
+  const [showExpert, setShowExpert] = useState<boolean>(useExpert);
+  const handleClick = (index) => () => {
+    if (index === 0) setShowAvg((old) => !old);
+    if (index === 1) setShowUser((old) => !old);
+    if (index === 2) setShowExpert((old) => !old);
+  };
+  const renderLegend = (props) => {
+    const { payload } = props;
+    const getChecked = (index) => {
+      if (index === 0) return showAvg;
+      if (index === 1) return showUser;
+      if (index === 2) return showExpert;
+      return false;
+    };
+
+    return (
+      <ul className="">
+        {payload.map((entry, index) => (
+          <li
+            key={`item-${index}`}
+            className="mx-3 inline-flex border px-2 py-1"
+          >
+            <label htmlFor={`item-${index}`}>
+              <input
+                id={`item-${index}`}
+                type="checkbox"
+                name={"selectedData"}
+                onChange={handleClick(index)}
+                checked={getChecked(index)}
+              />
+              <span className={`grow px-2 `} style={{ color: entry.color }}>
+                {entry.value}
+              </span>
+              <svg
+                className="inline align-middle mr-1 recharts-surface"
+                width="14"
+                height="14"
+                viewBox="0 0 32 32"
+                //style="display: inline-block; vertical-align: middle; margin-right: 4px;"
+              >
+                <title></title>
+                <desc></desc>
+                <path
+                  stroke="none"
+                  fill={entry.color}
+                  d="M0,4h32v24h-32z"
+                  className="recharts-legend-icon"
+                ></path>
+              </svg>
+            </label>
+          </li>
+        ))}
+      </ul>
+    );
+  };
 
   return (
     <Card>
@@ -131,18 +169,28 @@ export function HopSensoryChart({ src, data: d }: HopSensoryChartProps) {
             <PolarAngleAxis dataKey="aroma" tickLine={true} tickCount={6} />
             <PolarGrid />
             <Radar
+              className={showAvg ? "" : "hidden"}
               name="Global Avg"
-              dataKey="value"
+              dataKey="avg"
               fill="var(--color-value)"
               fillOpacity={0.6}
             />
             <Radar
+              className={showUser ? "" : "hidden"}
               name="User"
               dataKey="user"
               fill="var(--color-user)"
               fillOpacity={0.7}
             />
-            <Legend content={renderLegend} />
+            <Radar
+              className={showExpert ? "" : "hidden"}
+              name="Expert"
+              dataKey="expert"
+              fill="var(--color-expert)"
+              fillOpacity={0.7}
+            />
+
+            <Legend onClick={handleClick} content={renderLegend} />
           </RadarChart>
         </ChartContainer>
       </CardContent>

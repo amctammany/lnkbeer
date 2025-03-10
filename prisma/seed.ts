@@ -292,6 +292,8 @@ async function main() {
               },
               update: { ...flavorMap },
               create: {
+                userId: "ADMIN",
+                //userEmail: "yakimachief",
                 ...flavorMap,
               },
             },
@@ -302,7 +304,11 @@ async function main() {
           ...hop,
           flavor: aromas,
           hopSensoryPanels: {
-            create: flavorMap,
+            create: {
+              userId: "ADMIN",
+              //userEmail: "yakimachief",
+              ...flavorMap,
+            },
           },
         },
         include: {

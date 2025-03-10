@@ -11,6 +11,7 @@ const HopSensoryChart = dynamic(
 export type HopSensoryProps = {
   //slug: string;
   userPanel?: HopSensoryPanel;
+  expertPanel?: HopSensoryPanel;
   hop?: ExtendedHop | null;
 };
 const aromaGroups: Uncapitalize<AromaGroups>[] = [
@@ -30,13 +31,17 @@ const aromaGroups: Uncapitalize<AromaGroups>[] = [
   "woody",
   "spicy",
 ];
-
-function addUserChartData(root: HopSensoryChartData, src: HopSensoryPanel) {
+function addToChartData(
+  root: HopSensoryChartData,
+  src: HopSensoryPanel,
+  key: string,
+) {
   return aromaGroups.reduce((acc, g) => {
-    acc[g].user = src[g] ?? 0;
+    acc[g][key] = src[g] ?? 0;
     return acc;
   }, root);
 }
+
 //type ChartData = Record<Uncapitalize<AromaGroups>, D>;
 function makeAvgChartData(src: ExtendedHop) {
   const res = (src?.hopSensoryPanels ?? []).reduce((acc, panel) => {
@@ -46,18 +51,21 @@ function makeAvgChartData(src: ExtendedHop) {
     }, acc);
   }, {} as HopSensoryChartData<number>);
   return aromaGroups.reduce((acc, g) => {
-    acc[g] = { value: res[g] / (src?.hopSensoryPanels?.length ?? 1) };
+    acc[g] = { avg: res[g] / (src?.hopSensoryPanels?.length ?? 1) };
     return acc;
   }, {} as HopSensoryChartData);
 }
 
-export function HopSensory({ hop, userPanel }: HopSensoryProps) {
+export function HopSensory({ hop, userPanel, expertPanel }: HopSensoryProps) {
   const data = makeAvgChartData(hop!);
-  const d = addUserChartData(data, userPanel ?? ({} as HopSensoryPanel));
+  if (userPanel)
+    addToChartData(data, userPanel ?? ({} as HopSensoryPanel), "user");
+  if (expertPanel)
+    addToChartData(data, expertPanel ?? ({} as HopSensoryPanel), "expert");
 
   return (
     <div className="grid grid-cols-1">
-      <HopSensoryChart data={d} src={hop} />
+      <HopSensoryChart data={data} src={hop} />
     </div>
   );
 }

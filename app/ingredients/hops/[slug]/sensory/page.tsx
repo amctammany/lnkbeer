@@ -34,6 +34,9 @@ export default async function HopSensoryPage({ params }: HopSensoryPageProps) {
   const hop = await getHop(slug);
   const session = await auth();
   const user = session?.user;
+  const expertPanel = hop?.hopSensoryPanels.find(
+    (panel) => panel.userId === "ADMIN",
+  );
   const userPanel = hop?.hopSensoryPanels.find(
     (panel) => user && panel.userEmail === user.email,
   );
@@ -44,7 +47,7 @@ export default async function HopSensoryPage({ params }: HopSensoryPageProps) {
       actions={<HopSensoryActions slug={slug} />}
     >
       <Suspense fallback={<div>loading?</div>}>
-        <HopSensory hop={hop} userPanel={userPanel} />
+        <HopSensory hop={hop} userPanel={userPanel} expertPanel={expertPanel} />
       </Suspense>
     </AppBarLayout>
   );

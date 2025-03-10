@@ -28,8 +28,10 @@ export type YeastInput = Yeast & {
   attenuationRange?: RangeValue;
 };
 export type HopSensoryData = {
-  value: number;
+  value?: number;
+  expert?: number;
   user?: number;
+  avg?: number;
 };
 
 export type HopSensoryChartData<T = HopSensoryData> = Record<
