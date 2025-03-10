@@ -17,9 +17,13 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { ExtendedHop, HopSensoryChartData } from "@/types/ingredient";
-import { AromaGroups, HopSensoryPanel } from "@prisma/client";
 
 const chartConfig = {
+  user: {
+    label: "User",
+    color: "hsl(var(--chart-1))",
+  },
+
   value: {
     label: "Value",
     color: "hsl(var(--chart-3))",
@@ -69,7 +73,12 @@ export type HopSensoryChartProps = {
 };
 export function HopSensoryChart({ src, data: d }: HopSensoryChartProps) {
   //const data = makeChartData(src!);
-  const data = Object.entries(d).map(([aroma, value]) => ({ aroma, value }));
+  const data = Object.entries(d).map(([aroma, { value, user }]) => ({
+    aroma,
+    value,
+    user,
+  }));
+  console.log(data);
 
   return (
     <Card>
@@ -91,6 +100,7 @@ export function HopSensoryChart({ src, data: d }: HopSensoryChartProps) {
               fill="var(--color-value)"
               fillOpacity={0.6}
             />
+            <Radar dataKey="user" fill="var(--color-value)" fillOpacity={0.9} />
           </RadarChart>
         </ChartContainer>
       </CardContent>

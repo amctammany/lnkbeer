@@ -27,4 +27,12 @@ export type YeastInput = Yeast & {
   tempRange?: RangeValue;
   attenuationRange?: RangeValue;
 };
-export type HopSensoryChartData = Record<Uncapitalize<AromaGroups>, number>;
+export type HopSensoryData = {
+  value: number;
+  user?: number;
+};
+
+export type HopSensoryChartData<T = HopSensoryData> = Record<
+  Uncapitalize<AromaGroups>,
+  T
+>;

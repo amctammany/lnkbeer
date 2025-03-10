@@ -1,5 +1,5 @@
 import { ExtendedHop } from "@/types/ingredient";
-import { HopSensoryChart } from "../HopSensoryChart";
+//import { HopSensoryChart } from "../HopSensoryChart";
 
 export type SensoryTabProps = {
   src: ExtendedHop;

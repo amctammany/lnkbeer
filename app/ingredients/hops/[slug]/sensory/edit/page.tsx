@@ -1,9 +1,5 @@
 import { HopSensoryEditor } from "@/app/ingredients/hops/_components/HopSensoryEditor";
 import { getHop, getHops } from "@/app/ingredients/hops/queries";
-import { AppBarLayout } from "@/components/AppBarLayout";
-import AppBarTitle from "@/components/AppBarTitle";
-import { Hop } from "lucide-react";
-import { HopSensoryEditorActions } from "@/app/ingredients/hops/_components/HopSensoryEditor/HopSensoryEditorActions";
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/client";
@@ -18,13 +14,6 @@ export async function generateMetadata({ params }: HopSensoryEditorPageProps) {
   return {
     title: `LNK HopSensoryEditor: ${slug}`,
   };
-}
-export async function generateStaticParams() {
-  const hops = await getHops();
-
-  return hops.map((hop) => ({
-    slug: hop.slug,
-  }));
 }
 export default async function HopSensoryEditorPage({
   params,
