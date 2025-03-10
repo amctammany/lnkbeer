@@ -150,7 +150,7 @@ export const createHopNote = async (prev: any, formData: FormData) => {
       hop: true,
     },
   });
-  redirect(`/ingredients/hops/${res.hop.slug}`);
+  redirect(`/ingredients/hops/${res.hop.slug}/sensory`);
 };
 export const updateHopNote = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, noteSchema);
@@ -193,7 +193,7 @@ export const updateHopNote = async (prev: any, formData: FormData) => {
       sensoryPanel: { include: { aromas: true } },
     },
   });
-  redirect(`/ingredients/hops/${res.hop.slug}`);
+  redirect(`/ingredients/hops/${res.hop.slug}/sensory`);
 };
 export const createHop = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, schema);

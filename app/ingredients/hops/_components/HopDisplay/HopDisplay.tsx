@@ -6,45 +6,88 @@ import SensoryTab from "./SensoryTab";
 import { Hop as HopIcon } from "lucide-react";
 import { getHop } from "@/app/ingredients/hops/queries";
 import { Suspense } from "react";
+import type { Hop } from "@prisma/client";
+import { Prop } from "@/components/Prop";
+import { Card } from "@/components/ui/card";
 
 export type HopDisplayProps = {
-  slug: string;
+  //slug: string;
+  hop?: Hop | null;
 };
+import { Range } from "@/components/Range";
+import { HopInput } from "@/types/ingredient";
+type RangeProp = {
+  name: keyof HopInput;
+  label?: string;
+  min: number;
+  max: number;
+  range: [number, number];
+  value?: number;
+};
+const rangeProps: (hop: HopInput) => RangeProp[] = (hop) => [
+  {
+    name: "alphaRange",
+    label: "Alpha",
+    min: 0,
+    max: 30,
+    range: [hop.alphaLow!, hop.alphaHigh!],
+  },
+  {
+    name: "betaRange",
+    label: "Beta",
+    min: 0,
+    max: 25,
+    range: [hop.betaLow!, hop.betaHigh!],
+  },
+  {
+    name: "caryophylleneRange",
+    label: "Caryophyllene",
+    min: 0,
+    max: 20,
+    range: [hop.caryophylleneLow!, hop.caryophylleneHigh!],
+  },
+  {
+    name: "cohumuloneRange",
+    label: "Cohumulone",
+    min: 0,
+    max: 70,
+    range: [hop.cohumuloneLow!, hop.cohumuloneHigh!],
+  },
+  {
+    name: "myrceneRange",
+    label: "Myrcene",
+    min: 0,
+    max: 80,
+    range: [hop.myrceneLow!, hop.myrceneHigh!],
+  },
+  {
+    name: "totalOilRange",
+    label: "Total Oils",
+    min: 0,
+    max: 8,
+    range: [hop.totalOilLow!, hop.totalOilHigh!],
+  },
+];
 
-export async function HopDisplay({ slug }: HopDisplayProps) {
-  const hop = await getHop(slug);
-  if (!hop) return <div>Bad</div>;
+export async function HopDisplay({ hop }: HopDisplayProps) {
   return (
-    <Tabs defaultValue="summary" className="">
-      <TabsList className="flex justify-start">
-        <HopIcon className="size-4 mx-4" />
-        <TabsTrigger value="summary">Summary</TabsTrigger>
-        <TabsTrigger value="composition">Oil Composition</TabsTrigger>
-        <TabsTrigger value="sensory">Sensory</TabsTrigger>
-        <TabsTrigger value="notes">Notes</TabsTrigger>
-      </TabsList>
-
-      <TabsContent value="summary">
-        <Suspense fallback={<div>Loading</div>}>
-          <SummaryTab src={hop} />
-        </Suspense>
-      </TabsContent>
-      <TabsContent value="composition">
-        <Suspense fallback={<div>Loading</div>}>
-          <CompositionTab src={hop} />
-        </Suspense>
-      </TabsContent>
-      <TabsContent value="sensory">
-        <Suspense fallback={<div>Loading</div>}>
-          <SensoryTab src={hop} />
-        </Suspense>
-      </TabsContent>
-      <TabsContent value="notes">
-        <Suspense fallback={<div>Loading</div>}>
-          <NotesTab src={hop} />
-        </Suspense>
-      </TabsContent>
-    </Tabs>
+    <div className="grid grid-cols-2">
+      <Card className="m-4  *:border-b-2 *:last-of-type:border-b-0 ">
+        <Prop label="Name" value={hop?.name} />
+        <Prop label="Country" value={hop?.country} />
+        <Prop label="Usage" value={hop?.usage} />
+        <Prop label="Characteristics" value={hop?.characteristics} />
+        <Prop label="Alpha" value={hop?.alpha} />
+        <Prop label="Beta" value={hop?.beta} />
+      </Card>
+      <Card className="m-4  *:border-b-2 *:last-of-type:border-b-0 ">
+        <div className="m-2">
+          {rangeProps(hop!).map((props) => (
+            <Range key={props.name} label={props.name} {...props} />
+          ))}
+        </div>
+      </Card>
+    </div>
   );
 }
 
