@@ -20,22 +20,33 @@ export type InputProps = {
 export const inputStyles = cva(
   //"disabled:bg-slate-50 disabled:shadow-none disabled:text-slate-500 disabled:border-slate-200",
 
-  "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-1 invalid:ring-destructive focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm bg-white",
+  "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-xs transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-hidden invalid:ring-destructive disabled:cursor-not-allowed disabled:opacity-50 md:text-sm ",
 
   {
     variants: {
       variant: {
-        error: ["border-2 border-red-500"],
+        error: [
+          "border-2 border-red-500 focus-visible:ring-1 focus-visible:ring-destructive",
+        ],
         inline: ["inline-block"],
-        default: ["block"],
+        default: ["block focus-visible:ring-1 focus-visible:ring-ring "],
       },
       inputSize: {
         default: [],
         full: ["w-full"],
         small: ["w-8"],
       },
+      suffixV: {
+        default: [""],
+        error: ["border-2 border-r-0 rounded-r-none border-destructive"],
+        active: ["border-r-0 rounded-r-none"],
+      },
     },
-    defaultVariants: { inputSize: "default", variant: "default" },
+    defaultVariants: {
+      inputSize: "default",
+      variant: "default",
+      suffixV: "default",
+    },
   },
 );
 export function Input({
@@ -47,6 +58,7 @@ export function Input({
   className,
   //disabled,
   label,
+  suffix,
   //defaultValue,
   variant,
   inputSize,
@@ -59,6 +71,7 @@ export function Input({
         inputStyles({
           variant: error ? "error" : variant,
           inputSize,
+          //suffixV: suffix ? (error ? "error" : "active") : "default",
         }),
         className,
       )}

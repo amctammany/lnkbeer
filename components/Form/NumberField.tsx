@@ -36,8 +36,12 @@ const numberFieldStyles = cva("input form-input ", {
       default: ["w-auto"],
       small: ["w-auto"],
     },
+    suffixV: {
+      default: [],
+      active: [],
+    },
   },
-  defaultVariants: { size: "default", variant: "default" },
+  defaultVariants: { size: "default", variant: "default", suffixV: "default" },
 });
 
 export function NumberField({
@@ -62,8 +66,17 @@ export function NumberField({
     >
       <Input
         className={clsx(
-          inputStyles({ variant, inputSize }),
-          numberFieldStyles({ variant, size }),
+          inputStyles({
+            variant,
+            inputSize,
+            //suffixV: error ? "error" : suffix ? "active" : "default",
+            suffixV: !suffix ? (error ? "error" : "default") : "active",
+          }),
+          numberFieldStyles({
+            variant,
+            size,
+            suffixV: suffix ? "active" : "default",
+          }),
         )}
         type="number"
         name={name}

@@ -17,8 +17,12 @@ const textFieldStyles = cva(
         default: ["w-full"],
         small: [""],
       },
+      suffix: {
+        default: [],
+        active: ["border-r-0"],
+      },
     },
-    defaultVariants: { size: "default", variant: "default" },
+    defaultVariants: { size: "default", variant: "default", suffix: "default" },
   },
 );
 export function TextField({
@@ -43,7 +47,10 @@ export function TextField({
     >
       <Input
         type="text"
-        className={clsx(inputStyles({ variant }), textFieldStyles({ variant }))}
+        className={clsx(
+          //inputStyles({ variant, suffix: !!suffix ? "active" : "default" }),
+          textFieldStyles({ variant, suffix: !!suffix ? "active" : "default" }),
+        )}
         name={name}
         error={error}
         variant={variant}

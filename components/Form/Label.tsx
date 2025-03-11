@@ -47,6 +47,37 @@ const labelChildStyles = cva(["w-full flex"], {
   defaultVariants: { inputSize: "default", variant: "default" },
 });
 
+const labelSuffixStyles = cva(
+  [
+    "shrink grid items-center rounded-md rounded-l-none  align-middle justify-center bg-slate-400 text-sm font-medium leading-none ",
+  ],
+  {
+    variants: {
+      variant: {
+        default: ["-gray-600"],
+        error: ["text-destructive"],
+        inline: ["text-gray-600"],
+      },
+      inputSize: {
+        default: [""],
+        full: [],
+        small: [""],
+      },
+      suffixV: {
+        hidden: ["hidden"],
+        error: ["border-destructive border-2 rounded-l-none"],
+        active: [""],
+        default: [],
+      },
+    },
+    defaultVariants: {
+      inputSize: "default",
+      variant: "default",
+      suffixV: "default",
+    },
+  },
+);
+
 const labelLabelStyles = cva(["block capitalize my-auto mb-1"], {
   variants: {
     variant: {
@@ -106,10 +137,11 @@ export const Label = ({
         {children}
 
         <div
-          className={clsx(
-            "shrink grid items-center rounded-md rounded-l-none align-middle justify-center bg-slate-400 text-sm font-medium leading-none ",
-            { hidden: !suffix },
-          )}
+          className={labelSuffixStyles({
+            variant: error ? "error" : variant,
+            suffixV: suffix ? (error ? "error" : "active") : "hidden",
+            //suffixV: error ? "error" : suffix ? "active" : "hidden",
+          })}
         >
           <span className="my-auto block text-xs px-2 font-bold">{suffix}</span>
         </div>
