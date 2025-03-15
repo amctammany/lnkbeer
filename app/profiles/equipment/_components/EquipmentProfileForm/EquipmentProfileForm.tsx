@@ -10,9 +10,10 @@ import { EquipmentProfile, SpargeMethodType } from "@prisma/client";
 import { Anvil } from "lucide-react";
 import EquipmentProfileFormActions from "./EquipmentProfileFormActions";
 import AppBarTitle from "@/components/AppBarTitle";
+import { EquipmentProfileInput } from "@/types/Profile";
 
 export type EquipmentProfileFormProps = {
-  src?: EquipmentProfile | null;
+  src?: EquipmentProfileInput | null;
   action: any;
 };
 
@@ -20,7 +21,7 @@ export function EquipmentProfileForm({
   src,
   action,
 }: EquipmentProfileFormProps) {
-  const { state, register, formAction } = useActionForm<EquipmentProfile>(
+  const { state, register, formAction } = useActionForm<EquipmentProfileInput>(
     action,
     src!,
   );
@@ -35,6 +36,7 @@ export function EquipmentProfileForm({
             <span className="shrink p-2 block bg-slate-300">General</span>
             <div className="grow">
               <Input type="hidden" {...register("id")} />
+              <Input type="hidden" {...register("userId")} />
               <TextField {...register("name")} />
               <TextField {...register("description")} />
               <Select
