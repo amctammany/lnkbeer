@@ -25,6 +25,7 @@ export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
   const { state, register, control, getValues, formAction } =
     useActionForm<WaterProfileInput>(action, src!);
 
+  console.log(state);
   return (
     <Form className="flex" action={formAction}>
       <AppBarLayout

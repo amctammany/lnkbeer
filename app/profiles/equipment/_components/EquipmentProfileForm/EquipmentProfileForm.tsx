@@ -25,13 +25,14 @@ export function EquipmentProfileForm({
     action,
     src!,
   );
+  console.log(src, state);
   return (
-    <Form className="flex" action={formAction}>
+    <Form className="flex " action={formAction}>
       <AppBarLayout
         title={<AppBarTitle icon={<Anvil />}>{src?.name}</AppBarTitle>}
         actions={<EquipmentProfileFormActions />}
       >
-        <div className="gap-2 lg:w-9/12 mx-auto">
+        <div className="p-2 gap-2 lg:w-9/12 mx-auto">
           <div className="m-2 border-2 flex flex-col rounded-sm ">
             <span className="shrink p-2 block bg-slate-300">General</span>
             <div className="grow">
@@ -43,7 +44,7 @@ export function EquipmentProfileForm({
                 {...register("spargeMethod")}
                 options={SpargeMethodType}
               />
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 <NumberField
                   step={0.01}
                   {...register("boilTime")}

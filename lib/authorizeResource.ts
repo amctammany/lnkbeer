@@ -9,6 +9,6 @@ export async function authorizeResource<T extends object>(fn, ...args) {
   const resource = await fn(...args);
   if (session?.role === "SUPERUSER") return resource;
   if (resource.userId && resource.userId === session.user.id) return resource;
-  if (session?.role === "ADMIN") return resource();
+  if (session?.role === "ADMIN") return resource;
   return forbidden();
 }

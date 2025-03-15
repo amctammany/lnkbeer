@@ -64,7 +64,8 @@ export const createEquipmentProfile = async (prev: any, formData: FormData) => {
 export const updateEquipmentProfile = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, equipmentSchema);
 
-  if (valid.errors) return valid;
+  console.log(valid);
+  if (!valid.success) return valid;
   const { id, userId, forkedFrom, ...rest } =
     valid.data || ({} as EquipmentProfile);
   const res = await prisma.equipmentProfile.update({
@@ -89,5 +90,8 @@ export const updateEquipmentProfile = async (prev: any, formData: FormData) => {
     },
   });
 
+  if (res) {
+    console.log("good res", res);
+  }
   redirect(`/profiles/equipment/${res.slug}`);
 };

@@ -19,7 +19,7 @@ export function FermentationProfileDisplay({
   src,
 }: FermentationProfileDisplayProps) {
   return (
-    <div className="">
+    <div className="p-2">
       <Card className="m-4 *:border-b-2 *:last-of-type:border-b-0 ">
         <Prop label="Name" value={src?.name} />
         <Prop
@@ -48,7 +48,7 @@ export function FermentationProfileDisplay({
               ))}
             </ol>
           </Section>
-          <Section title="Steps" className="m-4  ">
+          <Section title="Graph" className="m-4  ">
             <Suspense fallback={<ChartLine />}>
               <FermentationChart src={src} />
             </Suspense>

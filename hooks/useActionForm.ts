@@ -14,7 +14,8 @@ export function useActionForm<T extends FieldValues>(action: any, data: T) {
   });
   useEffect(() => {
     if (!state.success) {
-      reset(state.data); // {
+      console.log(state.data);
+      //reset(state.data, {
       //keepDirty: true,
       //keepDefaultValues: true,
       //keepValues: true,

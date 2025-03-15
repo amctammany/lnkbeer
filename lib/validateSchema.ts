@@ -34,7 +34,7 @@ export function validateSchema<
   if (!valid.success) {
     return {
       success: valid.success,
-      data: Object.fromEntries(formData.entries()) as any,
+      data: valid.data, //Object.fromEntries(formData.entries()) as any,
       errors: Object.entries(valid.error.issues)?.reduce(
         (acc, [n, issue]) => {
           acc[
