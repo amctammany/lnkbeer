@@ -44,7 +44,7 @@ export function FermentationStepForm({
   return (
     <Dialog onOpenChange={handleOpen} defaultOpen={src !== undefined}>
       <DialogOverlay className="bg-black/30">
-        <DialogContent className="max-w-[680px]  min-h-[400px]">
+        <DialogContent className="max--[680px]  min--[400px]">
           <DialogHeader>
             <DialogTitle>Fermentation Step Editor</DialogTitle>
             <DialogDescription>Fermentation Step</DialogDescription>

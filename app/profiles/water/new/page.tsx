@@ -32,7 +32,7 @@ export default async function WaterProfileCreatorPage({}: WaterProfileCreatorPag
     },
   });
   if (!user) throw new Error("Invalid User?");
-  const name = `${user?.name} - WaterProfile ${user?.waterProfiles.length}`;
+  const name = `${user?.name} - WaterProfile ${user?.waterProfiles.length + 1}`;
   const src = {
     name,
     userId: user.id,

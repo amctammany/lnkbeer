@@ -29,7 +29,7 @@ export default async function FermentationProfileCreatorPage({}: FermentationPro
     },
   });
   if (!user) throw new Error("Invalid User?");
-  const name = `${user?.name} - FermentationProfile ${user?.fermentationProfiles.length}`;
+  const name = `${user?.name} - FermentationProfile ${user?.fermentationProfiles.length + 1}`;
   const res = await prisma.fermentationProfile.create({
     data: {
       name,
