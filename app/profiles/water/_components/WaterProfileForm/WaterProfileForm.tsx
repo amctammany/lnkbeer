@@ -14,15 +14,16 @@ import { WaterProfile } from "@prisma/client";
 import WaterProfileFormActions from "./WaterProfileFormActions";
 import AppBarTitle from "@/components/AppBarTitle";
 import { Waves } from "lucide-react";
+import { WaterProfileInput } from "@/types/Profile";
 
 export type WaterProfileFormProps = {
-  src?: WaterProfile | null;
+  src?: WaterProfileInput | null;
   action: any;
 };
 
 export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
   const { state, register, control, getValues, formAction } =
-    useActionForm<WaterProfile>(action, src!);
+    useActionForm<WaterProfileInput>(action, src!);
 
   return (
     <Form className="flex" action={formAction}>

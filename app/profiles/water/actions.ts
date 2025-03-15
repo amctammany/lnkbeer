@@ -2,7 +2,7 @@
 import { prisma } from "@/lib/client";
 import slugify from "@/lib/slugify";
 import { validateSchema } from "@/lib/validateSchema";
-import { ExtendedWaterProfile } from "@/types/Profile";
+import { ExtendedWaterProfile, WaterProfileInput } from "@/types/Profile";
 import { WaterProfile } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -80,7 +80,7 @@ export const updateWaterProfile = async (prev: any, formData: FormData) => {
 
   redirect(`/profiles/water/${res.slug}`);
 };
-export const removeWaterProfile = async (src?: WaterProfile | null) => {
+export const removeWaterProfile = async (src?: WaterProfileInput | null) => {
   if (!src) return;
   await prisma.waterProfile.delete({
     where: {

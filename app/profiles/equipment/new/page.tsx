@@ -25,6 +25,7 @@ export default async function EquipmentProfileCreatorPage({}: EquipmentProfileCr
   });
   if (!user) throw new Error("Invalid User?");
   const name = `${user?.name} - EquipmentProfile ${user?.equipmentProfiles.length}`;
+
   const res = await prisma.equipmentProfile.create({
     data: {
       name,

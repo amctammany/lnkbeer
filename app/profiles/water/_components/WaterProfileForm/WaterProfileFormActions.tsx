@@ -7,9 +7,10 @@ import {
 } from "@/components/AppBarDropdown";
 import { AppBarItem } from "@/components/AppBarItem";
 import { removeWaterProfile } from "../../actions";
+import { WaterProfileInput } from "@/types/Profile";
 
 export type WaterProfileFormActionsProps = {
-  src?: WaterProfile | null;
+  src?: WaterProfileInput | null;
 };
 export const WaterProfileFormActions = ({
   src,
