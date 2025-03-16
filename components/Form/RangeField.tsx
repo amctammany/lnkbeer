@@ -37,7 +37,7 @@ const inputClass = clsx(
   "[&::-webkit-slider-thumb]:rounded-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:[pointer-events:all] [&::-webkit-slider-thumb]:w-[var(--thumb-size)] [&::-webkit-slider-thumb]:h-[var(--thumb-size)] [&::-webkit-slider-thumb]:cursor-grab [&::-webkit-slider-thumb]:bg-red-900 [border:0,none]  [&:focus::-webkit-slider-runnable-track]:border-transparent [&:focus::-webkit-slider-runnable-track]:appearance-none [&:focus::-webkit-slider-runnable-track]:w-[var(--thumb-size)] [&:focus::-webkit-slider-runnable-track]:h-[var(--thumb-size)] [&:focus::-webkit-slider-runnable-track]:bg-red-900   [[&::-webkit-slider-thumb]&:hover]:[cursor:grabbing] hover:bg-green-200 hover:text-blue-200 ",
 );
 const controlClass = clsx(
-  "w-[calc(var(--thumb-size)/1)] h-[var(--thumb-size)] rounded-[50%] absolute top-1/2 bg-pink-400 z-[2] -translate-y-1/2 transform[translate3d(0,-50%,0)] ml-[calc(var(--thumb-size)*-0.5)] pointer-events-none hover:bg-green-200 hover:text-blue-200 ",
+  "w-[calc(var(--thumb-size)/1)] h-[var(--thumb-size)] rounded-[50%] absolute top-[40%] bg-pink-400 z-[2] -translate-y-[calc(50% + 8px)] transform[translate3d(0,-22%,0)] ml-[calc(var(--thumb-size)*-0.5)] pointer-events-none hover:bg-green-200 hover:text-blue-200 ",
 );
 
 const rangeFieldStyles = cva("input w-full", {
@@ -157,7 +157,7 @@ export function RangeField({
                 onWheel={(e) => e.currentTarget.blur()}
               />
             </div>
-            <div className="w-full bg-ble-300 absolute h-[calc(var(--thumb-size)/4)] ">
+            <div className="w-full bg-ble-300 absolute h-10">
               <div className={controlClass} style={{ left: `${minPos}%` }} />
               <div className="absolute w-full top-1/2 -translate-y-1/2 h-1 bg-gray-300">
                 <div
