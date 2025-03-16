@@ -16,6 +16,7 @@ import {
 } from "react-hook-form";
 import clsx from "clsx";
 import { lowerFirst } from "@/lib/utils";
+import { RangeSelect } from "@/components/Form/RangeSelect";
 export type HopNoteInput = Partial<HopNote> & {
   id?: any;
   slug?: any;
@@ -101,55 +102,19 @@ function HopAromaForm<T extends FieldValues>({
   aromaProps: UseFormRegisterReturn;
 }) {
   return (
-    <div className={clsx("flex", className)}>
-      <div className="m-auto px-2">
+    <div className={clsx("grid grid-cols-6 odd:bg-blue-50", className)}>
+      <div className="text-right px-1">
         <span className=" shrink">{label ?? name}</span>
       </div>
-      <RangeSelect className="grow" {...rangeProps} />
-      <AromaSelect className="grow" {...aromaProps} aromas={aromas} />
+      <RangeSelect className="col-span-2" {...rangeProps} />
+      <AromaSelect
+        className="col-span-3 overflow-x-scroll"
+        {...aromaProps}
+        aromas={aromas}
+      />
     </div>
   );
 }
-const RangeSelect = ({
-  label,
-  className,
-  ...props
-}: UseFormRegisterReturn & { className?: string; label?: React.ReactNode }) => {
-  return (
-    <div
-      className={clsx(
-        "flex justify-evenly items-stretch justify-items-stretch my-0",
-        className,
-      )}
-    >
-      <b className="m-auto ">0</b>
-      {Array.from({ length: 11 }).map((_, i) => (
-        <div
-          key={i}
-          className="grid border grid-flow-col-dense auto-cols-auto justify-self-auto b-1 m-auto items-center space-y-2 space-x-2 au "
-        >
-          <label
-            className="self-stretch p-1 gap-0"
-            htmlFor={`opt-${props.name}-${i}`}
-          >
-            <input
-              className="size-2"
-              {...props}
-              type="radio"
-              key={`opt-${props.name}-${i}`}
-              id={`opt-${props.name}-${i}`}
-              //name={props.name}
-              //onChange={handleChange}
-              value={i.toString()}
-              //checked={props.ref.current.toString() === i.toString()}
-            />
-          </label>
-        </div>
-      ))}
-      <b className="my-auto text-lg">10</b>
-    </div>
-  );
-};
 export function HopSensoryEditorForm({
   action,
   register,
