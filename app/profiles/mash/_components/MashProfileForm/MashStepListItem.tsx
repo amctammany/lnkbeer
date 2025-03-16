@@ -3,6 +3,7 @@ import React from "react";
 import { ExtendedMashStep } from "@/types/Profile";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { MashStepSchema } from "@/schemas/mashProfileSchema";
 type MashStepTextProps = {
   src: MashStep;
 };
@@ -15,7 +16,7 @@ export function MashStepText({ src }: MashStepTextProps) {
 }
 
 export type MashStepListItemProps = {
-  src: ExtendedMashStep | MashStep;
+  src: MashStepSchema; //ExtendedMashStep | MashStep;
   index: number;
 };
 export function MashStepListItem({ src, index }: MashStepListItemProps) {

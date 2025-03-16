@@ -65,12 +65,28 @@ export function MashStepForm({ src, action, ...props }: MashStepFormProps) {
               <Select
                 className="col-span-3"
                 {...register("type")}
+                error={state.errors?.type}
                 options={MashStepType}
               />
 
-              <NumberField {...register("temperature")} step={0.1} />
-              <NumberField {...register("time")} step={0.1} />
-              <NumberField {...register("rampTime")} step={0.1} />
+              <NumberField
+                {...register("temperature")}
+                step={0.1}
+                suffix="&deg;F"
+                error={state.errors?.temperature}
+              />
+              <NumberField
+                {...register("time")}
+                step={0.1}
+                suffix="min"
+                error={state.errors?.time}
+              />
+              <NumberField
+                {...register("rampTime")}
+                step={0.1}
+                suffix="min"
+                error={state.errors?.rampTime}
+              />
               <Button type="submit">Save</Button>
             </div>
           </Form>

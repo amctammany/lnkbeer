@@ -26,6 +26,7 @@ export const mashProfileSchema = zfd.formData({
   fermenterLoss: zfd.numeric(z.number().min(0).optional()),
   mashEfficiency: zfd.numeric(z.number().min(0).max(100).optional()).nullable(),
   brewEfficiency: zfd.numeric(z.number().min(0).max(100).optional()).nullable(),
+  steps: zfd.repeatableOfType(mashStepSchema),
 });
 
 export type MashStepSchema = z.infer<typeof mashStepSchema>;

@@ -34,6 +34,7 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
     defaultValues: src!,
     resolver: zodResolver(mashProfileSchema),
   });
+
   const title = src?.name
     ? `MashProfile Editor: ${src?.name}`
     : "MashProfile Creator";
@@ -84,7 +85,7 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
                     </Link>
                     <MashStepActions
                       className="mx-2 hidden md:block"
-                      src={{ MashProfile: src, ...step }}
+                      src={{ MashProfile: src!, ...step }}
                     />
                   </div>
                 </li>

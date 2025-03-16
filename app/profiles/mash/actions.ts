@@ -14,7 +14,7 @@ import { redirect } from "next/navigation";
 import { zfd } from "zod-form-data";
 
 export const createMashProfile = async (data: MashProfileSchema) => {
-  const { id, userId, forkedFrom, ...rest } = data;
+  const { id, userId, steps, forkedFrom, ...rest } = data;
   const res = await prisma.mashProfile.create({
     data: {
       ...rest,
@@ -120,7 +120,7 @@ export async function removeMashProfile(formData: FormData) {
 }
 
 export const createMashStep = async (data: MashStepSchema) => {
-  const { id, mashProfileId, ...rest } = data;
+  const { id, ...rest } = data;
   const res = await prisma.mashStep.create({
     data: { ...rest },
     include: {
@@ -137,7 +137,7 @@ export const createMashStep = async (data: MashStepSchema) => {
 };
 
 export const updateMashStep = async (data: MashStepSchema) => {
-  const { id, mashProfileId, ...rest } = data;
+  const { id, ...rest } = data;
   const res = await prisma.mashStep.update({
     where: { id: id! },
     data: rest,
@@ -154,7 +154,7 @@ export const updateMashStep = async (data: MashStepSchema) => {
   redirect(`/profiles/mash/${res?.MashProfile?.slug}/edit`);
 };
 export const updateMashProfile = async (data: MashProfileSchema) => {
-  const { id, userId, forkedFrom, ...rest } = data; //|| ({} as MashProfile);
+  const { id, userId, forkedFrom, steps, ...rest } = data; //|| ({} as MashProfile);
   const res = await prisma.mashProfile.update({
     where: { id: id! },
     data: {

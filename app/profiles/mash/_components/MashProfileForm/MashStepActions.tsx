@@ -24,7 +24,7 @@ import {
 } from "@/app/profiles/mash/actions";
 
 export type MashStepActionsProps = {
-  src: ExtendedMashStep;
+  src: Partial<ExtendedMashStep>;
 } & ComponentProps<"div">;
 //import { duplicateMashStep } from "../../actions";
 export function MashStepActions({ src, className }: MashStepActionsProps) {
