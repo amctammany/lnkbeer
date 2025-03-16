@@ -13,13 +13,15 @@ import { Select } from "@/components/Form/Select";
 //import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
+import { yeastSchema } from "@/schemas/yeastSchema";
 import { RangeValue, YeastInput } from "@/types/ingredient";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { YeastFlocculation, YeastForm, YeastType } from "@prisma/client";
 import { FlaskConical, Save } from "lucide-react";
-import { Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 export type YeastEditorProps = {
-  src?: YeastInput | null;
+  yeast?: YeastInput | null;
   action: any;
 };
 const rangeProps: RangeFieldProp<YeastInput>[] = [
@@ -33,7 +35,7 @@ const rangeProps: RangeFieldProp<YeastInput>[] = [
   {
     name: "attenuationRange",
     min: 0,
-    max: 1,
+    max: 100,
     lowField: "attenuationLow",
     highField: "attenuationHigh",
   },
@@ -42,13 +44,24 @@ const rangeProps: RangeFieldProp<YeastInput>[] = [
 const YeastEditorActions = () => {
   return [<AppBarItem key="save" text="Save" type="submit" icon={<Save />} />];
 };
-export function YeastEditor({ src, action }: YeastEditorProps) {
-  const { state, register, control, getValues, formAction } =
-    useActionForm<YeastInput>(action, src!);
+export function YeastEditor({ yeast, action }: YeastEditorProps) {
+  //const { state, register, control, getValues, formAction } =
+  //useActionForm<YeastInput>(action, src!);
+  const {
+    register,
+    getValues,
+    control,
+    handleSubmit,
+    formState: state,
+  } = useForm<YeastInput>({
+    defaultValues: yeast!,
+    resolver: zodResolver<any>(yeastSchema),
+  });
+  console.log(state);
   return (
-    <Form className="flex" action={formAction}>
+    <Form className="flex" onSubmit={handleSubmit(action)}>
       <AppBarLayout
-        title={<AppBarTitle icon={<FlaskConical />}>{src?.name}</AppBarTitle>}
+        title={<AppBarTitle icon={<FlaskConical />}>{yeast?.name}</AppBarTitle>}
         actions={<YeastEditorActions />}
       >
         <div className="grid grid-cols-4 gap-2">
@@ -56,16 +69,30 @@ export function YeastEditor({ src, action }: YeastEditorProps) {
             <span className="shrink p-2 block bg-slate-300">General</span>
             <div className="grow">
               <Input type="hidden" {...register("id")} />
+              <Input type="hidden" {...register("userId")} />
               <TextField {...register("name")} />
               <TextField {...register("manufacturer")} />
-              <NumberField {...register("attenuation")} step={0.001} />
-              <TextField {...register("notes")} />
-              <Select {...register("type")} options={YeastType} />
+              <NumberField
+                {...register("attenuation")}
+                step={0.001}
+                error={state.errors?.attenuation}
+              />
+              <TextField {...register("notes")} error={state.errors?.notes} />
+              <Select
+                {...register("type")}
+                options={YeastType}
+                error={state.errors?.type}
+              />
               <Select
                 {...register("flocculation")}
+                error={state.errors?.flocculation}
                 options={YeastFlocculation}
               />
-              <Select {...register("form")} options={YeastForm} />
+              <Select
+                {...register("form")}
+                options={YeastForm}
+                error={state.errors?.form}
+              />
               {rangeProps.map(({ name, highField, lowField, min, max }) => (
                 <Controller
                   key={name}
@@ -82,8 +109,12 @@ export function YeastEditor({ src, action }: YeastEditorProps) {
                   }
                   render={({ field }) => (
                     <RangeField
-                      error={state.errors?.[name!]}
+                      errors={[
+                        state.errors?.[lowField!],
+                        state.errors?.[highField!],
+                      ]}
                       {...field}
+                      //onChange={(e) => console.log(e)}
                       value={field.value ?? { min: 0, max: 100 }}
                       label={name}
                       step={0.01}

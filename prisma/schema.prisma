@@ -34,7 +34,10 @@ model User {
   mashProfiles         MashProfile[]
   fermentationProfiles FermentationProfile[]
   hopSensoryPanels     HopSensoryPanel[]
-  hopNote              HopNote[]
+  hopNotes             HopNote[]
+  yeasts               Yeast[]
+  fermentables         Fermentable[]
+  hops                 Hop[]
 }
 
 model Account {
@@ -166,6 +169,8 @@ model Hop {
   //HopIngredient     HopIngredient[]
   hopSensoryPanels  HopSensoryPanel[]
   hopNote           HopNote[]
+  userId            String?
+  owner             User?             @relation(fields: [userId], references: [id])
 }
 
 model HopSensoryPanel {
@@ -274,6 +279,8 @@ model Fermentable {
   color        Float?
   potential    Float?
   stability    String?
+  userId       String?
+  owner        User?   @relation(fields: [userId], references: [id])
   //FermentableIngredient FermentableIngredient[]
 }
 
@@ -314,6 +321,9 @@ model Yeast {
   attenuation     Float?
   attenuationLow  Float?
   attenuationHigh Float?
+  userId          String?
+  owner           User?              @relation(fields: [userId], references: [id])
+
   //  YeastIngredient YeastIngredient[]
 }
 

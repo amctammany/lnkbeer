@@ -1,6 +1,8 @@
 import { YeastEditor } from "@/app/ingredients/yeasts/_components/YeastEditor";
-import { Yeast } from "@prisma/client";
 import { createYeast } from "../actions";
+import { auth } from "@/app/auth";
+import { redirect } from "next/navigation";
+import { YeastInput } from "@/types/ingredient";
 export function generateMetadata() {
   return {
     title: "LNK Create Yeast",
@@ -8,6 +10,10 @@ export function generateMetadata() {
 }
 
 export default async function YeastCreatorPage() {
-  const yeast = {} as Yeast;
-  return <YeastEditor src={yeast} action={createYeast} />;
+  const session = await auth();
+  if (!session?.user)
+    return redirect("/admin/login?callbackUrl=/ingredients/yeasts/new");
+  const yeast = { userId: session.user.id } as YeastInput;
+
+  return <YeastEditor yeast={yeast} action={createYeast} />;
 }

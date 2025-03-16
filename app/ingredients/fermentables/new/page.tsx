@@ -1,5 +1,4 @@
 import { FermentableEditor } from "@/app/ingredients/fermentables/_components/FermentableEditor";
-import { Fermentable } from "@prisma/client";
 import { createFermentable } from "../actions";
 import { FermentableInput } from "@/types/ingredient";
 export function generateMetadata() {

@@ -6,9 +6,9 @@ const nextConfig: NextConfig = {
   experimental: {
     authInterrupts: true,
     ppr: "incremental",
-    //reactCompiler: {
-    //compilationMode: "infer",
-    //},
+    reactCompiler: {
+      compilationMode: "infer",
+    },
     staleTimes: {
       dynamic: 30,
       static: 180,

@@ -2,63 +2,41 @@
 import { Yeast, YeastFlocculation, YeastForm, YeastType } from "@prisma/client";
 import { prisma } from "@/lib/client";
 import { redirect } from "next/navigation";
-import { z } from "zod";
-import { zfd } from "zod-form-data";
 import { validateSchema } from "@/lib/validateSchema";
 import slugify from "@/lib/slugify";
+import { YeastSchema } from "@/schemas/yeastSchema";
 //import { FieldValues } from "react-hook-form";
 //import { YeastInput } from "@/types/Ingredient";
 
-const schema = zfd.formData({
-  id: zfd.text(z.string().optional()),
-  name: zfd.text(),
-  description: zfd.text(z.string().optional()),
-  manufacturer: zfd.text(z.string().optional()),
-  type: z.nativeEnum(YeastType).optional().default(YeastType.Ale),
-  flocculation: z.nativeEnum(YeastFlocculation).optional(),
-  form: z.nativeEnum(YeastForm).optional(),
-  attenuationRange: zfd
-    .numeric(z.number().min(0).max(1).optional())
-    .array()
-    .length(2),
-  attenuationLow: zfd.numeric(z.number().min(0).max(1).optional()),
-  attenuationHigh: zfd.numeric(z.number().min(0).max(1).optional()),
-  attenuation: zfd.numeric(z.number().min(0).max(1).optional()),
-  tempRange: zfd.numeric(z.number()).array().length(2),
-  tempLow: zfd.numeric(z.number().optional()),
-  tempHigh: zfd.numeric(z.number().optional()),
-  usage: zfd.text(z.string().optional()),
-  notes: zfd.text(z.string().optional()),
-});
-type YeastSchema = z.infer<typeof schema>;
 function parseYeast(data: YeastSchema) {
   const { tempRange, attenuationRange, ...rest } = data;
   return {
     ...rest,
-    tempLow: tempRange?.[0],
-    tempHigh: tempRange?.[1],
-    attenuationLow: attenuationRange?.[0],
-    attenuationHigh: attenuationRange?.[1],
+    tempLow: tempRange?.min,
+    tempHigh: tempRange?.max,
+    attenuationLow: attenuationRange?.min,
+    attenuationHigh: attenuationRange?.max,
     slug: slugify(rest.name, { lower: true }),
   };
 }
-export const createYeast = async (prev: any, formData: FormData) => {
-  const valid = validateSchema(formData, schema);
-  if (!valid.success) return Promise.resolve(valid);
-  const data = parseYeast(valid.data);
+export const createYeast = async (data: YeastSchema) => {
+  console.log(data);
+  //const valid = validateSchema(formData, schema);
+  //if (!valid.success) return Promise.resolve(valid);
+  const yeastData = parseYeast(data);
   const res = await prisma.yeast.create({
-    data,
+    data: yeastData,
   });
   redirect(`/ingredients/yeasts/${res.slug}`);
 };
 
-export const updateYeast = async (prev: any, formData: FormData) => {
-  const valid = validateSchema(formData, schema);
-  if (!valid.success) return Promise.resolve(valid);
-  const data = parseYeast(valid.data);
+export const updateYeast = async (data: YeastSchema) => {
+  //const valid = validateSchema(formData, schema);
+  //if (!valid.success) return Promise.resolve(valid);
+  const yeastData = parseYeast(data);
   const res = await prisma.yeast.update({
     where: { id: data.id },
-    data,
+    data: yeastData,
   });
   redirect(`/ingredients/yeasts/${res.slug}`);
 };

@@ -8,6 +8,7 @@ import clsx from "clsx";
 import { NumberFieldRaw } from "./NumberField";
 import { FieldValues } from "react-hook-form";
 import { NumberKeys, RangeKeys } from "@/types/util";
+import { SchemaFieldError } from "@/lib/validateSchema";
 export type RangeFieldProp<T extends FieldValues> = {
   name: Required<RangeKeys<T>>;
   lowField: Required<NumberKeys<T>>;
@@ -25,17 +26,18 @@ export type RangeFieldProps = //H extends Path<T> = Path<T>,
     highField?: any; //UseControllerReturn<T, Path<T>>; //["field"];
     onChange: any;
     error?: any;
+    errors?: (undefined | SchemaFieldError)[];
     value?: { min?: number; max?: number };
   } & Omit<InputProps, "value" | "error">;
 
 const inputClass = clsx(
-  "absolute w-full h-full z-[3] p-0 opacity-0 appearance-none pointer-events-none ",
-  "[&::-ms-track]:bg-transparent [&::-ms-track]:border-transparent [&::-ms-track]:appearance-none [&::-ms-thumb]:appearance-none [&::-ms-thumb]:[pointer-events:all] [&::-ms-thumb]:w-[--thumb-size] [&::-ms-thumb]:h-[--thumb-size] [&::-ms-thumb]:bg-red-900 [&::-ms-thumb]:cursor-grab [[&::-ms-thumb]&:active]:[cursor:grabbing]",
-  "[&::-moz-range-track]:bg-transparent [&::-moz-range-track]:border-transparent [&::-moz-range-track]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:[pointer-events:all] [&::-moz-range-thumb]:w-[--thumb-size] [&::-moz-range-thumb]:h-[--thumb-size] [&::-moz-range-thumb]:bg-red-900 [&::-moz-range-thumb]:cursor-grab [[&::-moz-range-thumb]&:active]:[cursor:grabbing]",
-  "[&::-webkit-slider-thumb]:rounded-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:[pointer-events:all] [&::-webkit-slider-thumb]:w-[--thumb-size] [&::-webkit-slider-thumb]:h-[--thumb-size] [&::-webkit-slider-thumb]:cursor-grab [&::-webkit-slider-thumb]:bg-red-900 [border:0,none]  [&:focus::-webkit-slider-runnable-track]:bg-transparent [&:focus::-webkit-slider-runnable-track]:border-transparent [&:focus::-webkit-slider-runnable-track]:appearance-none [&:focus::-webkit-slider-runnable-track]:w-[--thumb-size] [&:focus::-webkit-slider-runnable-track]:h-[--thumb-size] [&:focus::-webkit-slider-runnable-track]:bg-red-900   [[&::-webkit-slider-thumb]&:hover]:[cursor:grabbing] ",
+  "absolute w-full h-full z-[30] p-0 opacity-0 appearance-none pointer-events-none ",
+  "[&::-ms-track]:bg-transparent [&::-ms-track]:border-transparent [&::-ms-track]:appearance-none [&::-ms-thumb]:appearance-none [&::-ms-thumb]:[pointer-events:all] [&::-ms-thumb]:w-[var(--thumb-size)] [&::-ms-thumb]:h-[var(--thumb-size)] [&::-ms-thumb]:bg-red-900 [&::-ms-thumb]:cursor-grab [[&::-ms-thumb]&:active]:[cursor:grabbing]",
+  "[&::-moz-range-track]:bg-transparent [&::-moz-range-track]:border-transparent [&::-moz-range-track]:appearance-none [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:[pointer-events:all] [&::-moz-range-thumb]:w-[var(--thumb-size)] [&::-moz-range-thumb]:h-[var(--thumb-size)] [&::-moz-range-thumb]:bg-red-900 [&::-moz-range-thumb]:cursor-grab [[&::-moz-range-thumb]&:active]:[cursor:grabbing]",
+  "[&::-webkit-slider-thumb]:rounded-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:[pointer-events:all] [&::-webkit-slider-thumb]:w-[var(--thumb-size)] [&::-webkit-slider-thumb]:h-[var(--thumb-size)] [&::-webkit-slider-thumb]:cursor-grab [&::-webkit-slider-thumb]:bg-red-900 [border:0,none]  [&:focus::-webkit-slider-runnable-track]:border-transparent [&:focus::-webkit-slider-runnable-track]:appearance-none [&:focus::-webkit-slider-runnable-track]:w-[var(--thumb-size)] [&:focus::-webkit-slider-runnable-track]:h-[var(--thumb-size)] [&:focus::-webkit-slider-runnable-track]:bg-red-900   [[&::-webkit-slider-thumb]&:hover]:[cursor:grabbing] hover:bg-green-200 hover:text-blue-200 ",
 );
 const controlClass = clsx(
-  "w-[calc(var(--thumb-size)/1)] h-[var(--thumb-size)] rounded-[50%] absolute top-1/2 bg-pink-400 z-[2] -translate-y-1/2 transform[translate3d(0,-50%,0)] ml-[calc(var(--thumb-size*-1/2))] pointer-events-none ",
+  "w-[calc(var(--thumb-size)/1)] h-[var(--thumb-size)] rounded-[50%] absolute top-1/2 bg-pink-400 z-[2] -translate-y-1/2 transform[translate3d(0,-50%,0)] ml-[calc(var(--thumb-size)*-0.5)] pointer-events-none hover:bg-green-200 hover:text-blue-200 ",
 );
 
 const rangeFieldStyles = cva("input w-full", {
@@ -72,6 +74,7 @@ export function RangeField({
 
   //lowField,
   //highField,
+  errors,
   error,
   className,
   max = 100,
@@ -90,7 +93,7 @@ export function RangeField({
     e.preventDefault();
     const newMinVal = Math.min(+e.target.value, maxValue - step);
     setMinValue(newMinVal);
-    //console.log("min: " + newMinVal);
+    console.log("min: " + newMinVal);
     //console.log(lowField.field.onChange);
     //lowField.field.onChange(newMinVal);
     onChange({ min: newMinVal, max: maxValue });
@@ -99,7 +102,7 @@ export function RangeField({
   const handleMaxChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
     const newMaxVal = Math.max(+e.target.value, minValue + step);
-    //console.log("max: " + newMaxVal);
+    console.log("max: " + newMaxVal);
     //console.log(highField.field.onChange);
     setMaxValue(newMaxVal);
     //highField.field.onChange(newMaxVal);
@@ -122,9 +125,10 @@ export function RangeField({
         <NumberFieldRaw
           className="flex-shrink text-sm w-16 h-8"
           value={minValue}
+          step={step}
           onChange={handleMinChange}
         />
-
+        {errors?.[0]?.message}
         <div className="flex-grow">
           <div className="relative flex items-center mx-10 my-[calc(var(--thumb-size)/2)] pt-[1.6rem] h-[calc(var(--thumb-size)+1.0rem)]">
             <div className="absolute mx-0 h-[var(--thumb-size)] my-[calc(var(--thumb-size)*-.5)] w-[calc(100%+var(--thumb-size))]">
@@ -153,7 +157,7 @@ export function RangeField({
                 onWheel={(e) => e.currentTarget.blur()}
               />
             </div>
-            <div className="w-full bg-blue-300 absolute h-[calc(--thumb-size)/4] ">
+            <div className="w-full bg-ble-300 absolute h-[calc(var(--thumb-size)/4)] ">
               <div className={controlClass} style={{ left: `${minPos}%` }} />
               <div className="absolute w-full top-1/2 -translate-y-1/2 h-1 bg-gray-300">
                 <div
@@ -168,8 +172,10 @@ export function RangeField({
         <NumberFieldRaw
           className="flex-shrink text-sm w-16 h-8"
           value={maxValue}
+          step={step}
           onChange={handleMaxChange}
         />
+        {errors?.[1]?.message}
       </div>
     </Label>
   );

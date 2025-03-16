@@ -5,7 +5,6 @@ import { Input } from "@/components/Form/Input";
 import { NumberField } from "@/components/Form/NumberField";
 import { TextField } from "@/components/Form/TextField";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useActionForm } from "@/hooks/useActionForm";
 import { FermentableInput } from "@/types/ingredient";
 import { FermentableEditorActions } from "./FermentableEditorActions";
 import { Wheat } from "lucide-react";
@@ -33,7 +32,7 @@ export function FermentableEditor({
     resolver: zodResolver(fermentableSchema),
   });
   return (
-    <Form className="flex" onSubmit={handleSubmit((d) => console.log(d))}>
+    <Form className="flex" onSubmit={handleSubmit(action)}>
       <AppBarLayout
         title={
           <AppBarTitle icon={<Wheat />}>

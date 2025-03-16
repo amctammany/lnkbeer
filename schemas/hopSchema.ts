@@ -41,6 +41,7 @@ export function parseHop(data: HopSchema) {
 
 export const hopSchema = zfd.formData({
   id: zfd.text(z.string().optional()),
+  userId: zfd.text(z.string().optional()),
   name: zfd.text(z.string()),
   description: zfd.text(z.string().optional()).nullable(),
   flavor: zfd.text(z.string().optional()).nullable(),

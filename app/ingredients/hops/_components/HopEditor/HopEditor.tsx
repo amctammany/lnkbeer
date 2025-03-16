@@ -93,11 +93,11 @@ export function HopEditor({ hop, action }: HopEditorProps) {
     formState: state,
   } = useForm<HopInput>({
     defaultValues: hop!,
-    resolver: zodResolver<HopInput>(hopSchema as any),
+    resolver: zodResolver<any>(hopSchema),
   });
 
   return (
-    <Form className="flex" onSubmit={handleSubmit((d) => console.log(d))}>
+    <Form className="flex" onSubmit={handleSubmit(action)}>
       <AppBarLayout
         title={
           <AppBarTitle icon={<HopIcon />}>{hop?.name ?? "Creator"}</AppBarTitle>
