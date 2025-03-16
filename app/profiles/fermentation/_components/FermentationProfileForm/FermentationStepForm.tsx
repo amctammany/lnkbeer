@@ -18,6 +18,12 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  FermentationStepSchema,
+  fermentationStepSchema,
+} from "@/schemas/fermentationProfileSchema";
+import { useForm } from "react-hook-form";
 
 export type FermentationStepFormProps = {
   src?: FermentationStepInput | null;
@@ -28,8 +34,17 @@ export function FermentationStepForm({
   action,
   ...props
 }: FermentationStepFormProps) {
-  const { state, register, control, getValues, formAction } =
-    useActionForm<FermentationStepInput>(action, src!);
+  //const { state, register, control, getValues, formAction } =
+  //useActionForm<FermentationStepInput>(action, src!);
+  const {
+    register,
+    handleSubmit,
+    formState: state,
+  } = useForm<FermentationStepSchema>({
+    defaultValues: src!,
+    resolver: zodResolver(fermentationStepSchema),
+  });
+
   const { replace } = useRouter();
   //useContext(
   //FermentationProfileFormContext,
@@ -50,7 +65,7 @@ export function FermentationStepForm({
             <DialogDescription>Fermentation Step</DialogDescription>
           </DialogHeader>
 
-          <Form action={formAction} {...props}>
+          <Form onSubmit={handleSubmit(action)} {...props}>
             <div className="grid grid-cols-3 gap-2 w-full">
               <Input type="hidden" {...register("id")} />
               <Input type="hidden" {...register("fermentationProfileId")} />

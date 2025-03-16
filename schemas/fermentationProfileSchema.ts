@@ -3,10 +3,10 @@ import { z } from "zod";
 import { zfd } from "zod-form-data";
 
 export const fermentationStepSchema = zfd.formData({
-  id: zfd.text(z.string().optional()),
-  fermentationProfileId: zfd.text(z.string().optional()),
+  id: zfd.text(z.string().optional()).nullable(),
+  fermentationProfileId: zfd.text(z.string().optional()).nullable(),
   rank: zfd.numeric(z.number().min(0)),
-  name: zfd.text(z.string().optional()),
+  name: zfd.text(z.string().optional().nullable()),
   type: z
     .nativeEnum(FermentationStepType)
     .default(FermentationStepType.primary),
@@ -14,18 +14,26 @@ export const fermentationStepSchema = zfd.formData({
   time: zfd.numeric(z.number()),
   temperature: zfd.numeric(z.number()),
 });
-export const fermentationSchema = zfd.formData({
-  id: zfd.text(z.string().optional()),
+export const fermentationProfileSchema = zfd.formData({
+  id: zfd.text(z.string().optional()).nullable(),
   name: zfd.text(),
-  userId: zfd.text(z.string().optional()),
-  forkedFrom: zfd.text(z.string().optional()),
-  description: zfd.text(z.string().optional()),
-  boilTime: zfd.numeric(z.number().min(0).optional()),
-  batchVolume: zfd.numeric(z.number().min(0).optional()),
-  boilOffRate: zfd.numeric(z.number().min(0).optional()),
-  trubLoss: zfd.numeric(z.number().min(0).optional()),
-  fermentationLoss: zfd.numeric(z.number().min(0).optional()),
-  fermenterLoss: zfd.numeric(z.number().min(0).optional()),
-  fermentationEfficiency: zfd.numeric(z.number().min(0).max(100).optional()),
-  brewEfficiency: zfd.numeric(z.number().min(0).max(100).optional()),
+  slug: zfd.text(z.string().optional()).nullable(),
+  userId: zfd.text(z.string().optional()).nullable(),
+  forkedFrom: zfd.text(z.string().optional()).nullable(),
+  description: zfd.text(z.string().optional()).nullable(),
+  boilTime: zfd.numeric(z.number().min(0).optional()).nullable(),
+  batchVolume: zfd.numeric(z.number().min(0).optional()).nullable(),
+  boilOffRate: zfd.numeric(z.number().min(0).optional()).nullable(),
+  trubLoss: zfd.numeric(z.number().min(0).optional()).nullable(),
+  fermentationLoss: zfd.numeric(z.number().min(0).optional()).nullable(),
+  fermenterLoss: zfd.numeric(z.number().min(0).optional()).nullable(),
+  fermentationEfficiency: zfd
+    .numeric(z.number().min(0).max(100).optional())
+    .nullable(),
+  brewEfficiency: zfd.numeric(z.number().min(0).max(100).optional()).nullable(),
+  //steps: zfd.repeatableOfType(fermentationStepSchema),
 });
+export type FermentationStepSchema = z.infer<typeof fermentationStepSchema>;
+export type FermentationProfileSchema = z.infer<
+  typeof fermentationProfileSchema
+>;

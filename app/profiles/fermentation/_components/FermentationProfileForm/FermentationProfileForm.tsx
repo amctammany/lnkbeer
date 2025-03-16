@@ -13,6 +13,12 @@ import FermentationStepActions from "./FermentationStepActions";
 import { AppBarItem } from "@/components/AppBarItem";
 import { FermentationProfileFormActions } from "./FermentationProfileFormActions";
 import AppBarTitle from "@/components/AppBarTitle";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  FermentationProfileSchema,
+  fermentationProfileSchema,
+} from "@/schemas/fermentationProfileSchema";
 
 export type FermentationProfileFormProps = {
   src?: ExtendedFermentationProfile | null;
@@ -23,13 +29,20 @@ export function FermentationProfileForm({
   src,
   action,
 }: FermentationProfileFormProps) {
-  const { state, register, formAction } =
-    useActionForm<ExtendedFermentationProfile>(action, src!);
+  const {
+    register,
+    handleSubmit,
+    formState: state,
+  } = useForm<FermentationProfileSchema>({
+    defaultValues: src!,
+    resolver: zodResolver(fermentationProfileSchema),
+  });
+
   const title = src?.name
     ? `FermentationProfile Editor: ${src?.name}`
     : "FermentationProfile Creator";
   return (
-    <Form className="flex" action={formAction}>
+    <Form className="flex" onSubmit={handleSubmit(action)}>
       <AppBarLayout
         title={
           <AppBarTitle icon={<Thermometer />}>

@@ -1,53 +1,22 @@
 "use server";
 import { prisma } from "@/lib/client";
 import slugify from "@/lib/slugify";
-import { validateSchema } from "@/lib/validateSchema";
+import {
+  FermentationProfileSchema,
+  FermentationStepSchema,
+} from "@/schemas/fermentationProfileSchema";
 import { ExtendedFermentationStep } from "@/types/Profile";
-import { FermentationProfile, FermentationStepType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { z } from "zod";
 import { zfd } from "zod-form-data";
 
-const fermentationStepSchema = zfd.formData({
-  id: zfd.text(z.string().optional()),
-  fermentationProfileId: zfd.text(z.string().optional()),
-  rank: zfd.numeric(z.number().min(0)),
-  name: zfd.text(z.string().optional()),
-  type: z
-    .nativeEnum(FermentationStepType)
-    .default(FermentationStepType.primary),
-  rampTime: zfd.numeric(z.number().optional()),
-  time: zfd.numeric(z.number()),
-  temperature: zfd.numeric(z.number()),
-});
-const fermentationSchema = zfd.formData({
-  id: zfd.text(z.string().optional()),
-  name: zfd.text(),
-  userId: zfd.text(z.string().optional()),
-  forkedFrom: zfd.text(z.string().optional()),
-  description: zfd.text(z.string().optional()),
-  boilTime: zfd.numeric(z.number().min(0).optional()),
-  batchVolume: zfd.numeric(z.number().min(0).optional()),
-  boilOffRate: zfd.numeric(z.number().min(0).optional()),
-  trubLoss: zfd.numeric(z.number().min(0).optional()),
-  fermentationLoss: zfd.numeric(z.number().min(0).optional()),
-  fermenterLoss: zfd.numeric(z.number().min(0).optional()),
-  fermentationEfficiency: zfd.numeric(z.number().min(0).max(100).optional()),
-  brewEfficiency: zfd.numeric(z.number().min(0).max(100).optional()),
-});
-
 export const createFermentationProfile = async (
-  prev: any,
-  formData: FormData,
+  data: FermentationProfileSchema,
 ) => {
-  const valid = validateSchema(formData, fermentationSchema);
-  if (!valid.success) return valid;
-
-  const { id, userId, forkedFrom, ...data } = valid.data;
+  const { id, userId, forkedFrom, ...rest } = data;
   const res = await prisma.fermentationProfile.create({
     data: {
-      ...data,
+      ...rest,
       slug: slugify(data.name, { lower: true }),
       ...(userId
         ? {
@@ -160,12 +129,10 @@ export async function removeFermentationProfile(formData: FormData) {
   revalidatePath("/profiles/fermentation");
 }
 
-export const createFermentationStep = async (prev: any, formData: FormData) => {
-  const valid = validateSchema(formData, fermentationStepSchema);
-  if (!valid.success) return valid;
-  const { id, ...data } = valid.data;
+export const createFermentationStep = async (data: FermentationStepSchema) => {
+  const { id, fermentationProfileId, ...rest } = data;
   const res = await prisma.fermentationStep.create({
-    data,
+    data: { ...rest, fermentationProfileId: fermentationProfileId! },
     include: {
       FermentationProfile: {
         select: {
@@ -179,13 +146,11 @@ export const createFermentationStep = async (prev: any, formData: FormData) => {
   redirect(`/profiles/fermentation/${res?.FermentationProfile?.slug}/edit`);
 };
 
-export const updateFermentationStep = async (prev: any, formData: FormData) => {
-  const valid = validateSchema(formData, fermentationStepSchema);
-  if (!valid.success) return valid;
-  const { id, ...data } = valid.data;
+export const updateFermentationStep = async (data: FermentationStepSchema) => {
+  const { id, ...rest } = data;
   const res = await prisma.fermentationStep.update({
-    where: { id },
-    data,
+    where: { id: id! },
+    data: rest,
     include: {
       FermentationProfile: {
         select: {
@@ -199,16 +164,11 @@ export const updateFermentationStep = async (prev: any, formData: FormData) => {
   redirect(`/profiles/fermentation/${res?.FermentationProfile?.slug}/edit`);
 };
 export const updateFermentationProfile = async (
-  prev: any,
-  formData: FormData,
+  data: FermentationProfileSchema,
 ) => {
-  const valid = validateSchema(formData, fermentationSchema);
-
-  if (valid.errors) return valid;
-  const { id, userId, forkedFrom, ...rest } =
-    valid.data || ({} as FermentationProfile);
+  const { id, userId, forkedFrom, ...rest } = data;
   const res = await prisma.fermentationProfile.update({
-    where: { id },
+    where: { id: id! },
     data: {
       ...rest,
       slug: slugify(rest.name ?? "", { lower: true }),
