@@ -15,6 +15,7 @@ export const Dashboard = ({ user }: DashboardProps) => {
       <Section>
         <Prop label="Name" value={user?.name} />
         <Prop label="Email" value={user?.email} />
+        <Prop label="Role" value={user?.role} />
       </Section>
     </div>
   );
