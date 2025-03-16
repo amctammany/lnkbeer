@@ -2,34 +2,20 @@
 import { prisma } from "@/lib/client";
 import slugify from "@/lib/slugify";
 import { validateSchema } from "@/lib/validateSchema";
+import { WaterProfileSchema } from "@/schemas/waterProfileSchema";
 import { ExtendedWaterProfile, WaterProfileInput } from "@/types/Profile";
 import { WaterProfile } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { z } from "zod";
-import { zfd } from "zod-form-data";
 
-const waterSchema = zfd.formData({
-  id: zfd.text(z.string().optional()),
-  name: zfd.text(),
-  userId: zfd.text(z.string().optional()),
-  forkedFrom: zfd.text(z.string().optional()),
-  description: zfd.text(z.string().optional()),
-  calcium: zfd.numeric(z.number().min(0).default(0)),
-  magnesium: zfd.numeric(z.number().min(0).default(0)),
-  sodium: zfd.numeric(z.number().min(0).default(0)),
-  chloride: zfd.numeric(z.number().min(0).default(0)),
-  sulfate: zfd.numeric(z.number().min(0).default(0)),
-  bicarbonate: zfd.numeric(z.number().min(0).default(0)),
-});
-export const createWaterProfile = async (prev: any, formData: FormData) => {
-  const valid = validateSchema(formData, waterSchema);
-  if (!valid.success) return valid;
+export const createWaterProfile = async (data: WaterProfileSchema) => {
+  //const valid = validateSchema(formData, waterSchema);
+  //if (!valid.success) return valid;
 
-  const { id, userId, forkedFrom, ...data } = valid.data;
+  const { id, userId, forkedFrom, ...rest } = data;
   const res = await prisma.waterProfile.create({
     data: {
-      ...data,
+      ...rest,
       slug: slugify(data.name, { lower: true }),
       ...(userId
         ? {
@@ -49,13 +35,12 @@ export const createWaterProfile = async (prev: any, formData: FormData) => {
   });
   redirect(`/profiles/water/${res.slug}`);
 };
-export const updateWaterProfile = async (prev: any, formData: FormData) => {
+export const updateWaterProfile = async (data: WaterProfileInput) => {
   //console.log(prev, formData.entries());
-  const valid = validateSchema(formData, waterSchema);
+  //const valid = validateSchema(formData, waterSchema);
 
-  if (valid.errors) return valid;
-  const { id, userId, forkedFrom, ...rest } =
-    valid.data || ({} as WaterProfile);
+  //if (valid.errors) return valid;
+  const { id, userId, forkedFrom, ...rest } = data || ({} as WaterProfile);
   const res = await prisma.waterProfile.update({
     where: { id },
     data: {

@@ -9,12 +9,20 @@ import { NumberField } from "@/components/Form/NumberField";
 //import { RangeValue } from "@/components/Form/RangeSlider";
 //import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
-import { useActionForm } from "@/hooks/useActionForm";
-import { WaterProfile } from "@prisma/client";
 import WaterProfileFormActions from "./WaterProfileFormActions";
 import AppBarTitle from "@/components/AppBarTitle";
 import { Waves } from "lucide-react";
 import { WaterProfileInput } from "@/types/Profile";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  EquipmentProfileSchema,
+  equipmentProfileSchema,
+} from "@/schemas/equipmentProfileSchema";
+import {
+  waterProfileSchema,
+  WaterProfileSchema,
+} from "@/schemas/waterProfileSchema";
 
 export type WaterProfileFormProps = {
   src?: WaterProfileInput | null;
@@ -22,12 +30,17 @@ export type WaterProfileFormProps = {
 };
 
 export function WaterProfileForm({ src, action }: WaterProfileFormProps) {
-  const { state, register, control, getValues, formAction } =
-    useActionForm<WaterProfileInput>(action, src!);
+  const {
+    register,
+    handleSubmit,
+    formState: state,
+  } = useForm<WaterProfileSchema>({
+    defaultValues: src!,
+    resolver: zodResolver(waterProfileSchema),
+  });
 
-  console.log(state);
   return (
-    <Form className="flex" action={formAction}>
+    <Form className="flex" onSubmit={handleSubmit(action)}>
       <AppBarLayout
         title={
           <AppBarTitle icon={<Waves />}>{src?.name ?? "Creator"}</AppBarTitle>
