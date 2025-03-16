@@ -13,6 +13,12 @@ import MashStepActions from "./MashStepActions";
 import { AppBarItem } from "@/components/AppBarItem";
 import { MashProfileFormActions } from "./MashProfileFormActions";
 import AppBarTitle from "@/components/AppBarTitle";
+import {
+  mashProfileSchema,
+  MashProfileSchema,
+} from "@/schemas/mashProfileSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 export type MashProfileFormProps = {
   src?: ExtendedMashProfile | null;
@@ -20,15 +26,19 @@ export type MashProfileFormProps = {
 };
 
 export function MashProfileForm({ src, action }: MashProfileFormProps) {
-  const { state, register, formAction } = useActionForm<ExtendedMashProfile>(
-    action,
-    src!,
-  );
+  const {
+    register,
+    handleSubmit,
+    formState: state,
+  } = useForm<MashProfileSchema>({
+    defaultValues: src!,
+    resolver: zodResolver(mashProfileSchema),
+  });
   const title = src?.name
     ? `MashProfile Editor: ${src?.name}`
     : "MashProfile Creator";
   return (
-    <Form className="flex" action={formAction}>
+    <Form className="flex" onSubmit={handleSubmit(action)}>
       <AppBarLayout
         title={
           <AppBarTitle icon={<Thermometer />}>

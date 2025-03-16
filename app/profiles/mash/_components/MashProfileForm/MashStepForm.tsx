@@ -18,14 +18,24 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { useRouter } from "next/navigation";
+import { mashStepSchema, MashStepSchema } from "@/schemas/mashProfileSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 export type MashStepFormProps = {
   src?: MashStepInput | null;
   action?: any;
 } & ComponentProps<"form">;
 export function MashStepForm({ src, action, ...props }: MashStepFormProps) {
-  const { state, register, control, getValues, formAction } =
-    useActionForm<MashStepInput>(action, src!);
+  const {
+    register,
+    handleSubmit,
+    formState: state,
+  } = useForm<MashStepSchema>({
+    defaultValues: src!,
+    resolver: zodResolver(mashStepSchema),
+  });
+
   const { replace } = useRouter();
   //useContext(
   //MashProfileFormContext,
@@ -33,7 +43,7 @@ export function MashStepForm({ src, action, ...props }: MashStepFormProps) {
   //console.log(state);
   const handleOpen = (open: boolean) => {
     if (!open)
-      replace(`/profiles/mash/${src?.MashProfile.slug}/edit`, {
+      replace(`/profiles/mash/${src?.MashProfile?.slug}/edit`, {
         scroll: false,
       });
   };
@@ -46,7 +56,7 @@ export function MashStepForm({ src, action, ...props }: MashStepFormProps) {
             <DialogDescription>Mash Step</DialogDescription>
           </DialogHeader>
 
-          <Form action={formAction} {...props}>
+          <Form onSubmit={handleSubmit(action)} {...props}>
             <div className="grid grid-cols-3 gap-2 w-full">
               <Input type="hidden" {...register("id")} />
               <Input type="hidden" {...register("mashProfileId")} />

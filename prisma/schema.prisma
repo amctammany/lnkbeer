@@ -416,7 +416,7 @@ model MashStep {
   rank          Int
   temperature   Float
   time          Float
-  rampTime      Float        @default(0)
+  rampTime      Float?       @default(0)
   MashProfile   MashProfile? @relation(fields: [mashProfileId], references: [id])
   mashProfileId String?
 

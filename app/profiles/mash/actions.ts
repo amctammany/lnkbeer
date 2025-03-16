@@ -2,47 +2,22 @@
 import { prisma } from "@/lib/client";
 import slugify from "@/lib/slugify";
 import { validateSchema } from "@/lib/validateSchema";
-import { ExtendedMashStep } from "@/types/Profile";
+import { MashProfileSchema, MashStepSchema } from "@/schemas/mashProfileSchema";
+import {
+  ExtendedMashStep,
+  MashProfileInput,
+  MashStepInput,
+} from "@/types/Profile";
 import { MashProfile, MashStepType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { z } from "zod";
 import { zfd } from "zod-form-data";
 
-const mashStepSchema = zfd.formData({
-  id: zfd.text(z.string().optional()),
-  mashProfileId: zfd.text(z.string().optional()),
-  rank: zfd.numeric(z.number().min(0)),
-  name: zfd.text(z.string().optional()),
-  type: z.nativeEnum(MashStepType).default(MashStepType.temperature),
-  rampTime: zfd.numeric(z.number().optional()),
-  time: zfd.numeric(z.number()),
-  temperature: zfd.numeric(z.number()),
-});
-const mashSchema = zfd.formData({
-  id: zfd.text(z.string().optional()),
-  name: zfd.text(),
-  userId: zfd.text(z.string().optional()),
-  forkedFrom: zfd.text(z.string().optional()),
-  description: zfd.text(z.string().optional()),
-  boilTime: zfd.numeric(z.number().min(0).optional()),
-  batchVolume: zfd.numeric(z.number().min(0).optional()),
-  boilOffRate: zfd.numeric(z.number().min(0).optional()),
-  trubLoss: zfd.numeric(z.number().min(0).optional()),
-  mashLoss: zfd.numeric(z.number().min(0).optional()),
-  fermenterLoss: zfd.numeric(z.number().min(0).optional()),
-  mashEfficiency: zfd.numeric(z.number().min(0).max(100).optional()),
-  brewEfficiency: zfd.numeric(z.number().min(0).max(100).optional()),
-});
-
-export const createMashProfile = async (prev: any, formData: FormData) => {
-  const valid = validateSchema(formData, mashSchema);
-  if (!valid.success) return valid;
-
-  const { id, userId, forkedFrom, ...data } = valid.data;
+export const createMashProfile = async (data: MashProfileSchema) => {
+  const { id, userId, forkedFrom, ...rest } = data;
   const res = await prisma.mashProfile.create({
     data: {
-      ...data,
+      ...rest,
       slug: slugify(data.name, { lower: true }),
       ...(userId
         ? {
@@ -144,12 +119,10 @@ export async function removeMashProfile(formData: FormData) {
   revalidatePath("/profiles/mash");
 }
 
-export const createMashStep = async (prev: any, formData: FormData) => {
-  const valid = validateSchema(formData, mashStepSchema);
-  if (!valid.success) return valid;
-  const { id, ...data } = valid.data;
+export const createMashStep = async (data: MashStepSchema) => {
+  const { id, mashProfileId, ...rest } = data;
   const res = await prisma.mashStep.create({
-    data,
+    data: { ...rest },
     include: {
       MashProfile: {
         select: {
@@ -163,13 +136,11 @@ export const createMashStep = async (prev: any, formData: FormData) => {
   redirect(`/profiles/mash/${res?.MashProfile?.slug}/edit`);
 };
 
-export const updateMashStep = async (prev: any, formData: FormData) => {
-  const valid = validateSchema(formData, mashStepSchema);
-  if (!valid.success) return valid;
-  const { id, ...data } = valid.data;
+export const updateMashStep = async (data: MashStepSchema) => {
+  const { id, mashProfileId, ...rest } = data;
   const res = await prisma.mashStep.update({
-    where: { id },
-    data,
+    where: { id: id! },
+    data: rest,
     include: {
       MashProfile: {
         select: {
@@ -182,13 +153,10 @@ export const updateMashStep = async (prev: any, formData: FormData) => {
   });
   redirect(`/profiles/mash/${res?.MashProfile?.slug}/edit`);
 };
-export const updateMashProfile = async (prev: any, formData: FormData) => {
-  const valid = validateSchema(formData, mashSchema);
-
-  if (valid.errors) return valid;
-  const { id, userId, forkedFrom, ...rest } = valid.data || ({} as MashProfile);
+export const updateMashProfile = async (data: MashProfileSchema) => {
+  const { id, userId, forkedFrom, ...rest } = data; //|| ({} as MashProfile);
   const res = await prisma.mashProfile.update({
-    where: { id },
+    where: { id: id! },
     data: {
       ...rest,
       slug: slugify(rest.name ?? "", { lower: true }),

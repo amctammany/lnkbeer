@@ -53,7 +53,7 @@ export type MashProfileInput = Omit<MashProfile, "id"> & {
 };
 export type MashStepInput = Omit<MashStep, "id"> & {
   id?: string;
-  MashProfile: Partial<MashProfile>;
+  MashProfile?: Partial<MashProfile> | null;
   //steps: Omit<MashStep, "id" | "userId" | "mashProfileId">[];
 };
 export type FermentationProfileInput = Omit<FermentationProfile, "id"> & {
