@@ -21,19 +21,19 @@ export default async function EquipmentProfileCreatorPage({}: EquipmentProfileCr
   const session = await auth();
   if (!session?.user)
     return redirect("/admin/login?callbackUrl=/profiles/equipment/new");
-  const user = await prisma.user.findFirst({
-    where: { id: session?.user?.id },
-    include: {
-      equipmentProfiles: { select: { id: true, name: true } },
-    },
-  });
-  if (!user) throw new Error("Invalid User?");
-  const name = `${user?.name} - EquipmentProfile ${user?.equipmentProfiles.length + 1}`;
+  //const user = await prisma.user.findFirst({
+  //where: { id: session?.user?.id },
+  //include: {
+  //equipmentProfiles: { select: { id: true, name: true } },
+  //},
+  //});
+  //if (!user) throw new Error("Invalid User?");
+  //const name = `${user?.name} - EquipmentProfile ${user?.equipmentProfiles.length + 1}`;
 
   const src = {
-    name,
-    slug: slugify(name, { lower: true }),
-    userId: user.id,
+    //name,
+    //slug: slugify(name, { lower: true }),
+    userId: session.user.id,
   } as EquipmentProfileInput;
   return <EquipmentProfileForm src={src} action={createEquipmentProfile} />;
   /**
