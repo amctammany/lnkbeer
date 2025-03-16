@@ -1,3 +1,4 @@
+"use client";
 import { AppBarItem } from "@/components/AppBarItem";
 import { Save } from "lucide-react";
 

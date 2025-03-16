@@ -2,6 +2,7 @@
 import { prisma } from "@/lib/client";
 import slugify from "@/lib/slugify";
 import { validateSchema } from "@/lib/validateSchema";
+import { HopInput } from "@/types/ingredient";
 import { HopUsage } from "@prisma/client";
 import { connect, sensitiveHeaders } from "http2";
 import { redirect } from "next/navigation";
@@ -41,7 +42,7 @@ function parseHop(data: T) {
     myrceneLow: myrceneRange?.[0],
     myrceneHigh: myrceneRange?.[1],
     slug: slugify(rest.name, { lower: true }),
-  } as any;
+  } as HopInput;
 }
 
 const schema = zfd.formData({

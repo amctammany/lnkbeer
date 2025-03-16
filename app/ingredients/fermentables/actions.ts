@@ -34,7 +34,7 @@ export const createFermentable = async (prev: any, formData: FormData) => {
 
 export const updateFermentable = async (prev: any, formData: FormData) => {
   const valid = validateSchema(formData, schema);
-  if (!valid.success) return valid;
+  if (!valid.success) return { ...valid, data: undefined };
   const { data } = valid;
   const res = await prisma.fermentable.update({
     where: { id: data.id },

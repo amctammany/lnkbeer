@@ -24,8 +24,9 @@ export type RangeFieldProps = //H extends Path<T> = Path<T>,
     lowField?: any; //UseControllerReturn<T, Path<T>>; //["field"];
     highField?: any; //UseControllerReturn<T, Path<T>>; //["field"];
     onChange: any;
+    error?: any;
     value?: { min?: number; max?: number };
-  } & Omit<InputProps, "value">;
+  } & Omit<InputProps, "value" | "error">;
 
 const inputClass = clsx(
   "absolute w-full h-full z-[3] p-0 opacity-0 appearance-none pointer-events-none ",

@@ -9,14 +9,15 @@ import { RangeField, RangeFieldProp } from "@/components/Form/RangeField";
 //import { RangeValue } from "@/components/Form/RangeSlider";
 import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
-import { useActionForm } from "@/hooks/useActionForm";
+import { HopSchema, hopSchema } from "@/schemas/hopSchema";
 import { HopInput, RangeValue } from "@/types/ingredient";
-import { HopUsage } from "@prisma/client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Hop, HopUsage } from "@prisma/client";
 import { HopIcon, Save } from "lucide-react";
-import { Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 export type HopEditorProps = {
-  hop?: HopInput | null;
+  hop?: Hop | null;
   action: any;
 };
 const rangeProps: RangeFieldProp<HopInput>[] = [
@@ -82,10 +83,21 @@ const HopEditorActions = () => {
 };
 
 export function HopEditor({ hop, action }: HopEditorProps) {
-  const { state, register, control, getValues, formAction } =
-    useActionForm<HopInput>(action, hop!);
+  //const { state, register, control, getValues, formAction } =
+  //useActionForm<HopInput>(action, hop!);
+  const {
+    register,
+    getValues,
+    control,
+    handleSubmit,
+    formState: state,
+  } = useForm<HopInput>({
+    defaultValues: hop!,
+    resolver: zodResolver<HopInput>(hopSchema as any),
+  });
+
   return (
-    <Form className="flex" action={formAction}>
+    <Form className="flex" onSubmit={handleSubmit((d) => console.log(d))}>
       <AppBarLayout
         title={
           <AppBarTitle icon={<HopIcon />}>{hop?.name ?? "Creator"}</AppBarTitle>
@@ -164,7 +176,9 @@ export function HopEditor({ hop, action }: HopEditorProps) {
                   name={name!}
                   control={control}
                   defaultValue={
-                    getValues([lowField!, highField!]).reduce(
+                    (
+                      (getValues([lowField!, highField!]) as number[]) ?? []
+                    ).reduce(
                       (acc, v, i) => ({
                         ...acc,
                         [i === 0 ? "min" : "max"]: v!,

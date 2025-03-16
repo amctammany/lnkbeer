@@ -7,7 +7,8 @@ import {
   Yeast,
 } from "@prisma/client";
 
-export type RangeValue = { min: number; max: number };
+export type RangeValue = { min: number; max: number }; //| [number, number];
+//export type RangeValue = [number, number];
 export type ExtendedHop = Hop & {
   hopSensoryPanels?: HopSensoryPanel[];
 };

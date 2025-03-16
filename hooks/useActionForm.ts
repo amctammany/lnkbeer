@@ -10,12 +10,15 @@ export function useActionForm<T extends FieldValues>(action: any, data: T) {
     data: data,
   });
   const { reset, setError, register, control, getValues } = useForm<T>({
-    values: state.data,
+    defaultValues: state.data as any,
+    resetOptions: { keepValues: true },
+    //values: state.data,
   });
   useEffect(() => {
+    //if (state.data) reset(undefined, { keepDefaultValues: true });
     if (!state.success) {
       console.log(state.data);
-      //reset(state.data, {
+
       //keepDirty: true,
       //keepDefaultValues: true,
       //keepValues: true,

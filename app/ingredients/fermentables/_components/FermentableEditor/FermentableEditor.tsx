@@ -4,25 +4,40 @@ import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
 import { NumberField } from "@/components/Form/NumberField";
 import { TextField } from "@/components/Form/TextField";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useActionForm } from "@/hooks/useActionForm";
 import { FermentableInput } from "@/types/ingredient";
 import { FermentableEditorActions } from "./FermentableEditorActions";
 import { Wheat } from "lucide-react";
 import AppBarTitle from "@/components/AppBarTitle";
+import { useForm } from "react-hook-form";
+import { fermentableSchema } from "@/schemas/fermentableSchema";
 
 export type FermentableEditorProps = {
-  src?: FermentableInput | null;
+  fermentable: FermentableInput;
   action: any;
 };
-export function FermentableEditor({ src, action }: FermentableEditorProps) {
-  const { state, register, control, getValues, formAction } =
-    useActionForm<FermentableInput>(action, src!);
+export function FermentableEditor({
+  fermentable,
+  action,
+}: FermentableEditorProps) {
+  //const { state, register, control, getValues, formAction } =
+  //useActionForm<FermentableInput>(action, fermentable);
+  //console.log(state);
+  const {
+    register,
+    handleSubmit,
+    formState: state,
+  } = useForm({
+    defaultValues: fermentable,
+    resolver: zodResolver(fermentableSchema),
+  });
   return (
-    <Form className="flex" action={formAction}>
+    <Form className="flex" onSubmit={handleSubmit((d) => console.log(d))}>
       <AppBarLayout
         title={
           <AppBarTitle icon={<Wheat />}>
-            {src?.name ?? "Fermentable Creator"}
+            {fermentable?.name ?? "Fermentable Creator"}
           </AppBarTitle>
         }
         actions={<FermentableEditorActions />}
@@ -34,9 +49,21 @@ export function FermentableEditor({ src, action }: FermentableEditorProps) {
               <Input type="hidden" {...register("id")} />
               <TextField {...register("name")} />
               <TextField {...register("country")} />
-              <NumberField {...register("color")} step={0.01} />
-              <NumberField {...register("potential")} step={0.001} />
-              <NumberField {...register("power")} step={0.01} />
+              <NumberField
+                {...register("color")}
+                step={0.01}
+                error={state.errors?.color}
+              />
+              <NumberField
+                {...register("potential")}
+                step={0.001}
+                error={state.errors?.potential}
+              />
+              <NumberField
+                {...register("power")}
+                step={0.01}
+                error={state.errors?.power}
+              />
               <TextField {...register("notes")} />
 
               <TextField {...register("description")} />
