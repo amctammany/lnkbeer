@@ -15,5 +15,5 @@ export default async function Page() {
   const user = await prisma.user.findFirst({
     where: { email: session?.user?.email },
   });
-  return <Dashboard src={user} />;
+  return <Dashboard user={user} />;
 }

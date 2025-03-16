@@ -1,31 +1,22 @@
-import { AppBarItem } from "@/components/AppBarItem";
-import { AppBarLayout } from "@/components/AppBarLayout";
+import { Prop } from "@/components/Prop";
+import Section from "@/components/Section";
 import type { User } from "@prisma/client";
-import { LogOut } from "lucide-react";
 
 export interface DashboardProps {
-  src?: User | null;
+  user?: User | null;
   //action?: any;
   //children: React.ReactNode;
 }
 
-const DashboardActions = () => {
-  return [
-    <AppBarItem
-      key="signout"
-      text="Sign Out"
-      url="/api/auth/signout"
-      icon={<LogOut />}
-    />,
-  ];
-};
-export const Dashboard = ({ src }: DashboardProps) => {
+export const Dashboard = ({ user }: DashboardProps) => {
   return (
-    <AppBarLayout title="Dashboard" actions={<DashboardActions />}>
-      <div className="mx-auto w-10/12 grid grid-flow-row gap-8">
-        {JSON.stringify(src)}
-      </div>
-    </AppBarLayout>
+    <div className="mx-auto w-10/12 grid grid-flow-row gap-8">
+      <h2 className="text-2xl text-center">Dashboard</h2>
+      <Section>
+        <Prop label="Name" value={user?.name} />
+        <Prop label="Email" value={user?.email} />
+      </Section>
+    </div>
   );
 };
 export default Dashboard;
