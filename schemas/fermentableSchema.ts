@@ -1,8 +1,10 @@
 import { z } from "zod";
 import { zfd } from "zod-form-data";
 
+export type FermentableSchema = z.infer<typeof fermentableSchema>;
 export const fermentableSchema = zfd.formData({
   id: zfd.text(z.string().optional()),
+  userId: zfd.text(z.string().optional()).nullable(),
   name: zfd.text(),
   description: zfd.text(z.string().optional()).nullable(),
   country: zfd.text(z.string().optional()).nullable(),

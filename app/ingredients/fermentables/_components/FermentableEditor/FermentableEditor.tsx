@@ -10,7 +10,10 @@ import { FermentableEditorActions } from "./FermentableEditorActions";
 import { Wheat } from "lucide-react";
 import AppBarTitle from "@/components/AppBarTitle";
 import { useForm } from "react-hook-form";
-import { fermentableSchema } from "@/schemas/fermentableSchema";
+import {
+  fermentableSchema,
+  FermentableSchema,
+} from "@/schemas/fermentableSchema";
 
 export type FermentableEditorProps = {
   fermentable: FermentableInput;
@@ -27,7 +30,7 @@ export function FermentableEditor({
     register,
     handleSubmit,
     formState: state,
-  } = useForm({
+  } = useForm<FermentableSchema>({
     defaultValues: fermentable,
     resolver: zodResolver(fermentableSchema),
   });
@@ -46,6 +49,7 @@ export function FermentableEditor({
             <span className="shrink p-2 block bg-slate-300">General</span>
             <div className="grow">
               <Input type="hidden" {...register("id")} />
+              <Input type="hidden" {...register("userId")} />
               <TextField {...register("name")} />
               <TextField {...register("country")} />
               <NumberField
