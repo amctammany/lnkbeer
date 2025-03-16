@@ -20,12 +20,11 @@ export async function generateMetadata({ params }: YeastEditorPageProps) {
 export default async function YeastEditorPage({
   params,
 }: YeastEditorPageProps) {
-  const session = await auth();
-  if (!session?.user)
-    return redirect("/admin/login?callbackUrl=/ingredients/yeasts/new");
+  //const session = await auth();
+  //if (!session?.user)
+  //return redirect("/admin/login?callbackUrl=/ingredients/yeasts/new");
   const { slug } = await params;
-  const res = await authorizeResource(getYeast, slug);
-  const yeast = { ...res, userId: session.user.id };
-  if (!res) notFound();
+  const yeast = await authorizeResource(getYeast, slug);
+  if (!yeast) notFound();
   return <YeastEditor yeast={yeast} action={updateYeast} />;
 }

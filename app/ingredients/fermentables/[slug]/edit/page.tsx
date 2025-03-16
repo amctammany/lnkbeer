@@ -2,6 +2,7 @@ import { FermentableEditor } from "@/app/ingredients/fermentables/_components/Fe
 import { getFermentable } from "@/app/ingredients/fermentables/queries";
 import { updateFermentable } from "../../actions";
 import { notFound } from "next/navigation";
+import { authorizeResource } from "@/lib/authorizeResource";
 type FermentableEditorPageProps = {
   params: Promise<{
     slug: string;
@@ -19,7 +20,7 @@ export default async function FermentableEditorPage({
   params,
 }: FermentableEditorPageProps) {
   const { slug } = await params;
-  const fermentable = await getFermentable(slug);
+  const fermentable = await authorizeResource(getFermentable, slug);
   if (!fermentable) notFound();
   return (
     <FermentableEditor fermentable={fermentable} action={updateFermentable} />
