@@ -190,7 +190,7 @@ export function HopSensoryEditorForm({
               label={k}
               name={`sensoryPanel.${lowerFirst(k)}`}
               rangeProps={register(`sensoryPanel.${lowerFirst(k)}` as any, {
-                value: src?.sensoryPanel?.[lowerFirst(k)]?.toString(),
+                value: (sensoryPanel?.[lowerFirst(k)] * 10).toString(),
               })}
               aromaProps={aromaRegister}
             />

@@ -13,6 +13,7 @@ export const RangeSelect = ({
   error,
   ...props
 }: RangeSelectProps) => {
+  console.log(props);
   return (
     <div className={clsx("grid grid-cols-12 justify-items-center", className)}>
       <span className=" m-auto">0</span>

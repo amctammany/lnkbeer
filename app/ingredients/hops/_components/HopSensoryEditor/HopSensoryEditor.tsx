@@ -49,7 +49,7 @@ export function HopSensoryEditor({
     "driedFruit",
     "dank",
   ].reduce((acc, prop) => {
-    acc[prop] = ((hopNote?.sensoryPanel?.[prop] ?? 0) * 10)?.toString();
+    acc[prop] = ((hopNote?.sensoryPanel?.[prop] ?? 0) * 1)?.toString();
     return acc;
   }, {});
   //const { state, register, control, getValues, formAction } =
@@ -68,11 +68,12 @@ export function HopSensoryEditor({
     handleSubmit,
     formState: state,
   } = useForm<HopNoteSchema>({
-    defaultValues: hopNote!,
+    defaultValues: { ...hopNote, sensoryPanel },
     resolver: zodResolver<any>(hopNoteSchema),
   });
   const action = hopNote?.uid ? updateHopNote : createHopNote;
 
+  console.log(state);
   return (
     <Form onSubmit={handleSubmit(action)}>
       <AppBarLayout
