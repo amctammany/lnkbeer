@@ -72,7 +72,7 @@ export function HopSensoryEditor({
     resolver: zodResolver<any>(hopNoteSchema),
   });
   const action = hopNote?.uid ? updateHopNote : createHopNote;
-
+  if (state.isSubmitting || state.isSubmitted) return <div>Loadin</div>;
   return (
     <Form onSubmit={handleSubmit(action)}>
       <AppBarLayout
@@ -83,6 +83,7 @@ export function HopSensoryEditor({
           <Card className="m-4 *:border-b-2 *:last-of-type:border-b-0 ">
             <HopSensoryEditorForm
               action={hopNote?.uid ? updateHopNote : createHopNote}
+              disabled={state.isSubmitting}
               register={register}
               src={hopNote}
               aromas={aromas}

@@ -27,6 +27,7 @@ export type HopNoteInput = Partial<HopNote> & {
   };
 };
 export type HopSensoryEditorFormProps = {
+  disabled?: boolean;
   src?: HopNoteInput | null;
   //user?: any;
   register: UseFormReturn<HopNoteSchema>["register"];
@@ -80,6 +81,7 @@ const AromaSelect = ({
 };
 function HopAromaForm<T extends FieldValues>({
   label,
+  disabled,
   name,
   className,
   aromas,
@@ -89,6 +91,7 @@ function HopAromaForm<T extends FieldValues>({
 }: {
   aromas: any;
   name: Path<T>;
+  disabled?: boolean;
   className?: string;
   label?: React.ReactNode;
   rangeProps: UseFormRegisterReturn;
@@ -104,8 +107,13 @@ function HopAromaForm<T extends FieldValues>({
       <div className="text-center lg:text-right px-1 text-lg lg:text-2xl underline">
         <span className=" shrink">{label ?? name}</span>
       </div>
-      <RangeSelect className="lg:col-span-2" {...rangeProps} />
+      <RangeSelect
+        disabled={disabled}
+        className="lg:col-span-2"
+        {...rangeProps}
+      />
       <AromaSelect
+        disabled={disabled}
         className="shrink lg:col-span-4 "
         {...aromaProps}
         aromas={aromas}
@@ -116,6 +124,7 @@ function HopAromaForm<T extends FieldValues>({
 export function HopSensoryEditorForm({
   action,
   register,
+  disabled = false,
   aromas,
   src,
 }: HopSensoryEditorFormProps) {
@@ -164,7 +173,11 @@ export function HopSensoryEditorForm({
           {...register("sensoryPanel.id", { value: src?.sensoryPanelId })}
         />
         <div>
-          <TextArea {...register("sensoryPanel.notes")} label="Notes" />
+          <TextArea
+            {...register("sensoryPanel.notes")}
+            disabled={disabled}
+            label="Notes"
+          />
         </div>
         <div className="grid grid-cols-1">
           {[
@@ -186,6 +199,7 @@ export function HopSensoryEditorForm({
           ].map((k) => (
             <HopAromaForm
               aromas={aromas.filter(({ group }) => group === k)}
+              disabled={disabled}
               key={k}
               label={k}
               name={`sensoryPanel.${lowerFirst(k)}`}
