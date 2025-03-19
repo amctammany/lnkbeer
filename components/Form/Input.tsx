@@ -38,7 +38,7 @@ export const inputStyles = cva(
       },
       suffixV: {
         default: [""],
-        error: ["border-2 border-r-0 rounded-r-none border-destructive"],
+        error: ["border-2 borderr-0 ounded-r-none border-destructive"],
         active: ["border-r-0 rounded-r-none"],
       },
     },

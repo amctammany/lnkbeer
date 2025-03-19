@@ -59,7 +59,7 @@ export function FermentationStepForm({
   return (
     <Dialog onOpenChange={handleOpen} defaultOpen={src !== undefined}>
       <DialogOverlay className="bg-black/30">
-        <DialogContent className="max--[680px]  min--[400px]">
+        <DialogContent className="max-w-[680px]  min--[400px]">
           <DialogHeader>
             <DialogTitle>Fermentation Step Editor</DialogTitle>
             <DialogDescription>Fermentation Step</DialogDescription>
@@ -74,12 +74,27 @@ export function FermentationStepForm({
               <Select
                 className="col-span-3"
                 {...register("type")}
+                error={state.errors?.type}
                 options={FermentationStepType}
               />
 
-              <NumberField {...register("temperature")} step={0.1} />
-              <NumberField {...register("time")} step={0.1} />
-              <NumberField {...register("rampTime")} step={0.1} />
+              <NumberField
+                {...register("temperature")}
+                suffix="&deg;F"
+                step={0.1}
+                error={state.errors?.temperature}
+              />
+              <NumberField
+                {...register("time")}
+                step={0.1}
+                error={state.errors?.time}
+              />
+              <NumberField
+                {...register("rampTime")}
+                suffix="min"
+                step={0.1}
+                error={state.errors?.rampTime}
+              />
               <Button type="submit">Save</Button>
             </div>
           </Form>

@@ -10,8 +10,8 @@ export const fermentationStepSchema = zfd.formData({
   type: z
     .nativeEnum(FermentationStepType)
     .default(FermentationStepType.primary),
-  rampTime: zfd.numeric(z.number().optional()),
-  time: zfd.numeric(z.number()),
+  rampTime: zfd.numeric(z.number().min(0).optional()),
+  time: zfd.numeric(z.number().min(0)),
   temperature: zfd.numeric(z.number()),
 });
 export const fermentationProfileSchema = zfd.formData({
