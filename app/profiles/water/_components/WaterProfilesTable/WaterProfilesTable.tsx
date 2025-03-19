@@ -23,6 +23,36 @@ const columns: ColumnDef<WaterProfile>[] = [
       </Link>
     ),
   },
+  {
+    accessorKey: "calcium",
+    header: Header<WaterProfile>,
+    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+  },
+  {
+    accessorKey: "chloride",
+    header: Header<WaterProfile>,
+    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+  },
+  {
+    accessorKey: "sodium",
+    header: Header<WaterProfile>,
+    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+  },
+  {
+    accessorKey: "magnesium",
+    header: Header<WaterProfile>,
+    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+  },
+  {
+    accessorKey: "sulfate",
+    header: Header<WaterProfile>,
+    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+  },
+  {
+    accessorKey: "bicarbonate",
+    header: Header<WaterProfile>,
+    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+  },
 ];
 
 export type WaterProfilesTableProps = {

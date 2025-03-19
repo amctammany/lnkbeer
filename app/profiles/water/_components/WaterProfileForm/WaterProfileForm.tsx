@@ -16,10 +16,6 @@ import { WaterProfileInput } from "@/types/Profile";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  EquipmentProfileSchema,
-  equipmentProfileSchema,
-} from "@/schemas/equipmentProfileSchema";
-import {
   waterProfileSchema,
   WaterProfileSchema,
 } from "@/schemas/waterProfileSchema";

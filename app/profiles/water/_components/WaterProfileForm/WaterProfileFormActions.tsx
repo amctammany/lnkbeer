@@ -1,6 +1,4 @@
-//"use client";
-import { WaterProfile } from "@prisma/client";
-import { Activity, Delete, ForkKnife, Redo, Save } from "lucide-react";
+import { Delete, ForkKnife, Save } from "lucide-react";
 import {
   AppBarDropdown,
   AppBarDropdownItem,
