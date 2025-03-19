@@ -81,11 +81,19 @@ export const updateHopNote = async (data: HopNoteSchema) => {
       //user: { connect: { email: userEmail } },
       //...sensoryPanel,
       ...Object.keys(sensoryPanel).reduce((acc, k) => {
+        if (typeof sensoryPanel[k] === "string") {
+          acc[k] = sensoryPanel[k];
+          return acc;
+        }
+        if (k === "notes") {
+          acc.notes = sensoryPanel.notes;
+          return acc;
+        }
         if (k === "aromaIds") return acc;
         if (k === "id") return acc;
         acc[k] = sensoryPanel[k] / 10;
         return acc;
-      }, {}),
+      }, {} as any),
     },
   });
   console.log(es);

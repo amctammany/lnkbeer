@@ -21,17 +21,7 @@ import { HopNoteSchema, hopNoteSchema } from "@/schemas/hopSchema";
 import { useForm } from "react-hook-form";
 
 export type HopSensoryEditorProps = {
-  hopNote?:
-    | (HopNoteSchema & {
-        aromaIds: string[];
-        hop: HopType;
-        sensoryPanel: HopSensoryPanel & {
-          aromas?: CharacteristicAroma[];
-          aromaIds?: string[];
-        };
-      })
-    | null;
-
+  hopNote?: HopNoteInput;
   src?: HopType | null;
   aromas: CharacteristicAroma[];
 };
@@ -83,7 +73,6 @@ export function HopSensoryEditor({
   });
   const action = hopNote?.uid ? updateHopNote : createHopNote;
 
-  console.log(state);
   return (
     <Form onSubmit={handleSubmit(action)}>
       <AppBarLayout

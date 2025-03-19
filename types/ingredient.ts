@@ -12,7 +12,7 @@ export type RangeValue = { min: number; max: number }; //| [number, number];
 export type ExtendedHop = Hop & {
   hopSensoryPanels?: HopSensoryPanel[];
 };
-export type HopNoteInput = HopNote & {};
+export type HopNoteInput = Partial<HopNote> & {};
 export type HopInput = Hop & {
   alphaRange?: RangeValue;
   betaRange?: RangeValue;

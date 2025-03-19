@@ -19,24 +19,15 @@ import { lowerFirst } from "@/lib/utils";
 import { RangeSelect } from "@/components/Form/RangeSelect";
 import { HopNoteSchema } from "@/schemas/hopSchema";
 export type HopNoteInput = Partial<HopNote> & {
-  id?: any;
-  slug?: any;
   aromaIds?: string[];
-  sensoryPanel?: any; // Partial<HopSensoryPanel>;
-  //flavor?: number;
+  hop?: HopType;
+  sensoryPanel?: HopSensoryPanel & {
+    aromas?: CharacteristicAroma[];
+    aromaIds?: string[];
+  };
 };
 export type HopSensoryEditorFormProps = {
-  src?:
-    | (HopNoteInput & {
-        uid?: number;
-        aromaIds: string[];
-        hop: HopType;
-        sensoryPanel: HopSensoryPanel & {
-          aromas?: CharacteristicAroma[];
-          aromaIds?: string[];
-        };
-      })
-    | null;
+  src?: HopNoteInput | null;
   //user?: any;
   register: UseFormReturn<HopNoteSchema>["register"];
   aromas: CharacteristicAroma[];
@@ -167,13 +158,13 @@ export function HopSensoryEditorForm({
       <div className="grid auto-rows-auto w-full">
         <input type="hidden" {...register("userEmail")} />
         <input type="hidden" {...register("hopId")} />
-        <input type="hidden" {...register("slug", { value: src?.hop.slug })} />
+        <input type="hidden" {...register("slug", { value: src?.hop?.slug })} />
         <input
           type="hidden"
           {...register("sensoryPanel.id", { value: src?.sensoryPanelId })}
         />
         <div>
-          <TextArea {...register("notes")} />
+          <TextArea {...register("sensoryPanel.notes")} />
         </div>
         <div className="grid grid-cols-1">
           {[

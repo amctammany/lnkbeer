@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/client";
 import { auth } from "@/app/auth";
+import { HopNoteInput } from "@/types/ingredient";
 interface HopSensoryEditorPageProps {
   params: Promise<{
     slug: string;
@@ -32,7 +33,7 @@ export default async function HopSensoryEditorPage({
       userEmail: session?.user?.email,
       hopId: hop?.id,
       hop: { slug: hop?.slug },
-    } as any);
+    } as HopNoteInput);
   const aromas = await prisma.characteristicAroma.findMany();
 
   return (
