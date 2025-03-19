@@ -16,10 +16,13 @@ import { AppBarLayout } from "@/components/AppBarLayout";
 import AppBarTitle from "@/components/AppBarTitle";
 import { Hop } from "lucide-react";
 import { HopSensoryEditorActions } from "./HopSensoryEditorActions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { HopNoteSchema, hopNoteSchema } from "@/schemas/hopSchema";
+import { useForm } from "react-hook-form";
 
 export type HopSensoryEditorProps = {
   hopNote?:
-    | (HopNote & {
+    | (HopNoteSchema & {
         aromaIds: string[];
         hop: HopType;
         sensoryPanel: HopSensoryPanel & {
@@ -59,17 +62,29 @@ export function HopSensoryEditor({
     acc[prop] = ((hopNote?.sensoryPanel?.[prop] ?? 0) * 10)?.toString();
     return acc;
   }, {});
-  const { state, register, control, getValues, formAction } =
-    useActionForm<HopNoteInput>(
-      hopNote?.uid ? updateHopNote : createHopNote,
-      {
-        ...hopNote,
-        sensoryPanel,
-      }!,
-    );
+  //const { state, register, control, getValues, formAction } =
+  //useActionForm<HopNoteInput>(
+  //hopNote?.uid ? updateHopNote : createHopNote,
+  //{
+  //...hopNote,
+  //sensoryPanel,
+  //}!,
+  //);
+
+  const {
+    register,
+    getValues,
+    control,
+    handleSubmit,
+    formState: state,
+  } = useForm<HopNoteSchema>({
+    defaultValues: hopNote!,
+    resolver: zodResolver<any>(hopNoteSchema),
+  });
+  const action = hopNote?.uid ? updateHopNote : createHopNote;
 
   return (
-    <Form action={formAction}>
+    <Form onSubmit={handleSubmit(action)}>
       <AppBarLayout
         title={<AppBarTitle icon={<Hop />}>{src?.name}</AppBarTitle>}
         actions={<HopSensoryEditorActions />}

@@ -17,6 +17,7 @@ import {
 import clsx from "clsx";
 import { lowerFirst } from "@/lib/utils";
 import { RangeSelect } from "@/components/Form/RangeSelect";
+import { HopNoteSchema } from "@/schemas/hopSchema";
 export type HopNoteInput = Partial<HopNote> & {
   id?: any;
   slug?: any;
@@ -26,7 +27,8 @@ export type HopNoteInput = Partial<HopNote> & {
 };
 export type HopSensoryEditorFormProps = {
   src?:
-    | (HopNote & {
+    | (HopNoteInput & {
+        uid?: number;
         aromaIds: string[];
         hop: HopType;
         sensoryPanel: HopSensoryPanel & {
@@ -36,7 +38,7 @@ export type HopSensoryEditorFormProps = {
       })
     | null;
   //user?: any;
-  register: UseFormReturn<HopNoteInput>["register"];
+  register: UseFormReturn<HopNoteSchema>["register"];
   aromas: CharacteristicAroma[];
   action?: any;
 };
@@ -102,12 +104,21 @@ function HopAromaForm<T extends FieldValues>({
   aromaProps: UseFormRegisterReturn;
 }) {
   return (
-    <div className={clsx("grid grid-cols-7 odd:bg-blue-50 h-6", className)}>
-      <div className="text-right px-1">
+    <div
+      className={clsx(
+        " md:grid flex flex-col md:grid-cols-7 odd:bg-blue-50 md:h-6",
+        className,
+      )}
+    >
+      <div className="text-center md:text-right px-1">
         <span className=" shrink">{label ?? name}</span>
       </div>
-      <RangeSelect className="col-span-2" {...rangeProps} />
-      <AromaSelect className="col-span-4 " {...aromaProps} aromas={aromas} />
+      <RangeSelect className="md:col-span-2" {...rangeProps} />
+      <AromaSelect
+        className="shrink md:col-span-4 "
+        {...aromaProps}
+        aromas={aromas}
+      />
     </div>
   );
 }
@@ -164,7 +175,7 @@ export function HopSensoryEditorForm({
         <div>
           <TextArea {...register("comments")} />
         </div>
-        <div>
+        <div className="grid grid-cols-1">
           {[
             "StoneFruit",
             "Pomme",
@@ -187,7 +198,7 @@ export function HopSensoryEditorForm({
               key={k}
               label={k}
               name={`sensoryPanel.${lowerFirst(k)}`}
-              rangeProps={register(`sensoryPanel.${lowerFirst(k)}`, {
+              rangeProps={register(`sensoryPanel.${lowerFirst(k)}` as any, {
                 value: src?.sensoryPanel?.[lowerFirst(k)]?.toString(),
               })}
               aromaProps={aromaRegister}

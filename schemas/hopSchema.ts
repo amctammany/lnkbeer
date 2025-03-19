@@ -70,13 +70,14 @@ export const hopSchema = zfd.formData({
 
 export type HopSchema = z.infer<typeof hopSchema>;
 export const hopNoteSchema = zfd.formData({
-  id: zfd.numeric(z.number().optional()),
+  id: zfd.numeric(z.number().optional()).nullable(),
+  uid: zfd.numeric(z.number().optional()),
   userEmail: zfd.text(z.string()),
   slug: zfd.text(z.string()),
   hopId: zfd.text(z.string()),
-  comments: zfd.text(z.string().optional()),
+  comments: zfd.text(z.string().optional()).nullable(),
   sensoryPanel: z.object({
-    id: zfd.numeric(z.number().optional()),
+    id: zfd.numeric(z.number().optional()).nullable(),
     sweetAromatic: zfd.numeric(z.number().default(0)),
     berry: zfd.numeric(z.number().default(0)),
     stoneFruit: zfd.numeric(z.number().default(0)),
@@ -97,3 +98,4 @@ export const hopNoteSchema = zfd.formData({
     aromaIds: zfd.repeatable(),
   }),
 });
+export type HopNoteSchema = z.infer<typeof hopNoteSchema>;

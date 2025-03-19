@@ -14,19 +14,19 @@ export const RangeSelect = ({
   ...props
 }: RangeSelectProps) => {
   return (
-    <div className={clsx("grid grid-cols-12", className)}>
+    <div className={clsx("grid grid-cols-12 justify-items-center", className)}>
       <span className=" m-auto">0</span>
       {Array.from({ length: 10 }).map((_, i) => (
         <div
           key={i}
-          className="grid justify-self-auto m-auto items-center space-y-2 space-x-2 au "
+          className="grid justify-items-center m-auto space-y-2 space-x-2 au "
         >
           <label
-            className="self-stretch p-1 gap-0"
+            className="sef-stretch p-1 gap-0"
             htmlFor={`opt-${props.name}-${i}`}
           >
             <input
-              className="size-2"
+              className="size-4"
               {...props}
               type="radio"
               key={`opt-${props.name}-${i}`}
