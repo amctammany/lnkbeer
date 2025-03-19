@@ -83,6 +83,7 @@ export function HopSensoryEditor({
   });
   const action = hopNote?.uid ? updateHopNote : createHopNote;
 
+  console.log(state);
   return (
     <Form onSubmit={handleSubmit(action)}>
       <AppBarLayout

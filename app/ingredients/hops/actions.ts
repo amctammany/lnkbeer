@@ -26,7 +26,7 @@ export const createHopNote = async (data: HopNoteSchema) => {
   //if (!valid.success) return valid;
   //const f = validateSchema(formData, schema);
   //const d = schema.parse(formData);
-  const { id, userEmail, hopId, slug, comments, sensoryPanel } = data;
+  const { id, userEmail, hopId, slug, sensoryPanel } = data;
   const panel = await prisma.hopSensoryPanel.create({
     data: {
       user: { connect: { email: userEmail } },
@@ -50,7 +50,6 @@ export const createHopNote = async (data: HopNoteSchema) => {
       slug,
       sensoryPanelId: panel.id,
       //hop: { connect: { id: hopId } },
-      comments,
       //sensoryPanel: {
       //connect: { id: panel.id },
       //},

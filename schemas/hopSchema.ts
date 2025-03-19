@@ -75,8 +75,9 @@ export const hopNoteSchema = zfd.formData({
   userEmail: zfd.text(z.string()),
   slug: zfd.text(z.string()),
   hopId: zfd.text(z.string()),
-  comments: zfd.text(z.string().optional()).nullable(),
+  notes: zfd.text(z.string().optional()).nullable(),
   sensoryPanel: z.object({
+    notes: zfd.text(z.string().optional()).nullable(),
     id: zfd.numeric(z.number().optional()).nullable(),
     sweetAromatic: zfd.numeric(z.number().default(0)),
     berry: zfd.numeric(z.number().default(0)),

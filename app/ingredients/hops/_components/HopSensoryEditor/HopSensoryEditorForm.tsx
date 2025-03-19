@@ -173,7 +173,7 @@ export function HopSensoryEditorForm({
           {...register("sensoryPanel.id", { value: src?.sensoryPanelId })}
         />
         <div>
-          <TextArea {...register("comments")} />
+          <TextArea {...register("notes")} />
         </div>
         <div className="grid grid-cols-1">
           {[
