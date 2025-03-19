@@ -45,7 +45,7 @@ export default async function MashStepEditorPage({
         : await getMashStep(id?.[0])
       : undefined;
   return (
-    <>
+    <div>
       <MashProfileForm src={mashProfile} action={updateMashProfile} />
       <MashStepForm
         className={clsx("", {
@@ -54,7 +54,7 @@ export default async function MashStepEditorPage({
         src={mashStep! as MashStepInput}
         action={(mashStep?.id ? updateMashStep : createMashStep) as any}
       />
-    </>
+    </div>
   );
 }
 /**

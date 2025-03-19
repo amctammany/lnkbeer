@@ -50,7 +50,7 @@ export function MashStepForm({ src, action, ...props }: MashStepFormProps) {
   return (
     <Dialog onOpenChange={handleOpen} defaultOpen={src !== undefined}>
       <DialogOverlay className="bg-black/30">
-        <DialogContent className="max-w-[680px]  min-h-[400px]">
+        <DialogContent className="sm:max-w-lg m-auto in-h-[400px]">
           <DialogHeader>
             <DialogTitle>Mash Step Editor</DialogTitle>
             <DialogDescription>Mash Step</DialogDescription>
