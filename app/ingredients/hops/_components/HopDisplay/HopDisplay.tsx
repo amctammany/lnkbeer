@@ -71,7 +71,7 @@ const rangeProps: (hop: HopInput) => RangeProp[] = (hop) => [
 
 export async function HopDisplay({ hop }: HopDisplayProps) {
   return (
-    <div className="grid lg:grid-cols-2">
+    <div className="grid grid-cols-1 lg:grid-cols-2">
       <Card className="m-4  *:border-b-2 *:last-of-type:border-b-0 ">
         <Prop label="Name" value={hop?.name} />
         <Prop label="Country" value={hop?.country} />

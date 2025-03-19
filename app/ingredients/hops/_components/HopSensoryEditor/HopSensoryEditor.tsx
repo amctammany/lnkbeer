@@ -73,7 +73,6 @@ export function HopSensoryEditor({
   });
   const action = hopNote?.uid ? updateHopNote : createHopNote;
 
-  console.log(state);
   return (
     <Form onSubmit={handleSubmit(action)}>
       <AppBarLayout
@@ -82,8 +81,6 @@ export function HopSensoryEditor({
       >
         <div className="">
           <Card className="m-4 *:border-b-2 *:last-of-type:border-b-0 ">
-            <h4>Notes</h4>
-            <Prop label="Name" value={src?.name} />
             <HopSensoryEditorForm
               action={hopNote?.uid ? updateHopNote : createHopNote}
               register={register}

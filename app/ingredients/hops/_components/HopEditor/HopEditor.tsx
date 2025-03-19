@@ -105,7 +105,7 @@ export function HopEditor({ hop, action }: HopEditorProps) {
         actions={<HopEditorActions />}
       >
         <div className="grid grid-cols-4 gap-2">
-          <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 md:col-span-2">
+          <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 lg:col-span-2">
             <span className="shrink p-2 block bg-slate-300">General</span>
             <div className="grow">
               <Input
@@ -125,7 +125,7 @@ export function HopEditor({ hop, action }: HopEditorProps) {
             </div>
           </div>
 
-          <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 md:col-span-2">
+          <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 lg:col-span-2">
             <span className="shrink p-2 block bg-slate-300">Composition</span>
             <div className="grow">
               <NumberField

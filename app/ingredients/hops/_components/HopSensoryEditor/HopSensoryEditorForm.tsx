@@ -47,7 +47,7 @@ const AromaSelect = ({
 }) => {
   return (
     <div className={clsx("w-full", className)}>
-      <div className="flex overflow-x-scroll scrollbar-h-0 scrollbar">
+      <div className="flex overflow-x-scroll scrollbar-h-0 scrollbar gap-x-2">
         {aromas.map((aroma) => (
           <div
             key={aroma.id}
@@ -97,16 +97,16 @@ function HopAromaForm<T extends FieldValues>({
   return (
     <div
       className={clsx(
-        " md:grid flex flex-col md:grid-cols-7 odd:bg-blue-50 ",
+        " lg:grid flex flex-col lg:grid-cols-7 odd:bg-blue-50 ",
         className,
       )}
     >
-      <div className="text-center md:text-right px-1">
+      <div className="text-center lg:text-right px-1 text-lg lg:text-2xl underline">
         <span className=" shrink">{label ?? name}</span>
       </div>
-      <RangeSelect className="md:col-span-2" {...rangeProps} />
+      <RangeSelect className="lg:col-span-2" {...rangeProps} />
       <AromaSelect
-        className="shrink md:col-span-4 "
+        className="shrink lg:col-span-4 "
         {...aromaProps}
         aromas={aromas}
       />
@@ -164,7 +164,7 @@ export function HopSensoryEditorForm({
           {...register("sensoryPanel.id", { value: src?.sensoryPanelId })}
         />
         <div>
-          <TextArea {...register("sensoryPanel.notes")} />
+          <TextArea {...register("sensoryPanel.notes")} label="Notes" />
         </div>
         <div className="grid grid-cols-1">
           {[

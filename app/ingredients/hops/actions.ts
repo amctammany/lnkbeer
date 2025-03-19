@@ -1,13 +1,7 @@
 "use server";
 import { prisma } from "@/lib/client";
-import slugify from "@/lib/slugify";
-import { validateSchema } from "@/lib/validateSchema";
 import { HopNoteSchema, HopSchema, parseHop } from "@/schemas/hopSchema";
-import { HopInput } from "@/types/ingredient";
-import { HopUsage } from "@prisma/client";
-import { connect, sensitiveHeaders } from "http2";
 import { redirect } from "next/navigation";
-import { z } from "zod";
 import { zfd } from "zod-form-data";
 
 const removeSchema = zfd.formData({
@@ -96,7 +90,6 @@ export const updateHopNote = async (data: HopNoteSchema) => {
       }, {} as any),
     },
   });
-  console.log(es);
   const res = await prisma.hopNote.update({
     where: { id: { hopId: data.hopId, userEmail } },
     data: {

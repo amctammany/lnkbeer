@@ -40,7 +40,7 @@ export default async function HopSensoryPage({ params }: HopSensoryPageProps) {
   const userPanel = hop?.hopSensoryPanels.find(
     (panel) => user && panel.userEmail === user.email,
   );
-  console.log(user, userPanel, hop?.hopSensoryPanels);
+  //console.log(user, userPanel, hop?.hopSensoryPanels);
   return (
     <AppBarLayout
       title={<AppBarTitle icon={<Hop />}>{slug}</AppBarTitle>}
