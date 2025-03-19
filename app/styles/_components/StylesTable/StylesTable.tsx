@@ -8,13 +8,17 @@ import Link from "next/link";
 import slugify from "slugify";
 import { StylesTableRowActions } from "./StylesTableRowActions";
 import { DataTable } from "@/components/DataTable";
+import { AppBarLayout } from "@/components/AppBarLayout";
+import AppBarTitle from "@/components/AppBarTitle";
+import { BookType, Waves } from "lucide-react";
 const columns: ColumnDef<Style>[] = [
   {
     accessorKey: "identifier",
     header: Header<Style>,
+    size: 3,
     cell: ({ getValue }) => (
       <Link
-        className="hover:underline"
+        className="hover:underline w-8"
         prefetch={false}
         href={`/styles/${slugify(getValue<string>(), { lower: true })}`}
       >
@@ -47,9 +51,14 @@ export type StylesTableProps = {
 };
 export function StylesTable({ src = [] }: StylesTableProps) {
   return (
-    <div className="relative overflow-auto">
-      <DataTable data={src} columns={columns} />
-    </div>
+    <AppBarLayout
+      title={<AppBarTitle icon={<BookType />}>Styles</AppBarTitle>}
+      //actions={<WaterProfilesTableActions />}
+    >
+      <div className="relative overflow-auto">
+        <DataTable data={src} columns={columns} />
+      </div>
+    </AppBarLayout>
   );
 }
 export default StylesTable;

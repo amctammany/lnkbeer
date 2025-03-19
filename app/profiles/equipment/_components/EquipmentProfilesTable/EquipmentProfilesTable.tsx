@@ -21,6 +21,17 @@ const columns: ColumnDef<EquipmentProfile>[] = [
     ),
   },
   {
+    accessorKey: "batchVolume",
+    header: Header<EquipmentProfile>,
+    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+  },
+  {
+    accessorKey: "brewEfficiency",
+    header: Header<EquipmentProfile>,
+    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
+  },
+
+  {
     id: "actions",
     enableHiding: false,
     cell: EquipmentProfileRowActions<EquipmentProfile>,
