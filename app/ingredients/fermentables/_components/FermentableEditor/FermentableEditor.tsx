@@ -16,7 +16,7 @@ import {
 } from "@/schemas/fermentableSchema";
 
 export type FermentableEditorProps = {
-  fermentable: FermentableInput;
+  fermentable: Partial<FermentableInput>;
   action: any;
 };
 export function FermentableEditor({

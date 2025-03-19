@@ -13,7 +13,7 @@ export default async function HopCreatorPage() {
   const session = await auth();
   if (!session?.user)
     return redirect("/admin/login?callbackUrl=/ingredients/hops/new");
-  const hop = { userId: session.user.id } as Hop;
+  const hop = { userId: session.user.id } as any;
 
   return <HopEditor hop={hop} action={createHop} />;
 }

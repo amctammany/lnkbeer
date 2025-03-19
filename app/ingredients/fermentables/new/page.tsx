@@ -13,7 +13,7 @@ export default async function FermentableCreatorPage() {
   const session = await auth();
   if (!session?.user)
     return redirect("/admin/login?callbackUrl=/ingredients/fermentables/new");
-  const fermentable = { userId: session.user.id } as FermentableInput;
+  const fermentable = { userId: session.user.id } as Partial<FermentableInput>;
 
   return (
     <FermentableEditor fermentable={fermentable} action={createFermentable} />

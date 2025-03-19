@@ -23,7 +23,10 @@ export type HopInput = Hop & {
   myrceneRange?: RangeValue;
   totalOilRange?: RangeValue;
 };
-export type FermentableInput = Fermentable;
+export type FermentableInput = Partial<Fermentable> & {
+  name: string | null;
+  slug: string | null;
+};
 export type YeastInput = Yeast & {
   tempRange?: RangeValue;
   attenuationRange?: RangeValue;

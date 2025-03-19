@@ -53,19 +53,19 @@ const AromaSelect = ({
   label?: React.ReactNode;
 }) => {
   return (
-    <div className={clsx("grid items-center  my-0 gap-3", className)}>
-      <div className="flex items-center gap-4">
+    <div className={clsx("w-full", className)}>
+      <div className="flex overflow-x-scroll scrollbar-h-0 scrollbar">
         {aromas.map((aroma) => (
           <div
             key={aroma.id}
-            className="flex border b-1 rounded-lg justify-around items-center space-y-2 space-x-2 "
+            className="w-fit h-6 flex border b-1 rounded-lg  "
           >
             <label
-              className="border b-1 m-auto px-1 gap-0 has-checked:bg-red-100"
+              className="inline-flex border b-1 m-auto px-1 gap-0 has-checked:bg-red-100"
               htmlFor={`aroma-${aroma.id}`}
             >
               <input
-                className="peer size-3"
+                className="peer m-auto size-3"
                 {...props}
                 type="checkbox"
                 key={`aroma-${aroma.id}`}
@@ -75,7 +75,7 @@ const AromaSelect = ({
                 value={aroma.id.toString()}
                 //checked={props.ref.current.toString() === i.toString()}
               />
-              <span className="px-2 text-sm peer-checked:text-blue peer-checked:underline">
+              <span className="px-2 whitespace-nowrap block text-sm peer-checked:text-blue peer-checked:underline">
                 {aroma.name}
               </span>
             </label>
@@ -102,16 +102,12 @@ function HopAromaForm<T extends FieldValues>({
   aromaProps: UseFormRegisterReturn;
 }) {
   return (
-    <div className={clsx("grid grid-cols-6 odd:bg-blue-50", className)}>
+    <div className={clsx("grid grid-cols-7 odd:bg-blue-50 h-6", className)}>
       <div className="text-right px-1">
         <span className=" shrink">{label ?? name}</span>
       </div>
       <RangeSelect className="col-span-2" {...rangeProps} />
-      <AromaSelect
-        className="col-span-3 overflow-x-scroll"
-        {...aromaProps}
-        aromas={aromas}
-      />
+      <AromaSelect className="col-span-4 " {...aromaProps} aromas={aromas} />
     </div>
   );
 }

@@ -120,9 +120,9 @@ export async function removeMashProfile(formData: FormData) {
 }
 
 export const createMashStep = async (data: MashStepSchema) => {
-  const { id, ...rest } = data;
+  const { id, rampTime, mashProfileId, ...rest } = data;
   const res = await prisma.mashStep.create({
-    data: { ...rest },
+    data: { rampTime: rampTime!, mashProfileId: mashProfileId!, ...rest },
     include: {
       MashProfile: {
         select: {
@@ -137,10 +137,10 @@ export const createMashStep = async (data: MashStepSchema) => {
 };
 
 export const updateMashStep = async (data: MashStepSchema) => {
-  const { id, ...rest } = data;
+  const { id, rampTime, mashProfileId, ...rest } = data;
   const res = await prisma.mashStep.update({
     where: { id: id! },
-    data: rest,
+    data: { rampTime: rampTime!, mashProfileId: mashProfileId!, ...rest },
     include: {
       MashProfile: {
         select: {

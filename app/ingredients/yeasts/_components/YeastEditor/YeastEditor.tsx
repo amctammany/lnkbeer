@@ -13,7 +13,7 @@ import { Select } from "@/components/Form/Select";
 //import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
 import { useActionForm } from "@/hooks/useActionForm";
-import { yeastSchema } from "@/schemas/yeastSchema";
+import { YeastSchema, yeastSchema } from "@/schemas/yeastSchema";
 import { RangeValue, YeastInput } from "@/types/ingredient";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { YeastFlocculation, YeastForm, YeastType } from "@prisma/client";
@@ -21,7 +21,7 @@ import { FlaskConical, Save } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 
 export type YeastEditorProps = {
-  yeast?: YeastInput | null;
+  yeast?: YeastSchema | null;
   action: any;
 };
 const rangeProps: RangeFieldProp<YeastInput>[] = [
@@ -53,11 +53,10 @@ export function YeastEditor({ yeast, action }: YeastEditorProps) {
     control,
     handleSubmit,
     formState: state,
-  } = useForm<YeastInput>({
+  } = useForm<YeastSchema>({
     defaultValues: yeast!,
     resolver: zodResolver<any>(yeastSchema),
   });
-  console.log(state);
   return (
     <Form className="flex" onSubmit={handleSubmit(action)}>
       <AppBarLayout
@@ -98,15 +97,13 @@ export function YeastEditor({ yeast, action }: YeastEditorProps) {
                   key={name}
                   name={name!}
                   control={control}
-                  defaultValue={
-                    getValues([lowField!, highField!]).reduce(
-                      (acc, v, i) => ({
-                        ...acc,
-                        [i === 0 ? "min" : "max"]: v!,
-                      }),
-                      {} as RangeValue,
-                    ) as RangeValue
-                  }
+                  defaultValue={getValues<any>([lowField!, highField!]).reduce(
+                    (acc, v, i) => ({
+                      ...acc,
+                      [i === 0 ? "min" : "max"]: v!,
+                    }),
+                    {} as RangeValue,
+                  )}
                   render={({ field }) => (
                     <RangeField
                       errors={[

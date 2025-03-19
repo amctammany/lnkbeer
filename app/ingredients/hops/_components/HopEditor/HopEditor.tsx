@@ -17,7 +17,7 @@ import { HopIcon, Save } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 
 export type HopEditorProps = {
-  hop?: Hop | null;
+  hop?: HopInput | null;
   action: any;
 };
 const rangeProps: RangeFieldProp<HopInput>[] = [
