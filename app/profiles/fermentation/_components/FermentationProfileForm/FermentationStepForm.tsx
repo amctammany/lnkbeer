@@ -59,43 +59,49 @@ export function FermentationStepForm({
   return (
     <Dialog onOpenChange={handleOpen} defaultOpen={src !== undefined}>
       <DialogOverlay className="bg-black/30">
-        <DialogContent className="max-w-[680px]  min--[400px]">
+        <DialogContent className="max-w-[780px]  min--[400px]">
           <DialogHeader>
             <DialogTitle>Fermentation Step Editor</DialogTitle>
             <DialogDescription>Fermentation Step</DialogDescription>
           </DialogHeader>
 
           <Form onSubmit={handleSubmit(action)} {...props}>
-            <div className="grid grid-cols-3 gap-2 w-full">
+            <div className="grid grid-cols-6 gap-2 w-full">
               <Input type="hidden" {...register("id")} />
               <Input type="hidden" {...register("fermentationProfileId")} />
               <Input type="hidden" {...register("rank")} />
-              <TextField className="col-span-3" {...register("name")} />
+              <TextField className="col-span-6" {...register("name")} />
               <Select
-                className="col-span-3"
+                className="col-span-6"
                 {...register("type")}
                 error={state.errors?.type}
                 options={FermentationStepType}
               />
 
               <NumberField
+                className="col-span-6 md:col-span-2"
                 {...register("temperature")}
                 suffix="&deg;F"
                 step={0.1}
                 error={state.errors?.temperature}
               />
               <NumberField
+                className="col-span-3 md:col-span-2"
+                suffix="min"
                 {...register("time")}
                 step={0.1}
                 error={state.errors?.time}
               />
               <NumberField
+                className="col-span-3 md:col-span-2"
                 {...register("rampTime")}
                 suffix="min"
                 step={0.1}
                 error={state.errors?.rampTime}
               />
-              <Button type="submit">Save</Button>
+              <Button className="col-span-6" type="submit">
+                Save
+              </Button>
             </div>
           </Form>
         </DialogContent>

@@ -14,6 +14,7 @@ type ErrorType = {
 export type SelectProps = {
   name: string;
   label?: string | React.ReactNode;
+  includeBlank?: boolean;
   error?: SchemaFieldError;
   defaultValue?: any;
   disabled?: boolean;
@@ -55,6 +56,7 @@ export function Select({
   //name,
   label,
   error,
+  includeBlank,
   //children,
   options,
   //disabled,
@@ -86,7 +88,7 @@ SelectProps) {
     >
       <div className={clsx("flex w-full")}>
         <select {...props} className={selectStyles({ inputSize, variant })}>
-          <option value=""></option>
+          {includeBlank && <option value=""></option>}
           {opts}
         </select>
       </div>
