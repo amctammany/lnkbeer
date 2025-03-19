@@ -9,6 +9,7 @@ import { RangeField, RangeFieldProp } from "@/components/Form/RangeField";
 //import { RangeValue } from "@/components/Form/RangeSlider";
 import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
+import Section from "@/components/Section";
 import { HopSchema, hopSchema } from "@/schemas/hopSchema";
 import { HopInput, RangeValue } from "@/types/ingredient";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -95,6 +96,7 @@ export function HopEditor({ hop, action }: HopEditorProps) {
     defaultValues: hop!,
     resolver: zodResolver<any>(hopSchema),
   });
+  console.log(state);
 
   return (
     <Form className="flex" onSubmit={handleSubmit(action)}>
@@ -105,13 +107,13 @@ export function HopEditor({ hop, action }: HopEditorProps) {
         actions={<HopEditorActions />}
       >
         <div className="grid grid-cols-4 gap-2">
-          <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 lg:col-span-2">
-            <span className="shrink p-2 block bg-slate-300">General</span>
+          <Section
+            title="General"
+            className="m-2 border-2 flex flex-col rounded-sm col-span-4 lg:col-span-2"
+          >
             <div className="grow">
-              <Input
-                type="hidden"
-                {...register("id", { valueAsNumber: true })}
-              />
+              <Input type="hidden" {...register("id")} />
+              <Input type="hidden" {...register("userId")} />
               <Input type="hidden" {...register("slug")} />
 
               <TextField {...register("name")} />
@@ -123,11 +125,10 @@ export function HopEditor({ hop, action }: HopEditorProps) {
                 error={state.errors?.usage}
               />
             </div>
-          </div>
+          </Section>
 
-          <div className="m-2 border-2 flex flex-col rounded-sm col-span-4 lg:col-span-2">
-            <span className="shrink p-2 block bg-slate-300">Composition</span>
-            <div className="grow">
+          <Section title="Composition" className="col-span-4 lg:col-span-2">
+            <div className="grow grid grid-cols-2 lg:grid-cols-3">
               <NumberField
                 suffix="%"
                 {...register("alpha")}
@@ -135,72 +136,81 @@ export function HopEditor({ hop, action }: HopEditorProps) {
                 step={0.01}
               />
               <NumberField
+                suffix="%"
                 {...register("beta")}
                 step={0.01}
                 error={state.errors?.beta}
               />
               <NumberField
+                suffix="%"
                 {...register("caryophyllene")}
                 step={0.01}
                 error={state.errors?.caryophyllene}
               />
               <NumberField
+                suffix="%"
                 {...register("cohumulone")}
                 step={0.01}
                 error={state.errors?.cohumulone}
               />
               <NumberField
+                suffix="%"
                 {...register("humulene")}
                 step={0.01}
                 error={state.errors?.humulene}
               />
               <NumberField
+                suffix="%"
                 {...register("farnesene")}
                 error={state.errors?.farnesene}
                 step={0.01}
               />
               <NumberField
+                suffix="%"
                 {...register("myrcene")}
                 step={0.01}
                 error={state.errors?.myrcene}
               />
 
               <NumberField
+                suffix="g/mL"
                 {...register("totalOil")}
                 step={0.01}
                 error={state.errors?.totalOil}
               />
-              {rangeProps.map(({ name, highField, lowField }) => (
-                <Controller
-                  key={name}
-                  name={name!}
-                  control={control}
-                  defaultValue={
-                    (
-                      (getValues([lowField!, highField!]) as number[]) ?? []
-                    ).reduce(
-                      (acc, v, i) => ({
-                        ...acc,
-                        [i === 0 ? "min" : "max"]: v!,
-                      }),
-                      {} as RangeValue,
-                    ) as RangeValue
-                  }
-                  render={({ field }) => (
-                    <RangeField
-                      error={state.errors?.[name!]}
-                      {...field}
-                      value={field.value ?? { min: 0, max: 100 }}
-                      label={name}
-                      step={0.01}
-                      min={0}
-                      max={40}
-                    />
-                  )}
-                />
-              ))}
             </div>
-          </div>
+          </Section>
+          <Section title="Ranges" className="col-span-4 ">
+            {rangeProps.map(({ name, min, max, highField, lowField }) => (
+              <Controller
+                key={name}
+                name={name!}
+                control={control}
+                defaultValue={
+                  (
+                    (getValues([lowField!, highField!]) as number[]) ?? []
+                  ).reduce(
+                    (acc, v, i) => ({
+                      ...acc,
+                      [i === 0 ? "min" : "max"]: v!,
+                    }),
+                    {} as RangeValue,
+                  ) as RangeValue
+                }
+                render={({ field }) => (
+                  <RangeField
+                    error={state.errors?.[name!]}
+                    {...field}
+                    value={field.value ?? { min: 0, max: 100 }}
+                    label={name}
+                    step={0.01}
+                    min={min ?? 0}
+                    max={max ?? 100}
+                  />
+                )}
+              />
+            ))}
+          </Section>
         </div>
       </AppBarLayout>
     </Form>

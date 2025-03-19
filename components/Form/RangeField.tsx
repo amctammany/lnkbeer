@@ -93,7 +93,7 @@ export function RangeField({
     e.preventDefault();
     const newMinVal = Math.min(+e.target.value, maxValue - step);
     setMinValue(newMinVal);
-    console.log("min: " + newMinVal);
+    //console.log("min: " + newMinVal);
     //console.log(lowField.field.onChange);
     //lowField.field.onChange(newMinVal);
     onChange({ min: newMinVal, max: maxValue });
@@ -102,7 +102,7 @@ export function RangeField({
   const handleMaxChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
     const newMaxVal = Math.max(+e.target.value, minValue + step);
-    console.log("max: " + newMaxVal);
+    //console.log("max: " + newMaxVal);
     //console.log(highField.field.onChange);
     setMaxValue(newMaxVal);
     //highField.field.onChange(newMaxVal);

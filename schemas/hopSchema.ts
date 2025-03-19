@@ -5,6 +5,7 @@ import { z } from "zod";
 import { zfd } from "zod-form-data";
 
 export function parseHop(data: HopSchema) {
+  console.log(data);
   //if (!data) return null;
   const {
     alphaRange,
@@ -19,51 +20,56 @@ export function parseHop(data: HopSchema) {
   } = data || { name: "" };
   return {
     ...rest,
-    alphaLow: alphaRange?.[0],
-    alphaHigh: alphaRange?.[1],
-    betaLow: betaRange?.[0],
-    betaHigh: betaRange?.[1],
-    caryophylleneLow: caryophylleneRange?.[0],
-    caryophylleneHigh: caryophylleneRange?.[1],
-    farneseneLow: farneseneRange?.[0],
-    farneseneHigh: farneseneRange?.[1],
-    humuleneLow: humuleneRange?.[0],
-    humuleneHigh: humuleneRange?.[1],
-    cohumuloneLow: cohumuloneRange?.[0],
-    cohumuloneHigh: cohumuloneRange?.[1],
-    totalOilLow: totalOilRange?.[0],
-    totalOilHigh: totalOilRange?.[1],
-    myrceneLow: myrceneRange?.[0],
-    myrceneHigh: myrceneRange?.[1],
+    alphaLow: alphaRange?.min,
+    alphaHigh: alphaRange?.max,
+    betaLow: betaRange?.min,
+    betaHigh: betaRange?.max,
+    caryophylleneLow: caryophylleneRange?.min,
+    caryophylleneHigh: caryophylleneRange?.max,
+    farneseneLow: farneseneRange?.min,
+    farneseneHigh: farneseneRange?.max,
+    humuleneLow: humuleneRange?.min,
+    humuleneHigh: humuleneRange?.max,
+    cohumuloneLow: cohumuloneRange?.min,
+    cohumuloneHigh: cohumuloneRange?.max,
+    totalOilLow: totalOilRange?.min,
+    totalOilHigh: totalOilRange?.max,
+    myrceneLow: myrceneRange?.min,
+    myrceneHigh: myrceneRange?.max,
     slug: slugify(rest.name, { lower: true }),
   } as HopInput;
 }
 
+const RangeV = () =>
+  z.object({
+    min: z.number().min(0).max(100).default(0),
+    max: z.number().min(0).max(100).default(100),
+  });
 export const hopSchema = zfd.formData({
-  id: zfd.text(z.string().optional()),
-  userId: zfd.text(z.string().optional()),
+  id: zfd.text(z.string().optional()).nullable(),
+  userId: zfd.text(z.string().optional()).nullable(),
   name: zfd.text(z.string()),
   description: zfd.text(z.string().optional()).nullable(),
   flavor: zfd.text(z.string().optional()).nullable(),
   characteristics: zfd.text(z.string().optional()).nullable(),
   country: zfd.text(z.string().optional()).nullable(),
   usage: z.nativeEnum(HopUsage).optional().default(HopUsage.dual).nullable(),
-  alphaRange: zfd.numeric(z.number()).array().length(2).optional(),
+  alphaRange: RangeV(), //zfd.numeric(z.number()).array().length(2).optional(),
   alpha: zfd.numeric(z.number().min(0).max(40).optional()).nullable(),
-  betaRange: zfd.numeric().array().length(2).optional(),
+  betaRange: RangeV(),
   beta: zfd.numeric(z.number().min(0).max(40).optional()).nullable(),
   caryophyllene: zfd.numeric(z.number().min(0).max(30).optional()).nullable(),
-  caryophylleneRange: zfd.numeric().array().length(2).optional(),
+  caryophylleneRange: RangeV(),
   cohumulone: zfd.numeric(z.number().min(0).max(70).optional()).nullable(),
-  cohumuloneRange: zfd.numeric().array().length(2).optional(),
+  cohumuloneRange: RangeV(),
   farnesene: zfd.numeric(z.number().min(0).max(50).optional()).nullable(),
-  farneseneRange: zfd.numeric().array().length(2).optional(),
+  farneseneRange: RangeV(),
   humulene: zfd.numeric(z.number().min(0).max(50).optional()).nullable(),
-  humuleneRange: zfd.numeric().array().length(2).optional(),
+  humuleneRange: RangeV(),
   myrcene: zfd.numeric(z.number().min(0).max(80).optional()).nullable(),
-  myrceneRange: zfd.numeric().array().length(2).optional(),
+  myrceneRange: RangeV(),
   totalOil: zfd.numeric(z.number().min(0).max(40).optional()).nullable(),
-  totalOilRange: zfd.numeric().array().length(2).optional(),
+  totalOilRange: RangeV(),
   purpose: zfd.text(z.string().optional()).nullable(),
   notes: zfd.text(z.string().optional()).nullable(),
 });

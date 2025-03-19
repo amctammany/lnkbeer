@@ -124,7 +124,7 @@ export const updateHop = async (data: HopSchema) => {
   //const hop = valid.data;
   const hop = parseHop(data);
   const res = await prisma.hop.update({
-    where: { id: data.id },
+    where: { id: data.id! },
     data: hop,
   });
   redirect(`/ingredients/hops/${res.slug}`);
