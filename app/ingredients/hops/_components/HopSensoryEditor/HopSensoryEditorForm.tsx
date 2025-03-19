@@ -211,7 +211,9 @@ export function HopSensoryEditorForm({
           ))}
         </div>
         <div>
-          <Button type="submit">Save</Button>
+          <Button disabled={disabled} type="submit">
+            Save
+          </Button>
         </div>
       </div>
     </div>

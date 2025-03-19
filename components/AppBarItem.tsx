@@ -10,6 +10,7 @@ import {
 
 export interface AppBarItemProps {
   text?: string;
+  disabled?: boolean;
   icon?: any;
   action?: any;
   type?: HTMLButtonElement["type"];
@@ -17,6 +18,7 @@ export interface AppBarItemProps {
 }
 export const AppBarItem = ({
   text,
+  disabled = false,
   icon,
   action,
   type,
@@ -30,6 +32,7 @@ export const AppBarItem = ({
           <Button
             type={type ?? "button"}
             className="hover:bg-primary/20 [&_svg]:size-6 sm:[&_svg]:size-4 p-1 lg:p-2 m-1 "
+            disabled={disabled}
             key={text}
             aria-label={text}
             variant="secondary"

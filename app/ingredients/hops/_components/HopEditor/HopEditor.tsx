@@ -79,8 +79,16 @@ const rangeProps: RangeFieldProp<HopInput>[] = [
     highField: "totalOilHigh",
   },
 ];
-const HopEditorActions = () => {
-  return [<AppBarItem key="save" text="Save" type="submit" icon={<Save />} />];
+const HopEditorActions = ({ disabled = false }: { disabled?: boolean }) => {
+  return [
+    <AppBarItem
+      key="save"
+      text="Save"
+      type="submit"
+      disabled={disabled}
+      icon={<Save />}
+    />,
+  ];
 };
 
 export function HopEditor({ hop, action }: HopEditorProps) {
@@ -98,13 +106,14 @@ export function HopEditor({ hop, action }: HopEditorProps) {
   });
   console.log(state);
 
+  const disabled = state.isSubmitting || state.isSubmitted;
   return (
     <Form className="flex" onSubmit={handleSubmit(action)}>
       <AppBarLayout
         title={
           <AppBarTitle icon={<HopIcon />}>{hop?.name ?? "Creator"}</AppBarTitle>
         }
-        actions={<HopEditorActions />}
+        actions={<HopEditorActions disabled={disabled} />}
       >
         <div className="grid grid-cols-4 gap-2">
           <Section
@@ -116,11 +125,12 @@ export function HopEditor({ hop, action }: HopEditorProps) {
               <Input type="hidden" {...register("userId")} />
               <Input type="hidden" {...register("slug")} />
 
-              <TextField {...register("name")} />
-              <TextField {...register("description")} />
+              <TextField {...register("name")} disabled={disabled} />
+              <TextField {...register("description")} disabled={disabled} />
               <Select
                 {...register("usage")}
                 className="w-full"
+                disabled={disabled}
                 options={HopUsage}
                 error={state.errors?.usage}
               />
@@ -131,6 +141,7 @@ export function HopEditor({ hop, action }: HopEditorProps) {
             <div className="grow grid grid-cols-2 lg:grid-cols-3">
               <NumberField
                 suffix="%"
+                disabled={disabled}
                 {...register("alpha")}
                 error={state.errors?.alpha}
                 step={0.01}
@@ -138,36 +149,42 @@ export function HopEditor({ hop, action }: HopEditorProps) {
               <NumberField
                 suffix="%"
                 {...register("beta")}
+                disabled={disabled}
                 step={0.01}
                 error={state.errors?.beta}
               />
               <NumberField
                 suffix="%"
                 {...register("caryophyllene")}
+                disabled={disabled}
                 step={0.01}
                 error={state.errors?.caryophyllene}
               />
               <NumberField
                 suffix="%"
                 {...register("cohumulone")}
+                disabled={disabled}
                 step={0.01}
                 error={state.errors?.cohumulone}
               />
               <NumberField
                 suffix="%"
                 {...register("humulene")}
+                disabled={disabled}
                 step={0.01}
                 error={state.errors?.humulene}
               />
               <NumberField
                 suffix="%"
                 {...register("farnesene")}
+                disabled={disabled}
                 error={state.errors?.farnesene}
                 step={0.01}
               />
               <NumberField
                 suffix="%"
                 {...register("myrcene")}
+                disabled={disabled}
                 step={0.01}
                 error={state.errors?.myrcene}
               />
@@ -175,6 +192,7 @@ export function HopEditor({ hop, action }: HopEditorProps) {
               <NumberField
                 suffix="g/mL"
                 {...register("totalOil")}
+                disabled={disabled}
                 step={0.01}
                 error={state.errors?.totalOil}
               />
