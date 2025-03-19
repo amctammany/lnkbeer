@@ -97,7 +97,7 @@ function HopAromaForm<T extends FieldValues>({
   return (
     <div
       className={clsx(
-        " md:grid flex flex-col md:grid-cols-7 odd:bg-blue-50 md:h-6",
+        " md:grid flex flex-col md:grid-cols-7 odd:bg-blue-50 ",
         className,
       )}
     >
