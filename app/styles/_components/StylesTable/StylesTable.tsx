@@ -1,22 +1,36 @@
 "use client";
-import { FermentationProfile } from "@prisma/client";
+import { Style } from "@prisma/client";
 //import { AppBarLayout } from "@/components/AppBarLayout";
 //import { DataTable } from "@/components/DataTable";
 import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
-import { FermentationProfileRowActions } from "./FermentationProfileRowActions";
+import { StylesTableRowActions } from "./StylesTableRowActions";
 import { DataTable } from "@/components/DataTable";
-const columns: ColumnDef<FermentationProfile>[] = [
+const columns: ColumnDef<Style>[] = [
   {
-    accessorKey: "name",
-    header: Header<FermentationProfile>,
+    accessorKey: "identifier",
+    header: Header<Style>,
     cell: ({ getValue }) => (
       <Link
         className="hover:underline"
         prefetch={false}
-        href={`/profiles/fermentation/${slugify(getValue<string>(), { lower: true })}`}
+        href={`/styles/${slugify(getValue<string>(), { lower: true })}`}
+      >
+        {getValue<string>()}
+      </Link>
+    ),
+  },
+
+  {
+    accessorKey: "name",
+    header: Header<Style>,
+    cell: ({ getValue }) => (
+      <Link
+        className="hover:underline"
+        prefetch={false}
+        href={`/styles/${slugify(getValue<string>(), { lower: true })}`}
       >
         {getValue<string>()}
       </Link>
@@ -25,19 +39,17 @@ const columns: ColumnDef<FermentationProfile>[] = [
   {
     id: "actions",
     enableHiding: false,
-    cell: FermentationProfileRowActions<FermentationProfile>,
+    cell: StylesTableRowActions<Style>,
   },
 ];
-export type FermentationProfilesTableProps = {
-  src?: FermentationProfile[];
+export type StylesTableProps = {
+  src?: Style[];
 };
-export function FermentationProfilesTable({
-  src = [],
-}: FermentationProfilesTableProps) {
+export function StylesTable({ src = [] }: StylesTableProps) {
   return (
     <div className="relative overflow-auto">
       <DataTable data={src} columns={columns} />
     </div>
   );
 }
-export default FermentationProfilesTable;
+export default StylesTable;
