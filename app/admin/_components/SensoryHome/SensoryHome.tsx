@@ -9,7 +9,7 @@ import Link from "next/link";
 
 export interface SensoryHomeProps {
   user?: ExtendedUser | null;
-  panels: Pick<HopSensoryPanel, "id" | "hopId" | "year">[];
+  panels: Pick<HopSensoryPanel, "id" | "hopId" | "userId">[];
   //action?: any;
   //children: React.ReactNode;
 }
@@ -19,7 +19,7 @@ import { ListItemText } from "@/components/List/ListItemText";
 import { List } from "@/components/List/List";
 
 export type HopSensoryListItemProps = {
-  src: Pick<HopSensoryPanel, "id" | "hopId" | "year">;
+  src: Pick<HopSensoryPanel, "id" | "hopId" | "userId">;
 };
 export const HopSensoryListItem = ({ src }: HopSensoryListItemProps) => {
   return (
@@ -31,7 +31,11 @@ export const HopSensoryListItem = ({ src }: HopSensoryListItemProps) => {
       <ListItemIcon variant="icon">
         <Hop />
       </ListItemIcon>
-      <ListItemText className="grow" primary={src.hopId} secondary={src.year} />
+      <ListItemText
+        className="grow"
+        primary={src.hopId}
+        secondary={src.userId}
+      />
     </ListItem>
   );
 };

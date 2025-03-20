@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/client";
 import { SensoryHome } from "@/app/admin/_components/SensoryHome";
 import { ExtendedUser } from "@/types/User";
+import { SensoryDisplay } from "@/app/admin/_components/SensoryDisplay";
 //import { Dashboard } from "./_components/Dashboard";
 //const AdminModal = dynamic(
 //() => import("./AdminModal").then((s) => s.AdminModal),
@@ -10,17 +11,20 @@ import { ExtendedUser } from "@/types/User";
 //);
 
 //import { auth } from "@/app/auth";
-export default async function Page() {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{
+    id: string;
+  }>;
+}) {
   const session = await auth();
+  const { id } = await params;
 
   if (!session || !session?.user?.email) return redirect("/");
-  const panels = await prisma.hopNote.findMany({
-    where: { userId: session.user.id },
-    select: { hopId: true, uid: true, sensoryPanelId: true },
+  const panel = await prisma.hopSensoryPanel.findFirst({
+    where: { id: parseInt(id) },
+    //select: { hopId: true, uid: true, sensoryPanelId: true },
   });
-  const user = await prisma.user.findFirst({
-    where: { email: session?.user?.email },
-    include: { hopSensoryPanels: { select: { id: true, hopId: true } } },
-  });
-  return <SensoryHome user={user as ExtendedUser} panels={panels as any} />;
+  return <SensoryDisplay panel={panel as any} />;
 }
