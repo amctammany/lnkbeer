@@ -9,8 +9,8 @@ export type EquipmentProfileDisplayProps = {
 
 export function EquipmentProfileDisplay({ src }: EquipmentProfileDisplayProps) {
   return (
-    <div className="p-2">
-      <Card className="m-4 *:border-b-2 *:last-of-type:border-b-0 ">
+    <div className="lg:p-2">
+      <Card className="m-1 lg:m-4 *:border-b-2 *:last-of-type:border-b-0 ">
         <Prop label="Name" value={src?.name} />
         <Prop
           label="Forked From"

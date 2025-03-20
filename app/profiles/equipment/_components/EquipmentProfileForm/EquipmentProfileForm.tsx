@@ -47,8 +47,8 @@ export function EquipmentProfileForm({
         title={<AppBarTitle icon={<Anvil />}>{src?.name}</AppBarTitle>}
         actions={<EquipmentProfileFormActions />}
       >
-        <div className="p-2 gap-2 lg:w-9/12 mx-auto">
-          <div className="m-2 border-2 flex flex-col rounded-sm ">
+        <div className="p-1 lg:p-2 gap-0 l:gap-2 lg:w-9/12 mx-auto">
+          <div className="m-0 lg:m-2 border-2 flex flex-col rounded-sm ">
             <span className="shrink p-2 block bg-slate-300">General</span>
             <div className="grow">
               <Input type="hidden" {...register("id")} />

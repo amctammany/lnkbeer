@@ -19,7 +19,7 @@ export function WaterProfileDisplay({ src }: WaterProfileDisplayProps) {
       actions={<WaterProfileDisplayActions src={src} />}
     >
       <div className="pt-4">
-        <Card className="m-4 *:border-b-2 *:last-of-type:border-b-0 ">
+        <Card className="m-1 lg:m-4 *:border-b-2 *:last-of-type:border-b-0 ">
           <Prop label="Name" value={src?.name} />
           <Prop
             label="Forked From"
