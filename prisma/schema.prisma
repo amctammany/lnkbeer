@@ -195,6 +195,7 @@ model HopSensoryPanel {
   onionGarlic   Float                 @default(0)
   driedFruit    Float                 @default(0)
   dank          Float                 @default(0)
+  offFlavors    Float                 @default(0)
   year          Int?
   producer      String?
   batchInfo     String?

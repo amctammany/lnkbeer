@@ -20,8 +20,8 @@ export default async function Page({
   const { id } = await params;
 
   if (!session || !session?.user?.email) return redirect("/");
-  const panel = await prisma.hopNote.findFirst({
-    where: { uid: parseInt(id) },
+  const panel = await prisma.hopSensoryPanel.findFirst({
+    where: { id: parseInt(id) },
     //select: { hopId: true, uid: true, sensoryPanelId: true },
   });
   return <SensoryEditor panel={panel as any} />;

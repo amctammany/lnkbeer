@@ -26,5 +26,6 @@ export default async function Page({
     where: { id: parseInt(id) },
     //select: { hopId: true, uid: true, sensoryPanelId: true },
   });
+  console.log({ id, panel });
   return <SensoryDisplay panel={panel as any} />;
 }

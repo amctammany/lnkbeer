@@ -40,6 +40,6 @@ export type HopSensoryData = {
 };
 
 export type HopSensoryChartData<T = HopSensoryData> = Record<
-  Uncapitalize<AromaGroups>,
+  Uncapitalize<Exclude<AromaGroups, "OffFlavors">>,
   T
 >;

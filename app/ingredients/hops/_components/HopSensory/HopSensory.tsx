@@ -14,7 +14,7 @@ export type HopSensoryProps = {
   expertPanel?: HopSensoryPanel;
   hop?: ExtendedHop | null;
 };
-const aromaGroups: Uncapitalize<AromaGroups>[] = [
+export const aromaGroups: Uncapitalize<AromaGroups>[] = [
   "sweetAromatic",
   "pomme",
   "citrus",
@@ -30,6 +30,8 @@ const aromaGroups: Uncapitalize<AromaGroups>[] = [
   "vegetal",
   "woody",
   "spicy",
+  "onionGarlic",
+  "offFlavors",
 ];
 function addToChartData(
   root: HopSensoryChartData,
