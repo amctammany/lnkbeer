@@ -82,8 +82,8 @@ export function HopSensoryEditor({
           />
         }
       >
-        <div className="">
-          <Card className="m-4 *:border-b-2 *:last-of-type:border-b-0 ">
+        <div className="pt-2 lg:pt-4">
+          <Card className="m-1 lg:m-4 *:border-b-2 *:last-of-type:border-b-0 ">
             <HopSensoryEditorForm
               action={hopNote?.uid ? updateHopNote : createHopNote}
               disabled={state.isSubmitting || state.isSubmitted}
