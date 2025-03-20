@@ -165,6 +165,7 @@ export function HopSensoryEditorForm({
   return (
     <div className="grid auto-rows-auto w-full">
       <div className="grid auto-rows-auto w-full">
+        <input type="hidden" {...register("userId")} />
         <input type="hidden" {...register("userEmail")} />
         <input type="hidden" {...register("hopId")} />
         <input type="hidden" {...register("slug", { value: src?.hop?.slug })} />
@@ -204,7 +205,7 @@ export function HopSensoryEditorForm({
               label={k}
               name={`sensoryPanel.${lowerFirst(k)}`}
               rangeProps={register(`sensoryPanel.${lowerFirst(k)}` as any, {
-                value: (sensoryPanel?.[lowerFirst(k)] * 10).toString(),
+                value: (sensoryPanel?.[lowerFirst(k)] * 1).toString(),
               })}
               aromaProps={aromaRegister}
             />

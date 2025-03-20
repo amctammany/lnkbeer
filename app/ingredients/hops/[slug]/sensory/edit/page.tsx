@@ -30,6 +30,7 @@ export default async function HopSensoryEditorPage({
     include: { hop: true, sensoryPanel: { include: { aromas: true } } },
   })) || {
     userEmail: session?.user?.email,
+    userId: session?.user?.id,
     hopId: hop?.id,
     hop: { slug: hop?.slug },
   };

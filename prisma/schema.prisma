@@ -227,10 +227,11 @@ model HopNote {
   hopId          String
   sensoryPanelId Int             @unique
   userEmail      String
+  userId         String
   batch          String?
   comments       String?
   hop            Hop             @relation(fields: [slug], references: [slug])
-  user           User            @relation(fields: [userEmail], references: [email])
+  user           User            @relation(fields: [userId], references: [id])
   sensoryPanel   HopSensoryPanel @relation(fields: [sensoryPanelId], references: [id], onDelete: Cascade)
 
   @@id(name: "id", [hopId, userEmail])

@@ -34,11 +34,12 @@ export default async function HopSensoryPage({ params }: HopSensoryPageProps) {
   const hop = await getHop(slug);
   const session = await auth();
   const user = session?.user;
+  console.log(hop, user);
   const expertPanel = hop?.hopSensoryPanels.find(
     (panel) => panel.userId === "ADMIN",
   );
   const userPanel = hop?.hopSensoryPanels.find(
-    (panel) => user && panel.userEmail === user.email,
+    (panel) => user && panel.userId === user.id,
   );
   //console.log(user, userPanel, hop?.hopSensoryPanels);
   return (

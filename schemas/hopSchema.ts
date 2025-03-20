@@ -48,6 +48,7 @@ const RangeV = () =>
 export const hopSchema = zfd.formData({
   id: zfd.text(z.string().optional()).nullable(),
   userId: zfd.text(z.string().optional()).nullable(),
+  userEmail: zfd.text(z.string().optional()).nullable(),
   name: zfd.text(z.string()),
   description: zfd.text(z.string().optional()).nullable(),
   flavor: zfd.text(z.string().optional()).nullable(),
@@ -77,6 +78,7 @@ export const hopSchema = zfd.formData({
 export type HopSchema = z.infer<typeof hopSchema>;
 export const hopNoteSchema = zfd.formData({
   id: zfd.numeric(z.number().optional()).nullable(),
+  userId: zfd.text(z.string()),
   uid: zfd.numeric(z.number().optional()),
   userEmail: zfd.text(z.string()),
   slug: zfd.text(z.string()),

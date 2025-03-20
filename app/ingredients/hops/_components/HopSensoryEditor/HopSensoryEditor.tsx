@@ -72,6 +72,7 @@ export function HopSensoryEditor({
     resolver: zodResolver<any>(hopNoteSchema),
   });
   const action = hopNote?.uid ? updateHopNote : createHopNote;
+  console.log(state);
   return (
     <Form onSubmit={handleSubmit(action)}>
       <AppBarLayout

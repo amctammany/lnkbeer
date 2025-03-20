@@ -31,7 +31,7 @@ export function Section({
         </span>
         {actions}
       </div>
-      <div className="grow">{children}</div>
+      <div className="grow *:truncate *:ext-ellipsis">{children}</div>
     </div>
   );
 }

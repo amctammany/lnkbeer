@@ -20,10 +20,12 @@ export const createHopNote = async (data: HopNoteSchema) => {
   //if (!valid.success) return valid;
   //const f = validateSchema(formData, schema);
   //const d = schema.parse(formData);
-  const { id, userEmail, hopId, slug, sensoryPanel } = data;
+  const { id, userEmail, userId, hopId, slug, sensoryPanel } = data;
 
   const panel = await prisma.hopSensoryPanel.create({
     data: {
+      userId,
+      //userEmail,
       user: { connect: { email: userEmail } },
       aromas: {
         connect: (sensoryPanel.aromaIds ?? []).map((id) => ({ id })), // [{id}]//{ id: { in: sensoryPanel.aromas.map(({ id }) => id) } },
@@ -37,7 +39,7 @@ export const createHopNote = async (data: HopNoteSchema) => {
 
         if (k === "aromaIds") return acc;
         if (k === "id") return acc;
-        acc[k] = sensoryPanel[k] / 10;
+        acc[k] = sensoryPanel[k] / 1;
         return acc;
       }, {} as any),
     },
@@ -46,6 +48,7 @@ export const createHopNote = async (data: HopNoteSchema) => {
   const res = await prisma.hopNote.create({
     data: {
       userEmail,
+      userId,
       hopId,
       slug,
       sensoryPanelId: panel.id,
@@ -65,7 +68,7 @@ export const updateHopNote = async (data: HopNoteSchema) => {
   //const valid = validateSchema(formData, noteSchema);
   //if (!valid.success) return valid;
   //console.log(valid.data);
-  const { id, uid, sensoryPanel, slug, userEmail, ...rest } = data;
+  const { id, uid, sensoryPanel, slug, userId, userEmail, ...rest } = data;
   if (!sensoryPanel.id) return;
   const es = await prisma.hopSensoryPanel.update({
     where: { id: sensoryPanel?.id },
@@ -73,6 +76,7 @@ export const updateHopNote = async (data: HopNoteSchema) => {
     data: {
       ...rest,
       slug,
+      userId,
       userEmail,
       aromas: {
         connect: (sensoryPanel.aromaIds ?? []).map((id) => ({ id })), // [{id}]//{ id: { in: sensoryPanel.aromas.map(({ id }) => id) } },
@@ -91,7 +95,7 @@ export const updateHopNote = async (data: HopNoteSchema) => {
         }
         if (k === "aromaIds") return acc;
         if (k === "id") return acc;
-        acc[k] = sensoryPanel[k] / 10;
+        acc[k] = sensoryPanel[k] / 1;
         return acc;
       }, {} as any),
     },

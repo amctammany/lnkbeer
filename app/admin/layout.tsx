@@ -16,8 +16,8 @@ const AdminLayoutActions = () => {
 function AdminLayout({ children }) {
   return (
     <AppBarLayout title="Admin" actions={<AdminLayoutActions />}>
-      <div className="">
-        <div className="m-3">{children}</div>
+      <div className="pt-2 lg:pt-4">
+        <div className="m-1 lg:m-3">{children}</div>
       </div>
     </AppBarLayout>
   );
