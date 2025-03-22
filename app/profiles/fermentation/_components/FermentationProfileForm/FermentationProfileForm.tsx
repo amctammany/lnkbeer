@@ -79,7 +79,7 @@ export function FermentationProfileForm({
                   index={index}
                 >
                   <FermentationStepActions
-                    className="mx-2 hidden md:block"
+                    className="mx-2 "
                     src={{ FermentationProfile: src, ...step }}
                   />
                 </FermentationStepListItem>
