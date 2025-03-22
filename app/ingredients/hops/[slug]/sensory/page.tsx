@@ -11,6 +11,7 @@ import { Hop } from "lucide-react";
 import { HopSensoryActions } from "@/app/ingredients/hops/_components/HopSensory/HopSensoryActions";
 import { Suspense } from "react";
 import { auth } from "@/app/auth";
+import { notFound } from "next/navigation";
 interface HopSensoryPageProps {
   params: Promise<{
     slug: string;
@@ -34,20 +35,24 @@ export default async function HopSensoryPage({ params }: HopSensoryPageProps) {
   const hop = await getHop(slug);
   const session = await auth();
   const user = session?.user;
-  const expertPanel = hop?.hopSensoryPanels.find(
+  if (!hop) notFound();
+  const expertPanels = hop.hopSensoryPanels.filter(
     (panel) => panel.userId === "ADMIN",
   );
-  const userPanel = hop?.hopSensoryPanels.find(
+  const userPanels = hop.hopSensoryPanels.filter(
     (panel) => user && panel.userId === user.id,
   );
-  //console.log(user, userPanel, hop?.hopSensoryPanels);
   return (
     <AppBarLayout
       title={<AppBarTitle icon={<Hop />}>{slug}</AppBarTitle>}
       actions={<HopSensoryActions slug={slug} />}
     >
       <Suspense fallback={<div>loading?</div>}>
-        <HopSensory hop={hop} userPanel={userPanel} expertPanel={expertPanel} />
+        <HopSensory
+          hop={hop}
+          userPanels={userPanels}
+          expertPanels={expertPanels}
+        />
       </Suspense>
     </AppBarLayout>
   );
