@@ -9,6 +9,8 @@
 @theme {
   --font-default: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-tab-background: hsl(var(--tab-background));
+  --color-tab-foreground: hsl(var(--tab-foreground));
 
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -86,6 +88,8 @@
 
 @layer base {
   :root {
+    --tab-background: 248 53% 58%;
+    --tab-foreground: 0 100% 100%;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -123,6 +127,8 @@
 
   }
   .dark {
+    --tab-background: 110 0% 100%;
+    --tab-foreground: 22.2 84% 84.9%;
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
