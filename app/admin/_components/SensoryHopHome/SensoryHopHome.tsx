@@ -15,16 +15,16 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
 import { ExtendedHopNote } from "@/types/ingredient";
 import type { Hop as HopType } from "@prisma/client";
 import { Plus } from "lucide-react";
-import { Radar, RadarChart, PolarAngleAxis, PolarGrid } from "recharts";
+import dynamic from "next/dynamic";
+const SensoryHopChart = dynamic(
+  () => import("../SensoryHopDisplay/SensoryHopChart"),
+  {
+    ssr: false,
+  },
+);
 
 export interface SensoryHopHomeProps {
   hop?: HopType | null;
@@ -34,26 +34,6 @@ export interface SensoryHopHomeProps {
   //action?: any;
   //children: React.ReactNode;
 }
-
-const chartConfig = {
-  user: {
-    label: "User",
-    color: "hsl(var(--chart-1))",
-  },
-
-  expert: {
-    label: "Expert",
-    color: "hsl(var(--chart-2))",
-  },
-  avg: {
-    label: "Average",
-    color: "hsl(var(--chart-4))",
-  },
-  value: {
-    label: "Value",
-    color: "hsl(var(--chart-2))",
-  },
-} satisfies ChartConfig;
 
 export const SensoryHopHome = ({ hop, notes }: SensoryHopHomeProps) => {
   const {
@@ -133,30 +113,7 @@ export const SensoryHopHome = ({ hop, notes }: SensoryHopHomeProps) => {
               <CardDescription>Perceived Hop Aromas.</CardDescription>
             </CardHeader>
             <CardContent className="pb-0">
-              <ChartContainer
-                config={chartConfig}
-                className="mx-auto aspect-square max-h-[450px]"
-              >
-                <RadarChart data={data}>
-                  <ChartTooltip
-                    cursor={false}
-                    content={<ChartTooltipContent />}
-                  />
-                  <PolarAngleAxis
-                    dataKey="aroma"
-                    tickLine={true}
-                    tickCount={6}
-                  />
-                  <PolarGrid />
-                  <Radar
-                    className=""
-                    name="Global Avg"
-                    dataKey="value"
-                    fill="var(--color-value)"
-                    fillOpacity={0.6}
-                  />
-                </RadarChart>
-              </ChartContainer>
+              <SensoryHopChart data={data} />
             </CardContent>
             <CardFooter className="flex-col gap-2 text-sm">
               Legend Controls??

@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/client";
 import { getHop } from "@/app/ingredients/hops/queries";
 import { SensoryHopHome } from "@/app/admin/_components/SensoryHopHome";
+import { Suspense } from "react";
 //import { Dashboard } from "./_components/Dashboard";
 //const AdminModal = dynamic(
 //() => import("./AdminModal").then((s) => s.AdminModal),
@@ -31,5 +32,9 @@ export default async function SensoryHopDisplayPage({
       sensoryPanel: { include: { aromas: true } },
     },
   });
-  return <SensoryHopHome hop={hop} notes={notes} />;
+  return (
+    <Suspense fallback={<div>loading?</div>}>
+      <SensoryHopHome hop={hop} notes={notes} />
+    </Suspense>
+  );
 }
