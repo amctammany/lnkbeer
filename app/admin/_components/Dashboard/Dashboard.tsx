@@ -2,11 +2,8 @@ import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import { Prop } from "@/components/Prop";
 import Section from "@/components/Section";
-import { Button } from "@/components/ui/button";
 import { ExtendedUser } from "@/types/User";
-import type { User } from "@prisma/client";
 import { LogOut, SquareArrowOutUpRight } from "lucide-react";
-import Link from "next/link";
 
 export interface DashboardProps {
   user?: ExtendedUser | null;

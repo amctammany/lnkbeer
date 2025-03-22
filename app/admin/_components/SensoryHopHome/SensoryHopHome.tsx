@@ -1,5 +1,4 @@
 "use client";
-import { aromaGroups } from "@/app/ingredients/hops/_components/HopSensory";
 //import { HopSensoryChart } from "@/app/ingredients/hops/_components/HopSensoryChart";
 import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
@@ -22,10 +21,10 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { ExtendedHopNote, HopSensoryChartData } from "@/types/ingredient";
-import type { Hop as HopType, HopSensoryPanel } from "@prisma/client";
+import { ExtendedHopNote } from "@/types/ingredient";
+import type { Hop as HopType } from "@prisma/client";
 import { Plus } from "lucide-react";
-import { Radar, RadarChart, PolarAngleAxis, PolarGrid, Legend } from "recharts";
+import { Radar, RadarChart, PolarAngleAxis, PolarGrid } from "recharts";
 
 export interface SensoryHopHomeProps {
   hop?: HopType | null;
@@ -77,26 +76,6 @@ export const SensoryHopHome = ({ hop, notes }: SensoryHopHomeProps) => {
     //offFlavors,
     driedFruit,
   } = notes[0]?.sensoryPanel ?? {};
-  const _data = {
-    sweetAromatic,
-    pomme,
-    citrus,
-    melon,
-    dank,
-    tropical,
-    berry,
-    stoneFruit,
-    herbal,
-    onionGarlic,
-    //offFlavors,
-    driedFruit,
-    floral,
-    earthy,
-    grassy,
-    vegetal,
-    woody,
-    spicy,
-  };
   const data = Object.entries({
     sweetAromatic,
     pomme,
@@ -113,17 +92,13 @@ export const SensoryHopHome = ({ hop, notes }: SensoryHopHomeProps) => {
     vegetal,
     woody,
     spicy,
+    onionGarlic,
+    driedFruit,
   }).map(([aroma, value]) => ({ aroma, value: value ?? 0 }));
   //.reduce((acc, g) => {
   //acc[g.aroma] = g.value ?? 0;
   //return acc;
   //}, {});
-  function addToChartData(root: HopSensoryChartData, src: HopSensoryPanel) {
-    return aromaGroups.reduce((acc, g) => {
-      acc[g] = src[g] ?? 0;
-      return acc;
-    }, root);
-  }
   return (
     <AppBarLayout title="SensoryHopHome">
       <div className="mx-auto lg:w-10/12 flex flex-col md:grid md:grid-cols-2 gap-0">

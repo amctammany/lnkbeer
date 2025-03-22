@@ -1,11 +1,6 @@
 "use client";
-import { aromaGroups } from "@/app/ingredients/hops/_components/HopSensory";
-import { HopSensoryChart } from "@/app/ingredients/hops/_components/HopSensoryChart";
 import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
-import { List } from "@/components/List/List";
-import { ListItem } from "@/components/List/ListItem";
-import { ListItemText } from "@/components/List/ListItemText";
 import { Prop } from "@/components/Prop";
 import Section from "@/components/Section";
 import {
@@ -22,15 +17,10 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { ExtendedHopNote, HopSensoryChartData } from "@/types/ingredient";
-import type {
-  Hop as HopType,
-  HopSensoryPanel,
-  User,
-  HopNote,
-} from "@prisma/client";
-import { Edit, Plus, SquareArrowOutUpRight } from "lucide-react";
-import { Radar, RadarChart, PolarAngleAxis, PolarGrid, Legend } from "recharts";
+import { ExtendedHopNote } from "@/types/ingredient";
+import type { Hop as HopType } from "@prisma/client";
+import { Edit } from "lucide-react";
+import { Radar, RadarChart, PolarAngleAxis, PolarGrid } from "recharts";
 
 export interface SensoryHopDisplayProps {
   hop: HopType;
@@ -82,26 +72,6 @@ export const SensoryHopDisplay = ({ hop, note }: SensoryHopDisplayProps) => {
     //offFlavors,
     driedFruit,
   } = note.sensoryPanel ?? {};
-  const _data = {
-    sweetAromatic,
-    pomme,
-    citrus,
-    melon,
-    dank,
-    tropical,
-    berry,
-    stoneFruit,
-    herbal,
-    onionGarlic,
-    //offFlavors,
-    driedFruit,
-    floral,
-    earthy,
-    grassy,
-    vegetal,
-    woody,
-    spicy,
-  };
   const data = Object.entries({
     sweetAromatic,
     pomme,
@@ -116,6 +86,8 @@ export const SensoryHopDisplay = ({ hop, note }: SensoryHopDisplayProps) => {
     earthy,
     grassy,
     vegetal,
+    onionGarlic,
+    driedFruit,
     woody,
     spicy,
   }).map(([aroma, value]) => ({ aroma, value: value ?? 0 }));
@@ -123,13 +95,6 @@ export const SensoryHopDisplay = ({ hop, note }: SensoryHopDisplayProps) => {
   //acc[g.aroma] = g.value ?? 0;
   //return acc;
   //}, {});
-  function addToChartData(root: HopSensoryChartData, src: HopSensoryPanel) {
-    return aromaGroups.reduce((acc, g) => {
-      acc[g] = src[g] ?? 0;
-      return acc;
-    }, root);
-  }
-  console.log(data);
   return (
     <AppBarLayout
       title="Hop Sensory Editor"

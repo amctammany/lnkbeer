@@ -1,7 +1,6 @@
 import { auth } from "@/app/auth";
 import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/client";
-import { SensoryHopDisplay } from "@/app/admin/_components/SensoryHopDisplay";
 import { getHop } from "@/app/ingredients/hops/queries";
 import { SensoryHopHome } from "@/app/admin/_components/SensoryHopHome";
 //import { Dashboard } from "./_components/Dashboard";

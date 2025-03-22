@@ -2,17 +2,11 @@
 import { AppBarItem } from "@/components/AppBarItem";
 import { Form } from "@/components/Form/Form";
 import { TextArea } from "@/components/Form/TextArea";
-import { Prop } from "@/components/Prop";
 import Section from "@/components/Section";
 import { hopNoteSchema, HopNoteSchema } from "@/schemas/hopSchema";
 import { ExtendedHop, ExtendedHopNote } from "@/types/ingredient";
-import type {
-  CharacteristicAroma,
-  HopNote,
-  HopSensoryPanel,
-  User,
-} from "@prisma/client";
-import { Save, SquareArrowOutUpRight } from "lucide-react";
+import type { CharacteristicAroma } from "@prisma/client";
+import { Save } from "lucide-react";
 import { useForm } from "react-hook-form";
 import HopAromaForm from "./HopAromaForm";
 import { lowerFirst } from "@/lib/utils";
@@ -62,8 +56,7 @@ export const SensoryHopEditor = ({
   const {
     handleSubmit,
     register,
-    getValues,
-    formState: state,
+    //formState: state,
   } = useForm<HopNoteSchema>({
     defaultValues: { ...note, sensoryPanel },
     resolver: zodResolver(hopNoteSchema),

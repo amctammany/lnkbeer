@@ -1,10 +1,7 @@
 import { auth } from "@/app/auth";
 import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/client";
-import { SensoryHopEditor } from "@/app/admin/_components/SensoryHopEditor";
-import { ExtendedUser } from "@/types/User";
-import { getHop, getHops } from "@/app/ingredients/hops/queries";
-import { updateHopNote } from "@/app/ingredients/hops/actions";
+import { getHop } from "@/app/ingredients/hops/queries";
 import { SensoryHopDisplay } from "@/app/admin/_components/SensoryHopDisplay";
 //import { Dashboard } from "./_components/Dashboard";
 //const AdminModal = dynamic(
