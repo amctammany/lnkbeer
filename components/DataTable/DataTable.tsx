@@ -46,7 +46,7 @@ export function DataTable<TData, TValue>({
   selectable = true,
   children,
 }: DataTableProps<TData, TValue>) {
-  "use no memo";
+  //"use no memo";
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState<any>([]);

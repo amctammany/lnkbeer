@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     authInterrupts: true,
     ppr: "incremental",
     reactCompiler: {
-      compilationMode: "infer",
+      compilationMode: "annotation",
     },
     staleTimes: {
       dynamic: 30,
