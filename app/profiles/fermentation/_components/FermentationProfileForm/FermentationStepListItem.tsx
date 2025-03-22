@@ -50,7 +50,9 @@ export function FermentationStepListItem({
         primary={<FermentationStepText src={src} />}
         secondary={<FermentationStepDetails src={src} />}
       />
-      <ListItemActions>{children}</ListItemActions>
+      <ListItemActions className={children ? "" : "hidden"}>
+        {children}
+      </ListItemActions>
     </ListItem>
   );
 }

@@ -4,11 +4,9 @@ import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
 import { TextField } from "@/components/Form/TextField";
 import Section from "@/components/Section";
-import { useActionForm } from "@/hooks/useActionForm";
 import { ExtendedMashProfile } from "@/types/Profile";
 import { Plus, Thermometer } from "lucide-react";
 import { MashStepListItem } from "./MashStepListItem";
-import Link from "next/link";
 import MashStepActions from "./MashStepActions";
 import { AppBarItem } from "@/components/AppBarItem";
 import { MashProfileFormActions } from "./MashProfileFormActions";
@@ -42,11 +40,7 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
   return (
     <Form className="flex" onSubmit={handleSubmit(action)}>
       <AppBarLayout
-        title={
-          <AppBarTitle icon={<Thermometer />}>
-            {src?.name ?? "Creator"}
-          </AppBarTitle>
-        }
+        title={<AppBarTitle icon={<Thermometer />}>{title}</AppBarTitle>}
         actions={<MashProfileFormActions src={src} />}
       >
         <div className="gap-2 lg:w-9/12 mx-auto">
