@@ -146,7 +146,7 @@ export const SensoryHopEditor = ({
                         value: (
                           note.sensoryPanel?.[lowerFirst(k)] * 1
                         ).toString(),
-                      }
+                      },
                     )}
                     aromaProps={aromaRegister}
                   />
