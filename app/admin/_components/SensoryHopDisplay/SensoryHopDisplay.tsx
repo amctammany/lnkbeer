@@ -142,6 +142,7 @@ export const SensoryHopDisplay = ({ hop, note }: SensoryHopDisplayProps) => {
         }
       >
         <Prop label="Hop" value={hop.name} />
+        <Prop label="Date" value={note.date.toDateString()} />
         <Prop label="Producer" value={note.producer} />
         <Prop label="Year" value={note.year} />
       </Section>
@@ -184,7 +185,17 @@ export const SensoryHopDisplay = ({ hop, note }: SensoryHopDisplayProps) => {
             </ChartContainer>
           </CardContent>
           <CardFooter className="flex-col gap-2 text-sm">
-            Legend Controls??
+            <span className="text-xl">Aroma Profile:</span>
+            <div className="flex">
+              {note.sensoryPanel?.aromas.map((aroma) => (
+                <div
+                  className="px-2 py-1 mx-2 border-2 border-blue rounded"
+                  key={aroma.id}
+                >
+                  {aroma.name}
+                </div>
+              ))}
+            </div>
           </CardFooter>
         </Card>
       </Section>
