@@ -1,8 +1,5 @@
 "use client";
-import { aromaGroups } from "@/app/ingredients/hops/_components/HopSensory";
-import { HopSensoryChart } from "@/app/ingredients/hops/_components/HopSensoryChart";
 import { AppBarItem } from "@/components/AppBarItem";
-import { Prop } from "@/components/Prop";
 import Section from "@/components/Section";
 import {
   Card,
@@ -18,10 +15,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { HopSensoryChartData } from "@/types/ingredient";
-import type { HopSensoryPanel, User } from "@prisma/client";
+import type { HopSensoryPanel } from "@prisma/client";
 import { SquareArrowOutUpRight } from "lucide-react";
-import { Radar, RadarChart, PolarAngleAxis, PolarGrid, Legend } from "recharts";
+import { Radar, RadarChart, PolarAngleAxis, PolarGrid } from "recharts";
 
 export interface SensoryDisplayProps {
   //user?: ExtendedUser | null;
@@ -71,26 +67,6 @@ export const SensoryDisplay = ({ panel }: SensoryDisplayProps) => {
     //offFlavors,
     driedFruit,
   } = panel;
-  const _data = {
-    sweetAromatic,
-    pomme,
-    citrus,
-    melon,
-    dank,
-    tropical,
-    berry,
-    stoneFruit,
-    herbal,
-    onionGarlic,
-    //offFlavors,
-    driedFruit,
-    floral,
-    earthy,
-    grassy,
-    vegetal,
-    woody,
-    spicy,
-  };
   const data = Object.entries({
     sweetAromatic,
     pomme,
@@ -107,18 +83,13 @@ export const SensoryDisplay = ({ panel }: SensoryDisplayProps) => {
     vegetal,
     woody,
     spicy,
+    onionGarlic,
+    driedFruit,
   }).map(([aroma, value]) => ({ aroma, value: value ?? 0 }));
   //.reduce((acc, g) => {
   //acc[g.aroma] = g.value ?? 0;
   //return acc;
   //}, {});
-  function addToChartData(root: HopSensoryChartData, src: HopSensoryPanel) {
-    return aromaGroups.reduce((acc, g) => {
-      acc[g] = src[g] ?? 0;
-      return acc;
-    }, root);
-  }
-  console.log(data);
   return (
     <div className="mx-auto lg:w-10/12 flex flex-col gap-0">
       <Section
@@ -162,13 +133,8 @@ export const SensoryDisplay = ({ panel }: SensoryDisplayProps) => {
             Legend Controls??
           </CardFooter>
         </Card>
-
-        {JSON.stringify(panel)}
       </Section>
     </div>
   );
 };
 export default SensoryDisplay;
-/**
- *
- *           */

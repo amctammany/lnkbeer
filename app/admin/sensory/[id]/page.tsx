@@ -1,8 +1,6 @@
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/client";
-import { SensoryHome } from "@/app/admin/_components/SensoryHome";
-import { ExtendedUser } from "@/types/User";
 import { SensoryDisplay } from "@/app/admin/_components/SensoryDisplay";
 //import { Dashboard } from "./_components/Dashboard";
 //const AdminModal = dynamic(
@@ -26,6 +24,5 @@ export default async function Page({
     where: { id: parseInt(id) },
     //select: { hopId: true, uid: true, sensoryPanelId: true },
   });
-  console.log({ id, panel });
   return <SensoryDisplay panel={panel as any} />;
 }

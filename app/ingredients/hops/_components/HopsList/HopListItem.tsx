@@ -2,11 +2,11 @@ import { Hop } from "@prisma/client";
 import {
   BicepsFlexed,
   Home,
-  Hop as HopIcon,
-  House,
+  //Hop as HopIcon,
+  //House,
   SquareScissors,
 } from "lucide-react";
-import { Badge, TooltipBadge } from "@/components/Badge";
+import { Badge } from "@/components/Badge";
 import Link from "next/link";
 export type HopListItemProps = {
   hop: Hop;

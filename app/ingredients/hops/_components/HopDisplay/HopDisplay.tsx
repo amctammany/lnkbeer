@@ -1,11 +1,3 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import CompositionTab from "./CompositionTab";
-import NotesTab from "./NotesTab";
-import SummaryTab from "./SummaryTab";
-import SensoryTab from "./SensoryTab";
-import { Hop as HopIcon } from "lucide-react";
-import { getHop } from "@/app/ingredients/hops/queries";
-import { Suspense } from "react";
 import type { Hop } from "@prisma/client";
 import { Prop } from "@/components/Prop";
 import { Card } from "@/components/ui/card";

@@ -1,16 +1,9 @@
 "use client";
-import { Prop } from "@/components/Prop";
 import { Card } from "@/components/ui/card";
-import {
-  CharacteristicAroma,
-  Hop as HopType,
-  HopNote,
-  HopSensoryPanel,
-} from "@prisma/client";
+import { CharacteristicAroma, Hop as HopType } from "@prisma/client";
 
 import { createHopNote, updateHopNote } from "../../actions";
 import HopSensoryEditorForm, { HopNoteInput } from "./HopSensoryEditorForm";
-import { useActionForm } from "@/hooks/useActionForm";
 import { Form } from "@/components/Form/Form";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import AppBarTitle from "@/components/AppBarTitle";
@@ -63,8 +56,8 @@ export function HopSensoryEditor({
 
   const {
     register,
-    getValues,
-    control,
+    //getValues,
+    //control,
     handleSubmit,
     formState: state,
   } = useForm<HopNoteSchema>({
@@ -72,7 +65,6 @@ export function HopSensoryEditor({
     resolver: zodResolver<any>(hopNoteSchema),
   });
   const action = hopNote?.uid ? updateHopNote : createHopNote;
-  console.log(state);
   return (
     <Form onSubmit={handleSubmit(action)}>
       <AppBarLayout

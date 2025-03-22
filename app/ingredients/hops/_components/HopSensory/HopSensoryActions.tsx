@@ -1,5 +1,5 @@
 import { AppBarItem } from "@/components/AppBarItem";
-import { ChartNoAxesCombined, Edit, Folder } from "lucide-react";
+import { Edit, Folder } from "lucide-react";
 
 export const HopSensoryActions = ({ slug }: { slug: string }) => {
   return [

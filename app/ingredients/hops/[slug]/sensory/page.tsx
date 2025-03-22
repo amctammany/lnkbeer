@@ -4,7 +4,7 @@ const HopSensory = dynamic(
   () => import("../../_components/HopSensory/HopSensory"),
 );
 
-import { getHop, getHops } from "@/app/ingredients/hops/queries";
+import { getHop } from "@/app/ingredients/hops/queries";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import AppBarTitle from "@/components/AppBarTitle";
 import { Hop } from "lucide-react";
@@ -34,7 +34,6 @@ export default async function HopSensoryPage({ params }: HopSensoryPageProps) {
   const hop = await getHop(slug);
   const session = await auth();
   const user = session?.user;
-  console.log(hop, user);
   const expertPanel = hop?.hopSensoryPanels.find(
     (panel) => panel.userId === "ADMIN",
   );

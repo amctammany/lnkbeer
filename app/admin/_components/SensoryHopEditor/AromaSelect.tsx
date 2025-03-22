@@ -4,8 +4,8 @@ import { UseFormRegisterReturn } from "react-hook-form";
 
 export const AromaSelect = ({
   className,
-  label,
-  group,
+  //label,
+  //group,
   aromas,
   ...props
 }: UseFormRegisterReturn & {

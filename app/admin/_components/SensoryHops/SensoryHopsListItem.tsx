@@ -15,6 +15,7 @@ export const SensoryHopsListItem = ({
   return (
     <ListItem
       border="none"
+      variant={active ? "warning" : "default"}
       className="even:bg-slate-100 odd:bg-slate-200"
       href={`/admin/sensory/hops/${hop.slug}`}
     >

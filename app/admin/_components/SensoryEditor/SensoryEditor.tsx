@@ -1,7 +1,6 @@
 import { AppBarItem } from "@/components/AppBarItem";
-import { Prop } from "@/components/Prop";
 import Section from "@/components/Section";
-import type { HopSensoryPanel, User } from "@prisma/client";
+import type { HopSensoryPanel } from "@prisma/client";
 import { SquareArrowOutUpRight } from "lucide-react";
 
 export interface SensoryEditorProps {

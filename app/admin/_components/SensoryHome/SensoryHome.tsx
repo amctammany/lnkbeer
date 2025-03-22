@@ -1,10 +1,8 @@
-import { AppBarItem } from "@/components/AppBarItem";
 import { Prop } from "@/components/Prop";
 import Section from "@/components/Section";
-import { Button } from "@/components/ui/button";
 import { ExtendedUser } from "@/types/User";
-import type { Hop as HopType, HopSensoryPanel, User } from "@prisma/client";
-import { Hop, SquareArrowOutUpRight } from "lucide-react";
+import type { Hop as HopType, HopSensoryPanel } from "@prisma/client";
+import { Hop } from "lucide-react";
 import Link from "next/link";
 
 export interface SensoryHomeProps {

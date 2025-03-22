@@ -38,49 +38,49 @@ const chartConfig = {
     color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
-function makeChartData(src: ExtendedHop) {
-  return src?.hopSensoryPanels?.map(
-    ({
-      sweetAromatic,
-      pomme,
-      citrus,
-      melon,
-      earthy,
-      tropical,
-      berry,
-      stoneFruit,
-      dank,
-      herbal,
-      floral,
-      grassy,
-      vegetal,
-      woody,
-      spicy,
-    }) =>
-      Object.entries({
-        sweetAromatic,
-        pomme,
-        citrus,
-        melon,
-        dank,
-        tropical,
-        berry,
-        stoneFruit,
-        herbal,
-        floral,
-        earthy,
-        grassy,
-        vegetal,
-        woody,
-        spicy,
-      }).map(([aroma, value]) => ({ aroma, value })),
-  );
-}
+//function makeChartData(src: ExtendedHop) {
+//return src?.hopSensoryPanels?.map(
+//({
+//sweetAromatic,
+//pomme,
+//citrus,
+//melon,
+//earthy,
+//tropical,
+//berry,
+//stoneFruit,
+//dank,
+//herbal,
+//floral,
+//grassy,
+//vegetal,
+//woody,
+//spicy,
+//}) =>
+//Object.entries({
+//sweetAromatic,
+//pomme,
+//citrus,
+//melon,
+//dank,
+//tropical,
+//berry,
+//stoneFruit,
+//herbal,
+//floral,
+//earthy,
+//grassy,
+//vegetal,
+//woody,
+//spicy,
+//}).map(([aroma, value]) => ({ aroma, value })),
+//);
+//}
 export type HopSensoryChartProps = {
   src?: ExtendedHop | null;
   data: HopSensoryChartData;
 };
-export function HopSensoryChart({ src, data: _data }: HopSensoryChartProps) {
+export function HopSensoryChart({ data: _data }: HopSensoryChartProps) {
   //const data = makeChartData(src!);
   const data = Object.entries(_data).map(
     ([aroma, { value, avg, user, expert }]) => ({

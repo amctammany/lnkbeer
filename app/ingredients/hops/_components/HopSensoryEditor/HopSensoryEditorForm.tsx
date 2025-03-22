@@ -36,8 +36,8 @@ export type HopSensoryEditorFormProps = {
 };
 const AromaSelect = ({
   className,
-  label,
-  group,
+  //label,
+  //group,
   aromas,
   ...props
 }: UseFormRegisterReturn & {
@@ -122,7 +122,7 @@ function HopAromaForm<T extends FieldValues>({
   );
 }
 export function HopSensoryEditorForm({
-  action,
+  //action,
   register,
   disabled = false,
   aromas,

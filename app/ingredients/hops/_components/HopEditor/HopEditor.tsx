@@ -10,7 +10,7 @@ import { RangeField, RangeFieldProp } from "@/components/Form/RangeField";
 import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
 import Section from "@/components/Section";
-import { HopSchema, hopSchema } from "@/schemas/hopSchema";
+import { hopSchema } from "@/schemas/hopSchema";
 import { HopInput, RangeValue } from "@/types/ingredient";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Hop, HopUsage } from "@prisma/client";
@@ -104,7 +104,6 @@ export function HopEditor({ hop, action }: HopEditorProps) {
     defaultValues: hop!,
     resolver: zodResolver<any>(hopSchema),
   });
-  console.log(state);
 
   const disabled = state.isSubmitting || state.isSubmitted;
   return (

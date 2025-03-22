@@ -1,11 +1,9 @@
 import { HopSensoryEditor } from "@/app/ingredients/hops/_components/HopSensoryEditor";
-import { getHop, getHops } from "@/app/ingredients/hops/queries";
+import { getHop } from "@/app/ingredients/hops/queries";
 import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/client";
 import { auth } from "@/app/auth";
-import { ExtendedHopNote, HopNoteInput } from "@/types/ingredient";
-import { HopNote } from "@prisma/client";
 interface HopSensoryEditorPageProps {
   params: Promise<{
     slug: string;
