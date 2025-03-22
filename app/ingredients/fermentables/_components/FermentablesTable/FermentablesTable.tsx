@@ -37,7 +37,7 @@ const cols: ColumnDef<Fermentable>[] = [
     accessorKey: "power",
     header: Header<Fermentable>,
   },
-  { accessorKey: "usage", header: Header },
+  { accessorKey: "maxUsage", header: Header<Fermentable> },
 ];
 export type FermentablesTableProps = {
   fermentables?: Fermentable[];

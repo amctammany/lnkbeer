@@ -13,7 +13,7 @@ export const HopSensoryActions = ({ slug }: { slug: string }) => {
     <AppBarItem
       key="edit"
       text="Edit"
-      url={`/ingredients/hops/${slug}/sensory/edit`}
+      url={`/admin/sensory/hops/${slug}`}
       icon={<Edit />}
     />,
   ];

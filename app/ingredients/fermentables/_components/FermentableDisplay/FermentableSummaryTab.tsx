@@ -11,10 +11,12 @@ export function FermentableSummaryTab({ src }: FermentableSummaryTabProps) {
       <Card className="m-4 *:border-b-2 *:last-of-type:border-b-0 ">
         <Prop label="Name" value={src?.name} />
         <Prop label="Country" value={src?.country} />
+        <Prop label="Manufacturer" value={src?.manufacturer} />
         <Prop label="Notes" value={src?.notes} />
         <Prop label="Color" value={src?.color} />
         <Prop label="Potential" value={src?.potential} />
         <Prop label="Power" value={src?.power} />
+        <Prop label="Max Usage" value={src?.maxUsage} />
       </Card>
     </div>
   );

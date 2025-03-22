@@ -67,6 +67,13 @@ export function FermentableEditor({
                 step={0.01}
                 error={state.errors?.power}
               />
+              <NumberField
+                label="Max Usage"
+                {...register("maxUsage")}
+                step={1}
+                error={state.errors?.maxUsage}
+              />
+
               <TextField {...register("notes")} />
 
               <TextField {...register("description")} />
