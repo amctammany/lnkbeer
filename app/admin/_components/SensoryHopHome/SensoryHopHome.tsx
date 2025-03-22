@@ -2,6 +2,7 @@
 import { aromaGroups } from "@/app/ingredients/hops/_components/HopSensory";
 //import { HopSensoryChart } from "@/app/ingredients/hops/_components/HopSensoryChart";
 import { AppBarItem } from "@/components/AppBarItem";
+import { AppBarLayout } from "@/components/AppBarLayout";
 import { List } from "@/components/List/List";
 import { ListItem } from "@/components/List/ListItem";
 import { ListItemText } from "@/components/List/ListItemText";
@@ -123,67 +124,72 @@ export const SensoryHopHome = ({ hop, notes }: SensoryHopHomeProps) => {
       return acc;
     }, root);
   }
-  console.log(data);
   return (
-    <div className="mx-auto lg:w-10/12 flex flex-col md:grid md:grid-cols-2 gap-0">
-      <Section
-        title="Hop Notes"
-        actions={
-          <AppBarItem
-            url={`/admin/sensory/hops/${hop?.slug}/new`}
-            icon={<Plus />}
-            text="New"
-          />
-        }
-      >
-        <List>
-          {notes.map((note) => (
-            <ListItem
-              href={`/admin/sensory/hops/${hop?.slug}/${note.uid}`}
-              key={note.uid}
-            >
-              <ListItemText
-                primary={`Producer: ${note.producer}; Year: ${note.year}`}
-                secondary={note.date.toString()}
-              />
-            </ListItem>
-          ))}
-        </List>
-      </Section>
-      <Section title="Sensory">
-        <Card>
-          <CardHeader className="items-center pb-4">
-            <CardTitle>Sensory Chart</CardTitle>
-            <CardDescription>Perceived Hop Aromas.</CardDescription>
-          </CardHeader>
-          <CardContent className="pb-0">
-            <ChartContainer
-              config={chartConfig}
-              className="mx-auto aspect-square max-h-[450px]"
-            >
-              <RadarChart data={data}>
-                <ChartTooltip
-                  cursor={false}
-                  content={<ChartTooltipContent />}
+    <AppBarLayout title="SensoryHopHome">
+      <div className="mx-auto lg:w-10/12 flex flex-col md:grid md:grid-cols-2 gap-0">
+        <Section
+          title="Hop Notes"
+          actions={
+            <AppBarItem
+              url={`/admin/sensory/hops/${hop?.slug}/new`}
+              icon={<Plus />}
+              text="New"
+            />
+          }
+        >
+          <List>
+            {notes.map((note) => (
+              <ListItem
+                href={`/admin/sensory/hops/${hop?.slug}/${note.uid}`}
+                key={note.uid}
+              >
+                <ListItemText
+                  primary={`Producer: ${note.producer}; Year: ${note.year}`}
+                  secondary={note.date.toString()}
                 />
-                <PolarAngleAxis dataKey="aroma" tickLine={true} tickCount={6} />
-                <PolarGrid />
-                <Radar
-                  className=""
-                  name="Global Avg"
-                  dataKey="value"
-                  fill="var(--color-value)"
-                  fillOpacity={0.6}
-                />
-              </RadarChart>
-            </ChartContainer>
-          </CardContent>
-          <CardFooter className="flex-col gap-2 text-sm">
-            Legend Controls??
-          </CardFooter>
-        </Card>
-      </Section>
-    </div>
+              </ListItem>
+            ))}
+          </List>
+        </Section>
+        <Section title="Sensory">
+          <Card>
+            <CardHeader className="items-center pb-4">
+              <CardTitle>Sensory Chart</CardTitle>
+              <CardDescription>Perceived Hop Aromas.</CardDescription>
+            </CardHeader>
+            <CardContent className="pb-0">
+              <ChartContainer
+                config={chartConfig}
+                className="mx-auto aspect-square max-h-[450px]"
+              >
+                <RadarChart data={data}>
+                  <ChartTooltip
+                    cursor={false}
+                    content={<ChartTooltipContent />}
+                  />
+                  <PolarAngleAxis
+                    dataKey="aroma"
+                    tickLine={true}
+                    tickCount={6}
+                  />
+                  <PolarGrid />
+                  <Radar
+                    className=""
+                    name="Global Avg"
+                    dataKey="value"
+                    fill="var(--color-value)"
+                    fillOpacity={0.6}
+                  />
+                </RadarChart>
+              </ChartContainer>
+            </CardContent>
+            <CardFooter className="flex-col gap-2 text-sm">
+              Legend Controls??
+            </CardFooter>
+          </Card>
+        </Section>
+      </div>
+    </AppBarLayout>
   );
 };
 export default SensoryHopHome;

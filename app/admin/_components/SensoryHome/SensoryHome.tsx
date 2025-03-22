@@ -18,6 +18,7 @@ import { ListItem } from "@/components/List/ListItem";
 import { ListItemIcon } from "@/components/List/ListItemIcon";
 import { ListItemText } from "@/components/List/ListItemText";
 import { List } from "@/components/List/List";
+import { AppBarLayout } from "@/components/AppBarLayout";
 
 export type HopListItemProps = {
   src: Pick<HopType, "id" | "name" | "country" | "slug">;
@@ -60,33 +61,37 @@ export const HopSensoryListItem = ({ src }: HopSensoryListItemProps) => {
 };
 export const SensoryHome = ({ user, hops, panels }: SensoryHomeProps) => {
   return (
-    <div className="mx-auto lg:w-10/12 flex flex-col gap-0">
-      <Section title="Panels">
-        <List>
-          {panels.map((panel) => (
-            <HopSensoryListItem key={panel.id} src={panel} />
-          ))}
-        </List>
-
-        <Prop label="Total Sensory Panels" value={panels.length} />
-        <Prop label="% Complete" value={(panels.length ?? 0) / 500} />
-      </Section>
-      <Section title="Hops">
-        <div className="h-[300px] overflow-auto">
-          <List className="h-full overflow-auto">
-            {hops.map((hop) => (
-              <HopListItem
-                key={hop.id}
-                src={hop}
-                active={
-                  !!user?.hopSensoryPanels.find(({ hopId }) => hopId === hop.id)
-                }
-              />
+    <AppBarLayout title="SensoryHome">
+      <div className="mx-auto lg:w-10/12 flex flex-col gap-0">
+        <Section title="Panels">
+          <List>
+            {panels.map((panel) => (
+              <HopSensoryListItem key={panel.id} src={panel} />
             ))}
           </List>
-        </div>
-      </Section>
-    </div>
+
+          <Prop label="Total Sensory Panels" value={panels.length} />
+          <Prop label="% Complete" value={(panels.length ?? 0) / 500} />
+        </Section>
+        <Section title="Hops">
+          <div className="h-[300px] overflow-auto">
+            <List className="h-full overflow-auto">
+              {hops.map((hop) => (
+                <HopListItem
+                  key={hop.id}
+                  src={hop}
+                  active={
+                    !!user?.hopSensoryPanels.find(
+                      ({ hopId }) => hopId === hop.id,
+                    )
+                  }
+                />
+              ))}
+            </List>
+          </div>
+        </Section>
+      </div>
+    </AppBarLayout>
   );
 };
 export default SensoryHome;
