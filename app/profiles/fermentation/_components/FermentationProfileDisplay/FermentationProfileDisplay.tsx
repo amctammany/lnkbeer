@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { ChartLine } from "lucide-react";
+import { List } from "@/components/List/List";
 const FermentationChart = dynamic(() => import("./FermentationProfileChart"), {
   ssr: false,
 });
@@ -38,16 +39,16 @@ export function FermentationProfileDisplay({
       </Card>
       <div className="grid md:grid-cols-2">
         <Section title="Steps" className="lg:m-4  ">
-          <ol className="list-decimal list-outside pl-6">
+          <List className="">
             {(src?.steps ?? []).map((step, index) => (
-              <li
+              <FermentationStepListItem
+                src={step}
+                index={index}
                 key={step.id}
-                className="list-item leading-4 py-2 px-1 hover:bg-slate-200 "
-              >
-                <FermentationStepListItem src={step} index={index} />
-              </li>
+                //className="list-item hover:bg-slate-200 "
+              />
             ))}
-          </ol>
+          </List>
         </Section>
         <Section title="Graph" className="lg:m-4  ">
           <Suspense fallback={<ChartLine />}>

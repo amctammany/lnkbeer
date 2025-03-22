@@ -55,7 +55,7 @@ export const ListItemText = ({
         {primary || children}
       </div>
       {secondary && (
-        <div className="block text-xs hitespace-nowrap">{secondary}</div>
+        <div className="block text-sm hitespace-nowrap">{secondary}</div>
       )}
     </div>
   );
