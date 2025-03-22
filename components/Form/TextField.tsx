@@ -49,7 +49,7 @@ export function TextField({
         type="text"
         className={clsx(
           //inputStyles({ variant, suffix: !!suffix ? "active" : "default" }),
-          textFieldStyles({ variant, suffix: !!suffix ? "active" : "default" }),
+          textFieldStyles({ variant, suffix: suffix ? "active" : "default" }),
         )}
         name={name}
         error={error}

@@ -19,6 +19,7 @@ import {
 } from "@/schemas/mashProfileSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { List } from "@/components/List/List";
 
 export type MashProfileFormProps = {
   src?: ExtendedMashProfile | null;
@@ -65,32 +66,19 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
               />,
             ]}
           >
-            <ol className="list-decimal list-outside pl-6">
+            <List>
               {src?.steps.map((step, index) => (
-                <li
+                <MashStepListItem
+                  href={`/profiles/mash/${src?.slug}/edit/${step.id}`}
+                  scroll={false}
                   key={step.id}
-                  className="list-item leading-4 py-2 px-1 hover:bg-slate-200 "
+                  src={step}
+                  index={index}
                 >
-                  <div className="flex w-full p-1">
-                    <Link
-                      className="grow "
-                      href={`/profiles/mash/${src?.slug}/edit/${step.id}`}
-                      scroll={false}
-                    >
-                      <MashStepListItem
-                        key={step.id}
-                        src={step}
-                        index={index}
-                      />
-                    </Link>
-                    <MashStepActions
-                      className="mx-2 hidden md:block"
-                      src={{ MashProfile: src!, ...step }}
-                    />
-                  </div>
-                </li>
+                  <MashStepActions src={step} />
+                </MashStepListItem>
               ))}
-            </ol>
+            </List>
           </Section>
         </div>
       </AppBarLayout>

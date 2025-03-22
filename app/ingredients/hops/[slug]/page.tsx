@@ -5,6 +5,7 @@ import AppBarTitle from "@/components/AppBarTitle";
 import { Hop } from "lucide-react";
 import { HopDisplayActions } from "@/app/ingredients/hops/_components/HopDisplay/HopDisplayActions";
 import { Suspense } from "react";
+import { notFound } from "next/navigation";
 interface HopDisplayPageProps {
   params: Promise<{
     slug: string;
@@ -26,6 +27,7 @@ export async function generateStaticParams() {
 export default async function HopDisplayPage({ params }: HopDisplayPageProps) {
   const { slug } = await params;
   const hop = await getHop(slug);
+  if (!hop) notFound();
   return (
     <AppBarLayout
       title={<AppBarTitle icon={<Hop />}>{hop?.name}</AppBarTitle>}

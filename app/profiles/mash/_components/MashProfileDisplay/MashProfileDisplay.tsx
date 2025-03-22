@@ -31,19 +31,19 @@ export function MashProfileDisplay({ src }: MashProfileDisplayProps) {
         </div>
       </Section>
       <Section title="Steps" className="m-2 lg:m-4  ">
-        <ol className="list-decimal list-outside pl-6">
+        <ol className="">
           {(src?.steps ?? []).map((step, index) => (
-            <li
-              key={step.id}
-              className="list-item leading-4 py-2 px-1 hover:bg-slate-200 "
-            >
-              <MashStepListItem src={step} index={index} />
-            </li>
+            <MashStepListItem key={step.id} src={step} index={index} />
           ))}
         </ol>
       </Section>
     </div>
   );
 }
-
+/**<li
+              key={step.id}
+              className="list-item leading-4 py-2 px-1 hover:bg-slate-200 "
+            >
+            </li>
+   */
 export default MashProfileDisplay;

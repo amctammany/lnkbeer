@@ -1,3 +1,4 @@
+"use client";
 import { VariantProps, cva } from "class-variance-authority";
 import clsx from "clsx";
 import { ComponentProps } from "react";
@@ -13,7 +14,7 @@ const ListItemActionsStyles = cva(
     defaultVariants: {
       variant: "default",
     },
-  },
+  }
 );
 
 export type ListItemActionsProps = VariantProps<typeof ListItemActionsStyles> &

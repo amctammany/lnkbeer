@@ -19,6 +19,7 @@ import {
   FermentationProfileSchema,
   fermentationProfileSchema,
 } from "@/schemas/fermentationProfileSchema";
+import { List } from "@/components/List/List";
 
 export type FermentationProfileFormProps = {
   src?: ExtendedFermentationProfile | null;
@@ -68,32 +69,22 @@ export function FermentationProfileForm({
               />,
             ]}
           >
-            <ol className="list-decimal list-outside pl-6">
+            <List>
               {src?.steps.map((step, index) => (
-                <li
+                <FermentationStepListItem
                   key={step.id}
-                  className="list-item leading-4 py-2 px-1 hover:bg-slate-200 "
+                  href={`/profiles/fermentation/${src?.slug}/edit/${step.id}`}
+                  scroll={false}
+                  src={step}
+                  index={index}
                 >
-                  <div className="flex w-full p-1">
-                    <Link
-                      className="grow "
-                      href={`/profiles/fermentation/${src?.slug}/edit/${step.id}`}
-                      scroll={false}
-                    >
-                      <FermentationStepListItem
-                        key={step.id}
-                        src={step}
-                        index={index}
-                      />
-                    </Link>
-                    <FermentationStepActions
-                      className="mx-2 hidden md:block"
-                      src={{ FermentationProfile: src, ...step }}
-                    />
-                  </div>
-                </li>
+                  <FermentationStepActions
+                    className="mx-2 hidden md:block"
+                    src={{ FermentationProfile: src, ...step }}
+                  />
+                </FermentationStepListItem>
               ))}
-            </ol>
+            </List>
           </Section>
         </div>
       </AppBarLayout>

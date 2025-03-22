@@ -1,13 +1,11 @@
 import { FermentationStep } from "@prisma/client";
-import React from "react";
 import { ExtendedFermentationStep } from "@/types/Profile";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import clsx from "clsx";
-import { ListItem } from "@/components/List/ListItem";
+import { ListItem, ListItemProps } from "@/components/List/ListItem";
 import { ListItemIcon } from "@/components/List/ListItemIcon";
 import { ListItemText } from "@/components/List/ListItemText";
 import { Clock, Thermometer } from "lucide-react";
+import IconBadge from "@/components/IconBadge";
+import { ListItemActions } from "@/components/List/ListItemActions";
 type FermentationStepTextProps = {
   src: FermentationStep;
 };
@@ -16,19 +14,9 @@ export function FermentationStepText({ src }: FermentationStepTextProps) {
 
   return <span>{title}</span>;
 }
-function IconBadge({ icon, text }) {
-  return (
-    <div className="flex items-center place-content-center border rounded border-black">
-      {icon}
-      <span className="border-l-2 border-black px-3">{text}</span>
-    </div>
-  );
-}
-
-export type FermentationStepListItemProps = {
+export type FermentationStepListItemProps = ListItemProps & {
   src: ExtendedFermentationStep | FermentationStep;
   index: number;
-  className?: string;
 };
 function FermentationStepDetails({
   src,
@@ -36,7 +24,7 @@ function FermentationStepDetails({
   src: ExtendedFermentationStep | FermentationStep;
 }) {
   return (
-    <div className="flex gap-2 ">
+    <div className="flex gap-2 px-2 ">
       <IconBadge
         icon={<Clock size={16} className="mx-2" />}
         text={`${src.time} min`}
@@ -50,18 +38,19 @@ function FermentationStepDetails({
 }
 export function FermentationStepListItem({
   src,
+  href,
+  children,
   index,
   className,
 }: FermentationStepListItemProps) {
-  const title = src.name ? `${src.name} (${src.type})` : src.type;
-  const time = `${src.time} days (Ramp: ${src.rampTime} days)`;
   return (
-    <ListItem>
+    <ListItem href={href} className={className}>
       <ListItemIcon variant="icon">{index}</ListItemIcon>
       <ListItemText
         primary={<FermentationStepText src={src} />}
         secondary={<FermentationStepDetails src={src} />}
       />
+      <ListItemActions>{children}</ListItemActions>
     </ListItem>
   );
 }

@@ -45,7 +45,7 @@ const listItemStyles = cva(["group relative box-border justify-start w-full"], {
   },
   defaultVariants: {
     variant: "default",
-    border: "black",
+    border: "none",
   },
 });
 
