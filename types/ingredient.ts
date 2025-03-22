@@ -1,5 +1,6 @@
 import {
   AromaGroups,
+  CharacteristicAroma,
   Fermentable,
   Hop,
   HopNote,
@@ -12,7 +13,10 @@ export type RangeValue = { min: number; max: number }; //| [number, number];
 export type ExtendedHop = Hop & {
   hopSensoryPanels?: HopSensoryPanel[];
 };
-export type ExtendedHopNote = HopNote & any;
+export type ExtendedHopNote = HopNote & {
+  sensoryPanel?: HopSensoryPanel & { aromas: CharacteristicAroma[] };
+  hop?: Hop;
+};
 export type HopNoteInput = Partial<HopNote> & {};
 export type HopInput = Hop & {
   alphaRange?: RangeValue;

@@ -1,7 +1,7 @@
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/client";
-import { SensoryHome } from "../_components/SensoryHome";
+import { SensoryHops } from "@/app/admin/_components/SensoryHops";
 import { ExtendedUser } from "@/types/User";
 import { getHops } from "@/app/ingredients/hops/queries";
 //import { Dashboard } from "./_components/Dashboard";
@@ -11,20 +11,14 @@ import { getHops } from "@/app/ingredients/hops/queries";
 //);
 
 //import { auth } from "@/app/auth";
-export default async function Page() {
+export default async function SensoryHopsPage() {
   const session = await auth();
 
   if (!session || !session?.user?.email) return redirect("/");
   const hops = await getHops();
-  const panels = await prisma.hopSensoryPanel.findMany({
-    where: { userId: session.user.id },
-    select: { hopId: true, id: true, userId: true },
-  });
   const user = await prisma.user.findFirst({
     where: { email: session?.user?.email },
     include: { hopSensoryPanels: { select: { id: true, hopId: true } } },
   });
-  return (
-    <SensoryHome hops={hops} user={user as ExtendedUser} panels={panels} />
-  );
+  return <SensoryHops hops={hops} user={user as ExtendedUser} />;
 }

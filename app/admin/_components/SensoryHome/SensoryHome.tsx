@@ -3,13 +3,14 @@ import { Prop } from "@/components/Prop";
 import Section from "@/components/Section";
 import { Button } from "@/components/ui/button";
 import { ExtendedUser } from "@/types/User";
-import type { HopSensoryPanel, User } from "@prisma/client";
+import type { Hop as HopType, HopSensoryPanel, User } from "@prisma/client";
 import { Hop, SquareArrowOutUpRight } from "lucide-react";
 import Link from "next/link";
 
 export interface SensoryHomeProps {
   user?: ExtendedUser | null;
   panels: Pick<HopSensoryPanel, "id" | "hopId" | "userId">[];
+  hops: HopType[];
   //action?: any;
   //children: React.ReactNode;
 }
@@ -17,6 +18,24 @@ import { ListItem } from "@/components/List/ListItem";
 import { ListItemIcon } from "@/components/List/ListItemIcon";
 import { ListItemText } from "@/components/List/ListItemText";
 import { List } from "@/components/List/List";
+
+export type HopListItemProps = {
+  src: Pick<HopType, "id" | "name" | "country" | "slug">;
+  active?: boolean;
+};
+export const HopListItem = ({ src, active = false }: HopListItemProps) => {
+  return (
+    <Link href={`/admin/sensory/hops/${src.slug}`}>
+      <li
+        className={
+          active ? "bg-red-500/10 hover:bg-blue-400 " : "hover:bg-blue-50"
+        }
+      >
+        {src.name}
+      </li>
+    </Link>
+  );
+};
 
 export type HopSensoryListItemProps = {
   src: Pick<HopSensoryPanel, "id" | "hopId" | "userId">;
@@ -39,19 +58,10 @@ export const HopSensoryListItem = ({ src }: HopSensoryListItemProps) => {
     </ListItem>
   );
 };
-export const SensoryHome = ({ user, panels }: SensoryHomeProps) => {
+export const SensoryHome = ({ user, hops, panels }: SensoryHomeProps) => {
   return (
     <div className="mx-auto lg:w-10/12 flex flex-col gap-0">
-      <Section
-        title="Hops"
-        actions={
-          <AppBarItem
-            url="/admin/sensory"
-            icon={<SquareArrowOutUpRight />}
-            text="Go"
-          />
-        }
-      >
+      <Section title="Panels">
         <List>
           {panels.map((panel) => (
             <HopSensoryListItem key={panel.id} src={panel} />
@@ -60,6 +70,21 @@ export const SensoryHome = ({ user, panels }: SensoryHomeProps) => {
 
         <Prop label="Total Sensory Panels" value={panels.length} />
         <Prop label="% Complete" value={(panels.length ?? 0) / 500} />
+      </Section>
+      <Section title="Hops">
+        <div className="h-[300px] overflow-auto">
+          <List className="h-full overflow-auto">
+            {hops.map((hop) => (
+              <HopListItem
+                key={hop.id}
+                src={hop}
+                active={
+                  !!user?.hopSensoryPanels.find(({ hopId }) => hopId === hop.id)
+                }
+              />
+            ))}
+          </List>
+        </div>
       </Section>
     </div>
   );

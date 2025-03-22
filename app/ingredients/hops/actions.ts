@@ -20,8 +20,25 @@ export const createHopNote = async (data: HopNoteSchema) => {
   //if (!valid.success) return valid;
   //const f = validateSchema(formData, schema);
   //const d = schema.parse(formData);
-  const { id, userEmail, userId, hopId, slug, sensoryPanel } = data;
+  //const { id, userEmail, userId, hopId, slug, sensoryPanel } = data;
+  const {
+    uid,
+    sensoryPanel,
+    sensoryPanelId,
+    //date,
+    hopId,
+    lot,
+    batch,
+    comments,
+    year,
+    producer,
+    slug,
+    userId,
+    userEmail,
+    ...rest
+  } = data;
 
+  console.log(data);
   const panel = await prisma.hopSensoryPanel.create({
     data: {
       userId,
@@ -52,26 +69,42 @@ export const createHopNote = async (data: HopNoteSchema) => {
       hopId,
       slug,
       sensoryPanelId: panel.id,
-      //hop: { connect: { id: hopId } },
+      //hop: { connect: { slug } },
       //sensoryPanel: {
+      //create: { userId, hop: { connect: { slug } } },
       //connect: { id: panel.id },
       //},
     },
     include: {
-      sensoryPanel: { include: { aromas: true } },
+      sensoryPanel: true,
       hop: true,
     },
   });
-  redirect(`/ingredients/hops/${res.hop.slug}/sensory`);
+  //redirect(`/ingredients/hops/${res.hop.slug}/sensory`);
+  redirect(`/admin/sensory/hops/${res.hop.slug}`);
 };
 export const updateHopNote = async (data: HopNoteSchema) => {
   //const valid = validateSchema(formData, noteSchema);
   //if (!valid.success) return valid;
   //console.log(valid.data);
-  const { id, uid, sensoryPanel, slug, userId, userEmail, ...rest } = data;
+  const {
+    uid,
+    sensoryPanel,
+    sensoryPanelId,
+    //date,
+    lot,
+    batch,
+    comments,
+    year,
+    producer,
+    slug,
+    userId,
+    userEmail,
+    ...rest
+  } = data;
   if (!sensoryPanel.id) return;
   const es = await prisma.hopSensoryPanel.update({
-    where: { id: sensoryPanel?.id },
+    where: { id: sensoryPanelId! },
     include: { user: true },
     data: {
       ...rest,
@@ -101,9 +134,14 @@ export const updateHopNote = async (data: HopNoteSchema) => {
     },
   });
   const res = await prisma.hopNote.update({
-    where: { id: { hopId: data.hopId, userEmail } },
+    where: { uid },
     data: {
       ...rest,
+      batch,
+      lot,
+      comments,
+      year,
+      producer,
       sensoryPanel: {
         connect: { id: es.id },
         //update: { where: { id: sensoryPanel?.id }, data: sensoryPanel },
@@ -114,7 +152,7 @@ export const updateHopNote = async (data: HopNoteSchema) => {
       sensoryPanel: { include: { aromas: true } },
     },
   });
-  redirect(`/ingredients/hops/${res.hop.slug}/sensory`);
+  redirect(`/admin/sensory/hops/${res.hop.slug}`);
 };
 export const createHop = async (data: HopSchema) => {
   //const valid = validateSchema(formData, schema);

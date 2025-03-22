@@ -285,12 +285,13 @@ async function main() {
           hopSensoryPanels: {
             upsert: {
               where: {
-                pId: {
-                  userId: "ADMIN",
-                  slug: hop.slug,
-                },
+                id: 3932492349,
               },
-              update: { ...flavorMap },
+              update: {
+                userId: "ADMIN",
+                //slug: hop.slug,
+                ...flavorMap,
+              },
               create: {
                 userId: "ADMIN",
                 //userEmail: "yakimachief",

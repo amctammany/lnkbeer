@@ -79,11 +79,17 @@ export type HopSchema = z.infer<typeof hopSchema>;
 export const hopNoteSchema = zfd.formData({
   id: zfd.numeric(z.number().optional()).nullable(),
   userId: zfd.text(z.string()),
+  sensoryPanelId: zfd.numeric(z.number().optional()).nullable(),
   uid: zfd.numeric(z.number().optional()),
   userEmail: zfd.text(z.string()),
+  year: zfd.numeric(z.number().optional()).nullable(),
   slug: zfd.text(z.string()),
   hopId: zfd.text(z.string()),
+  producer: zfd.text(z.string().optional()).nullable(),
+  batch: zfd.text(z.string().optional()).nullable(),
+  lot: zfd.text(z.string().optional()).nullable(),
   notes: zfd.text(z.string().optional()).nullable(),
+  comments: zfd.text(z.string().optional()).nullable(),
   sensoryPanel: z.object({
     notes: zfd.text(z.string().optional()).nullable(),
     id: zfd.numeric(z.number().optional()).nullable(),

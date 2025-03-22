@@ -208,7 +208,7 @@ model HopSensoryPanel {
   aromas        CharacteristicAroma[]
   //aromas        SensoryAroma[] //@relation(fields: [aromaIds], references: [id])
 
-  @@unique(name: "pId", fields: [slug, userId])
+  //@@unique(name: "pId", fields: [slug, userId])
 }
 
 //model SensoryAroma {
@@ -226,16 +226,18 @@ model HopNote {
   uid            Int             @unique @default(autoincrement())
   slug           String
   hopId          String
+  date           DateTime        @default(now())
   sensoryPanelId Int             @unique
   userEmail      String
   userId         String
+  year           Int?
+  producer       String?
+  lot            String?
   batch          String?
   comments       String?
   hop            Hop             @relation(fields: [slug], references: [slug])
   user           User            @relation(fields: [userId], references: [id])
   sensoryPanel   HopSensoryPanel @relation(fields: [sensoryPanelId], references: [id], onDelete: Cascade)
-
-  @@id(name: "id", [hopId, userEmail])
 }
 
 enum AromaGroups {

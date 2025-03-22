@@ -31,7 +31,7 @@ const listItemStyles = cva(["group relative box-border justify-start w-full"], {
       default: [
         "bg-white hover:bg-primary-500/10 p-2 even:bg-primary-foreground even:hover:bg-slate-500/10 odd:bg-slate-200 odd:hover:bg-slate-500/10",
       ],
-      warning: ["group-hover:bg-warning-500/10"],
+      warning: ["group-hover:bg-warning-500/10 bg-warning-200"],
       //default: [""],
       //warning: [""],
     },

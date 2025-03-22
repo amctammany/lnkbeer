@@ -25,7 +25,7 @@ export default async function HopSensoryEditorPage({
   const session = await auth();
 
   if (!session || !session?.user?.email) return redirect("/");
-  const hopNote: ExtendedHopNote = (await prisma.hopNote.findFirst({
+  const hopNote: any = (await prisma.hopNote.findFirst({
     where: { userEmail: session?.user?.email, hopId: hop?.id },
     include: { hop: true, sensoryPanel: { include: { aromas: true } } },
   })) || {
