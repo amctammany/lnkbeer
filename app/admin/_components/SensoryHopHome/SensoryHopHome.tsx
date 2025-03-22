@@ -1,11 +1,11 @@
 "use client";
 import { aromaGroups } from "@/app/ingredients/hops/_components/HopSensory";
-import { HopSensoryChart } from "@/app/ingredients/hops/_components/HopSensoryChart";
+//import { HopSensoryChart } from "@/app/ingredients/hops/_components/HopSensoryChart";
 import { AppBarItem } from "@/components/AppBarItem";
 import { List } from "@/components/List/List";
 import { ListItem } from "@/components/List/ListItem";
 import { ListItemText } from "@/components/List/ListItemText";
-import { Prop } from "@/components/Prop";
+//import { Prop } from "@/components/Prop";
 import Section from "@/components/Section";
 import {
   Card,
@@ -22,18 +22,13 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { ExtendedHopNote, HopSensoryChartData } from "@/types/ingredient";
-import type {
-  Hop as HopType,
-  HopSensoryPanel,
-  User,
-  HopNote,
-} from "@prisma/client";
-import { Edit, Plus, SquareArrowOutUpRight } from "lucide-react";
+import type { Hop as HopType, HopSensoryPanel } from "@prisma/client";
+import { Plus } from "lucide-react";
 import { Radar, RadarChart, PolarAngleAxis, PolarGrid, Legend } from "recharts";
 
-export interface SensoryHopDisplayProps {
-  hop: HopType;
-  note: ExtendedHopNote;
+export interface SensoryHopHomeProps {
+  hop?: HopType | null;
+  notes: ExtendedHopNote[];
   //user?: ExtendedUser | null;
   //panel: HopSensoryPanel; // Pick<HopSensoryPanel, "id" | "hopId" | "year">[];
   //action?: any;
@@ -60,7 +55,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export const SensoryHopDisplay = ({ hop, note }: SensoryHopDisplayProps) => {
+export const SensoryHopHome = ({ hop, notes }: SensoryHopHomeProps) => {
   const {
     sweetAromatic,
     pomme,
@@ -80,7 +75,7 @@ export const SensoryHopDisplay = ({ hop, note }: SensoryHopDisplayProps) => {
     onionGarlic,
     //offFlavors,
     driedFruit,
-  } = note.sensoryPanel ?? {};
+  } = notes[0]?.sensoryPanel ?? {};
   const _data = {
     sweetAromatic,
     pomme,
@@ -132,30 +127,30 @@ export const SensoryHopDisplay = ({ hop, note }: SensoryHopDisplayProps) => {
   return (
     <div className="mx-auto lg:w-10/12 flex flex-col md:grid md:grid-cols-2 gap-0">
       <Section
-        title="Summary"
+        title="Hop Notes"
         actions={
           <AppBarItem
-            icon={<Edit />}
-            text="Edit"
-            url={`/admin/sensory/hops/${hop?.slug}/${note.uid}/edit`}
+            url={`/admin/sensory/hops/${hop?.slug}/new`}
+            icon={<Plus />}
+            text="New"
           />
         }
       >
-        <Prop label="Hop" value={hop.name} />
-        <Prop label="Producer" value={note.producer} />
-        <Prop label="Year" value={note.year} />
+        <List>
+          {notes.map((note) => (
+            <ListItem
+              href={`/admin/sensory/hops/${hop?.slug}/${note.uid}`}
+              key={note.uid}
+            >
+              <ListItemText
+                primary={`Producer: ${note.producer}; Year: ${note.year}`}
+                secondary={note.date.toString()}
+              />
+            </ListItem>
+          ))}
+        </List>
       </Section>
-
-      <Section
-        title="Sensory"
-        actions={
-          <AppBarItem
-            icon={<Edit />}
-            text="Edit"
-            url={`/admin/sensory/hops/${hop?.slug}/${note.uid}/edit`}
-          />
-        }
-      >
+      <Section title="Sensory">
         <Card>
           <CardHeader className="items-center pb-4">
             <CardTitle>Sensory Chart</CardTitle>
@@ -191,4 +186,4 @@ export const SensoryHopDisplay = ({ hop, note }: SensoryHopDisplayProps) => {
     </div>
   );
 };
-export default SensoryHopDisplay;
+export default SensoryHopHome;

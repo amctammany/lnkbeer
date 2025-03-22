@@ -1,9 +1,9 @@
 import { auth } from "@/app/auth";
 import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/client";
-import { SensoryHopDisplay } from "@/app/admin/_components/SensoryHopDisplay";
+import { SensoryHopEditor } from "@/app/admin/_components/SensoryHopEditor";
 import { getHop } from "@/app/ingredients/hops/queries";
-import { SensoryHopHome } from "@/app/admin/_components/SensoryHopHome";
+import { updateHopNote } from "@/app/ingredients/hops/actions";
 //import { Dashboard } from "./_components/Dashboard";
 //const AdminModal = dynamic(
 //() => import("./AdminModal").then((s) => s.AdminModal),
@@ -11,26 +11,36 @@ import { SensoryHopHome } from "@/app/admin/_components/SensoryHopHome";
 //);
 
 //import { auth } from "@/app/auth";
-export type SensoryHopDisplayPageProps = {
-  params: Promise<{ slug: string }>;
+export type SensoryHopEditorPageProps = {
+  params: Promise<{ slug: string; id: string }>;
 };
-export default async function SensoryHopDisplayPage({
+export default async function SensoryHopEditorPage({
   params,
-}: SensoryHopDisplayPageProps) {
-  const { slug } = await params;
+}: SensoryHopEditorPageProps) {
+  const { slug, id } = await params;
   const session = await auth();
 
   if (!session || !session?.user?.email) return redirect("/");
   const hop = await getHop(slug);
   if (!hop) notFound();
-  const notes = await prisma.hopNote.findMany({
+  const aromas = await prisma.characteristicAroma.findMany();
+  const note = await prisma.hopNote.findFirst({
     where: {
-      userId: session.user.id,
+      //userId: session.user.id,
+      uid: parseInt(id),
       hopId: hop.id,
     },
     include: {
       sensoryPanel: { include: { aromas: true } },
     },
   });
-  return <SensoryHopHome hop={hop} notes={notes} />;
+  if (!note) notFound();
+  return (
+    <SensoryHopEditor
+      hop={hop}
+      note={note}
+      action={updateHopNote}
+      aromas={aromas}
+    />
+  );
 }

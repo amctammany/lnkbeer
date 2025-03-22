@@ -22,9 +22,9 @@ export const createHopNote = async (data: HopNoteSchema) => {
   //const d = schema.parse(formData);
   //const { id, userEmail, userId, hopId, slug, sensoryPanel } = data;
   const {
-    uid,
+    //uid,
     sensoryPanel,
-    sensoryPanelId,
+    //sensoryPanelId,
     //date,
     hopId,
     lot,
@@ -34,14 +34,15 @@ export const createHopNote = async (data: HopNoteSchema) => {
     producer,
     slug,
     userId,
+    notes,
     userEmail,
     ...rest
   } = data;
 
-  console.log(data);
   const panel = await prisma.hopSensoryPanel.create({
     data: {
       userId,
+      notes,
       //userEmail,
       user: { connect: { email: userEmail } },
       aromas: {
@@ -68,6 +69,11 @@ export const createHopNote = async (data: HopNoteSchema) => {
       userId,
       hopId,
       slug,
+      comments,
+      lot,
+      year,
+      batch,
+      producer,
       sensoryPanelId: panel.id,
       //hop: { connect: { slug } },
       //sensoryPanel: {
