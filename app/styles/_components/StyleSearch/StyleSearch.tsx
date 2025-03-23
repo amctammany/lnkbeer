@@ -1,5 +1,4 @@
 import type { Style } from "@prisma/client";
-import React from "react";
 export interface StyleSearchProps {
   style: Style;
 }

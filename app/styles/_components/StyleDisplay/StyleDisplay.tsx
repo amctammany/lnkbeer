@@ -5,7 +5,6 @@ import { Prop } from "@/components/Prop";
 import { Card } from "@/components/ui/card";
 import type { Style } from "@prisma/client";
 import { BookType, Edit } from "lucide-react";
-import React from "react";
 export interface StyleDisplayProps {
   src?: Style | null;
 }
