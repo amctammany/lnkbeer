@@ -1,3 +1,4 @@
+"use client";
 import type { Hop as HopType } from "@prisma/client";
 import { Prop } from "@/components/Prop";
 import { Card } from "@/components/ui/card";
@@ -7,77 +8,34 @@ export type HopDisplayProps = {
   hop: HopType;
 };
 //import { Range } from "@/components/Range";
-import { HopInput } from "@/types/ingredient";
+//import { HopInput } from "@/types/ingredient";
 const SummaryTab = dynamic(
   () => import("../../_components/HopDisplay/SummaryTab")
 );
 const CompositionTab = dynamic(
-  () => import("../../_components/HopDisplay/CompositionTab")
+  () => import("../../_components/HopDisplay/CompositionTab"),
+  { ssr: false }
 );
 const SensoryTab = dynamic(
-  () => import("../../_components/HopDisplay/SensoryTab")
+  () => import("../../_components/HopDisplay/SensoryTab"),
+  { ssr: false }
 );
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import dynamic from "next/dynamic";
-type RangeProp = {
-  name: keyof HopInput;
-  label?: string;
-  min: number;
-  max: number;
-  range: [number, number];
-  value?: number;
-};
-const rangeProps: (hop: HopInput) => RangeProp[] = (hop) => [
-  {
-    name: "alphaRange",
-    label: "Alpha",
-    min: 0,
-    max: 30,
-    range: [hop.alphaLow!, hop.alphaHigh!],
-  },
-  {
-    name: "betaRange",
-    label: "Beta",
-    min: 0,
-    max: 25,
-    range: [hop.betaLow!, hop.betaHigh!],
-  },
-  {
-    name: "caryophylleneRange",
-    label: "Caryophyllene",
-    min: 0,
-    max: 20,
-    range: [hop.caryophylleneLow!, hop.caryophylleneHigh!],
-  },
-  {
-    name: "cohumuloneRange",
-    label: "Cohumulone",
-    min: 0,
-    max: 70,
-    range: [hop.cohumuloneLow!, hop.cohumuloneHigh!],
-  },
-  {
-    name: "myrceneRange",
-    label: "Myrcene",
-    min: 0,
-    max: 80,
-    range: [hop.myrceneLow!, hop.myrceneHigh!],
-  },
-  {
-    name: "totalOilRange",
-    label: "Total Oils",
-    min: 0,
-    max: 8,
-    range: [hop.totalOilLow!, hop.totalOilHigh!],
-  },
-];
+import { useRouter, useSearchParams } from "next/navigation";
 
-export async function HopDisplay({ hop }: HopDisplayProps) {
+export function HopDisplay({ hop }: HopDisplayProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const handleChange = (value) => {
+    router.push(`/ingredients/hops/${hop.slug}?tab=${value}`);
+  };
   return (
     <Tabs
       className="*:not-first:max-w-10/12 *:not-first:mx-auto"
-      defaultValue="summary"
+      defaultValue={searchParams.get("tab") ?? "summary"}
+      onValueChange={handleChange}
     >
       <TabsList className="grid w-full grid-cols-4">
         <TabsTrigger value="summary">Summary</TabsTrigger>
