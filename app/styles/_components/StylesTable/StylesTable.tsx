@@ -10,7 +10,7 @@ import { StylesTableRowActions } from "./StylesTableRowActions";
 import { DataTable } from "@/components/DataTable";
 import { AppBarLayout } from "@/components/AppBarLayout";
 import AppBarTitle from "@/components/AppBarTitle";
-import { BookType, Waves } from "lucide-react";
+import { BookType } from "lucide-react";
 const columns: ColumnDef<Style>[] = [
   {
     accessorKey: "identifier",
@@ -30,15 +30,7 @@ const columns: ColumnDef<Style>[] = [
   {
     accessorKey: "name",
     header: Header<Style>,
-    cell: ({ getValue }) => (
-      <Link
-        className="hover:underline"
-        prefetch={false}
-        href={`/styles/${slugify(getValue<string>(), { lower: true })}`}
-      >
-        {getValue<string>()}
-      </Link>
-    ),
+    cell: ({ getValue }) => <span>{getValue<string>()}</span>,
   },
   {
     id: "actions",
