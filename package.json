@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "analyze": "cross-env ANALYZE=true next build",
-    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "dev": "next dev",
+    "dev:inspect": "NODE_OPTIONS='--inspect' next dev",
     "prebuild": "pnpm run lint",
     "build": "next build",
     "start": "next start",
