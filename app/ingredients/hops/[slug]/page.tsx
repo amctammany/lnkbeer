@@ -4,18 +4,8 @@ import { AppBarLayout } from "@/components/AppBarLayout";
 import AppBarTitle from "@/components/AppBarTitle";
 import { Hop } from "lucide-react";
 import { HopDisplayActions } from "@/app/ingredients/hops/_components/HopDisplay/HopDisplayActions";
-import { Suspense } from "react";
-const SummaryTab = dynamic(
-  () => import("../_components/HopDisplay/SummaryTab")
-);
-const CompositionTab = dynamic(
-  () => import("../_components/HopDisplay/CompositionTab")
-);
 
 import { notFound } from "next/navigation";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import dynamic from "next/dynamic";
-import SensoryTab from "../_components/HopDisplay/SensoryTab";
 interface HopDisplayPageProps {
   params: Promise<{
     slug: string;
@@ -43,23 +33,7 @@ export default async function HopDisplayPage({ params }: HopDisplayPageProps) {
       title={<AppBarTitle icon={<Hop />}>{hop?.name}</AppBarTitle>}
       actions={<HopDisplayActions slug={hop.slug} />}
     >
-      <Tabs defaultValue="summary">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="summary">Summary</TabsTrigger>
-          <TabsTrigger value="composition">Composition</TabsTrigger>
-          <TabsTrigger value="sensory">Sensory</TabsTrigger>
-        </TabsList>
-        <TabsContent value="summary">
-          <SummaryTab src={hop} />
-        </TabsContent>
-        <TabsContent value="composition">
-          <CompositionTab src={hop} />
-        </TabsContent>
-
-        <TabsContent value="sensory">
-          <SensoryTab src={hop} />
-        </TabsContent>
-      </Tabs>
+      <HopDisplay hop={hop} />
     </AppBarLayout>
   );
   //return <HopDisplay hop={hop} />;

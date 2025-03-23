@@ -12,12 +12,10 @@ const SummaryTab = dynamic(
   () => import("../../_components/HopDisplay/SummaryTab")
 );
 const CompositionTab = dynamic(
-  () => import("../../_components/HopDisplay/CompositionTab"),
-  { ssr: false }
+  () => import("../../_components/HopDisplay/CompositionTab")
 );
 const SensoryTab = dynamic(
-  () => import("../../_components/HopDisplay/SensoryTab"),
-  { ssr: false }
+  () => import("../../_components/HopDisplay/SensoryTab")
 );
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -77,7 +75,10 @@ const rangeProps: (hop: HopInput) => RangeProp[] = (hop) => [
 
 export async function HopDisplay({ hop }: HopDisplayProps) {
   return (
-    <Tabs defaultValue="summary">
+    <Tabs
+      className="*:not-first:max-w-10/12 *:not-first:mx-auto"
+      defaultValue="summary"
+    >
       <TabsList className="grid w-full grid-cols-4">
         <TabsTrigger value="summary">Summary</TabsTrigger>
         <TabsTrigger value="composition">Composition</TabsTrigger>
