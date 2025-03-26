@@ -38,7 +38,7 @@ export function FermentationProfileDisplay({
         <Prop label="Description" value={src?.description} />
       </Card>
       <div className="grid lg:grid-cols-2">
-        <Section title="Steps" className="lg:m-4  ">
+        <Section title="Steps" className="lg:m-2  ">
           <List className="">
             {(src?.steps ?? []).map((step, index) => (
               <FermentationStepListItem
@@ -50,7 +50,7 @@ export function FermentationProfileDisplay({
             ))}
           </List>
         </Section>
-        <Section title="Graph" className="lg:m-4  ">
+        <Section title="Graph" className="lg:m-2  ">
           <Suspense fallback={<ChartLine />}>
             <FermentationChart src={src} />
           </Suspense>

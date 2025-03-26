@@ -51,7 +51,7 @@ export function MashStepListItem({
 }: MashStepListItemProps) {
   return (
     <ListItem href={href} className={className}>
-      <ListItemIcon variant="icon">{index}</ListItemIcon>
+      <ListItemIcon className="font-bold pr-2">{index}</ListItemIcon>
       <ListItemText
         primary={<MashStepText src={src} />}
         secondary={<MashStepDetails src={src} />}

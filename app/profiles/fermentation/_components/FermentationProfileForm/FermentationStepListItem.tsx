@@ -12,7 +12,7 @@ type FermentationStepTextProps = {
 export function FermentationStepText({ src }: FermentationStepTextProps) {
   const title = src.name ? `${src.name} (${src.type})` : src.type;
 
-  return <span>{title}</span>;
+  return <span className="capitalize">{title}</span>;
 }
 export type FermentationStepListItemProps = ListItemProps & {
   src: ExtendedFermentationStep | FermentationStep;
@@ -53,7 +53,7 @@ export function FermentationStepListItem({
 }: FermentationStepListItemProps) {
   return (
     <ListItem href={href} className={className}>
-      <ListItemIcon variant="icon">{index}</ListItemIcon>
+      <ListItemIcon className="font-bold pr-2">{index}</ListItemIcon>
       <ListItemText
         primary={<FermentationStepText src={src} />}
         secondary={<FermentationStepDetails src={src} />}
