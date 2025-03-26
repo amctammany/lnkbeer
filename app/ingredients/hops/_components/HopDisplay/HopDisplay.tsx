@@ -9,7 +9,8 @@ export type HopDisplayProps = {
 //import { Range } from "@/components/Range";
 //import { HopInput } from "@/types/ingredient";
 const SummaryTab = dynamic(
-  () => import("../../_components/HopDisplay/SummaryTab")
+  () => import("../../_components/HopDisplay/SummaryTab"),
+  { ssr: false }
 );
 const CompositionTab = dynamic(
   () => import("../../_components/HopDisplay/CompositionTab"),
