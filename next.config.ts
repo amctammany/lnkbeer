@@ -3,17 +3,17 @@ import analyze from "@next/bundle-analyzer";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  //experimental: {
-  //authInterrupts: true,
-  //ppr: "incremental",
-  //reactCompiler: {
-  //compilationMode: "annotation",
-  //},
-  //staleTimes: {
-  //dynamic: 30,
-  //static: 180,
-  //},
-  //},
+  experimental: {
+    //authInterrupts: true,
+    //ppr: "incremental",
+    //reactCompiler: {
+    //compilationMode: "annotation",
+    //},
+    staleTimes: {
+      dynamic: 30,
+      static: 180,
+    },
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
