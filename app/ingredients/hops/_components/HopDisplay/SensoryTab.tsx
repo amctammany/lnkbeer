@@ -1,26 +1,26 @@
 import { ExtendedHop } from "@/types/ingredient";
 import { HopSensory } from "../HopSensory";
 //import { HopSensoryChart } from "../HopSensoryChart";
+import { User } from "next-auth";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export type SensoryTabProps = {
   src: ExtendedHop;
+  user?: User;
 };
-export function SensoryTab({ src }: SensoryTabProps) {
-  const user = { id: "foo" };
-  const expertPanels = (src.hopSensoryPanels ?? []).filter(
-    (panel) => panel.userId === "ADMIN"
-  );
-  const userPanels = (src.hopSensoryPanels ?? []).filter(
-    (panel) => user && panel.userId === user.id
-  );
-
+export function SensoryTab({ src, user }: SensoryTabProps) {
   return (
     <div className="">
       <HopSensory
         hop={src}
-        userPanels={userPanels}
-        expertPanels={expertPanels}
+        user={user}
+        //userPanels={userPanels}
+        //expertPanels={expertPanels}
       />
+      <Button asChild>
+        <Link href={`/admin/sensory/hops/${src.slug}`}>User</Link>
+      </Button>
     </div>
   );
 }

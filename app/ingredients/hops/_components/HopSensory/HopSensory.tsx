@@ -3,16 +3,18 @@ import type { AromaGroups, HopSensoryPanel } from "@prisma/client";
 //import { HopSensoryChart } from "../HopSensoryChart";
 import dynamic from "next/dynamic";
 import { ExtendedHop, HopSensoryChartData } from "@/types/ingredient";
+import { User } from "next-auth";
 const HopSensoryChart = dynamic(
   () => import("../HopSensoryChart/HopSensoryChart"),
-  { ssr: false },
+  { ssr: false }
 );
 
 export type HopSensoryProps = {
   //slug: string;
-  userPanels: HopSensoryPanel[];
-  expertPanels: HopSensoryPanel[];
-  hop?: ExtendedHop | null;
+  //userPanels: HopSensoryPanel[];
+  //expertPanels: HopSensoryPanel[];
+  hop: ExtendedHop;
+  user?: User;
 };
 export const aromaGroups: Uncapitalize<AromaGroups>[] = [
   "sweetAromatic",
@@ -36,7 +38,7 @@ export const aromaGroups: Uncapitalize<AromaGroups>[] = [
 function addMultipleToChartData(
   root: HopSensoryChartData,
   src: HopSensoryPanel[],
-  key: string,
+  key: string
 ) {
   return aromaGroups.reduce((acc, g) => {
     acc[g][key] =
@@ -50,7 +52,7 @@ function addMultipleToChartData(
 function addToChartData(
   root: HopSensoryChartData,
   src: HopSensoryPanel,
-  key: string,
+  key: string
 ) {
   return aromaGroups.reduce((acc, g) => {
     acc[g][key] = src[g] ?? 0;
@@ -72,8 +74,15 @@ function makeAvgChartData(src: ExtendedHop) {
   }, {} as HopSensoryChartData);
 }
 
-export function HopSensory({ hop, userPanels, expertPanels }: HopSensoryProps) {
+export function HopSensory({ hop, user }: HopSensoryProps) {
   const data = makeAvgChartData(hop!);
+  const expertPanels = (hop.hopSensoryPanels ?? []).filter(
+    (panel) => panel.userId === "ADMIN"
+  );
+  const userPanels = (hop.hopSensoryPanels ?? []).filter(
+    (panel) => user && panel.userId === user.id
+  );
+
   if (userPanels.length > 0) addMultipleToChartData(data, userPanels, "user");
   if (expertPanels.length > 0)
     addMultipleToChartData(data, expertPanels, "expert");

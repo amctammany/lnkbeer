@@ -1,4 +1,5 @@
 import { Range } from "@/components/Range";
+import { Card } from "@/components/ui/card";
 import { HopInput } from "@/types/ingredient";
 type RangeProp = {
   name: keyof HopInput;
@@ -58,10 +59,12 @@ export type CompositionTabProps = {
 };
 export function CompositionTab({ src }: CompositionTabProps) {
   return (
-    <div className="m-2">
-      {rangeProps(src).map((props) => (
-        <Range key={props.name} label={props.name} {...props} />
-      ))}
+    <div className="">
+      <Card className="m-4 p-2 *:border-b-2 *:last-of-type:border-b-0 ">
+        {rangeProps(src).map((props) => (
+          <Range key={props.name} label={props.name} {...props} />
+        ))}
+      </Card>
     </div>
   );
 }

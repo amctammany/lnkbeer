@@ -1,10 +1,9 @@
 "use client";
 import type { Hop as HopType } from "@prisma/client";
-import { Prop } from "@/components/Prop";
-import { Card } from "@/components/ui/card";
 
 export type HopDisplayProps = {
   //slug: string;
+  user?: User;
   hop: HopType;
 };
 //import { Range } from "@/components/Range";
@@ -24,8 +23,9 @@ const SensoryTab = dynamic(
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import dynamic from "next/dynamic";
 import { useRouter, useSearchParams } from "next/navigation";
+import { User } from "next-auth";
 
-export function HopDisplay({ hop }: HopDisplayProps) {
+export function HopDisplay({ hop, user }: HopDisplayProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const handleChange = (value) => {
@@ -50,7 +50,7 @@ export function HopDisplay({ hop }: HopDisplayProps) {
       </TabsContent>
 
       <TabsContent value="sensory">
-        <SensoryTab src={hop} />
+        <SensoryTab src={hop} user={user} />
       </TabsContent>
     </Tabs>
   );
