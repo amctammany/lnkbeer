@@ -3,7 +3,7 @@ import { ExtendedFermentationStep } from "@/types/Profile";
 import { ListItem, ListItemProps } from "@/components/List/ListItem";
 import { ListItemIcon } from "@/components/List/ListItemIcon";
 import { ListItemText } from "@/components/List/ListItemText";
-import { Clock, Thermometer } from "lucide-react";
+import { Clock, Thermometer, TriangleRight } from "lucide-react";
 import IconBadge from "@/components/IconBadge";
 import { ListItemActions } from "@/components/List/ListItemActions";
 type FermentationStepTextProps = {
@@ -27,11 +27,19 @@ function FermentationStepDetails({
     <div className="flex gap-2 px-2 ">
       <IconBadge
         icon={<Clock size={16} className="mx-2" />}
+        label="Time"
         text={`${src.time} min`}
       />
       <IconBadge
         icon={<Thermometer size={16} className="mx-2" />}
+        label="Temperature"
         text={`${src.temperature} ${String.fromCodePoint(0x000b0)}F`}
+      />
+      <IconBadge
+        className={src.rampTime ? "" : "hidden"}
+        label="Ramp Time"
+        icon={<TriangleRight size={16} className="mx-2" />}
+        text={`${src.rampTime} min`}
       />
     </div>
   );

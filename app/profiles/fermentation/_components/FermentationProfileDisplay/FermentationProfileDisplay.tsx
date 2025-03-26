@@ -37,7 +37,7 @@ export function FermentationProfileDisplay({
         <Prop label="Forks" value={src?.forks.length} />
         <Prop label="Description" value={src?.description} />
       </Card>
-      <div className="grid md:grid-cols-2">
+      <div className="grid lg:grid-cols-2">
         <Section title="Steps" className="lg:m-4  ">
           <List className="">
             {(src?.steps ?? []).map((step, index) => (
