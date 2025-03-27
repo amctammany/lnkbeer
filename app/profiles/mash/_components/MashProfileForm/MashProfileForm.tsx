@@ -28,7 +28,7 @@ export function MashProfileForm({ src, action }: MashProfileFormProps) {
   const {
     register,
     handleSubmit,
-    formState: state,
+    //formState: state,
   } = useForm<MashProfileSchema>({
     defaultValues: src!,
     resolver: zodResolver(mashProfileSchema),

@@ -1,6 +1,6 @@
 import { auth } from "@/app/auth";
 import { MashProfileForm } from "../../_components/MashProfileForm";
-import { createMashProfile, updateMashProfile } from "../../actions";
+import { updateMashProfile } from "../../actions";
 import { getMashProfile } from "../../queries";
 import slugify from "slugify";
 import { prisma } from "@/lib/client";
@@ -17,6 +17,7 @@ export default async function MashProfileForkPage({
   if (!session?.user.id) {
     throw new Error("Unauthorized User");
   }
+  // eslint-disable-next-line
   const { id, owner, origin, forks, steps, ...old } =
     await getMashProfile(slug);
   const count = await prisma.mashProfile.count({
@@ -34,7 +35,8 @@ export default async function MashProfileForkPage({
       steps: {
         createMany: {
           data: (steps as ExtendedMashStep[]).map(
-            ({ id, MashProfile, mashProfileId, ...s }) => s,
+            // eslint-disable-next-line
+            ({ id, MashProfile, mashProfileId, ...s }) => s
           ),
         },
       },

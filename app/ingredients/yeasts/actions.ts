@@ -1,8 +1,8 @@
 "use server";
-import { Yeast, YeastFlocculation, YeastForm, YeastType } from "@prisma/client";
+//import { Yeast, YeastFlocculation, YeastForm, YeastType } from "@prisma/client";
 import { prisma } from "@/lib/client";
 import { redirect } from "next/navigation";
-import { validateSchema } from "@/lib/validateSchema";
+//import { validateSchema } from "@/lib/validateSchema";
 import slugify from "@/lib/slugify";
 import { YeastSchema } from "@/schemas/yeastSchema";
 //import { FieldValues } from "react-hook-form";
@@ -20,7 +20,7 @@ function parseYeast(data: YeastSchema) {
   };
 }
 export const createYeast = async (data: YeastSchema) => {
-  console.log(data);
+  //console.log(data);
   //const valid = validateSchema(formData, schema);
   //if (!valid.success) return Promise.resolve(valid);
   const yeastData = parseYeast(data);

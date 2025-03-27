@@ -16,6 +16,7 @@ export default async function WaterProfileForkPage({
   if (!session?.user.id) {
     throw new Error("Unauthorized User");
   }
+  // eslint-disable-next-line
   const { id, owner, origin, forks, ...old } = await getWaterProfile(slug);
   const count = await prisma.waterProfile.count({
     where: { userId: session.user.id, forkedFrom: id },

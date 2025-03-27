@@ -4,6 +4,7 @@ import { FlaskConical } from "lucide-react";
 import { YeastDisplay } from "../_components/YeastDisplay";
 import { YeastDisplayActions } from "../_components/YeastDisplay/YeastDisplayActions";
 import { getYeast, getYeasts } from "../queries";
+import { notFound } from "next/navigation";
 type YeastDisplayPageProps = {
   params: Promise<{
     slug: string;
@@ -29,6 +30,7 @@ export default async function YeastDisplayPage({
 }: YeastDisplayPageProps) {
   const { slug } = await params;
   const yeast = await getYeast(slug);
+  if (!yeast) notFound();
   return (
     <AppBarLayout
       title={<AppBarTitle icon={<FlaskConical />}>{yeast?.name}</AppBarTitle>}

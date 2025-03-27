@@ -49,16 +49,16 @@ function addMultipleToChartData(
   }, root);
 }
 
-function addToChartData(
-  root: HopSensoryChartData,
-  src: HopSensoryPanel,
-  key: string
-) {
-  return aromaGroups.reduce((acc, g) => {
-    acc[g][key] = src[g] ?? 0;
-    return acc;
-  }, root);
-}
+//function addToChartData(
+//root: HopSensoryChartData,
+//src: HopSensoryPanel,
+//key: string
+//) {
+//return aromaGroups.reduce((acc, g) => {
+//acc[g][key] = src[g] ?? 0;
+//return acc;
+//}, root);
+//}
 
 //type ChartData = Record<Uncapitalize<AromaGroups>, D>;
 function makeAvgChartData(src: ExtendedHop) {

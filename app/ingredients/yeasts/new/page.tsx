@@ -2,7 +2,7 @@ import { YeastEditor } from "@/app/ingredients/yeasts/_components/YeastEditor";
 import { createYeast } from "../actions";
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
-import { YeastInput } from "@/types/ingredient";
+//import { YeastInput } from "@/types/ingredient";
 import { YeastSchema } from "@/schemas/yeastSchema";
 export function generateMetadata() {
   return {

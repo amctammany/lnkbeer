@@ -2,7 +2,7 @@ import { auth } from "@/app/auth";
 import { Prop } from "@/components/Prop";
 import { Card } from "@/components/ui/card";
 import { prisma } from "@/lib/client";
-import { Hop, HopNote } from "@prisma/client";
+import { Hop } from "@prisma/client";
 import { redirect } from "next/navigation";
 import NotesTabForm from "./NotesTabForm";
 import { createHopNote, updateHopNote } from "../../actions";

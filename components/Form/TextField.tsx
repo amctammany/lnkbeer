@@ -1,6 +1,6 @@
 import { Label } from "./Label";
 //import { cva } from "class-variance-authority";
-import { Input, InputProps, inputStyles } from "./Input";
+import { Input, InputProps } from "./Input";
 import { cva, VariantProps } from "class-variance-authority";
 import clsx from "clsx";
 
@@ -23,7 +23,7 @@ const textFieldStyles = cva(
       },
     },
     defaultVariants: { size: "default", variant: "default", suffix: "default" },
-  },
+  }
 );
 export function TextField({
   name,
@@ -32,7 +32,7 @@ export function TextField({
   label,
   suffix,
   variant,
-  size,
+  //size,
   inputSize = "full",
   ...props
 }: TextFieldProps) {
@@ -49,7 +49,7 @@ export function TextField({
         type="text"
         className={clsx(
           //inputStyles({ variant, suffix: !!suffix ? "active" : "default" }),
-          textFieldStyles({ variant, suffix: suffix ? "active" : "default" }),
+          textFieldStyles({ variant, suffix: suffix ? "active" : "default" })
         )}
         name={name}
         error={error}

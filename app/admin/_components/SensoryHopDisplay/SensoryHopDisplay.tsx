@@ -11,16 +11,9 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/ui/card";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
 import { ExtendedHopNote } from "@/types/ingredient";
 import type { Hop as HopType } from "@prisma/client";
 import { Edit } from "lucide-react";
-import { Radar, RadarChart, PolarAngleAxis, PolarGrid } from "recharts";
 import dynamic from "next/dynamic";
 const SensoryHopChart = dynamic(() => import("./SensoryHopChart"), {
   ssr: false,

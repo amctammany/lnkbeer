@@ -5,7 +5,6 @@ import { z } from "zod";
 import { zfd } from "zod-form-data";
 
 export function parseHop(data: HopSchema) {
-  console.log(data);
   //if (!data) return null;
   const {
     alphaRange,

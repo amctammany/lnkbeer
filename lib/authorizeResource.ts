@@ -1,7 +1,8 @@
 import { auth } from "@/app/auth";
-import { User } from "next-auth";
+//import { User } from "next-auth";
 import { forbidden, unauthorized } from "next/navigation";
 
+//eslint-disable-next-line
 export async function authorizeResource<T extends object>(fn, ...args) {
   const session = await auth();
   if (!session?.user) return unauthorized();

@@ -1,7 +1,7 @@
 "use server";
 import { prisma } from "@/lib/client";
 import slugify from "@/lib/slugify";
-import { validateSchema } from "@/lib/validateSchema";
+//import { validateSchema } from "@/lib/validateSchema";
 import { WaterProfileSchema } from "@/schemas/waterProfileSchema";
 import { ExtendedWaterProfile, WaterProfileInput } from "@/types/Profile";
 import { WaterProfile } from "@prisma/client";
@@ -12,6 +12,7 @@ export const createWaterProfile = async (data: WaterProfileSchema) => {
   //const valid = validateSchema(formData, waterSchema);
   //if (!valid.success) return valid;
 
+  // eslint-disable-next-line
   const { id, userId, forkedFrom, ...rest } = data;
   const res = await prisma.waterProfile.create({
     data: {
@@ -79,10 +80,15 @@ export const removeWaterProfile = async (src?: WaterProfileInput | null) => {
 
 export const duplicateWaterProfile = async (src: ExtendedWaterProfile) => {
   const {
+    // eslint-disable-next-line
     id,
+
     userId,
+    // eslint-disable-next-line
     forks,
+    // eslint-disable-next-line
     owner,
+    // eslint-disable-next-line
     origin,
     name: oldName,
     forkedFrom,

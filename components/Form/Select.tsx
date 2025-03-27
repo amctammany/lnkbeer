@@ -3,14 +3,14 @@ import { ComponentProps, SyntheticEvent } from "react";
 import { Label } from "./Label";
 import { VariantProps, cva } from "class-variance-authority";
 import { SchemaFieldError } from "@/lib/validateSchema";
-import { inputStyles } from "./Input";
+//import { inputStyles } from "./Input";
 import clsx from "clsx";
 
-type ErrorType = {
-  type: string;
-  path: string;
-  message?: string;
-};
+//type ErrorType = {
+//type: string;
+//path: string;
+//message?: string;
+//};
 export type SelectProps = {
   name: string;
   label?: string | React.ReactNode;

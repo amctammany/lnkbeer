@@ -47,7 +47,7 @@ export const authConfig = {
       }
       return true;
     },
-    async session({ session, token, user }) {
+    async session({ session, token }) {
       // Send properties to the client, like an access_token and user id from a provider.
       //session.accessToken = token.accessToken;
       //session.user = token.user as any;
@@ -56,7 +56,7 @@ export const authConfig = {
 
       return session;
     },
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token }) {
       const currentUser = await prisma.user.findFirst({
         where: {
           id: token.sub,

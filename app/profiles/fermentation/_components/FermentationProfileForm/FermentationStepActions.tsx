@@ -31,7 +31,7 @@ export function FermentationStepActions({
   src,
   className,
 }: FermentationStepActionsProps) {
-  const handleClick = (action) => async (e) => {
+  const handleClick = (action) => async () => {
     await action(src);
   };
   return (

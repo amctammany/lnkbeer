@@ -22,14 +22,14 @@ import {
 } from "@/components/ui/table";
 import { useMemo, useState } from "react";
 import { fuzzyFilter } from "@/lib/fuzzyFilter";
-import clsx from "clsx";
+//import clsx from "clsx";
 import TableSearch from "./TableSearch";
 import FilterInput from "./FilterInput";
 import FilterSelect from "./FilterSelect";
 import { Checkbox } from "../ui/checkbox";
-import { Badge } from "../Badge";
-import { Wheat } from "lucide-react";
-import TableSelection from "./TableSelection";
+//import { Badge } from "../Badge";
+//import { Wheat } from "lucide-react";
+//import TableSelection from "./TableSelection";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -44,7 +44,7 @@ export function DataTable<TData, TValue>({
   data,
   filters,
   selectable = true,
-  children,
+  //children,
 }: DataTableProps<TData, TValue>) {
   //"use no memo";
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -106,7 +106,7 @@ export function DataTable<TData, TValue>({
     () => (name, value) => {
       return table.getColumn(name)?.setFilterValue(value);
     },
-    [table],
+    [table]
   );
   return (
     <div className="w-full">
@@ -127,7 +127,7 @@ export function DataTable<TData, TValue>({
               value={(table.getColumn(name)?.getFilterValue() as string) ?? ""}
               onChange={onFilterChange}
             />
-          ),
+          )
         )}
       </TableSearch>
       <div className="overflow-auto">
@@ -142,7 +142,7 @@ export function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext(),
+                            header.getContext()
                           )}
                     </TableHead>
                   );
@@ -161,7 +161,7 @@ export function DataTable<TData, TValue>({
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext(),
+                        cell.getContext()
                       )}
                     </TableCell>
                   ))}

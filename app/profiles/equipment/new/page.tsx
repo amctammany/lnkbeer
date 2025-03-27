@@ -1,14 +1,14 @@
 import { EquipmentProfileForm } from "@/app/profiles/equipment/_components/EquipmentProfileForm";
-import { getEquipmentProfile } from "@/app/profiles/equipment/queries";
+//import { getEquipmentProfile } from "@/app/profiles/equipment/queries";
 import {
   createEquipmentProfile,
-  updateEquipmentProfile,
+  //updateEquipmentProfile,
 } from "@/app/profiles/equipment/actions";
-import { prisma } from "@/lib/client";
+//import { prisma } from "@/lib/client";
 import { auth } from "@/app/auth";
 import { redirect } from "next/navigation";
 import { EquipmentProfileInput } from "@/types/Profile";
-import slugify from "@/lib/slugify";
+//import slugify from "@/lib/slugify";
 type EquipmentProfileCreatorPageProps = any;
 
 export async function generateMetadata({}: EquipmentProfileCreatorPageProps) {

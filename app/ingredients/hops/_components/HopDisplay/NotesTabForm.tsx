@@ -37,8 +37,8 @@ export type NotesTabFormProps = {
 };
 const AromaSelect = ({
   className,
-  label,
-  group,
+  //label,
+  //group,
   aromas,
   ...props
 }: UseFormRegisterReturn & {
@@ -107,7 +107,7 @@ function HopAromaForm<T extends FieldValues>({
   );
 }
 const RangeSelect = ({
-  label,
+  //label,
   className,
   ...props
 }: UseFormRegisterReturn & { className?: string; label?: React.ReactNode }) => {
@@ -115,7 +115,7 @@ const RangeSelect = ({
     <div
       className={clsx(
         "flex justify-evenly items-stretch justify-items-stretch my-0",
-        className,
+        className
       )}
     >
       <b className="m-auto ">0</b>
@@ -169,13 +169,14 @@ export function NotesTabForm({ action, aromas, src }: NotesTabFormProps) {
     acc[prop] = ((src?.sensoryPanel?.[prop] ?? 0) * 10)?.toString();
     return acc;
   }, {});
+  //eslint-disable-next-line
   const { state, register, control, getValues, formAction } =
     useActionForm<HopNoteInput>(
       action,
       {
         ...src,
         sensoryPanel,
-      }!,
+      }!
     );
 
   const aromaRegister = register("sensoryPanel.aromaIds", {

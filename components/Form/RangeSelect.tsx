@@ -1,16 +1,16 @@
 import clsx from "clsx";
-import { UseFormRegisterReturn } from "react-hook-form";
+//import { UseFormRegisterReturn } from "react-hook-form";
 import { InputProps } from "./Input";
-import { Label } from "./Label";
+//import { Label } from "./Label";
 
 export type RangeSelectProps = InputProps & {
   range?: number[];
 };
 export const RangeSelect = ({
-  label,
-  inputSize,
+  //label,
+  //inputSize,
   className,
-  error,
+  //error,
   ...props
 }: RangeSelectProps) => {
   return (

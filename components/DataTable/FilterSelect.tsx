@@ -1,6 +1,7 @@
 import { ChangeEventHandler, useCallback } from "react";
 import { Select } from "../Form/Select";
 
+//eslint-disable-next-line
 export type FilterSelectProps<T = any> = {
   //table: T extends Table<infer R> ? R : T;
   onChange?: any;
@@ -16,7 +17,7 @@ export function FilterSelect({
 }: FilterSelectProps) {
   const handleChange = useCallback<ChangeEventHandler<HTMLSelectElement>>(
     (e) => onChange(name, e.target.value),
-    [onChange, name],
+    [onChange, name]
   );
   return (
     <div className="">

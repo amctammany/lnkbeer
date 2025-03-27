@@ -12,7 +12,7 @@ import { Select } from "@/components/Form/Select";
 //import { RangeValue } from "@/components/Form/RangeSlider";
 //import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
-import { useActionForm } from "@/hooks/useActionForm";
+//import { useActionForm } from "@/hooks/useActionForm";
 import { YeastSchema, yeastSchema } from "@/schemas/yeastSchema";
 import { RangeValue, YeastInput } from "@/types/ingredient";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -102,7 +102,7 @@ export function YeastEditor({ yeast, action }: YeastEditorProps) {
                       ...acc,
                       [i === 0 ? "min" : "max"]: v!,
                     }),
-                    {} as RangeValue,
+                    {} as RangeValue
                   )}
                   render={({ field }) => (
                     <RangeField

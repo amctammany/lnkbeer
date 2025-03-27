@@ -36,7 +36,7 @@ export const createHopNote = async (data: HopNoteSchema) => {
     userId,
     notes,
     userEmail,
-    ...rest
+    //...rest
   } = data;
 
   const panel = await prisma.hopSensoryPanel.create({

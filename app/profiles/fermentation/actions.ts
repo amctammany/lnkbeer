@@ -11,8 +11,9 @@ import { redirect } from "next/navigation";
 import { zfd } from "zod-form-data";
 
 export const createFermentationProfile = async (
-  data: FermentationProfileSchema,
+  data: FermentationProfileSchema
 ) => {
+  // eslint-disable-next-line
   const { id, userId, forkedFrom, ...rest } = data;
   const res = await prisma.fermentationProfile.create({
     data: {
@@ -59,12 +60,13 @@ export const removeFermentationStep = async (src: ExtendedFermentationStep) => {
     },
   });
   revalidatePath(
-    `/profiles/fermentation/${src?.FermentationProfile?.slug}/edit`,
+    `/profiles/fermentation/${src?.FermentationProfile?.slug}/edit`
   );
 };
 export const duplicateFermentationStep = async (
-  src: ExtendedFermentationStep,
+  src: ExtendedFermentationStep
 ) => {
+  // eslint-disable-next-line
   const { id, FermentationProfile, ...data } = src;
   await prisma.fermentationStep.updateMany({
     where: {
@@ -75,16 +77,16 @@ export const duplicateFermentationStep = async (
       rank: { increment: 1 },
     },
   });
-  const res = await prisma.fermentationStep.create({
+  await prisma.fermentationStep.create({
     data: { ...data, rank: src.rank + 1 },
   });
   revalidatePath(
-    `/profiles/fermentation/${src?.FermentationProfile?.slug}/edit`,
+    `/profiles/fermentation/${src?.FermentationProfile?.slug}/edit`
   );
 };
 export const shiftFermentationStep = async (
   dir: -1 | 1,
-  src: ExtendedFermentationStep,
+  src: ExtendedFermentationStep
 ) => {
   if (
     src.rank + dir >= 0 ||
@@ -100,7 +102,7 @@ export const shiftFermentationStep = async (
       },
     });
     if (other.count === 1) {
-      const res = await prisma.fermentationStep.update({
+      await prisma.fermentationStep.update({
         where: { id: src.id },
         data: { rank: src.rank + dir },
         include: {
@@ -113,7 +115,7 @@ export const shiftFermentationStep = async (
         },
       });
       revalidatePath(
-        `/profiles/fermentation/${src?.FermentationProfile?.slug}/edit`,
+        `/profiles/fermentation/${src?.FermentationProfile?.slug}/edit`
       );
     }
   }
@@ -130,6 +132,7 @@ export async function removeFermentationProfile(formData: FormData) {
 }
 
 export const createFermentationStep = async (data: FermentationStepSchema) => {
+  // eslint-disable-next-line
   const { id, fermentationProfileId, ...rest } = data;
   const res = await prisma.fermentationStep.create({
     data: { ...rest, fermentationProfileId: fermentationProfileId! },
@@ -164,7 +167,7 @@ export const updateFermentationStep = async (data: FermentationStepSchema) => {
   redirect(`/profiles/fermentation/${res?.FermentationProfile?.slug}/edit`);
 };
 export const updateFermentationProfile = async (
-  data: FermentationProfileSchema,
+  data: FermentationProfileSchema
 ) => {
   const { id, userId, forkedFrom, ...rest } = data;
   const res = await prisma.fermentationProfile.update({

@@ -5,11 +5,11 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Header } from "@/components/DataTable/Header";
 import Link from "next/link";
 import slugify from "slugify";
-import { FlaskConical, Plus } from "lucide-react";
-import { AppBarItem } from "@/components/AppBarItem";
-import { AppBarLayout } from "@/components/AppBarLayout";
-import AppBarTitle from "@/components/AppBarTitle";
-import FilterInput from "@/components/DataTable/FilterInput";
+//import { FlaskConical, Plus } from "lucide-react";
+//import { AppBarItem } from "@/components/AppBarItem";
+//import { AppBarLayout } from "@/components/AppBarLayout";
+//import AppBarTitle from "@/components/AppBarTitle";
+//import FilterInput from "@/components/DataTable/FilterInput";
 const columns: ColumnDef<Yeast>[] = [
   {
     accessorKey: "name",

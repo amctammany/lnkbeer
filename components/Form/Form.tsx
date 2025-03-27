@@ -7,6 +7,7 @@ import {
   //UseFormHandleSubmit,
 } from "react-hook-form";
 
+//eslint-disable-next-line
 export type FormProps<T extends FieldValues = FieldValues> = {
   children?: React.ReactNode;
   action?: (data: FormData) => void;

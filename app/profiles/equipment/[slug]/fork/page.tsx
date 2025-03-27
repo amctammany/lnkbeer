@@ -16,6 +16,7 @@ export default async function EquipmentProfileForkPage({
   if (!session?.user.id) {
     throw new Error("Unauthorized User");
   }
+  // eslint-disable-next-line
   const { id, owner, origin, forks, ...old } = await getEquipmentProfile(slug);
   const count = await prisma.equipmentProfile.count({
     where: { userId: session.user.id, forkedFrom: id },

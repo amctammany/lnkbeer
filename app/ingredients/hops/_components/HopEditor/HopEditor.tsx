@@ -13,7 +13,7 @@ import Section from "@/components/Section";
 import { hopSchema } from "@/schemas/hopSchema";
 import { HopInput, RangeValue } from "@/types/ingredient";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Hop, HopUsage } from "@prisma/client";
+import { HopUsage } from "@prisma/client";
 import { HopIcon, Save } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -211,7 +211,7 @@ export function HopEditor({ hop, action }: HopEditorProps) {
                       ...acc,
                       [i === 0 ? "min" : "max"]: v!,
                     }),
-                    {} as RangeValue,
+                    {} as RangeValue
                   ) as RangeValue
                 }
                 render={({ field }) => (

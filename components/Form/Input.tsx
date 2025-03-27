@@ -47,7 +47,7 @@ export const inputStyles = cva(
       variant: "default",
       suffixV: "default",
     },
-  },
+  }
 );
 export function Input({
   //name,
@@ -57,8 +57,8 @@ export function Input({
   error,
   className,
   //disabled,
-  label,
-  suffix,
+  //label,
+  //suffix,
   //defaultValue,
   variant,
   inputSize,
@@ -73,7 +73,7 @@ export function Input({
           inputSize,
           //suffixV: suffix ? (error ? "error" : "active") : "default",
         }),
-        className,
+        className
       )}
       type={props.type ?? "text"}
       {...props}

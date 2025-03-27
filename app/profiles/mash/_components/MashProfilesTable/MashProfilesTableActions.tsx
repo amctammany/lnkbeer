@@ -1,15 +1,17 @@
 //import { AppBarLayout } from "@/components/AppBarLayout";
 //import { DataTable } from "@/components/DataTable";
-import { Edit, ForkKnife, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
 import { AppBarItem } from "@/components/AppBarItem";
 import { ExtendedMashProfile } from "@/types/Profile";
 
 export type MashProfilesTableActionsProps = {
   src?: ExtendedMashProfile | null;
 };
-export const MashProfilesTableActions = ({
-  src,
-}: MashProfilesTableActionsProps) => {
+export const MashProfilesTableActions = (
+  {
+    //src,
+  }: MashProfilesTableActionsProps
+) => {
   return [
     <AppBarItem
       key="new"

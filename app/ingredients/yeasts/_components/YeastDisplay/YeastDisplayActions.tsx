@@ -19,9 +19,10 @@ export const YeastDisplayActions = ({ slug }: { slug: string }) => {
       <AppBarDropdownItem
         key="fork"
         text="fork"
-        action={() => {
-          console.log("fork");
-        }}
+        url={`/ingredients/yeasts/${slug}/fork`}
+        //action={() => {
+        //console.log("fork");
+        //}}
         icon={<Save />}
       />
 

@@ -1,6 +1,6 @@
 import { AppBarItem } from "@/components/AppBarItem";
 import { FermentationProfile } from "@prisma/client";
-import { Edit, Save } from "lucide-react";
+import { Edit } from "lucide-react";
 
 export type FermentationProfileDisplayActionsProps = {
   src?: FermentationProfile | null;

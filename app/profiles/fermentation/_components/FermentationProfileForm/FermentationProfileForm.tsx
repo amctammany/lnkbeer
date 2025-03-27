@@ -4,11 +4,11 @@ import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
 import { TextField } from "@/components/Form/TextField";
 import Section from "@/components/Section";
-import { useActionForm } from "@/hooks/useActionForm";
+//import { useActionForm } from "@/hooks/useActionForm";
 import { ExtendedFermentationProfile } from "@/types/Profile";
 import { Plus, Thermometer } from "lucide-react";
 import { FermentationStepListItem } from "./FermentationStepListItem";
-import Link from "next/link";
+//import Link from "next/link";
 import FermentationStepActions from "./FermentationStepActions";
 import { AppBarItem } from "@/components/AppBarItem";
 import { FermentationProfileFormActions } from "./FermentationProfileFormActions";
@@ -33,7 +33,7 @@ export function FermentationProfileForm({
   const {
     register,
     handleSubmit,
-    formState: state,
+    //formState: state,
   } = useForm<FermentationProfileSchema>({
     defaultValues: src!,
     resolver: zodResolver(fermentationProfileSchema),
@@ -45,11 +45,7 @@ export function FermentationProfileForm({
   return (
     <Form className="flex" onSubmit={handleSubmit(action)}>
       <AppBarLayout
-        title={
-          <AppBarTitle icon={<Thermometer />}>
-            {src?.name ?? "Creator"}
-          </AppBarTitle>
-        }
+        title={<AppBarTitle icon={<Thermometer />}>{title}</AppBarTitle>}
         actions={<FermentationProfileFormActions src={src} />}
       >
         <div className="gap-2 lg:w-9/12 mx-auto">

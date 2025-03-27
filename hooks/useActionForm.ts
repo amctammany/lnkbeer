@@ -17,12 +17,13 @@ export function useActionForm<T extends FieldValues>(action: any, data: T) {
   useEffect(() => {
     //if (state.data) reset(undefined, { keepDefaultValues: true });
     if (!state.success) {
-      console.log(state.data);
+      //console.log(state.data);
 
       //keepDirty: true,
       //keepDefaultValues: true,
       //keepValues: true,
       //});
+      // eslint-disable-next-line
       Object.entries(state?.errors ?? []).map(([n, err]) => {
         setError(err.path as any, err);
       });
@@ -37,6 +38,6 @@ export function useActionForm<T extends FieldValues>(action: any, data: T) {
   //};
   return useMemo(
     () => ({ register, reset, state, formAction, control, getValues }),
-    [state, formAction, register, reset, control, getValues],
+    [state, formAction, register, reset, control, getValues]
   );
 }

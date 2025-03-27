@@ -111,7 +111,7 @@ async function main() {
         tempHigh: temp[1],
         notes: notes[0],
         usage: notes[1],
-      }),
+      })
     ),
   });
   await prisma.equipmentProfile.create({
@@ -207,6 +207,7 @@ async function main() {
     },
   });
   await prisma.hop.createMany({
+    //eslint-disable-next-line
     data: hops.map(({ aromas, usage, flavorMap, ...hop }: any) => ({
       flavor: aromas,
       ...hop,
@@ -274,7 +275,7 @@ async function main() {
   await prisma.characteristicAroma.createMany({
     data: characteristicAromas,
   });
-  const data = await Promise.allSettled(
+  await Promise.allSettled(
     yakima.map(async ({ flavorMap, aromas, ...hop }) => {
       return await prisma.hop.upsert({
         where: {
@@ -316,7 +317,7 @@ async function main() {
           hopSensoryPanels: true,
         },
       });
-    }),
+    })
   );
 }
 main()
@@ -324,6 +325,7 @@ main()
     await prisma.$disconnect();
   })
   .catch(async (e) => {
+    //eslint-disable-next-line
     console.error(e);
     await prisma.$disconnect();
     process.exit(1);

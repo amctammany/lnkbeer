@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/client";
-import { ExtendedMashProfile, ExtendedMashStep } from "@/types/Profile";
+import { ExtendedMashProfile } from "@/types/Profile";
 import { cache } from "react";
 
 export const getMashStep = cache(async (id: string) => {
@@ -57,7 +57,7 @@ export const getMashProfileOptions = async () => {
       acc[profile.id] = `${profile.name}`;
       return acc;
     },
-    {} as Record<string, string>,
+    {} as Record<string, string>
   );
   return options;
 };

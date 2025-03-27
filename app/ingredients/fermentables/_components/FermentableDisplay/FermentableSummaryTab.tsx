@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Fermentable } from "@prisma/client";
 
 export type FermentableSummaryTabProps = {
-  src?: Fermentable | null;
+  src: Fermentable;
 };
 export function FermentableSummaryTab({ src }: FermentableSummaryTabProps) {
   return (

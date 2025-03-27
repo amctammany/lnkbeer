@@ -5,7 +5,7 @@ import { YeastSummaryTab } from "./YeastSummaryTab";
 import { YeastAnalyticsTab } from "./YeastAnalyticsTab";
 
 export type YeastDisplayProps = {
-  src?: YeastInput | null;
+  src: YeastInput;
 };
 
 export function YeastDisplay({ src }: YeastDisplayProps) {

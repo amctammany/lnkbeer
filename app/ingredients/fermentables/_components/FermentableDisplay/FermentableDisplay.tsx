@@ -5,7 +5,7 @@ import { Wheat } from "lucide-react";
 import { FermentableAnalyticsTab } from "./FermentableAnalyticsTab";
 
 export type FermentableDisplayProps = {
-  src?: Fermentable | null;
+  src: Fermentable;
 };
 export function FermentableDisplay({ src }: FermentableDisplayProps) {
   return (

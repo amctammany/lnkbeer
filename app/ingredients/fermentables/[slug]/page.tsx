@@ -4,6 +4,7 @@ import { getFermentable, getFermentables } from "../queries";
 import { FermentableDisplayActions } from "../_components/FermentableDisplay/FermentableDisplayActions";
 import AppBarTitle from "@/components/AppBarTitle";
 import { Wheat } from "lucide-react";
+import { notFound } from "next/navigation";
 type FermentableDisplayPageProps = {
   params: Promise<{
     slug: string;
@@ -31,6 +32,7 @@ export default async function FermentableDisplayPage({
 }: FermentableDisplayPageProps) {
   const { slug } = await params;
   const fermentable = await getFermentable(slug);
+  if (!fermentable) notFound();
   return (
     <AppBarLayout
       title={<AppBarTitle icon={<Wheat />}>{fermentable?.name}</AppBarTitle>}

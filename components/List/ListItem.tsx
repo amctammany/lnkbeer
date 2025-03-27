@@ -2,7 +2,6 @@ import { VariantProps, cva } from "class-variance-authority";
 import clsx from "clsx";
 import Link from "next/link";
 import { ComponentProps } from "react";
-import { ListItemActions } from "./ListItemActions";
 
 export type ListItemProps = VariantProps<typeof listItemStyles> &
   ComponentProps<"div"> & {

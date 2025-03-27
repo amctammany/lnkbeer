@@ -8,7 +8,7 @@ export type NavLinkProps = LinkProps & {
   children?: React.ReactNode;
 };
 export const NavLink = ({ href, children, ...props }: NavLinkProps) => {
-  const { isMobile, openMobile, setOpenMobile, toggleSidebar } = useSidebar();
+  const { isMobile, openMobile, setOpenMobile } = useSidebar();
   const { push } = useRouter();
   const handleClick: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
     if (isMobile && openMobile) setOpenMobile(false);

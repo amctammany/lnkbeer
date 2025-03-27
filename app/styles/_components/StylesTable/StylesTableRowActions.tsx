@@ -37,6 +37,7 @@ export function StylesTableRowActions<T>({ row }: CellContext<T, unknown>) {
           <RemoveButton
             name="slug"
             id={slugify(row.getValue("name"), { lower: true })}
+            // eslint-disable-next-line
             action={(e) => console.log(e)}
           />
         </DropdownMenuItem>

@@ -1,5 +1,5 @@
-import { FieldError, FieldValues } from "react-hook-form";
-import { ZodError, ZodIssue, ZodSchema, z } from "zod";
+import { FieldError } from "react-hook-form";
+import { ZodSchema, z } from "zod";
 export type SchemaFieldError = FieldError & {
   path?: string; //| (string | number)[];
   extra?: string;
@@ -22,6 +22,7 @@ export type State<I extends object> =
     }
   | { success: true; data: I; errors?: never };
 
+//eslint-disable-next-line
 type H<T extends object> = SuccessRes<T> | ErrRes<T>;
 export function validateSchema<
   //T extends FieldValues,
@@ -36,6 +37,7 @@ export function validateSchema<
       success: valid.success,
       //data: null, //valid.data, //Object.fromEntries(formData.entries()) as any,
       errors: Object.entries(valid.error.issues)?.reduce(
+        //eslint-disable-next-line
         (acc, [n, issue]) => {
           acc[
             issue.path
@@ -49,7 +51,7 @@ export function validateSchema<
           //issue as unknown as SchemaFieldError;
           return acc;
         },
-        {} as Record<any, SchemaFieldError>,
+        {} as Record<any, SchemaFieldError>
       ),
     };
   } else {

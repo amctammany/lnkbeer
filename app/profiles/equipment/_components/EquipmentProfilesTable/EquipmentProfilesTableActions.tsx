@@ -1,9 +1,7 @@
 import { EquipmentProfile } from "@prisma/client";
 import { Plus } from "lucide-react";
 import { AppBarItem } from "@/components/AppBarItem";
-export const EquipmentProfilesTableActions = ({
-  src,
-}: {
+export const EquipmentProfilesTableActions = ({}: {
   src?: EquipmentProfile | null;
 }) => {
   return [

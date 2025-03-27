@@ -1,9 +1,9 @@
 "use server";
 import { prisma } from "@/lib/client";
 import slugify from "@/lib/slugify";
-import { validateSchema } from "@/lib/validateSchema";
+//import { validateSchema } from "@/lib/validateSchema";
 import { EquipmentProfileInput } from "@/types/Profile";
-import { EquipmentProfile } from "@prisma/client";
+//import { EquipmentProfile } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { zfd } from "zod-form-data";
@@ -23,6 +23,7 @@ export const createEquipmentProfile = async (data: EquipmentProfileInput) => {
   //const valid = validateSchema(formData, equipmentSchema);
   //if (!valid.success) return valid;
 
+  // eslint-disable-next-line
   const { id, userId, forkedFrom, ...rest } = data;
   const res = await prisma.equipmentProfile.create({
     data: {
@@ -74,7 +75,7 @@ export const updateEquipmentProfile = async (data: EquipmentProfileInput) => {
   });
 
   if (res) {
-    console.log("good res", res);
+    //console.log("good res", res);
   }
   redirect(`/profiles/equipment/${res.slug}`);
 };

@@ -1,19 +1,20 @@
 "use server";
 import { prisma } from "@/lib/client";
 import slugify from "@/lib/slugify";
-import { validateSchema } from "@/lib/validateSchema";
+//import { validateSchema } from "@/lib/validateSchema";
 import { MashProfileSchema, MashStepSchema } from "@/schemas/mashProfileSchema";
 import {
   ExtendedMashStep,
-  MashProfileInput,
-  MashStepInput,
+  //MashProfileInput,
+  //MashStepInput,
 } from "@/types/Profile";
-import { MashProfile, MashStepType } from "@prisma/client";
+//import { MashProfile, MashStepType } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { zfd } from "zod-form-data";
 
 export const createMashProfile = async (data: MashProfileSchema) => {
+  // eslint-disable-next-line
   const { id, userId, steps, forkedFrom, ...rest } = data;
   const res = await prisma.mashProfile.create({
     data: {
@@ -62,6 +63,7 @@ export const removeMashStep = async (src: ExtendedMashStep) => {
   revalidatePath(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
 };
 export const duplicateMashStep = async (src: ExtendedMashStep) => {
+  // eslint-disable-next-line
   const { id, MashProfile, ...data } = src;
   await prisma.mashStep.updateMany({
     where: {
@@ -72,7 +74,7 @@ export const duplicateMashStep = async (src: ExtendedMashStep) => {
       rank: { increment: 1 },
     },
   });
-  const res = await prisma.mashStep.create({
+  await prisma.mashStep.create({
     data: { ...data, rank: src.rank + 1 },
   });
   revalidatePath(`/profiles/mash/${src?.MashProfile?.slug}/edit`);
@@ -92,7 +94,7 @@ export const shiftMashStep = async (dir: -1 | 1, src: ExtendedMashStep) => {
       },
     });
     if (other.count === 1) {
-      const res = await prisma.mashStep.update({
+      await prisma.mashStep.update({
         where: { id: src.id },
         data: { rank: src.rank + dir },
         include: {
@@ -120,6 +122,7 @@ export async function removeMashProfile(formData: FormData) {
 }
 
 export const createMashStep = async (data: MashStepSchema) => {
+  // eslint-disable-next-line
   const { id, rampTime, mashProfileId, ...rest } = data;
   const res = await prisma.mashStep.create({
     data: { rampTime: rampTime!, mashProfileId: mashProfileId!, ...rest },
@@ -154,6 +157,7 @@ export const updateMashStep = async (data: MashStepSchema) => {
   redirect(`/profiles/mash/${res?.MashProfile?.slug}/edit`);
 };
 export const updateMashProfile = async (data: MashProfileSchema) => {
+  // eslint-disable-next-line
   const { id, userId, forkedFrom, steps, ...rest } = data; //|| ({} as MashProfile);
   const res = await prisma.mashProfile.update({
     where: { id: id! },
