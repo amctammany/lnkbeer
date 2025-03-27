@@ -18,7 +18,7 @@ export function IconBadge({ icon, label, text, className }: IconBadgeProps) {
       <span className={label ? "hidden lg:block pr-2 font-bold" : "hidden"}>
         {label}
       </span>
-      <span className="border-l-2 border-black px-3">{text}</span>
+      <span className="border-l-2 border-black px-1 lg:px-3">{text}</span>
     </div>
   );
 }
