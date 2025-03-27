@@ -1,7 +1,7 @@
 "use client";
 import { AppBarItem } from "@/components/AppBarItem";
 import { AppBarLayout } from "@/components/AppBarLayout";
-import AppBarTitle from "@/components/AppBarTitle";
+import { AppBarTitle } from "@/components/AppBarTitle";
 import { Form } from "@/components/Form/Form";
 import { Input } from "@/components/Form/Input";
 import { NumberField } from "@/components/Form/NumberField";
@@ -9,16 +9,17 @@ import { RangeField, RangeFieldProp } from "@/components/Form/RangeField";
 //import { RangeValue } from "@/components/Form/RangeSlider";
 import { Select } from "@/components/Form/Select";
 import { TextField } from "@/components/Form/TextField";
-import Section from "@/components/Section";
+import { Section } from "@/components/Section";
 import { hopSchema } from "@/schemas/hopSchema";
-import { HopInput, RangeValue } from "@/types/ingredient";
+import type { HopInput, RangeValue } from "@/types/ingredient";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { HopUsage } from "@prisma/client";
+//import type { HopUsage } from "@prisma/client";
 import { HopIcon, Save } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 
 export type HopEditorProps = {
   hop?: HopInput | null;
+  usage: any;
   action: any;
 };
 const rangeProps: RangeFieldProp<HopInput>[] = [
@@ -91,7 +92,7 @@ const HopEditorActions = ({ disabled = false }: { disabled?: boolean }) => {
   ];
 };
 
-export function HopEditor({ hop, action }: HopEditorProps) {
+export function HopEditor({ hop, action, usage: HopUsage }: HopEditorProps) {
   //const { state, register, control, getValues, formAction } =
   //useActionForm<HopInput>(action, hop!);
   const {

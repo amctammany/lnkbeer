@@ -1,5 +1,5 @@
 import slugify from "@/lib/slugify";
-import { HopInput } from "@/types/ingredient";
+import type { HopInput } from "@/types/ingredient";
 import { HopUsage } from "@prisma/client";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
@@ -46,6 +46,7 @@ const RangeV = () =>
   });
 export const hopSchema = zfd.formData({
   id: zfd.text(z.string().optional()).nullable(),
+  slug: zfd.text(z.string().optional()).nullable(),
   userId: zfd.text(z.string().optional()).nullable(),
   userEmail: zfd.text(z.string().optional()).nullable(),
   name: zfd.text(z.string()),

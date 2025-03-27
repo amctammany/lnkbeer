@@ -1,5 +1,4 @@
-import {
-  AromaGroups,
+import type {
   CharacteristicAroma,
   Fermentable,
   Hop,
@@ -7,7 +6,8 @@ import {
   HopSensoryPanel,
   Yeast,
 } from "@prisma/client";
-
+import { AromaGroups, HopUsage as _HopUsage } from "@prisma/client";
+export const HopUsage = _HopUsage;
 export type RangeValue = { min: number; max: number }; //| [number, number];
 //export type RangeValue = [number, number];
 export type ExtendedHop = Hop & {
