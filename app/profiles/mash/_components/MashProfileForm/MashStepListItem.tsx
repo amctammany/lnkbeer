@@ -26,7 +26,7 @@ function MashStepDetails({ src }: { src: ExtendedMashStep | MashStep }) {
       <IconBadge
         icon={<Clock size={16} className="mx-2" />}
         label="Time"
-        text={`${src.time} min`}
+        text={`${src.time} m`}
       />
       <IconBadge
         icon={<Thermometer size={16} className="mx-2" />}
@@ -34,10 +34,10 @@ function MashStepDetails({ src }: { src: ExtendedMashStep | MashStep }) {
         text={`${src.temperature} ${String.fromCodePoint(0x000b0)}F`}
       />
       <IconBadge
-        className={src.rampTime ? "" : "hidden"}
+        className={src.rampTime ? "truncate" : "hidden"}
         label="Ramp Time"
         icon={<TriangleRight size={16} className="mx-2" />}
-        text={`${src.rampTime} min`}
+        text={`${src.rampTime} m`}
       />
     </div>
   );

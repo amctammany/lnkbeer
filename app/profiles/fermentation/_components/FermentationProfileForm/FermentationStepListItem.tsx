@@ -28,7 +28,7 @@ function FermentationStepDetails({
       <IconBadge
         icon={<Clock size={16} className="mx-2" />}
         label="Time"
-        text={`${src.time} min`}
+        text={`${src.time} m`}
       />
       <IconBadge
         icon={<Thermometer size={16} className="mx-2" />}
@@ -39,7 +39,7 @@ function FermentationStepDetails({
         className={src.rampTime ? "" : "hidden"}
         label="Ramp Time"
         icon={<TriangleRight size={16} className="mx-2" />}
-        text={`${src.rampTime} min`}
+        text={`${src.rampTime} m`}
       />
     </div>
   );

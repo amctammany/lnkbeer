@@ -34,8 +34,9 @@ export function HopDisplay({ hop, user }: HopDisplayProps) {
   };
   return (
     <Tabs
-      className="*:not-first:max-w-10/12 *:not-first:mx-auto"
+      className="lg:*:not-first:max-w-10/12 lg:*:not-first:mx-auto"
       defaultValue={searchParams.get("tab") ?? "summary"}
+      //value={searchParams.get("tab") ?? "summary"}
       onValueChange={handleChange}
     >
       <TabsList className="grid w-full grid-cols-4">
